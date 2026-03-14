@@ -27,6 +27,33 @@
 
 ※ 詳細な手順はデプロイ対象（WEBサイト等）が決まった段階で追記します。
 
+## リポジトリ情報
+
+- **リポジトリURL**: https://github.com/RICK-ORPHEN/my-ai-partner
+
+### クローン手順
+
+```bash
+git clone https://github.com/RICK-ORPHEN/my-ai-partner.git
+cd my-ai-partner
+```
+
+### Gemini API セットアップ手順
+
+```bash
+# 1. Pythonパッケージのインストール
+pip install -r requirements.txt
+
+# 2. 環境変数ファイルの作成
+cp .env.example .env
+
+# 3. .envファイルを編集してAPIキーを設定
+nano .env
+
+# 4. 接続テスト
+python gemini_test.py
+```
+
 ## 関連ドキュメント
 
 | ファイル | 内容 |
