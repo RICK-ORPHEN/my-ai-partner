@@ -1,0 +1,481 @@
+/* ===== エディタ基本 ===== */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+    --primary: #1a73e8;
+    --bg: #f0f0f0;
+    --surface: #ffffff;
+    --text: #202124;
+    --text-light: #5f6368;
+    --border: #dadce0;
+    --danger: #d93025;
+}
+
+body {
+    font-family: 'Noto Sans JP', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    overflow: hidden;
+    height: 100vh;
+}
+
+/* ===== ツールバー ===== */
+.toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 48px;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 0 12px;
+    z-index: 100;
+}
+
+.toolbar-left, .toolbar-right {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.back-btn {
+    text-decoration: none;
+    color: var(--text);
+    font-size: 20px;
+    padding: 4px 8px;
+    border-radius: 4px;
+}
+
+.back-btn:hover { background: var(--bg); }
+
+.toolbar-title {
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.slide-counter {
+    font-size: 13px;
+    color: var(--text-light);
+}
+
+.tool-btn {
+    padding: 6px 12px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background: var(--surface);
+    font-family: inherit;
+    font-size: 13px;
+    cursor: pointer;
+    color: var(--text);
+    transition: all 0.15s;
+}
+
+.tool-btn:hover { background: #f1f3f4; }
+
+.tool-btn.primary {
+    background: var(--primary);
+    color: #fff;
+    border-color: var(--primary);
+}
+
+.tool-btn.primary:hover { background: #1557b0; }
+
+.tool-btn.danger { color: var(--danger); border-color: var(--danger); }
+.tool-btn.danger:hover { background: #fce8e6; }
+
+.toolbar-divider {
+    width: 1px;
+    height: 24px;
+    background: var(--border);
+}
+
+/* ===== エディタレイアウト ===== */
+.editor-layout {
+    display: flex;
+    height: calc(100vh - 48px);
+}
+
+/* ===== サイドバー ===== */
+.sidebar {
+    width: 180px;
+    background: var(--surface);
+    border-right: 1px solid var(--border);
+    overflow-y: auto;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.thumb {
+    aspect-ratio: 16/9;
+    border: 2px solid var(--border);
+    border-radius: 6px;
+    cursor: pointer;
+    overflow: hidden;
+    position: relative;
+    transition: all 0.15s;
+    background: #fff;
+}
+
+.thumb:hover { border-color: var(--primary); }
+
+.thumb.active {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 2px rgba(26, 115, 232, 0.3);
+}
+
+.thumb-content {
+    transform: scale(0.15);
+    transform-origin: top left;
+    width: 960px;
+    height: 540px;
+    pointer-events: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.thumb-number {
+    position: absolute;
+    bottom: 2px;
+    right: 4px;
+    font-size: 10px;
+    color: var(--text-light);
+    background: rgba(255,255,255,0.8);
+    padding: 0 4px;
+    border-radius: 3px;
+}
+
+/* ===== キャンバスエリア ===== */
+.canvas-area {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: auto;
+    padding: 24px;
+}
+
+.slide-wrapper {
+    box-shadow: 0 4px 24px rgba(0,0,0,0.15);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.slide {
+    width: 960px;
+    height: 540px;
+    background: #fff;
+    position: relative;
+    overflow: hidden;
+}
+
+/* ===== スライドコンテンツスタイル ===== */
+.slide-element {
+    position: absolute;
+    cursor: pointer;
+    outline: 2px solid transparent;
+    transition: outline-color 0.15s;
+    min-width: 40px;
+    min-height: 20px;
+}
+
+.slide-element:hover {
+    outline-color: rgba(26, 115, 232, 0.4);
+}
+
+.slide-element.selected {
+    outline-color: var(--primary);
+    outline-style: solid;
+}
+
+.slide-element[contenteditable="true"] {
+    cursor: text;
+}
+
+/* ドラッグ用ハンドル */
+.slide-element.selected::after {
+    content: '';
+    position: absolute;
+    top: -4px; left: -4px; right: -4px; bottom: -4px;
+    border: 1px dashed var(--primary);
+    pointer-events: none;
+}
+
+/* ===== タイトルスライド ===== */
+.slide-title-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    padding: 60px;
+    text-align: center;
+}
+
+.slide-title-page .slide-main-title {
+    font-size: 42px;
+    font-weight: 700;
+    margin-bottom: 16px;
+    line-height: 1.3;
+}
+
+.slide-title-page .slide-subtitle {
+    font-size: 22px;
+    font-weight: 300;
+    opacity: 0.8;
+}
+
+/* ===== コンテンツスライド ===== */
+.slide-content-page {
+    padding: 48px 60px;
+}
+
+.slide-content-page .slide-heading {
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 32px;
+    padding-bottom: 12px;
+    border-bottom: 3px solid;
+}
+
+.slide-content-page .slide-bullets {
+    list-style: none;
+    padding: 0;
+}
+
+.slide-content-page .slide-bullets li {
+    font-size: 22px;
+    padding: 10px 0 10px 28px;
+    position: relative;
+    line-height: 1.5;
+}
+
+.slide-content-page .slide-bullets li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 18px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+}
+
+.slide-content-page .slide-note {
+    margin-top: 24px;
+    font-size: 16px;
+    opacity: 0.7;
+    font-style: italic;
+}
+
+/* ===== 2カラムスライド ===== */
+.slide-two-col {
+    padding: 48px 60px;
+}
+
+.slide-two-col .slide-heading {
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 32px;
+    padding-bottom: 12px;
+    border-bottom: 3px solid;
+}
+
+.slide-columns {
+    display: flex;
+    gap: 40px;
+    height: calc(100% - 100px);
+}
+
+.slide-column {
+    flex: 1;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.slide-column h3 {
+    font-size: 22px;
+    margin-bottom: 16px;
+    font-weight: 500;
+}
+
+.slide-column ul {
+    list-style: none;
+    padding: 0;
+}
+
+.slide-column li {
+    font-size: 18px;
+    padding: 8px 0;
+    line-height: 1.5;
+}
+
+/* ===== 画像テキストスライド ===== */
+.slide-img-text {
+    padding: 48px 60px;
+    display: flex;
+    flex-direction: column;
+}
+
+.slide-img-text .slide-heading {
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 32px;
+    padding-bottom: 12px;
+    border-bottom: 3px solid;
+}
+
+.slide-img-text-body {
+    display: flex;
+    gap: 40px;
+    flex: 1;
+}
+
+.slide-img-placeholder {
+    flex: 1;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    cursor: pointer;
+    border: 2px dashed;
+    opacity: 0.6;
+    min-height: 200px;
+}
+
+.slide-img-placeholder:hover {
+    opacity: 1;
+}
+
+.slide-img-text-body .text-side {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    font-size: 20px;
+    line-height: 1.8;
+}
+
+/* ===== クロージングスライド ===== */
+.slide-closing {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    text-align: center;
+    padding: 60px;
+}
+
+.slide-closing .slide-main-title {
+    font-size: 36px;
+    font-weight: 700;
+    margin-bottom: 24px;
+}
+
+.slide-closing .slide-bullets {
+    list-style: none;
+    margin-bottom: 32px;
+}
+
+.slide-closing .slide-bullets li {
+    font-size: 20px;
+    padding: 6px 0;
+}
+
+.slide-closing .closing-msg {
+    font-size: 28px;
+    font-weight: 300;
+    opacity: 0.8;
+    margin-top: 16px;
+}
+
+/* ===== プロパティパネル ===== */
+.properties {
+    width: 220px;
+    background: var(--surface);
+    border-left: 1px solid var(--border);
+    padding: 16px;
+    overflow-y: auto;
+}
+
+.properties h3 {
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 8px;
+}
+
+.properties .hint {
+    font-size: 12px;
+    color: var(--text-light);
+    margin-bottom: 16px;
+}
+
+.prop-section h4 {
+    font-size: 12px;
+    color: var(--text-light);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+}
+
+.prop-row {
+    margin-bottom: 12px;
+}
+
+.prop-row label {
+    display: block;
+    font-size: 12px;
+    color: var(--text-light);
+    margin-bottom: 4px;
+}
+
+.prop-row input[type="range"] {
+    width: 100%;
+}
+
+.prop-row select, .prop-row input[type="color"] {
+    width: 100%;
+    padding: 4px 8px;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    font-family: inherit;
+    font-size: 12px;
+}
+
+.prop-row input[type="color"] {
+    height: 32px;
+    cursor: pointer;
+}
+
+.align-btns {
+    display: flex;
+    gap: 4px;
+}
+
+.align-btn {
+    flex: 1;
+    padding: 4px;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    background: none;
+    font-size: 12px;
+    cursor: pointer;
+    font-family: inherit;
+}
+
+.align-btn.active {
+    background: var(--primary);
+    color: #fff;
+    border-color: var(--primary);
+}
+
+/* ===== PDF出力用（印刷時スタイル） ===== */
+@media print {
+    .toolbar, .sidebar, .properties { display: none !important; }
+    .editor-layout { display: block; }
+    .canvas-area { padding: 0; display: block; }
+    .slide-wrapper { box-shadow: none; }
+    .slide { page-break-after: always; }
+    .slide-element { outline: none !important; }
+    .slide-element::after { display: none !important; }
+}
