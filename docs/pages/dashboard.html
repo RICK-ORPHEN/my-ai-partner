@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ユーザーダッシュボード | AI SCHOOL</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+  <!-- ============ NAVIGATION ============ -->
+  <nav class="nav-bar">
+    <div class="nav-inner">
+      <a href="../index.html" class="nav-brand">AI SCHOOL</a>
+      <div class="nav-links">
+        <a href="./about.html">AIスクールとは</a>
+        <a href="./corporate.html">法人向け</a>
+        <a href="./individual.html">個人向け</a>
+        <a href="./talent.html">AI人材DB</a>
+        <a href="./lab.html">AIラボ</a>
+        <a href="./cases.html">成果事例</a>
+        <a href="./knowledge.html">AIナレッジ</a>
+        <a href="./pricing.html">料金</a>
+        <a href="./seminar.html">セミナー</a>
+        <a href="#" class="nav-cta">マイページ</a>
+      </div>
+      <div class="nav-hamburger" aria-label="Menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ============ 1. PAGE BANNER ============ -->
+  <section class="page-banner bg-orange">
+    <span class="banner-label">USER DASHBOARD</span>
+    <h1 class="banner-title">ダッシュボード</h1>
+    <p class="banner-subtitle">学習進捗の確認、スキル評価、プロジェクト管理まですべてをここで</p>
+  </section>
+
+  <!-- ============ 2. BREADCRUMB ============ -->
+  <div class="breadcrumb">
+    <a href="../index.html">HOME</a> &gt; ダッシュボード
+  </div>
+
+  <!-- ============ 3. DASHBOARD OVERVIEW ============ -->
+  <section class="section bg-white reveal">
+    <div class="section-header">
+      <span class="label-en section-label-orange mb-16" style="display: block;">OVERVIEW</span>
+      <h2 class="heading-section mb-48">学習ダッシュボード</h2>
+    </div>
+
+    <!-- Stats Row -->
+    <div class="stats-row mb-48">
+      <div class="stat-item">
+        <div class="stat-number">72</div>
+        <div class="stat-label">学習進捗 %</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">640</div>
+        <div class="stat-label">AIスキルスコア</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">4</div>
+        <div class="stat-label">スキルレベル</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">12</div>
+        <div class="stat-label">完了コース</div>
+      </div>
+    </div>
+
+    <!-- Dashboard Cards -->
+    <div class="two-col">
+      <div>
+        <div class="photo-placeholder photo-placeholder-wide mb-24" style="background: #888;">PHOTO</div>
+        <h3 class="heading-sub mb-8">学習進捗</h3>
+        <p class="body-text" style="color: rgba(0,0,0,0.6);">現在受講中のコース進捗状況。各コースの完了率と次のマイルストーンを確認できます。</p>
+      </div>
+      <div>
+        <div class="photo-placeholder photo-placeholder-wide mb-24" style="background: #888;">PHOTO</div>
+        <h3 class="heading-sub mb-8">AIスキルスコア</h3>
+        <p class="body-text" style="color: rgba(0,0,0,0.6);">6つのスキルドメインごとのスコアをレーダーチャートで可視化。強みと伸ばすべき領域が一目でわかります。</p>
+      </div>
+    </div>
+
+    <hr class="rule mt-48 mb-48">
+
+    <!-- Ranking & Latest -->
+    <div class="two-col">
+      <div>
+        <span class="label-en section-label-orange" style="display: block; margin-bottom: 16px;">RANKING</span>
+        <h3 class="heading-sub mb-16">ランキング</h3>
+        <div class="list-item">
+          <span class="list-num">01</span>
+          <span class="list-title">総合ランキング</span>
+          <span class="body-text" style="color: rgba(0,0,0,0.5); margin-left: auto;">128位 / 3,200人</span>
+        </div>
+        <div class="list-item">
+          <span class="list-num">02</span>
+          <span class="list-title">AI Development</span>
+          <span class="body-text" style="color: rgba(0,0,0,0.5); margin-left: auto;">56位 / 1,800人</span>
+        </div>
+        <div class="list-item" style="border-bottom: none;">
+          <span class="list-num">03</span>
+          <span class="list-title">AI Productivity</span>
+          <span class="body-text" style="color: rgba(0,0,0,0.5); margin-left: auto;">92位 / 2,400人</span>
+        </div>
+      </div>
+      <div>
+        <span class="label-en section-label-orange" style="display: block; margin-bottom: 16px;">LATEST TASKS</span>
+        <h3 class="heading-sub mb-16">最新課題</h3>
+        <div class="list-item">
+          <i class="arrow arrow-orange">&#8599;</i>
+          <span class="list-title">AIチャットボット構築</span>
+          <span class="body-text" style="color: rgba(0,0,0,0.5); margin-left: auto;">締切: 3/25</span>
+        </div>
+        <div class="list-item">
+          <i class="arrow arrow-orange">&#8599;</i>
+          <span class="list-title">画像生成プロンプト設計</span>
+          <span class="body-text" style="color: rgba(0,0,0,0.5); margin-left: auto;">締切: 3/30</span>
+        </div>
+        <div class="list-item" style="border-bottom: none;">
+          <i class="arrow arrow-orange">&#8599;</i>
+          <span class="list-title">業務自動化ワークフロー</span>
+          <span class="body-text" style="color: rgba(0,0,0,0.5); margin-left: auto;">締切: 4/5</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 4. CHAPTER: 学習コース ============ -->
+  <section class="chapter-divider bg-orange-flat reveal">
+    <div>
+      <span class="chapter-num">1</span>
+    </div>
+    <div>
+      <h2 class="chapter-title">学習コース</h2>
+    </div>
+    <div class="chapter-columns">
+      <p class="body-text" style="color: rgba(255,255,255,0.85);">実務に直結する4つのAIスキルドメインを体系的に学習。各コースは段階的なカリキュラムで構成されています。</p>
+      <p class="body-text" style="color: rgba(255,255,255,0.85);">動画講義、ハンズオン演習、実践プロジェクトを組み合わせた学習体験で、確実にスキルを習得できます。</p>
+    </div>
+  </section>
+
+  <!-- ============ 5. 学習コース DETAIL ============ -->
+  <section class="section bg-white reveal">
+    <div class="section-header">
+      <span class="label-en section-label-orange mb-16" style="display: block;">COURSES</span>
+      <h2 class="heading-section mb-48">受講可能コース</h2>
+    </div>
+
+    <!-- AI業務効率化 -->
+    <div style="display: grid; grid-template-columns: 200px 1fr; gap: 48px; align-items: start; border-bottom: 1px solid var(--rule-dark); padding: 32px 0;">
+      <div class="photo-placeholder" style="background: #888; aspect-ratio: 1/1; width: 100%;">PHOTO</div>
+      <div>
+        <span class="label-en" style="color: var(--orange-red); display: block; margin-bottom: 8px;">PRODUCTIVITY</span>
+        <h3 class="heading-sub mb-8">AI業務効率化</h3>
+        <p class="body-text mb-16" style="color: rgba(0,0,0,0.6);">AIツールを活用した業務プロセスの効率化手法を習得。ドキュメント自動生成、データ整理、ワークフロー最適化まで実務に直結するスキルを学びます。</p>
+        <div style="display: flex; gap: 8px; align-items: center;">
+          <div class="score-bar" style="max-width: 200px;">
+            <div class="score-bar-fill" style="width: 85%;"></div>
+          </div>
+          <span class="label-en" style="color: rgba(0,0,0,0.4);">85% 完了</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- AIクリエイター -->
+    <div style="display: grid; grid-template-columns: 200px 1fr; gap: 48px; align-items: start; border-bottom: 1px solid var(--rule-dark); padding: 32px 0;">
+      <div class="photo-placeholder" style="background: #888; aspect-ratio: 1/1; width: 100%;">PHOTO</div>
+      <div>
+        <span class="label-en" style="color: var(--orange-red); display: block; margin-bottom: 8px;">CREATIVE</span>
+        <h3 class="heading-sub mb-16">AIクリエイター</h3>
+        <div class="three-col" style="gap: 24px;">
+          <div style="padding: 24px; background: rgba(0,0,0,0.03);">
+            <i class="arrow arrow-orange" style="display: block; margin-bottom: 8px;">&#8599;</i>
+            <span style="font-weight: 600; display: block; margin-bottom: 4px;">画像生成</span>
+            <span class="body-text" style="color: rgba(0,0,0,0.5); font-size: 13px;">Midjourney / Stable Diffusion / DALL-E</span>
+          </div>
+          <div style="padding: 24px; background: rgba(0,0,0,0.03);">
+            <i class="arrow arrow-orange" style="display: block; margin-bottom: 8px;">&#8599;</i>
+            <span style="font-weight: 600; display: block; margin-bottom: 4px;">動画生成</span>
+            <span class="body-text" style="color: rgba(0,0,0,0.5); font-size: 13px;">Runway / Pika / Sora</span>
+          </div>
+          <div style="padding: 24px; background: rgba(0,0,0,0.03);">
+            <i class="arrow arrow-orange" style="display: block; margin-bottom: 8px;">&#8599;</i>
+            <span style="font-weight: 600; display: block; margin-bottom: 4px;">デザイン</span>
+            <span class="body-text" style="color: rgba(0,0,0,0.5); font-size: 13px;">AI × Figma / Canva / Brand Design</span>
+          </div>
+        </div>
+        <div style="display: flex; gap: 8px; align-items: center; margin-top: 16px;">
+          <div class="score-bar" style="max-width: 200px;">
+            <div class="score-bar-fill" style="width: 60%;"></div>
+          </div>
+          <span class="label-en" style="color: rgba(0,0,0,0.4);">60% 完了</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- AI開発 -->
+    <div style="display: grid; grid-template-columns: 200px 1fr; gap: 48px; align-items: start; border-bottom: 1px solid var(--rule-dark); padding: 32px 0;">
+      <div class="photo-placeholder" style="background: #888; aspect-ratio: 1/1; width: 100%;">PHOTO</div>
+      <div>
+        <span class="label-en" style="color: var(--orange-red); display: block; margin-bottom: 8px;">DEVELOPMENT</span>
+        <h3 class="heading-sub mb-16">AI開発</h3>
+        <div class="three-col" style="gap: 24px;">
+          <div style="padding: 24px; background: rgba(0,0,0,0.03);">
+            <i class="arrow arrow-orange" style="display: block; margin-bottom: 8px;">&#8599;</i>
+            <span style="font-weight: 600; display: block; margin-bottom: 4px;">AIエージェント</span>
+            <span class="body-text" style="color: rgba(0,0,0,0.5); font-size: 13px;">自律型AIの設計と構築</span>
+          </div>
+          <div style="padding: 24px; background: rgba(0,0,0,0.03);">
+            <i class="arrow arrow-orange" style="display: block; margin-bottom: 8px;">&#8599;</i>
+            <span style="font-weight: 600; display: block; margin-bottom: 4px;">API連携</span>
+            <span class="body-text" style="color: rgba(0,0,0,0.5); font-size: 13px;">OpenAI / Claude / Gemini API</span>
+          </div>
+          <div style="padding: 24px; background: rgba(0,0,0,0.03);">
+            <i class="arrow arrow-orange" style="display: block; margin-bottom: 8px;">&#8599;</i>
+            <span style="font-weight: 600; display: block; margin-bottom: 4px;">自動化</span>
+            <span class="body-text" style="color: rgba(0,0,0,0.5); font-size: 13px;">ワークフロー / RPA / スクレイピング</span>
+          </div>
+        </div>
+        <div style="display: flex; gap: 8px; align-items: center; margin-top: 16px;">
+          <div class="score-bar" style="max-width: 200px;">
+            <div class="score-bar-fill" style="width: 45%;"></div>
+          </div>
+          <span class="label-en" style="color: rgba(0,0,0,0.4);">45% 完了</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- AIマーケティング -->
+    <div style="display: grid; grid-template-columns: 200px 1fr; gap: 48px; align-items: start; padding: 32px 0;">
+      <div class="photo-placeholder" style="background: #888; aspect-ratio: 1/1; width: 100%;">PHOTO</div>
+      <div>
+        <span class="label-en" style="color: var(--orange-red); display: block; margin-bottom: 8px;">MARKETING</span>
+        <h3 class="heading-sub mb-8">AIマーケティング</h3>
+        <p class="body-text mb-16" style="color: rgba(0,0,0,0.6);">AIを活用したコンテンツ制作、広告最適化、市場分析、パーソナライゼーションの手法を実践的に学びます。</p>
+        <div style="display: flex; gap: 8px; align-items: center;">
+          <div class="score-bar" style="max-width: 200px;">
+            <div class="score-bar-fill" style="width: 30%;"></div>
+          </div>
+          <span class="label-en" style="color: rgba(0,0,0,0.4);">30% 完了</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 6. CHAPTER: 課題提出 ============ -->
+  <section class="section bg-black reveal">
+    <div class="section-header">
+      <div class="flex-between mb-16">
+        <span class="label-en" style="color: rgba(255,255,255,0.5);">ASSIGNMENTS</span>
+        <i class="arrow arrow-white">&#8599;</i>
+      </div>
+      <hr class="rule rule-light mb-32">
+      <h2 class="heading-section" style="color: var(--white);">課題提出</h2>
+    </div>
+
+    <div class="three-col mb-48">
+      <!-- 課題一覧 -->
+      <div>
+        <div class="photo-placeholder mb-24" style="background: #888; aspect-ratio: 16/9;">PHOTO</div>
+        <i class="arrow arrow-orange" style="display: block; margin-bottom: 8px;">&#8599;</i>
+        <h3 class="heading-sub mb-8" style="color: var(--white);">課題一覧</h3>
+        <p class="body-text" style="color: rgba(255,255,255,0.6);">受講中コースの課題を一覧表示。未提出・提出済み・フィードバック済みのステータスで管理します。</p>
+      </div>
+      <!-- 提出 -->
+      <div>
+        <div class="photo-placeholder mb-24" style="background: #888; aspect-ratio: 16/9;">PHOTO</div>
+        <i class="arrow arrow-orange" style="display: block; margin-bottom: 8px;">&#8599;</i>
+        <h3 class="heading-sub mb-8" style="color: var(--white);">提出</h3>
+        <p class="body-text" style="color: rgba(255,255,255,0.6);">課題の成果物をアップロードして提出。テキスト、ファイル、URLなど複数の提出形式に対応しています。</p>
+      </div>
+      <!-- フィードバック -->
+      <div>
+        <div class="photo-placeholder mb-24" style="background: #888; aspect-ratio: 16/9;">PHOTO</div>
+        <i class="arrow arrow-orange" style="display: block; margin-bottom: 8px;">&#8599;</i>
+        <h3 class="heading-sub mb-8" style="color: var(--white);">フィードバック</h3>
+        <p class="body-text" style="color: rgba(255,255,255,0.6);">講師からの詳細なフィードバックを確認。スコア評価とコメントで改善ポイントが明確にわかります。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 7. CHAPTER: AIプロジェクト ============ -->
+  <section class="chapter-divider bg-orange-flat reveal">
+    <div>
+      <span class="chapter-num">2</span>
+    </div>
+    <div>
+      <h2 class="chapter-title">AIプロジェクト</h2>
+    </div>
+    <div class="chapter-columns">
+      <p class="body-text" style="color: rgba(255,255,255,0.85);">実践的なAIプロジェクトに参加して、チームでの開発経験を積みます。ポートフォリオとなる成果物を制作します。</p>
+      <p class="body-text" style="color: rgba(255,255,255,0.85);">プロジェクトの進捗管理、チームコラボレーション、成果物の公開まで一元管理できます。</p>
+    </div>
+  </section>
+
+  <!-- ============ 8. AIプロジェクト DETAIL ============ -->
+  <section class="section bg-white reveal">
+    <div class="feature-grid">
+      <div class="feature-item">
+        <div class="photo-placeholder mb-24" style="background: #888; aspect-ratio: 16/9; width: 100%;">PHOTO</div>
+        <div class="feature-num">01</div>
+        <h3 class="feature-title">プロジェクト参加</h3>
+        <p class="feature-text">公開中のAIプロジェクトに応募・参加。難易度・期間・求められるスキルから最適なプロジェクトを選べます。</p>
+      </div>
+      <div class="feature-item">
+        <div class="photo-placeholder mb-24" style="background: #888; aspect-ratio: 16/9; width: 100%;">PHOTO</div>
+        <div class="feature-num">02</div>
+        <h3 class="feature-title">チーム開発</h3>
+        <p class="feature-text">チームメンバーとのコラボレーション。タスク管理、コードレビュー、進捗共有をプラットフォーム上で実現します。</p>
+      </div>
+      <div class="feature-item">
+        <div class="photo-placeholder mb-24" style="background: #888; aspect-ratio: 16/9; width: 100%;">PHOTO</div>
+        <div class="feature-num">03</div>
+        <h3 class="feature-title">成果物</h3>
+        <p class="feature-text">完成した成果物をポートフォリオとして公開。企業からのスカウトやプロジェクト参加の実績になります。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 9. AIスキル評価 ============ -->
+  <section class="split reveal">
+    <div class="split-image photo-placeholder" style="background: #888;">PHOTO</div>
+    <div class="split-content bg-white">
+      <span class="label-en section-label-orange mb-16">SKILL ASSESSMENT</span>
+      <hr class="rule mb-24">
+      <h2 class="heading-section mb-16">AIスキル評価</h2>
+      <p class="body-text mb-32" style="color: rgba(0,0,0,0.65);">6つのドメインで総合的にAIスキルを評価。スコアリングとレベル認定で客観的にスキルを可視化します。</p>
+
+      <div class="list-item">
+        <i class="arrow arrow-orange">&#8599;</i>
+        <span class="list-title">スキルスコア</span>
+        <span class="body-text" style="color: rgba(0,0,0,0.5); margin-left: auto;">640 / 1000</span>
+      </div>
+      <div class="list-item">
+        <i class="arrow arrow-orange">&#8599;</i>
+        <span class="list-title">レベル認定</span>
+        <span class="body-text" style="color: rgba(0,0,0,0.5); margin-left: auto;">Level 4</span>
+      </div>
+      <div class="list-item" style="border-bottom: none;">
+        <i class="arrow arrow-orange">&#8599;</i>
+        <span class="list-title">ランキング</span>
+        <span class="body-text" style="color: rgba(0,0,0,0.5); margin-left: auto;">128位</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 10. スキルドメイン詳細 ============ -->
+  <section class="section bg-black reveal">
+    <div class="section-header">
+      <span class="label-en mb-16" style="display: block; color: rgba(255,255,255,0.5);">SKILL SCORES</span>
+      <h2 class="heading-section mb-48" style="color: var(--white);">スキルドメイン別スコア</h2>
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 24px;">
+      <div style="display: grid; grid-template-columns: 200px 1fr 80px; gap: 24px; align-items: center; padding: 16px 0; border-bottom: 1px solid rgba(255,255,255,0.15);">
+        <span class="label-en" style="font-weight: 600;">AI Productivity</span>
+        <div class="score-bar" style="background: rgba(255,255,255,0.1);">
+          <div class="score-bar-fill" style="width: 85%;"></div>
+        </div>
+        <span class="label-en" style="color: var(--orange-red); text-align: right;">850</span>
+      </div>
+      <div style="display: grid; grid-template-columns: 200px 1fr 80px; gap: 24px; align-items: center; padding: 16px 0; border-bottom: 1px solid rgba(255,255,255,0.15);">
+        <span class="label-en" style="font-weight: 600;">AI Development</span>
+        <div class="score-bar" style="background: rgba(255,255,255,0.1);">
+          <div class="score-bar-fill" style="width: 72%;"></div>
+        </div>
+        <span class="label-en" style="color: var(--orange-red); text-align: right;">720</span>
+      </div>
+      <div style="display: grid; grid-template-columns: 200px 1fr 80px; gap: 24px; align-items: center; padding: 16px 0; border-bottom: 1px solid rgba(255,255,255,0.15);">
+        <span class="label-en" style="font-weight: 600;">AI Creative</span>
+        <div class="score-bar" style="background: rgba(255,255,255,0.1);">
+          <div class="score-bar-fill" style="width: 65%;"></div>
+        </div>
+        <span class="label-en" style="color: var(--orange-red); text-align: right;">650</span>
+      </div>
+      <div style="display: grid; grid-template-columns: 200px 1fr 80px; gap: 24px; align-items: center; padding: 16px 0; border-bottom: 1px solid rgba(255,255,255,0.15);">
+        <span class="label-en" style="font-weight: 600;">AI Marketing</span>
+        <div class="score-bar" style="background: rgba(255,255,255,0.1);">
+          <div class="score-bar-fill" style="width: 58%;"></div>
+        </div>
+        <span class="label-en" style="color: var(--orange-red); text-align: right;">580</span>
+      </div>
+      <div style="display: grid; grid-template-columns: 200px 1fr 80px; gap: 24px; align-items: center; padding: 16px 0; border-bottom: 1px solid rgba(255,255,255,0.15);">
+        <span class="label-en" style="font-weight: 600;">AI Automation</span>
+        <div class="score-bar" style="background: rgba(255,255,255,0.1);">
+          <div class="score-bar-fill" style="width: 50%;"></div>
+        </div>
+        <span class="label-en" style="color: var(--orange-red); text-align: right;">500</span>
+      </div>
+      <div style="display: grid; grid-template-columns: 200px 1fr 80px; gap: 24px; align-items: center; padding: 16px 0;">
+        <span class="label-en" style="font-weight: 600;">AI Data</span>
+        <div class="score-bar" style="background: rgba(255,255,255,0.1);">
+          <div class="score-bar-fill" style="width: 42%;"></div>
+        </div>
+        <span class="label-en" style="color: var(--orange-red); text-align: right;">420</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 11. AI人材プロフィール ============ -->
+  <section class="split reveal">
+    <div class="split-content bg-white">
+      <span class="label-en section-label-orange mb-16">AI TALENT PROFILE</span>
+      <hr class="rule mb-24">
+      <h2 class="heading-section mb-16">AI人材プロフィール</h2>
+      <p class="body-text mb-32" style="color: rgba(0,0,0,0.65);">AI人材データベースに登録するプロフィールを管理。スキル情報やポートフォリオを充実させることで、企業からのオファー確率が向上します。</p>
+
+      <div class="list-item">
+        <i class="arrow arrow-orange">&#8599;</i>
+        <span class="list-title">プロフィール編集</span>
+      </div>
+      <div class="list-item">
+        <i class="arrow arrow-orange">&#8599;</i>
+        <span class="list-title">スキル登録</span>
+      </div>
+      <div class="list-item">
+        <i class="arrow arrow-orange">&#8599;</i>
+        <span class="list-title">ポートフォリオ</span>
+      </div>
+      <div class="list-item" style="border-bottom: none;">
+        <i class="arrow arrow-orange">&#8599;</i>
+        <span class="list-title">公開設定</span>
+      </div>
+    </div>
+    <div class="split-image photo-placeholder" style="background: #888;">PHOTO</div>
+  </section>
+
+  <!-- ============ 12. 企業オファー ============ -->
+  <section class="section bg-black reveal">
+    <div class="section-header">
+      <div class="flex-between mb-16">
+        <span class="label-en" style="color: rgba(255,255,255,0.5);">CORPORATE OFFERS</span>
+        <i class="arrow arrow-white">&#8599;</i>
+      </div>
+      <hr class="rule rule-light mb-32">
+      <h2 class="heading-section" style="color: var(--white);">企業オファー</h2>
+    </div>
+
+    <div class="list-item list-item-dark">
+      <span class="list-num">01</span>
+      <span class="list-title">オファー一覧</span>
+      <span class="body-text" style="color: rgba(255,255,255,0.6); margin-left: auto;">企業からのスカウト・オファーを一覧で確認</span>
+      <i class="arrow arrow-orange">&#8599;</i>
+    </div>
+    <div class="list-item list-item-dark">
+      <span class="list-num">02</span>
+      <span class="list-title">案件応募</span>
+      <span class="body-text" style="color: rgba(255,255,255,0.6); margin-left: auto;">公開中の案件に応募・エントリー</span>
+      <i class="arrow arrow-orange">&#8599;</i>
+    </div>
+    <div class="list-item list-item-dark" style="border-bottom: none;">
+      <span class="list-num">03</span>
+      <span class="list-title">メッセージ</span>
+      <span class="body-text" style="color: rgba(255,255,255,0.6); margin-left: auto;">企業担当者とのダイレクトメッセージ</span>
+      <i class="arrow arrow-orange">&#8599;</i>
+    </div>
+
+    <hr class="rule rule-light mt-48 mb-48">
+
+    <!-- Offer Stats -->
+    <div class="three-col">
+      <div style="text-align: center;">
+        <div style="font-family: var(--font-heading-en); font-size: 48px; color: var(--orange-red); margin-bottom: 8px;">5</div>
+        <div style="font-size: 13px; color: rgba(255,255,255,0.5);">新着オファー</div>
+      </div>
+      <div style="text-align: center;">
+        <div style="font-family: var(--font-heading-en); font-size: 48px; color: var(--orange-red); margin-bottom: 8px;">3</div>
+        <div style="font-size: 13px; color: rgba(255,255,255,0.5);">応募中</div>
+      </div>
+      <div style="text-align: center;">
+        <div style="font-family: var(--font-heading-en); font-size: 48px; color: var(--orange-red); margin-bottom: 8px;">12</div>
+        <div style="font-size: 13px; color: rgba(255,255,255,0.5);">未読メッセージ</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 13. コミュニティ ============ -->
+  <section class="section bg-white reveal">
+    <div class="section-header">
+      <span class="label-en section-label-orange mb-16" style="display: block;">COMMUNITY</span>
+      <h2 class="heading-section mb-48">コミュニティ</h2>
+    </div>
+
+    <div class="three-col mb-48">
+      <div>
+        <div class="photo-placeholder mb-24" style="background: #888; aspect-ratio: 16/9;">PHOTO</div>
+        <h3 class="heading-sub mb-8">フォーラム</h3>
+        <p class="body-text" style="color: rgba(0,0,0,0.6);">AI SCHOOLの受講生同士で情報交換。最新のAI技術やノウハウを共有するディスカッションフォーラムです。</p>
+      </div>
+      <div>
+        <div class="photo-placeholder mb-24" style="background: #888; aspect-ratio: 16/9;">PHOTO</div>
+        <h3 class="heading-sub mb-8">質問</h3>
+        <p class="body-text" style="color: rgba(0,0,0,0.6);">学習中の疑問を質問。講師や他の受講生から回答を受けられるQ&Aプラットフォームです。</p>
+      </div>
+      <div>
+        <div class="photo-placeholder mb-24" style="background: #888; aspect-ratio: 16/9;">PHOTO</div>
+        <h3 class="heading-sub mb-8">チーム募集</h3>
+        <p class="body-text" style="color: rgba(0,0,0,0.6);">プロジェクトのチームメンバーを募集・応募。スキルマッチングで最適なチーム編成を支援します。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 14. 学習履歴 ============ -->
+  <section class="section bg-black reveal">
+    <div class="section-header">
+      <div class="flex-between mb-16">
+        <span class="label-en" style="color: rgba(255,255,255,0.5);">LEARNING HISTORY</span>
+        <i class="arrow arrow-white">&#8599;</i>
+      </div>
+      <hr class="rule rule-light mb-32">
+      <h2 class="heading-section mb-16" style="color: var(--white);">学習履歴</h2>
+      <p class="body-text mb-32" style="color: rgba(255,255,255,0.65);">過去の学習活動をすべて記録。完了コース、課題提出、取得スコアの履歴を時系列で確認できます。</p>
+    </div>
+
+    <div class="photo-placeholder photo-placeholder-wide mb-48" style="background: #888;">PHOTO</div>
+
+    <div style="border-top: 1px solid rgba(255,255,255,0.15);">
+      <div style="display: flex; align-items: baseline; gap: 24px; padding: 24px 0; border-bottom: 1px solid rgba(255,255,255,0.15);">
+        <span class="label-en" style="color: var(--orange-red); min-width: 100px;">2026.03.15</span>
+        <span style="display: inline-block; padding: 2px 12px; font-size: 11px; font-weight: 600; letter-spacing: 0.05em; border: 1px solid rgba(255,255,255,0.2); color: rgba(255,255,255,0.7); min-width: 80px; text-align: center;">課題</span>
+        <span class="body-text" style="color: rgba(255,255,255,0.7); flex: 1;">AIチャットボット構築 - 提出完了</span>
+        <i class="arrow arrow-orange">&#8599;</i>
+      </div>
+      <div style="display: flex; align-items: baseline; gap: 24px; padding: 24px 0; border-bottom: 1px solid rgba(255,255,255,0.15);">
+        <span class="label-en" style="color: var(--orange-red); min-width: 100px;">2026.03.12</span>
+        <span style="display: inline-block; padding: 2px 12px; font-size: 11px; font-weight: 600; letter-spacing: 0.05em; border: 1px solid rgba(255,255,255,0.2); color: rgba(255,255,255,0.7); min-width: 80px; text-align: center;">コース</span>
+        <span class="body-text" style="color: rgba(255,255,255,0.7); flex: 1;">AI業務効率化 レッスン12 完了</span>
+        <i class="arrow arrow-orange">&#8599;</i>
+      </div>
+      <div style="display: flex; align-items: baseline; gap: 24px; padding: 24px 0; border-bottom: 1px solid rgba(255,255,255,0.15);">
+        <span class="label-en" style="color: var(--orange-red); min-width: 100px;">2026.03.10</span>
+        <span style="display: inline-block; padding: 2px 12px; font-size: 11px; font-weight: 600; letter-spacing: 0.05em; border: 1px solid rgba(255,255,255,0.2); color: rgba(255,255,255,0.7); min-width: 80px; text-align: center;">評価</span>
+        <span class="body-text" style="color: rgba(255,255,255,0.7); flex: 1;">スキルスコア更新: 620 → 640</span>
+        <i class="arrow arrow-orange">&#8599;</i>
+      </div>
+      <div style="display: flex; align-items: baseline; gap: 24px; padding: 24px 0; border-bottom: 1px solid rgba(255,255,255,0.15);">
+        <span class="label-en" style="color: var(--orange-red); min-width: 100px;">2026.03.08</span>
+        <span style="display: inline-block; padding: 2px 12px; font-size: 11px; font-weight: 600; letter-spacing: 0.05em; border: 1px solid rgba(255,255,255,0.2); color: rgba(255,255,255,0.7); min-width: 80px; text-align: center;">PJ</span>
+        <span class="body-text" style="color: rgba(255,255,255,0.7); flex: 1;">AIサービス開発プロジェクト - チーム参加</span>
+        <i class="arrow arrow-orange">&#8599;</i>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 15. 支払い管理 ============ -->
+  <section class="section bg-white reveal">
+    <div class="section-header">
+      <span class="label-en section-label-orange mb-16" style="display: block;">BILLING</span>
+      <h2 class="heading-section mb-48">支払い管理</h2>
+    </div>
+
+    <!-- Current Plan -->
+    <div class="pricing-grid mb-48">
+      <div class="pricing-card">
+        <div class="pricing-label">CURRENT PLAN</div>
+        <div class="pricing-name">プロフェッショナルプラン</div>
+        <div class="pricing-price">¥29,800<span style="font-size: 16px; color: rgba(0,0,0,0.5);">/月</span></div>
+        <ul class="pricing-features">
+          <li>全コース受講可能</li>
+          <li>スキル評価・レベル認定</li>
+          <li>AI人材DB登録</li>
+          <li>プロジェクト参加</li>
+          <li>コミュニティアクセス</li>
+        </ul>
+      </div>
+      <div class="pricing-card pricing-card-featured">
+        <div class="pricing-label" style="color: var(--orange-red);">UPGRADE</div>
+        <div class="pricing-name">エキスパートプラン</div>
+        <div class="pricing-price">¥49,800<span style="font-size: 16px; color: rgba(255,255,255,0.5);">/月</span></div>
+        <ul class="pricing-features">
+          <li>プロフェッショナルプラン全機能</li>
+          <li>1on1メンタリング（月4回）</li>
+          <li>優先プロジェクトマッチング</li>
+          <li>企業オファー優先表示</li>
+          <li>限定セミナー参加</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Billing History -->
+    <h3 class="heading-sub mb-16">請求履歴</h3>
+    <div style="border-top: 1px solid var(--rule-dark);">
+      <div style="display: flex; align-items: center; gap: 24px; padding: 16px 0; border-bottom: 1px solid var(--rule-dark);">
+        <span class="label-en" style="color: var(--orange-red); min-width: 100px;">2026.03.01</span>
+        <span class="body-text" style="flex: 1;">プロフェッショナルプラン 月額</span>
+        <span style="font-family: var(--font-heading-en); font-weight: 400;">¥29,800</span>
+      </div>
+      <div style="display: flex; align-items: center; gap: 24px; padding: 16px 0; border-bottom: 1px solid var(--rule-dark);">
+        <span class="label-en" style="color: var(--orange-red); min-width: 100px;">2026.02.01</span>
+        <span class="body-text" style="flex: 1;">プロフェッショナルプラン 月額</span>
+        <span style="font-family: var(--font-heading-en); font-weight: 400;">¥29,800</span>
+      </div>
+      <div style="display: flex; align-items: center; gap: 24px; padding: 16px 0; border-bottom: 1px solid var(--rule-dark);">
+        <span class="label-en" style="color: var(--orange-red); min-width: 100px;">2026.01.01</span>
+        <span class="body-text" style="flex: 1;">プロフェッショナルプラン 月額</span>
+        <span style="font-family: var(--font-heading-en); font-weight: 400;">¥29,800</span>
+      </div>
+    </div>
+
+    <hr class="rule mt-48 mb-48">
+
+    <!-- Subscription -->
+    <h3 class="heading-sub mb-16">サブスクリプション</h3>
+    <div class="two-col">
+      <div>
+        <div class="list-item">
+          <span style="font-weight: 600; min-width: 140px;">プラン</span>
+          <span class="body-text" style="color: rgba(0,0,0,0.6);">プロフェッショナル</span>
+        </div>
+        <div class="list-item">
+          <span style="font-weight: 600; min-width: 140px;">次回更新日</span>
+          <span class="body-text" style="color: rgba(0,0,0,0.6);">2026年4月1日</span>
+        </div>
+        <div class="list-item" style="border-bottom: none;">
+          <span style="font-weight: 600; min-width: 140px;">決済方法</span>
+          <span class="body-text" style="color: rgba(0,0,0,0.6);">クレジットカード **** 4242</span>
+        </div>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 12px; justify-content: center;">
+        <a href="#" class="btn btn-orange">プランを変更する <i class="arrow">&#8599;</i></a>
+        <a href="#" class="btn btn-dark">決済方法を変更 <i class="arrow">&#8599;</i></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 16. アカウント設定 ============ -->
+  <section class="section bg-black reveal">
+    <div class="section-header">
+      <div class="flex-between mb-16">
+        <span class="label-en" style="color: rgba(255,255,255,0.5);">ACCOUNT SETTINGS</span>
+        <i class="arrow arrow-white">&#8599;</i>
+      </div>
+      <hr class="rule rule-light mb-32">
+      <h2 class="heading-section" style="color: var(--white);">アカウント設定</h2>
+    </div>
+
+    <div class="three-col">
+      <!-- プロフィール -->
+      <div style="border: 1px solid rgba(255,255,255,0.15); padding: 40px;">
+        <div class="photo-placeholder mb-24" style="background: #888; aspect-ratio: 1/1; width: 80px; height: 80px;">PHOTO</div>
+        <h3 class="heading-sub mb-8" style="color: var(--white);">プロフィール</h3>
+        <p class="body-text mb-24" style="color: rgba(255,255,255,0.6);">氏名、メールアドレス、プロフィール写真の変更ができます。</p>
+        <a href="#" class="btn btn-outline" style="padding: 10px 20px; font-size: 12px;">編集する <i class="arrow">&#8599;</i></a>
+      </div>
+      <!-- セキュリティ -->
+      <div style="border: 1px solid rgba(255,255,255,0.15); padding: 40px;">
+        <div style="width: 80px; height: 80px; background: #888; display: flex; align-items: center; justify-content: center; color: #aaa; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 24px;">PHOTO</div>
+        <h3 class="heading-sub mb-8" style="color: var(--white);">セキュリティ</h3>
+        <p class="body-text mb-24" style="color: rgba(255,255,255,0.6);">パスワード変更、二要素認証、ログイン履歴の確認ができます。</p>
+        <a href="#" class="btn btn-outline" style="padding: 10px 20px; font-size: 12px;">設定する <i class="arrow">&#8599;</i></a>
+      </div>
+      <!-- 通知設定 -->
+      <div style="border: 1px solid rgba(255,255,255,0.15); padding: 40px;">
+        <div style="width: 80px; height: 80px; background: #888; display: flex; align-items: center; justify-content: center; color: #aaa; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 24px;">PHOTO</div>
+        <h3 class="heading-sub mb-8" style="color: var(--white);">通知設定</h3>
+        <p class="body-text mb-24" style="color: rgba(255,255,255,0.6);">メール通知、プッシュ通知の設定を管理。受信するお知らせの種類を選択できます。</p>
+        <a href="#" class="btn btn-outline" style="padding: 10px 20px; font-size: 12px;">設定する <i class="arrow">&#8599;</i></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 17. CTA ============ -->
+  <section class="cta-banner bg-orange reveal">
+    <h2 class="cta-title">学習を続けて、AIスキルを磨こう</h2>
+    <p class="cta-text" style="color: rgba(255,255,255,0.85);">次のレベルを目指して、今日も学習を進めましょう</p>
+    <div class="cta-buttons">
+      <a href="#" class="btn btn-primary">学習を再開する <i class="arrow">&#8599;</i></a>
+      <a href="#" class="btn btn-outline">コース一覧を見る <i class="arrow">&#8599;</i></a>
+    </div>
+  </section>
+
+  <!-- ============ 18. FOOTER ============ -->
+  <footer class="site-footer">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">AI SCHOOL</div>
+        <p class="footer-desc">AI人材育成から企業のAI内製化まで、包括的なAI教育プラットフォーム。</p>
+      </div>
+      <div>
+        <div class="footer-heading">SERVICES</div>
+        <div class="footer-links">
+          <a href="./corporate.html">法人向け</a>
+          <a href="./individual.html">個人向け</a>
+          <a href="./talent.html">AI人材DB</a>
+          <a href="./lab.html">AIラボ</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-heading">CONTENT</div>
+        <div class="footer-links">
+          <a href="./cases.html">成果事例</a>
+          <a href="./knowledge.html">AIナレッジ</a>
+          <a href="./seminar.html">セミナー</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-heading">COMPANY</div>
+        <div class="footer-links">
+          <a href="./about.html">AIスクールとは</a>
+          <a href="./pricing.html">料金</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-heading">ACCOUNT</div>
+        <div class="footer-links">
+          <a href="./dashboard.html">ダッシュボード</a>
+          <a href="#">ログアウト</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; AI SCHOOL. All rights reserved.</span>
+      <span>TOKYO, JAPAN</span>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>
