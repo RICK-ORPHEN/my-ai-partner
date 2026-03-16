@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>システム設定 | AI SCHOOL ADMIN</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/dashboard.css">
+  <style>.dash-sidebar-brand span { color: var(--orange-red); font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; }</style>
+</head>
+<body class="dash-body">
+  <div class="dash">
+
+    <aside class="dash-sidebar">
+      <div class="dash-sidebar-brand"><a href="../index.html">AI SCHOOL</a><span>Admin</span></div>
+      <nav class="dash-sidebar-nav">
+        <span class="nav-section-label">Overview</span><a href="./admin.html">ダッシュボード</a>
+        <span class="nav-section-label">Management</span><a href="./admin-users.html">ユーザー管理</a><a href="./admin-courses.html">コース管理</a><a href="./admin-assignments.html">課題管理</a><a href="./admin-skills.html">AIスキル評価管理</a>
+        <span class="nav-section-label">Matching</span><a href="./admin-talent.html">AI人材データベース</a><a href="./admin-projects.html">企業案件管理</a>
+        <span class="nav-section-label">Content</span><a href="./admin-content.html">コンテンツ管理</a><a href="./admin-marketing.html">マーケティング</a>
+        <span class="nav-section-label">Finance</span><a href="./admin-revenue.html">売上管理</a><a href="./admin-system.html" class="active">システム設定</a>
+      </nav>
+      <div class="dash-sidebar-footer"><a href="./dashboard.html">ユーザー画面へ</a><a href="#">ログアウト</a></div>
+    </aside>
+
+    <div class="dash-main">
+      <header class="dash-topbar">
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <button class="dash-mobile-toggle" onclick="document.querySelector('.dash-sidebar').classList.toggle('open')">&#9776;</button>
+          <div class="dash-topbar-title">システム設定</div>
+        </div>
+        <div class="dash-topbar-actions"><div class="dash-topbar-user"><span>管理者</span><div class="dash-topbar-avatar">PHOTO</div></div></div>
+      </header>
+
+      <div class="dash-content">
+
+        <!-- プラン設定 -->
+        <div class="dash-section">
+          <div class="dash-section-header"><div class="dash-section-title">プラン設定</div><a href="#" class="dash-link">編集 &#8599;</a></div>
+          <table class="dash-table">
+            <thead><tr><th>プラン名</th><th>月額</th><th>年額</th><th>機能</th><th>契約数</th><th></th></tr></thead>
+            <tbody>
+              <tr>
+                <td style="font-weight:600;">スタンダード</td>
+                <td style="font-family:var(--font-heading-en);color:var(--orange-red);">¥9,800</td>
+                <td style="font-family:var(--font-heading-en);">¥98,000</td>
+                <td style="font-size:12px;color:rgba(0,0,0,0.5);">基本コース / スキル評価</td>
+                <td style="font-family:var(--font-heading-en);color:var(--orange-red);">1,280</td>
+                <td><a href="#" class="dash-link">編集 &#8599;</a></td>
+              </tr>
+              <tr>
+                <td style="font-weight:600;">プロフェッショナル</td>
+                <td style="font-family:var(--font-heading-en);color:var(--orange-red);">¥29,800</td>
+                <td style="font-family:var(--font-heading-en);">¥298,000</td>
+                <td style="font-size:12px;color:rgba(0,0,0,0.5);">全コース / AI人材DB / PJ参加</td>
+                <td style="font-family:var(--font-heading-en);color:var(--orange-red);">1,640</td>
+                <td><a href="#" class="dash-link">編集 &#8599;</a></td>
+              </tr>
+              <tr>
+                <td style="font-weight:600;">エキスパート</td>
+                <td style="font-family:var(--font-heading-en);color:var(--orange-red);">¥49,800</td>
+                <td style="font-family:var(--font-heading-en);">¥498,000</td>
+                <td style="font-size:12px;color:rgba(0,0,0,0.5);">全機能 / メンタリング / 優先マッチング</td>
+                <td style="font-family:var(--font-heading-en);color:var(--orange-red);">320</td>
+                <td><a href="#" class="dash-link">編集 &#8599;</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- API設定 -->
+        <div class="dash-section">
+          <div class="dash-section-header"><div class="dash-section-title">API設定</div><span class="dash-section-label">API Keys</span></div>
+          <div class="dash-widget" style="max-width: 640px;">
+            <div class="dash-list-item">
+              <span class="item-name" style="color: rgba(0,0,0,0.45); min-width: 160px;">OpenAI API</span>
+              <span class="item-meta" style="font-family: monospace; font-size: 12px;">sk-****...****a8Bx</span>
+              <span class="badge badge-active" style="margin-left: auto;">接続中</span>
+            </div>
+            <div class="dash-list-item">
+              <span class="item-name" style="color: rgba(0,0,0,0.45); min-width: 160px;">Anthropic API</span>
+              <span class="item-meta" style="font-family: monospace; font-size: 12px;">sk-ant-****...****kL2m</span>
+              <span class="badge badge-active" style="margin-left: auto;">接続中</span>
+            </div>
+            <div class="dash-list-item">
+              <span class="item-name" style="color: rgba(0,0,0,0.45); min-width: 160px;">Stripe API</span>
+              <span class="item-meta" style="font-family: monospace; font-size: 12px;">sk_live_****...****9pQr</span>
+              <span class="badge badge-active" style="margin-left: auto;">接続中</span>
+            </div>
+            <div class="dash-list-item">
+              <span class="item-name" style="color: rgba(0,0,0,0.45); min-width: 160px;">SendGrid API</span>
+              <span class="item-meta" style="font-family: monospace; font-size: 12px;">SG.****...****vW3x</span>
+              <span class="badge badge-active" style="margin-left: auto;">接続中</span>
+            </div>
+            <div class="dash-list-item">
+              <span class="item-name" style="color: rgba(0,0,0,0.45); min-width: 160px;">AWS S3</span>
+              <span class="item-meta" style="font-family: monospace; font-size: 12px;">AKIA****...****Y5Z</span>
+              <span class="badge badge-active" style="margin-left: auto;">接続中</span>
+            </div>
+          </div>
+
+          <div style="margin-top: 24px;">
+            <div class="dash-widget" style="max-width: 640px;">
+              <div class="dash-widget-title"><span>API使用量（今月）</span><span class="label-en">USAGE</span></div>
+              <div class="dash-list-item">
+                <span class="item-name">OpenAI</span>
+                <div class="score-bar" style="flex: 1; height: 4px;"><div class="score-bar-fill" style="width: 65%;"></div></div>
+                <span class="item-meta" style="font-family:var(--font-heading-en);color:var(--orange-red);">$3,240</span>
+              </div>
+              <div class="dash-list-item">
+                <span class="item-name">Anthropic</span>
+                <div class="score-bar" style="flex: 1; height: 4px;"><div class="score-bar-fill" style="width: 45%;"></div></div>
+                <span class="item-meta" style="font-family:var(--font-heading-en);color:var(--orange-red);">$2,180</span>
+              </div>
+              <div class="dash-list-item">
+                <span class="item-name">AWS S3</span>
+                <div class="score-bar" style="flex: 1; height: 4px;"><div class="score-bar-fill" style="width: 20%;"></div></div>
+                <span class="item-meta" style="font-family:var(--font-heading-en);color:var(--orange-red);">$420</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 通知設定 -->
+        <div class="dash-section">
+          <div class="dash-section-header"><div class="dash-section-title">通知設定</div><a href="#" class="dash-link">保存 &#8599;</a></div>
+          <div class="dash-widget" style="max-width: 640px;">
+            <div class="dash-list-item">
+              <span class="item-name">新規ユーザー登録</span>
+              <span class="badge badge-active">ON</span>
+            </div>
+            <div class="dash-list-item">
+              <span class="item-name">決済エラー</span>
+              <span class="badge badge-active">ON</span>
+            </div>
+            <div class="dash-list-item">
+              <span class="item-name">課題提出（一括）</span>
+              <span class="badge badge-active">ON</span>
+            </div>
+            <div class="dash-list-item">
+              <span class="item-name">API使用量アラート</span>
+              <span class="badge badge-active">ON</span>
+            </div>
+            <div class="dash-list-item">
+              <span class="item-name">セキュリティアラート</span>
+              <span class="badge badge-active">ON</span>
+            </div>
+            <div class="dash-list-item">
+              <span class="item-name">日次レポート</span>
+              <span class="badge badge-done">OFF</span>
+            </div>
+            <div class="dash-list-item">
+              <span class="item-name">週次レポート</span>
+              <span class="badge badge-active">ON</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</body>
+</html>

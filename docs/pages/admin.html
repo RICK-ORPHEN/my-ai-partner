@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>管理ダッシュボード | AI SCHOOL ADMIN</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/dashboard.css">
+  <style>
+    .dash-sidebar-brand span { color: var(--orange-red); font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; }
+  </style>
+</head>
+<body class="dash-body">
+  <div class="dash">
+
+    <aside class="dash-sidebar">
+      <div class="dash-sidebar-brand">
+        <a href="../index.html">AI SCHOOL</a>
+        <span>Admin</span>
+      </div>
+      <nav class="dash-sidebar-nav">
+        <span class="nav-section-label">Overview</span>
+        <a href="./admin.html" class="active">ダッシュボード</a>
+        <span class="nav-section-label">Management</span>
+        <a href="./admin-users.html">ユーザー管理</a>
+        <a href="./admin-courses.html">コース管理</a>
+        <a href="./admin-assignments.html">課題管理</a>
+        <a href="./admin-skills.html">AIスキル評価管理</a>
+        <span class="nav-section-label">Matching</span>
+        <a href="./admin-talent.html">AI人材データベース</a>
+        <a href="./admin-projects.html">企業案件管理</a>
+        <span class="nav-section-label">Content</span>
+        <a href="./admin-content.html">コンテンツ管理</a>
+        <a href="./admin-marketing.html">マーケティング</a>
+        <span class="nav-section-label">Finance</span>
+        <a href="./admin-revenue.html">売上管理</a>
+        <a href="./admin-system.html">システム設定</a>
+      </nav>
+      <div class="dash-sidebar-footer">
+        <a href="./dashboard.html">ユーザー画面へ</a>
+        <a href="#">ログアウト</a>
+      </div>
+    </aside>
+
+    <div class="dash-main">
+      <header class="dash-topbar">
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <button class="dash-mobile-toggle" onclick="document.querySelector('.dash-sidebar').classList.toggle('open')">&#9776;</button>
+          <div class="dash-topbar-title">ダッシュボード</div>
+        </div>
+        <div class="dash-topbar-actions">
+          <div class="dash-topbar-user">
+            <span>管理者</span>
+            <div class="dash-topbar-avatar">PHOTO</div>
+          </div>
+        </div>
+      </header>
+
+      <div class="dash-content">
+
+        <!-- KPI Stats -->
+        <div class="dash-stats">
+          <div class="dash-stat-card">
+            <div class="stat-val">3,240</div>
+            <div class="stat-lbl">受講者数</div>
+          </div>
+          <div class="dash-stat-card">
+            <div class="stat-val">¥12.8M</div>
+            <div class="stat-lbl">今月売上</div>
+          </div>
+          <div class="dash-stat-card">
+            <div class="stat-val">68%</div>
+            <div class="stat-lbl">平均学習進捗</div>
+          </div>
+          <div class="dash-stat-card">
+            <div class="stat-val">1,856</div>
+            <div class="stat-lbl">アクティブユーザー</div>
+          </div>
+        </div>
+
+        <!-- Charts -->
+        <div class="dash-widget-grid" style="margin-bottom: 24px;">
+          <div class="dash-widget">
+            <div class="dash-widget-title">
+              <span>売上推移</span>
+              <span class="label-en">REVENUE</span>
+            </div>
+            <div class="dash-img-placeholder" style="width: 100%; height: 200px;">REVENUE CHART</div>
+          </div>
+          <div class="dash-widget">
+            <div class="dash-widget-title">
+              <span>新規登録数</span>
+              <span class="label-en">NEW USERS</span>
+            </div>
+            <div class="dash-img-placeholder" style="width: 100%; height: 200px;">REGISTRATION CHART</div>
+          </div>
+        </div>
+
+        <!-- Sub Stats -->
+        <div class="dash-stats" style="grid-template-columns: repeat(4, 1fr); margin-bottom: 32px;">
+          <div class="dash-stat-card">
+            <div class="stat-val">42</div>
+            <div class="stat-lbl">公開コース</div>
+          </div>
+          <div class="dash-stat-card">
+            <div class="stat-val">156</div>
+            <div class="stat-lbl">法人ユーザー</div>
+          </div>
+          <div class="dash-stat-card">
+            <div class="stat-val">18</div>
+            <div class="stat-lbl">講師数</div>
+          </div>
+          <div class="dash-stat-card">
+            <div class="stat-val">87</div>
+            <div class="stat-lbl">進行中案件</div>
+          </div>
+        </div>
+
+        <!-- Widgets -->
+        <div class="dash-widget-grid">
+          <div class="dash-widget">
+            <div class="dash-widget-title">
+              <span>学習進捗分布</span>
+              <span class="label-en">PROGRESS</span>
+            </div>
+            <div class="dash-list-item">
+              <span class="item-name">0〜25%</span>
+              <div class="score-bar" style="flex: 1; height: 4px;"><div class="score-bar-fill" style="width: 15%;"></div></div>
+              <span class="item-meta">486人</span>
+            </div>
+            <div class="dash-list-item">
+              <span class="item-name">26〜50%</span>
+              <div class="score-bar" style="flex: 1; height: 4px;"><div class="score-bar-fill" style="width: 30%;"></div></div>
+              <span class="item-meta">972人</span>
+            </div>
+            <div class="dash-list-item">
+              <span class="item-name">51〜75%</span>
+              <div class="score-bar" style="flex: 1; height: 4px;"><div class="score-bar-fill" style="width: 35%;"></div></div>
+              <span class="item-meta">1,134人</span>
+            </div>
+            <div class="dash-list-item">
+              <span class="item-name">76〜100%</span>
+              <div class="score-bar" style="flex: 1; height: 4px;"><div class="score-bar-fill" style="width: 20%;"></div></div>
+              <span class="item-meta">648人</span>
+            </div>
+          </div>
+
+          <div class="dash-widget">
+            <div class="dash-widget-title">
+              <span>最近のアクティビティ</span>
+              <span class="label-en">ACTIVITY</span>
+            </div>
+            <div class="dash-list-item">
+              <span style="font-size: 11px; color: var(--orange-red); min-width: 50px;">09:30</span>
+              <span class="item-name">新規受講生 田中花子 が登録</span>
+            </div>
+            <div class="dash-list-item">
+              <span style="font-size: 11px; color: var(--orange-red); min-width: 50px;">09:15</span>
+              <span class="item-name">コース「AI開発入門」に新レッスン追加</span>
+            </div>
+            <div class="dash-list-item">
+              <span style="font-size: 11px; color: var(--orange-red); min-width: 50px;">08:50</span>
+              <span class="item-name">課題「チャットボット構築」に5件の提出</span>
+            </div>
+            <div class="dash-list-item">
+              <span style="font-size: 11px; color: var(--orange-red); min-width: 50px;">08:30</span>
+              <span class="item-name">株式会社テックが新規案件を登録</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</body>
+</html>

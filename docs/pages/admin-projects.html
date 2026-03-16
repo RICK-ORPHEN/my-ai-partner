@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>企業案件管理 | AI SCHOOL ADMIN</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/dashboard.css">
+  <style>.dash-sidebar-brand span { color: var(--orange-red); font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; }</style>
+</head>
+<body class="dash-body">
+  <div class="dash">
+
+    <aside class="dash-sidebar">
+      <div class="dash-sidebar-brand"><a href="../index.html">AI SCHOOL</a><span>Admin</span></div>
+      <nav class="dash-sidebar-nav">
+        <span class="nav-section-label">Overview</span><a href="./admin.html">ダッシュボード</a>
+        <span class="nav-section-label">Management</span><a href="./admin-users.html">ユーザー管理</a><a href="./admin-courses.html">コース管理</a><a href="./admin-assignments.html">課題管理</a><a href="./admin-skills.html">AIスキル評価管理</a>
+        <span class="nav-section-label">Matching</span><a href="./admin-talent.html">AI人材データベース</a><a href="./admin-projects.html" class="active">企業案件管理</a>
+        <span class="nav-section-label">Content</span><a href="./admin-content.html">コンテンツ管理</a><a href="./admin-marketing.html">マーケティング</a>
+        <span class="nav-section-label">Finance</span><a href="./admin-revenue.html">売上管理</a><a href="./admin-system.html">システム設定</a>
+      </nav>
+      <div class="dash-sidebar-footer"><a href="./dashboard.html">ユーザー画面へ</a><a href="#">ログアウト</a></div>
+    </aside>
+
+    <div class="dash-main">
+      <header class="dash-topbar">
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <button class="dash-mobile-toggle" onclick="document.querySelector('.dash-sidebar').classList.toggle('open')">&#9776;</button>
+          <div class="dash-topbar-title">企業案件管理</div>
+        </div>
+        <div class="dash-topbar-actions">
+          <a href="#" class="btn btn-orange" style="padding: 8px 20px; font-size: 12px;">案件登録 &#8599;</a>
+          <div class="dash-topbar-user"><span>管理者</span><div class="dash-topbar-avatar">PHOTO</div></div>
+        </div>
+      </header>
+
+      <div class="dash-content">
+
+        <div class="dash-stats" style="grid-template-columns: repeat(4,1fr);">
+          <div class="dash-stat-card"><div class="stat-val">87</div><div class="stat-lbl">進行中案件</div></div>
+          <div class="dash-stat-card"><div class="stat-val">342</div><div class="stat-lbl">今月マッチング</div></div>
+          <div class="dash-stat-card"><div class="stat-val">28</div><div class="stat-lbl">契約成立</div></div>
+          <div class="dash-stat-card"><div class="stat-val">¥4.2M</div><div class="stat-lbl">今月仲介収益</div></div>
+        </div>
+
+        <!-- 案件登録 -->
+        <div class="dash-section">
+          <div class="dash-section-header"><div class="dash-section-title">案件一覧</div><span class="dash-section-label">Projects</span></div>
+          <div class="dash-filters">
+            <div class="dash-filter-group"><label>ステータス</label><select><option>すべて</option><option>募集中</option><option>選考中</option><option>契約済み</option><option>完了</option></select></div>
+            <div class="dash-filter-group"><label>種別</label><select><option>すべて</option><option>正社員</option><option>業務委託</option><option>副業</option></select></div>
+          </div>
+          <table class="dash-table">
+            <thead><tr><th>ステータス</th><th>企業名</th><th>案件名</th><th>種別</th><th>報酬</th><th>応募数</th><th></th></tr></thead>
+            <tbody>
+              <tr><td><span class="badge badge-active">募集中</span></td><td style="font-weight:400;">株式会社テック</td><td>AIエージェント開発</td><td>業務委託</td><td style="font-family:var(--font-heading-en);">¥800K/月</td><td style="font-family:var(--font-heading-en);color:var(--orange-red);">12</td><td><a href="#" class="dash-link">管理 &#8599;</a></td></tr>
+              <tr><td><span class="badge badge-active">募集中</span></td><td style="font-weight:400;">AI Corp.</td><td>画像生成パイプライン</td><td>正社員</td><td style="font-family:var(--font-heading-en);">800万〜</td><td style="font-family:var(--font-heading-en);color:var(--orange-red);">8</td><td><a href="#" class="dash-link">管理 &#8599;</a></td></tr>
+              <tr><td><span class="badge badge-pending">選考中</span></td><td style="font-weight:400;">デジタルワークス</td><td>マーケティングAI導入</td><td>業務委託</td><td style="font-family:var(--font-heading-en);">¥600K/月</td><td style="font-family:var(--font-heading-en);">5</td><td><a href="#" class="dash-link">管理 &#8599;</a></td></tr>
+              <tr><td><span class="badge badge-done">契約済み</span></td><td style="font-weight:400;">フューチャーラボ</td><td>AI研修講師</td><td>副業</td><td style="font-family:var(--font-heading-en);">¥5K/時</td><td style="font-family:var(--font-heading-en);">3</td><td><a href="#" class="dash-link">管理 &#8599;</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- マッチング / 契約管理 -->
+        <div class="dash-widget-grid">
+          <div class="dash-widget">
+            <div class="dash-widget-title"><span>マッチング</span><span class="label-en">MATCHING</span></div>
+            <div class="dash-list-item"><span class="item-name">自動マッチング</span><span class="badge badge-active">有効</span></div>
+            <div class="dash-list-item"><span class="item-name">マッチ精度</span><span class="item-meta" style="font-family:var(--font-heading-en);color:var(--orange-red);">78%</span></div>
+            <div class="dash-list-item"><span class="item-name">平均応募数/案件</span><span class="item-meta" style="font-family:var(--font-heading-en);">6.2</span></div>
+            <div class="dash-list-item"><span class="item-name">成約率</span><span class="item-meta" style="font-family:var(--font-heading-en);color:var(--orange-red);">32%</span></div>
+          </div>
+          <div class="dash-widget">
+            <div class="dash-widget-title"><span>契約管理</span><span class="label-en">CONTRACTS</span></div>
+            <div class="dash-list-item"><span class="item-name">今月の新規契約</span><span class="item-meta" style="font-family:var(--font-heading-en);color:var(--orange-red);">28</span></div>
+            <div class="dash-list-item"><span class="item-name">継続契約</span><span class="item-meta" style="font-family:var(--font-heading-en);">45</span></div>
+            <div class="dash-list-item"><span class="item-name">契約完了</span><span class="item-meta" style="font-family:var(--font-heading-en);">14</span></div>
+            <div class="dash-list-item"><span class="item-name">トラブル案件</span><span class="item-meta" style="font-family:var(--font-heading-en);">0</span></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</body>
+</html>
