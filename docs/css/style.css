@@ -821,6 +821,10 @@ h3, .heading-sub {
   color: var(--black);
 }
 
+.pricing-card-featured .pricing-name {
+  color: var(--white);
+}
+
 .pricing-card .pricing-price {
   font-family: var(--font-heading-en);
   font-size: 48px;
@@ -846,6 +850,7 @@ h3, .heading-sub {
 }
 
 .pricing-card-featured .pricing-features li {
+  color: var(--white);
   border-bottom-color: rgba(255,255,255,0.1);
 }
 
