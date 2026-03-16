@@ -810,6 +810,7 @@ h3, .heading-sub {
   letter-spacing: 0.12em;
   text-transform: uppercase;
   margin-bottom: 16px;
+  color: var(--orange-red);
 }
 
 .pricing-card .pricing-name {
@@ -817,6 +818,7 @@ h3, .heading-sub {
   font-size: 32px;
   font-weight: 900;
   margin-bottom: 8px;
+  color: var(--black);
 }
 
 .pricing-card .pricing-price {
@@ -828,7 +830,7 @@ h3, .heading-sub {
 
 .pricing-card .pricing-features {
   padding-top: 24px;
-  border-top: 1px solid var(--rule-dark);
+  border-top: 1px solid rgba(0,0,0,0.15);
 }
 
 .pricing-card-featured .pricing-features {
@@ -839,6 +841,7 @@ h3, .heading-sub {
   padding: 8px 0;
   font-size: 14px;
   font-weight: 300;
+  color: var(--black);
   border-bottom: 1px solid rgba(0,0,0,0.06);
 }
 
