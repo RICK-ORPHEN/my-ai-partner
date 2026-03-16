@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>学習コース | AI SCHOOL</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/dashboard.css">
+</head>
+<body class="dash-body">
+  <div class="dash">
+
+    <!-- SIDEBAR -->
+    <aside class="dash-sidebar">
+      <div class="dash-sidebar-brand">
+        <a href="../index.html">AI SCHOOL</a>
+        <span>User Dashboard</span>
+      </div>
+      <nav class="dash-sidebar-nav">
+        <span class="nav-section-label">Main</span>
+        <a href="./dashboard.html">ダッシュボード</a>
+        <a href="./dashboard-courses.html" class="active">学習コース</a>
+        <a href="./dashboard-assignments.html">課題提出</a>
+        <span class="nav-section-label">Project</span>
+        <a href="./dashboard-projects.html">AIプロジェクト</a>
+        <a href="./dashboard-skills.html">AIスキル評価</a>
+        <a href="./dashboard-profile.html">AI人材プロフィール</a>
+        <span class="nav-section-label">Career</span>
+        <a href="./dashboard-offers.html">企業オファー</a>
+        <a href="./dashboard-community.html">コミュニティ</a>
+        <a href="./dashboard-history.html">学習履歴</a>
+        <span class="nav-section-label">Account</span>
+        <a href="./dashboard-billing.html">支払い管理</a>
+        <a href="./dashboard-settings.html">アカウント設定</a>
+      </nav>
+      <div class="dash-sidebar-footer">
+        <a href="#">利用規約</a>
+        <a href="#">プライバシーポリシー</a>
+        <a href="#">ログアウト</a>
+      </div>
+    </aside>
+
+    <!-- MAIN -->
+    <div class="dash-main">
+      <header class="dash-topbar">
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <button class="dash-mobile-toggle" onclick="document.querySelector('.dash-sidebar').classList.toggle('open')">&#9776;</button>
+          <div class="dash-topbar-title">学習コース</div>
+        </div>
+        <div class="dash-topbar-actions">
+          <div class="dash-topbar-user">
+            <span>山田 太郎</span>
+            <div class="dash-topbar-avatar">PHOTO</div>
+          </div>
+        </div>
+      </header>
+
+      <div class="dash-content">
+
+        <!-- Filters -->
+        <div class="dash-filters">
+          <div class="dash-filter-group">
+            <label>カテゴリ</label>
+            <select>
+              <option>すべて</option>
+              <option>AI業務効率化</option>
+              <option>AIクリエイター</option>
+              <option>AI開発</option>
+              <option>AIマーケティング</option>
+            </select>
+          </div>
+          <div class="dash-filter-group">
+            <label>ステータス</label>
+            <select>
+              <option>すべて</option>
+              <option>受講中</option>
+              <option>完了</option>
+              <option>未開始</option>
+            </select>
+          </div>
+          <div class="dash-filter-group">
+            <label>コース名</label>
+            <input type="text" placeholder="コース名を入力してください">
+          </div>
+        </div>
+
+        <div class="dash-count-bar">
+          <span class="count-text"><strong>1〜8件</strong>（全12件）</span>
+          <div class="dash-filter-group" style="flex-direction: row; align-items: center; gap: 8px;">
+            <label style="margin: 0;">表示件数</label>
+            <select style="min-width: 100px;">
+              <option>20件表示</option>
+              <option>50件表示</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Course Table -->
+        <table class="dash-table">
+          <thead>
+            <tr>
+              <th>ステータス</th>
+              <th>カテゴリ</th>
+              <th>コース名</th>
+              <th>サブカテゴリ</th>
+              <th>進捗</th>
+              <th>レッスン数</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="badge badge-active">受講中</span></td>
+              <td>AI業務効率化</td>
+              <td style="font-weight: 400;">AIツール実践マスター</td>
+              <td>—</td>
+              <td>
+                <div style="display: flex; align-items: center; gap: 8px;">
+                  <div class="score-bar" style="width: 80px; height: 4px;"><div class="score-bar-fill" style="width: 85%;"></div></div>
+                  <span style="font-size: 12px; color: rgba(0,0,0,0.5);">85%</span>
+                </div>
+              </td>
+              <td>12 / 14</td>
+              <td><a href="#" class="dash-link">詳細 &#8599;</a></td>
+            </tr>
+            <tr>
+              <td><span class="badge badge-active">受講中</span></td>
+              <td>AIクリエイター</td>
+              <td style="font-weight: 400;">画像生成AIマスター</td>
+              <td>画像生成</td>
+              <td>
+                <div style="display: flex; align-items: center; gap: 8px;">
+                  <div class="score-bar" style="width: 80px; height: 4px;"><div class="score-bar-fill" style="width: 72%;"></div></div>
+                  <span style="font-size: 12px; color: rgba(0,0,0,0.5);">72%</span>
+                </div>
+              </td>
+              <td>18 / 25</td>
+              <td><a href="#" class="dash-link">詳細 &#8599;</a></td>
+            </tr>
+            <tr>
+              <td><span class="badge badge-active">受講中</span></td>
+              <td>AIクリエイター</td>
+              <td style="font-weight: 400;">動画生成 実践編</td>
+              <td>動画生成</td>
+              <td>
+                <div style="display: flex; align-items: center; gap: 8px;">
+                  <div class="score-bar" style="width: 80px; height: 4px;"><div class="score-bar-fill" style="width: 45%;"></div></div>
+                  <span style="font-size: 12px; color: rgba(0,0,0,0.5);">45%</span>
+                </div>
+              </td>
+              <td>9 / 20</td>
+              <td><a href="#" class="dash-link">詳細 &#8599;</a></td>
+            </tr>
+            <tr>
+              <td><span class="badge badge-active">受講中</span></td>
+              <td>AI開発</td>
+              <td style="font-weight: 400;">AIエージェント開発入門</td>
+              <td>AIエージェント</td>
+              <td>
+                <div style="display: flex; align-items: center; gap: 8px;">
+                  <div class="score-bar" style="width: 80px; height: 4px;"><div class="score-bar-fill" style="width: 60%;"></div></div>
+                  <span style="font-size: 12px; color: rgba(0,0,0,0.5);">60%</span>
+                </div>
+              </td>
+              <td>12 / 20</td>
+              <td><a href="#" class="dash-link">詳細 &#8599;</a></td>
+            </tr>
+            <tr>
+              <td><span class="badge badge-pending">未開始</span></td>
+              <td>AI開発</td>
+              <td style="font-weight: 400;">API連携 実践ガイド</td>
+              <td>API連携</td>
+              <td>
+                <div style="display: flex; align-items: center; gap: 8px;">
+                  <div class="score-bar" style="width: 80px; height: 4px;"><div class="score-bar-fill" style="width: 0%;"></div></div>
+                  <span style="font-size: 12px; color: rgba(0,0,0,0.5);">0%</span>
+                </div>
+              </td>
+              <td>0 / 16</td>
+              <td><a href="#" class="dash-link">開始 &#8599;</a></td>
+            </tr>
+            <tr>
+              <td><span class="badge badge-pending">未開始</span></td>
+              <td>AI開発</td>
+              <td style="font-weight: 400;">自動化ワークフロー構築</td>
+              <td>自動化</td>
+              <td>
+                <div style="display: flex; align-items: center; gap: 8px;">
+                  <div class="score-bar" style="width: 80px; height: 4px;"><div class="score-bar-fill" style="width: 0%;"></div></div>
+                  <span style="font-size: 12px; color: rgba(0,0,0,0.5);">0%</span>
+                </div>
+              </td>
+              <td>0 / 12</td>
+              <td><a href="#" class="dash-link">開始 &#8599;</a></td>
+            </tr>
+            <tr>
+              <td><span class="badge badge-done">完了</span></td>
+              <td>AI業務効率化</td>
+              <td style="font-weight: 400;">プロンプトエンジニアリング基礎</td>
+              <td>—</td>
+              <td>
+                <div style="display: flex; align-items: center; gap: 8px;">
+                  <div class="score-bar" style="width: 80px; height: 4px;"><div class="score-bar-fill" style="width: 100%;"></div></div>
+                  <span style="font-size: 12px; color: rgba(0,0,0,0.5);">100%</span>
+                </div>
+              </td>
+              <td>10 / 10</td>
+              <td><a href="#" class="dash-link">詳細 &#8599;</a></td>
+            </tr>
+            <tr>
+              <td><span class="badge badge-done">完了</span></td>
+              <td>AIクリエイター</td>
+              <td style="font-weight: 400;">デザインAI活用術</td>
+              <td>デザイン</td>
+              <td>
+                <div style="display: flex; align-items: center; gap: 8px;">
+                  <div class="score-bar" style="width: 80px; height: 4px;"><div class="score-bar-fill" style="width: 100%;"></div></div>
+                  <span style="font-size: 12px; color: rgba(0,0,0,0.5);">100%</span>
+                </div>
+              </td>
+              <td>8 / 8</td>
+              <td><a href="#" class="dash-link">詳細 &#8599;</a></td>
+            </tr>
+          </tbody>
+        </table>
+
+      </div>
+    </div>
+  </div>
+</body>
+</html>

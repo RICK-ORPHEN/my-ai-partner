@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>支払い管理 | AI SCHOOL</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/dashboard.css">
+</head>
+<body class="dash-body">
+  <div class="dash">
+
+    <!-- SIDEBAR -->
+    <aside class="dash-sidebar">
+      <div class="dash-sidebar-brand">
+        <a href="../index.html">AI SCHOOL</a>
+        <span>User Dashboard</span>
+      </div>
+      <nav class="dash-sidebar-nav">
+        <span class="nav-section-label">Main</span>
+        <a href="./dashboard.html">ダッシュボード</a>
+        <a href="./dashboard-courses.html">学習コース</a>
+        <a href="./dashboard-assignments.html">課題提出</a>
+        <span class="nav-section-label">Project</span>
+        <a href="./dashboard-projects.html">AIプロジェクト</a>
+        <a href="./dashboard-skills.html">AIスキル評価</a>
+        <a href="./dashboard-profile.html">AI人材プロフィール</a>
+        <span class="nav-section-label">Career</span>
+        <a href="./dashboard-offers.html">企業オファー</a>
+        <a href="./dashboard-community.html">コミュニティ</a>
+        <a href="./dashboard-history.html">学習履歴</a>
+        <span class="nav-section-label">Account</span>
+        <a href="./dashboard-billing.html" class="active">支払い管理</a>
+        <a href="./dashboard-settings.html">アカウント設定</a>
+      </nav>
+      <div class="dash-sidebar-footer">
+        <a href="#">利用規約</a>
+        <a href="#">プライバシーポリシー</a>
+        <a href="#">ログアウト</a>
+      </div>
+    </aside>
+
+    <!-- MAIN -->
+    <div class="dash-main">
+      <header class="dash-topbar">
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <button class="dash-mobile-toggle" onclick="document.querySelector('.dash-sidebar').classList.toggle('open')">&#9776;</button>
+          <div class="dash-topbar-title">支払い管理</div>
+        </div>
+        <div class="dash-topbar-actions">
+          <div class="dash-topbar-user">
+            <span>山田 太郎</span>
+            <div class="dash-topbar-avatar">PHOTO</div>
+          </div>
+        </div>
+      </header>
+
+      <div class="dash-content">
+
+        <!-- Current Plan -->
+        <div class="dash-section">
+          <div class="dash-section-header">
+            <div class="dash-section-title">プラン</div>
+            <span class="dash-section-label">Plan</span>
+          </div>
+          <div class="dash-widget-grid">
+            <div class="dash-widget" style="border-color: var(--orange-red);">
+              <div style="font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--orange-red); margin-bottom: 12px;">CURRENT PLAN</div>
+              <div style="font-family: var(--font-heading-ja); font-size: 20px; font-weight: 900; margin-bottom: 4px;">プロフェッショナルプラン</div>
+              <div style="font-family: var(--font-heading-en); font-size: 32px; color: var(--orange-red); margin-bottom: 20px;">¥29,800<span style="font-size: 13px; color: rgba(0,0,0,0.4);">/月</span></div>
+              <div class="dash-list-item">
+                <span class="item-name" style="color: rgba(0,0,0,0.45);">次回更新日</span>
+                <span class="item-meta">2026年4月1日</span>
+              </div>
+              <div class="dash-list-item">
+                <span class="item-name" style="color: rgba(0,0,0,0.45);">決済方法</span>
+                <span class="item-meta">クレジットカード **** 4242</span>
+              </div>
+              <div class="dash-list-item">
+                <span class="item-name" style="color: rgba(0,0,0,0.45);">契約開始日</span>
+                <span class="item-meta">2025年10月1日</span>
+              </div>
+              <div style="margin-top: 20px; display: flex; gap: 12px;">
+                <a href="#" class="btn btn-orange" style="padding: 10px 20px; font-size: 12px;">プラン変更 &#8599;</a>
+                <a href="#" class="btn btn-dark" style="padding: 10px 20px; font-size: 12px;">決済方法変更 &#8599;</a>
+              </div>
+            </div>
+            <div class="dash-widget">
+              <div style="font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: rgba(0,0,0,0.3); margin-bottom: 12px;">UPGRADE AVAILABLE</div>
+              <div style="font-family: var(--font-heading-ja); font-size: 20px; font-weight: 900; margin-bottom: 4px;">エキスパートプラン</div>
+              <div style="font-family: var(--font-heading-en); font-size: 32px; color: var(--orange-red); margin-bottom: 20px;">¥49,800<span style="font-size: 13px; color: rgba(0,0,0,0.4);">/月</span></div>
+              <div class="dash-list-item">
+                <span class="item-name" style="font-size: 12px;">全コース受講可能</span>
+              </div>
+              <div class="dash-list-item">
+                <span class="item-name" style="font-size: 12px;">1on1メンタリング（月4回）</span>
+              </div>
+              <div class="dash-list-item">
+                <span class="item-name" style="font-size: 12px;">優先プロジェクトマッチング</span>
+              </div>
+              <div class="dash-list-item">
+                <span class="item-name" style="font-size: 12px;">企業オファー優先表示</span>
+              </div>
+              <div class="dash-list-item">
+                <span class="item-name" style="font-size: 12px;">限定セミナー参加</span>
+              </div>
+              <div style="margin-top: 20px;">
+                <a href="#" class="btn btn-orange" style="padding: 10px 20px; font-size: 12px;">アップグレード &#8599;</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Billing History -->
+        <div class="dash-section">
+          <div class="dash-section-header">
+            <div class="dash-section-title">請求履歴</div>
+            <span class="dash-section-label">Billing History</span>
+          </div>
+          <table class="dash-table">
+            <thead>
+              <tr>
+                <th>日付</th>
+                <th>内容</th>
+                <th>金額</th>
+                <th>ステータス</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td style="font-family: var(--font-body-en); font-size: 12px;">2026/03/01</td>
+                <td style="font-weight: 400;">プロフェッショナルプラン 月額</td>
+                <td style="font-family: var(--font-heading-en);">¥29,800</td>
+                <td><span class="badge badge-done">支払済</span></td>
+                <td><a href="#" class="dash-link">領収書 &#8599;</a></td>
+              </tr>
+              <tr>
+                <td style="font-family: var(--font-body-en); font-size: 12px;">2026/02/01</td>
+                <td style="font-weight: 400;">プロフェッショナルプラン 月額</td>
+                <td style="font-family: var(--font-heading-en);">¥29,800</td>
+                <td><span class="badge badge-done">支払済</span></td>
+                <td><a href="#" class="dash-link">領収書 &#8599;</a></td>
+              </tr>
+              <tr>
+                <td style="font-family: var(--font-body-en); font-size: 12px;">2026/01/01</td>
+                <td style="font-weight: 400;">プロフェッショナルプラン 月額</td>
+                <td style="font-family: var(--font-heading-en);">¥29,800</td>
+                <td><span class="badge badge-done">支払済</span></td>
+                <td><a href="#" class="dash-link">領収書 &#8599;</a></td>
+              </tr>
+              <tr>
+                <td style="font-family: var(--font-body-en); font-size: 12px;">2025/12/01</td>
+                <td style="font-weight: 400;">プロフェッショナルプラン 月額</td>
+                <td style="font-family: var(--font-heading-en);">¥29,800</td>
+                <td><span class="badge badge-done">支払済</span></td>
+                <td><a href="#" class="dash-link">領収書 &#8599;</a></td>
+              </tr>
+              <tr>
+                <td style="font-family: var(--font-body-en); font-size: 12px;">2025/11/01</td>
+                <td style="font-weight: 400;">プロフェッショナルプラン 月額</td>
+                <td style="font-family: var(--font-heading-en);">¥29,800</td>
+                <td><span class="badge badge-done">支払済</span></td>
+                <td><a href="#" class="dash-link">領収書 &#8599;</a></td>
+              </tr>
+              <tr>
+                <td style="font-family: var(--font-body-en); font-size: 12px;">2025/10/01</td>
+                <td style="font-weight: 400;">プロフェッショナルプラン 月額</td>
+                <td style="font-family: var(--font-heading-en);">¥29,800</td>
+                <td><span class="badge badge-done">支払済</span></td>
+                <td><a href="#" class="dash-link">領収書 &#8599;</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Subscription Info -->
+        <div class="dash-section">
+          <div class="dash-section-header">
+            <div class="dash-section-title">サブスクリプション</div>
+            <span class="dash-section-label">Subscription</span>
+          </div>
+          <div class="dash-widget" style="max-width: 480px;">
+            <div class="dash-list-item">
+              <span class="item-name" style="color: rgba(0,0,0,0.45); min-width: 120px;">プラン</span>
+              <span class="item-meta" style="font-weight: 600;">プロフェッショナル</span>
+            </div>
+            <div class="dash-list-item">
+              <span class="item-name" style="color: rgba(0,0,0,0.45); min-width: 120px;">更新サイクル</span>
+              <span class="item-meta">月額</span>
+            </div>
+            <div class="dash-list-item">
+              <span class="item-name" style="color: rgba(0,0,0,0.45); min-width: 120px;">次回請求日</span>
+              <span class="item-meta">2026年4月1日</span>
+            </div>
+            <div class="dash-list-item">
+              <span class="item-name" style="color: rgba(0,0,0,0.45); min-width: 120px;">カード</span>
+              <span class="item-meta">VISA **** 4242</span>
+            </div>
+            <div class="dash-list-item">
+              <span class="item-name" style="color: rgba(0,0,0,0.45); min-width: 120px;">ステータス</span>
+              <span class="badge badge-active">有効</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</body>
+</html>

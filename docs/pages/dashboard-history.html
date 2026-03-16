@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>学習履歴 | AI SCHOOL</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/dashboard.css">
+</head>
+<body class="dash-body">
+  <div class="dash">
+
+    <!-- SIDEBAR -->
+    <aside class="dash-sidebar">
+      <div class="dash-sidebar-brand">
+        <a href="../index.html">AI SCHOOL</a>
+        <span>User Dashboard</span>
+      </div>
+      <nav class="dash-sidebar-nav">
+        <span class="nav-section-label">Main</span>
+        <a href="./dashboard.html">ダッシュボード</a>
+        <a href="./dashboard-courses.html">学習コース</a>
+        <a href="./dashboard-assignments.html">課題提出</a>
+        <span class="nav-section-label">Project</span>
+        <a href="./dashboard-projects.html">AIプロジェクト</a>
+        <a href="./dashboard-skills.html">AIスキル評価</a>
+        <a href="./dashboard-profile.html">AI人材プロフィール</a>
+        <span class="nav-section-label">Career</span>
+        <a href="./dashboard-offers.html">企業オファー</a>
+        <a href="./dashboard-community.html">コミュニティ</a>
+        <a href="./dashboard-history.html" class="active">学習履歴</a>
+        <span class="nav-section-label">Account</span>
+        <a href="./dashboard-billing.html">支払い管理</a>
+        <a href="./dashboard-settings.html">アカウント設定</a>
+      </nav>
+      <div class="dash-sidebar-footer">
+        <a href="#">利用規約</a>
+        <a href="#">プライバシーポリシー</a>
+        <a href="#">ログアウト</a>
+      </div>
+    </aside>
+
+    <!-- MAIN -->
+    <div class="dash-main">
+      <header class="dash-topbar">
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <button class="dash-mobile-toggle" onclick="document.querySelector('.dash-sidebar').classList.toggle('open')">&#9776;</button>
+          <div class="dash-topbar-title">学習履歴</div>
+        </div>
+        <div class="dash-topbar-actions">
+          <div class="dash-topbar-user">
+            <span>山田 太郎</span>
+            <div class="dash-topbar-avatar">PHOTO</div>
+          </div>
+        </div>
+      </header>
+
+      <div class="dash-content">
+
+        <!-- Activity Graph -->
+        <div class="dash-section">
+          <div class="dash-section-header">
+            <div class="dash-section-title">学習アクティビティ</div>
+            <span class="dash-section-label">Activity</span>
+          </div>
+          <div class="dash-img-placeholder" style="width: 100%; height: 200px;">ACTIVITY GRAPH</div>
+        </div>
+
+        <!-- Filters -->
+        <div class="dash-filters">
+          <div class="dash-filter-group">
+            <label>種別</label>
+            <select>
+              <option>すべて</option>
+              <option>コース</option>
+              <option>課題</option>
+              <option>評価</option>
+              <option>プロジェクト</option>
+            </select>
+          </div>
+          <div class="dash-filter-group">
+            <label>期間</label>
+            <select>
+              <option>過去30日</option>
+              <option>過去90日</option>
+              <option>過去1年</option>
+              <option>すべて</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="dash-count-bar">
+          <span class="count-text"><strong>1〜10件</strong>（全48件）</span>
+          <div class="dash-filter-group" style="flex-direction: row; align-items: center; gap: 8px;">
+            <label style="margin: 0;">表示件数</label>
+            <select style="min-width: 100px;">
+              <option>10件表示</option>
+              <option>20件表示</option>
+              <option>50件表示</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- History Table -->
+        <table class="dash-table">
+          <thead>
+            <tr>
+              <th>日付</th>
+              <th>種別</th>
+              <th>内容</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="font-family: var(--font-body-en); color: var(--orange-red); font-size: 12px; white-space: nowrap;">2026.03.15</td>
+              <td><span class="badge badge-pending">課題</span></td>
+              <td style="font-weight: 400;">AIチャットボット構築 — 提出完了</td>
+              <td><a href="#" class="dash-link">&#8599;</a></td>
+            </tr>
+            <tr>
+              <td style="font-family: var(--font-body-en); color: var(--orange-red); font-size: 12px; white-space: nowrap;">2026.03.12</td>
+              <td><span class="badge badge-done">コース</span></td>
+              <td style="font-weight: 400;">AI業務効率化 レッスン12 完了</td>
+              <td><a href="#" class="dash-link">&#8599;</a></td>
+            </tr>
+            <tr>
+              <td style="font-family: var(--font-body-en); color: var(--orange-red); font-size: 12px; white-space: nowrap;">2026.03.10</td>
+              <td><span class="badge badge-active">評価</span></td>
+              <td style="font-weight: 400;">スキルスコア更新: 620 → 640</td>
+              <td><a href="#" class="dash-link">&#8599;</a></td>
+            </tr>
+            <tr>
+              <td style="font-family: var(--font-body-en); color: var(--orange-red); font-size: 12px; white-space: nowrap;">2026.03.08</td>
+              <td><span class="badge badge-pending">PJ</span></td>
+              <td style="font-weight: 400;">AIサービス開発プロジェクト — チーム参加</td>
+              <td><a href="#" class="dash-link">&#8599;</a></td>
+            </tr>
+            <tr>
+              <td style="font-family: var(--font-body-en); color: var(--orange-red); font-size: 12px; white-space: nowrap;">2026.03.05</td>
+              <td><span class="badge badge-done">コース</span></td>
+              <td style="font-weight: 400;">画像生成AIマスター レッスン18 完了</td>
+              <td><a href="#" class="dash-link">&#8599;</a></td>
+            </tr>
+            <tr>
+              <td style="font-family: var(--font-body-en); color: var(--orange-red); font-size: 12px; white-space: nowrap;">2026.03.01</td>
+              <td><span class="badge badge-pending">課題</span></td>
+              <td style="font-weight: 400;">AI画像バナー制作 — フィードバック受領 (87点)</td>
+              <td><a href="#" class="dash-link">&#8599;</a></td>
+            </tr>
+            <tr>
+              <td style="font-family: var(--font-body-en); color: var(--orange-red); font-size: 12px; white-space: nowrap;">2026.02.27</td>
+              <td><span class="badge badge-done">コース</span></td>
+              <td style="font-weight: 400;">画像生成AIマスター レッスン17 完了</td>
+              <td><a href="#" class="dash-link">&#8599;</a></td>
+            </tr>
+            <tr>
+              <td style="font-family: var(--font-body-en); color: var(--orange-red); font-size: 12px; white-space: nowrap;">2026.02.24</td>
+              <td><span class="badge badge-pending">課題</span></td>
+              <td style="font-weight: 400;">ワークフロー自動化設計 — フィードバック受領 (78点)</td>
+              <td><a href="#" class="dash-link">&#8599;</a></td>
+            </tr>
+            <tr>
+              <td style="font-family: var(--font-body-en); color: var(--orange-red); font-size: 12px; white-space: nowrap;">2026.02.20</td>
+              <td><span class="badge badge-active">評価</span></td>
+              <td style="font-weight: 400;">スキルスコア更新: 590 → 620</td>
+              <td><a href="#" class="dash-link">&#8599;</a></td>
+            </tr>
+            <tr>
+              <td style="font-family: var(--font-body-en); color: var(--orange-red); font-size: 12px; white-space: nowrap;">2026.02.18</td>
+              <td><span class="badge badge-done">コース</span></td>
+              <td style="font-weight: 400;">デザインAI活用術 — コース完了</td>
+              <td><a href="#" class="dash-link">&#8599;</a></td>
+            </tr>
+          </tbody>
+        </table>
+
+      </div>
+    </div>
+  </div>
+</body>
+</html>

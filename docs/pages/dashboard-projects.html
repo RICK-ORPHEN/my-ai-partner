@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AIプロジェクト | AI SCHOOL</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/dashboard.css">
+</head>
+<body class="dash-body">
+  <div class="dash">
+
+    <!-- SIDEBAR -->
+    <aside class="dash-sidebar">
+      <div class="dash-sidebar-brand">
+        <a href="../index.html">AI SCHOOL</a>
+        <span>User Dashboard</span>
+      </div>
+      <nav class="dash-sidebar-nav">
+        <span class="nav-section-label">Main</span>
+        <a href="./dashboard.html">ダッシュボード</a>
+        <a href="./dashboard-courses.html">学習コース</a>
+        <a href="./dashboard-assignments.html">課題提出</a>
+        <span class="nav-section-label">Project</span>
+        <a href="./dashboard-projects.html" class="active">AIプロジェクト</a>
+        <a href="./dashboard-skills.html">AIスキル評価</a>
+        <a href="./dashboard-profile.html">AI人材プロフィール</a>
+        <span class="nav-section-label">Career</span>
+        <a href="./dashboard-offers.html">企業オファー</a>
+        <a href="./dashboard-community.html">コミュニティ</a>
+        <a href="./dashboard-history.html">学習履歴</a>
+        <span class="nav-section-label">Account</span>
+        <a href="./dashboard-billing.html">支払い管理</a>
+        <a href="./dashboard-settings.html">アカウント設定</a>
+      </nav>
+      <div class="dash-sidebar-footer">
+        <a href="#">利用規約</a>
+        <a href="#">プライバシーポリシー</a>
+        <a href="#">ログアウト</a>
+      </div>
+    </aside>
+
+    <!-- MAIN -->
+    <div class="dash-main">
+      <header class="dash-topbar">
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <button class="dash-mobile-toggle" onclick="document.querySelector('.dash-sidebar').classList.toggle('open')">&#9776;</button>
+          <div class="dash-topbar-title">AIプロジェクト</div>
+        </div>
+        <div class="dash-topbar-actions">
+          <a href="#" class="btn btn-orange" style="padding: 8px 20px; font-size: 12px;">新規プロジェクトを探す &#8599;</a>
+          <div class="dash-topbar-user">
+            <span>山田 太郎</span>
+            <div class="dash-topbar-avatar">PHOTO</div>
+          </div>
+        </div>
+      </header>
+
+      <div class="dash-content">
+
+        <!-- Project Table -->
+        <div class="dash-section">
+          <div class="dash-section-header">
+            <div class="dash-section-title">プロジェクト参加 / チーム開発</div>
+            <span class="dash-section-label">Projects</span>
+          </div>
+
+          <table class="dash-table">
+            <thead>
+              <tr>
+                <th>ステータス</th>
+                <th>プロジェクト名</th>
+                <th>チーム</th>
+                <th>メンバー</th>
+                <th>期間</th>
+                <th>役割</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="badge badge-active">参加中</span></td>
+                <td style="font-weight: 400;">AIカスタマーサポート構築</td>
+                <td>Team Alpha</td>
+                <td>5名</td>
+                <td>3/1 - 4/30</td>
+                <td>エンジニア</td>
+                <td><a href="#" class="dash-link">詳細 &#8599;</a></td>
+              </tr>
+              <tr>
+                <td><span class="badge badge-active">参加中</span></td>
+                <td style="font-weight: 400;">AI画像生成サービス開発</td>
+                <td>Team Beta</td>
+                <td>4名</td>
+                <td>2/15 - 4/15</td>
+                <td>デザイナー</td>
+                <td><a href="#" class="dash-link">詳細 &#8599;</a></td>
+              </tr>
+              <tr>
+                <td><span class="badge badge-done">完了</span></td>
+                <td style="font-weight: 400;">社内FAQ自動応答システム</td>
+                <td>Team Gamma</td>
+                <td>3名</td>
+                <td>1/10 - 2/28</td>
+                <td>PM</td>
+                <td><a href="#" class="dash-link">成果物 &#8599;</a></td>
+              </tr>
+              <tr>
+                <td><span class="badge badge-done">完了</span></td>
+                <td style="font-weight: 400;">AIレコメンドエンジン</td>
+                <td>Team Delta</td>
+                <td>4名</td>
+                <td>11/1 - 12/20</td>
+                <td>エンジニア</td>
+                <td><a href="#" class="dash-link">成果物 &#8599;</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Deliverables -->
+        <div class="dash-section">
+          <div class="dash-section-header">
+            <div class="dash-section-title">成果物</div>
+            <span class="dash-section-label">Deliverables</span>
+          </div>
+          <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;">
+            <div>
+              <div class="dash-img-placeholder" style="width: 100%; aspect-ratio: 16/9; margin-bottom: 10px;">PHOTO</div>
+              <div style="font-size: 13px; font-weight: 600; margin-bottom: 2px;">AIカスタマーサポート</div>
+              <div style="font-size: 11px; color: rgba(0,0,0,0.4);">Team Alpha — 進行中</div>
+            </div>
+            <div>
+              <div class="dash-img-placeholder" style="width: 100%; aspect-ratio: 16/9; margin-bottom: 10px;">PHOTO</div>
+              <div style="font-size: 13px; font-weight: 600; margin-bottom: 2px;">AI画像生成サービス</div>
+              <div style="font-size: 11px; color: rgba(0,0,0,0.4);">Team Beta — 進行中</div>
+            </div>
+            <div>
+              <div class="dash-img-placeholder" style="width: 100%; aspect-ratio: 16/9; margin-bottom: 10px;">PHOTO</div>
+              <div style="font-size: 13px; font-weight: 600; margin-bottom: 2px;">FAQ自動応答システム</div>
+              <div style="font-size: 11px; color: rgba(0,0,0,0.4);">Team Gamma — 完了</div>
+            </div>
+            <div>
+              <div class="dash-img-placeholder" style="width: 100%; aspect-ratio: 16/9; margin-bottom: 10px;">PHOTO</div>
+              <div style="font-size: 13px; font-weight: 600; margin-bottom: 2px;">AIレコメンドエンジン</div>
+              <div style="font-size: 11px; color: rgba(0,0,0,0.4);">Team Delta — 完了</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</body>
+</html>
