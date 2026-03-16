@@ -794,6 +794,7 @@ h3, .heading-sub {
 .pricing-card {
   padding: 48px;
   background: var(--white);
+  color: var(--black);
   border: 1px solid var(--rule-dark);
 }
 
