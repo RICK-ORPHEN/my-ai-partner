@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AIスキル評価管理 | AI SCHOOL ADMIN</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/dashboard.css">
+  <style>.dash-sidebar-brand span { color: var(--orange-red); font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; }</style>
+</head>
+<body class="dash-body">
+  <div class="dash">
+
+    <aside class="dash-sidebar">
+      <div class="dash-sidebar-brand"><a href="../index.html">AI SCHOOL</a><span>Admin</span></div>
+      <nav class="dash-sidebar-nav">
+        <span class="nav-section-label">Overview</span><a href="./admin.html">ダッシュボード</a>
+        <span class="nav-section-label">Management</span><a href="./admin-users.html">ユーザー管理</a><a href="./admin-courses.html">コース管理</a><a href="./admin-assignments.html">課題管理</a><a href="./admin-skills.html" class="active">AIスキル評価管理</a>
+        <span class="nav-section-label">Matching</span><a href="./admin-talent.html">AI人材データベース</a><a href="./admin-projects.html">企業案件管理</a>
+        <span class="nav-section-label">Content</span><a href="./admin-content.html">コンテンツ管理</a><a href="./admin-marketing.html">マーケティング</a>
+        <span class="nav-section-label">Finance</span><a href="./admin-revenue.html">売上管理</a><a href="./admin-system.html">システム設定</a>
+      </nav>
+      <div class="dash-sidebar-footer"><a href="./dashboard.html">ユーザー画面へ</a><a href="#">ログアウト</a></div>
+    </aside>
+
+    <div class="dash-main">
+      <header class="dash-topbar">
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <button class="dash-mobile-toggle" onclick="document.querySelector('.dash-sidebar').classList.toggle('open')">&#9776;</button>
+          <div class="dash-topbar-title">AIスキル評価管理</div>
+        </div>
+        <div class="dash-topbar-actions"><div class="dash-topbar-user"><span>管理者</span><div class="dash-topbar-avatar">PHOTO</div></div></div>
+      </header>
+
+      <div class="dash-content">
+
+        <!-- 評価基準 -->
+        <div class="dash-section">
+          <div class="dash-section-header"><div class="dash-section-title">評価基準</div><a href="#" class="dash-link">編集 &#8599;</a></div>
+          <table class="dash-table">
+            <thead><tr><th>ドメイン</th><th>評価項目数</th><th>配点</th><th>ウェイト</th><th></th></tr></thead>
+            <tbody>
+              <tr><td style="font-weight:400;">AI Productivity</td><td>12</td><td style="font-family:var(--font-heading-en);color:var(--orange-red);">1,000</td><td>20%</td><td><a href="#" class="dash-link">編集 &#8599;</a></td></tr>
+              <tr><td style="font-weight:400;">AI Development</td><td>15</td><td style="font-family:var(--font-heading-en);color:var(--orange-red);">1,000</td><td>25%</td><td><a href="#" class="dash-link">編集 &#8599;</a></td></tr>
+              <tr><td style="font-weight:400;">AI Creative</td><td>10</td><td style="font-family:var(--font-heading-en);color:var(--orange-red);">1,000</td><td>15%</td><td><a href="#" class="dash-link">編集 &#8599;</a></td></tr>
+              <tr><td style="font-weight:400;">AI Marketing</td><td>8</td><td style="font-family:var(--font-heading-en);color:var(--orange-red);">1,000</td><td>15%</td><td><a href="#" class="dash-link">編集 &#8599;</a></td></tr>
+              <tr><td style="font-weight:400;">AI Automation</td><td>10</td><td style="font-family:var(--font-heading-en);color:var(--orange-red);">1,000</td><td>15%</td><td><a href="#" class="dash-link">編集 &#8599;</a></td></tr>
+              <tr><td style="font-weight:400;">AI Data</td><td>8</td><td style="font-family:var(--font-heading-en);color:var(--orange-red);">1,000</td><td>10%</td><td><a href="#" class="dash-link">編集 &#8599;</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- スコアリング -->
+        <div class="dash-section">
+          <div class="dash-section-header"><div class="dash-section-title">スコアリング状況</div><span class="dash-section-label">Scoring</span></div>
+          <div class="dash-img-placeholder" style="width: 100%; height: 220px; margin-bottom: 24px;">SCORE DISTRIBUTION CHART</div>
+          <div class="dash-stats" style="grid-template-columns: repeat(4,1fr);">
+            <div class="dash-stat-card"><div class="stat-val">640</div><div class="stat-lbl">平均スコア</div></div>
+            <div class="dash-stat-card"><div class="stat-val">980</div><div class="stat-lbl">最高スコア</div></div>
+            <div class="dash-stat-card"><div class="stat-val">120</div><div class="stat-lbl">最低スコア</div></div>
+            <div class="dash-stat-card"><div class="stat-val">3,240</div><div class="stat-lbl">評価済みユーザー</div></div>
+          </div>
+        </div>
+
+        <!-- レベル管理 -->
+        <div class="dash-section">
+          <div class="dash-section-header"><div class="dash-section-title">レベル管理</div><a href="#" class="dash-link">編集 &#8599;</a></div>
+          <table class="dash-table">
+            <thead><tr><th>レベル</th><th>認定名</th><th>必要スコア</th><th>認定者数</th><th></th></tr></thead>
+            <tbody>
+              <tr><td style="font-family:var(--font-heading-en);color:var(--orange-red);">Lv.1</td><td style="font-weight:400;">AI Beginner</td><td>100</td><td style="font-family:var(--font-heading-en);color:var(--orange-red);">3,120</td><td><a href="#" class="dash-link">編集 &#8599;</a></td></tr>
+              <tr><td style="font-family:var(--font-heading-en);color:var(--orange-red);">Lv.2</td><td style="font-weight:400;">AI Practitioner</td><td>300</td><td style="font-family:var(--font-heading-en);color:var(--orange-red);">2,450</td><td><a href="#" class="dash-link">編集 &#8599;</a></td></tr>
+              <tr><td style="font-family:var(--font-heading-en);color:var(--orange-red);">Lv.3</td><td style="font-weight:400;">AI Specialist</td><td>500</td><td style="font-family:var(--font-heading-en);color:var(--orange-red);">1,280</td><td><a href="#" class="dash-link">編集 &#8599;</a></td></tr>
+              <tr><td style="font-family:var(--font-heading-en);color:var(--orange-red);">Lv.4</td><td style="font-weight:400;">AI Professional</td><td>600</td><td style="font-family:var(--font-heading-en);color:var(--orange-red);">640</td><td><a href="#" class="dash-link">編集 &#8599;</a></td></tr>
+              <tr><td style="font-family:var(--font-heading-en);color:var(--orange-red);">Lv.5</td><td style="font-weight:400;">AI Expert</td><td>800</td><td style="font-family:var(--font-heading-en);color:var(--orange-red);">185</td><td><a href="#" class="dash-link">編集 &#8599;</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</body>
+</html>

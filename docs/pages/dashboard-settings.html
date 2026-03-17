@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>アカウント設定 | AI SCHOOL</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/dashboard.css">
+</head>
+<body class="dash-body">
+  <div class="dash">
+
+    <!-- SIDEBAR -->
+    <aside class="dash-sidebar">
+      <div class="dash-sidebar-brand">
+        <a href="../index.html">AI SCHOOL</a>
+        <span>User Dashboard</span>
+      </div>
+      <nav class="dash-sidebar-nav">
+        <span class="nav-section-label">Main</span>
+        <a href="./dashboard.html">ダッシュボード</a>
+        <a href="./dashboard-courses.html">学習コース</a>
+        <a href="./dashboard-assignments.html">課題提出</a>
+        <span class="nav-section-label">Project</span>
+        <a href="./dashboard-projects.html">AIプロジェクト</a>
+        <a href="./dashboard-skills.html">AIスキル評価</a>
+        <a href="./dashboard-profile.html">AI人材プロフィール</a>
+        <span class="nav-section-label">Career</span>
+        <a href="./dashboard-offers.html">企業オファー</a>
+        <a href="./dashboard-community.html">コミュニティ</a>
+        <a href="./dashboard-history.html">学習履歴</a>
+        <span class="nav-section-label">Account</span>
+        <a href="./dashboard-billing.html">支払い管理</a>
+        <a href="./dashboard-settings.html" class="active">アカウント設定</a>
+      </nav>
+      <div class="dash-sidebar-footer">
+        <a href="#">利用規約</a>
+        <a href="#">プライバシーポリシー</a>
+        <a href="#">ログアウト</a>
+      </div>
+    </aside>
+
+    <!-- MAIN -->
+    <div class="dash-main">
+      <header class="dash-topbar">
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <button class="dash-mobile-toggle" onclick="document.querySelector('.dash-sidebar').classList.toggle('open')">&#9776;</button>
+          <div class="dash-topbar-title">アカウント設定</div>
+        </div>
+        <div class="dash-topbar-actions">
+          <div class="dash-topbar-user">
+            <span>山田 太郎</span>
+            <div class="dash-topbar-avatar">PHOTO</div>
+          </div>
+        </div>
+      </header>
+
+      <div class="dash-content">
+
+        <!-- Profile Settings -->
+        <div class="dash-section">
+          <div class="dash-section-header">
+            <div class="dash-section-title">プロフィール</div>
+            <a href="#" class="dash-link">保存 &#8599;</a>
+          </div>
+          <div class="dash-widget" style="max-width: 600px;">
+            <div style="display: flex; align-items: center; gap: 20px; margin-bottom: 24px;">
+              <div class="dash-img-placeholder" style="width: 72px; height: 72px; min-width: 72px;">PHOTO</div>
+              <div>
+                <div style="font-weight: 600; font-size: 16px; margin-bottom: 4px;">山田 太郎</div>
+                <a href="#" class="dash-link">写真を変更</a>
+              </div>
+            </div>
+            <div class="dash-list-item">
+              <span class="item-name" style="color: rgba(0,0,0,0.45); min-width: 120px;">氏名</span>
+              <span class="item-meta">山田 太郎</span>
+            </div>
+            <div class="dash-list-item">
+              <span class="item-name" style="color: rgba(0,0,0,0.45); min-width: 120px;">メールアドレス</span>
+              <span class="item-meta">yamada@example.com</span>
+            </div>
+            <div class="dash-list-item">
+              <span class="item-name" style="color: rgba(0,0,0,0.45); min-width: 120px;">電話番号</span>
+              <span class="item-meta">090-****-1234</span>
+            </div>
+            <div class="dash-list-item">
+              <span class="item-name" style="color: rgba(0,0,0,0.45); min-width: 120px;">所属</span>
+              <span class="item-meta">株式会社サンプル</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Security -->
+        <div class="dash-section">
+          <div class="dash-section-header">
+            <div class="dash-section-title">セキュリティ</div>
+            <span class="dash-section-label">Security</span>
+          </div>
+          <div class="dash-widget" style="max-width: 600px;">
+            <div class="dash-list-item">
+              <span class="item-name" style="color: rgba(0,0,0,0.45); min-width: 140px;">パスワード</span>
+              <span class="item-meta">********</span>
+              <a href="#" class="dash-link" style="margin-left: auto;">変更 &#8599;</a>
+            </div>
+            <div class="dash-list-item">
+              <span class="item-name" style="color: rgba(0,0,0,0.45); min-width: 140px;">二要素認証</span>
+              <span class="badge badge-active">有効</span>
+              <a href="#" class="dash-link" style="margin-left: auto;">設定 &#8599;</a>
+            </div>
+            <div class="dash-list-item">
+              <span class="item-name" style="color: rgba(0,0,0,0.45); min-width: 140px;">最終ログイン</span>
+              <span class="item-meta">2026/03/16 09:30 — Tokyo, JP</span>
+            </div>
+            <div class="dash-list-item">
+              <span class="item-name" style="color: rgba(0,0,0,0.45); min-width: 140px;">アクティブセッション</span>
+              <span class="item-meta">2台</span>
+              <a href="#" class="dash-link" style="margin-left: auto;">管理 &#8599;</a>
+            </div>
+          </div>
+
+          <!-- Login History -->
+          <div style="margin-top: 24px;">
+            <div style="font-size: 13px; font-weight: 600; margin-bottom: 12px;">ログイン履歴</div>
+            <table class="dash-table" style="max-width: 600px;">
+              <thead>
+                <tr>
+                  <th>日時</th>
+                  <th>IPアドレス</th>
+                  <th>場所</th>
+                  <th>デバイス</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="font-size: 12px;">2026/03/16 09:30</td>
+                  <td style="font-size: 12px; color: rgba(0,0,0,0.5);">192.168.***</td>
+                  <td style="font-size: 12px;">Tokyo, JP</td>
+                  <td style="font-size: 12px;">Chrome / macOS</td>
+                </tr>
+                <tr>
+                  <td style="font-size: 12px;">2026/03/15 18:20</td>
+                  <td style="font-size: 12px; color: rgba(0,0,0,0.5);">192.168.***</td>
+                  <td style="font-size: 12px;">Tokyo, JP</td>
+                  <td style="font-size: 12px;">Safari / iOS</td>
+                </tr>
+                <tr>
+                  <td style="font-size: 12px;">2026/03/14 08:45</td>
+                  <td style="font-size: 12px; color: rgba(0,0,0,0.5);">172.16.***</td>
+                  <td style="font-size: 12px;">Tokyo, JP</td>
+                  <td style="font-size: 12px;">Chrome / macOS</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Notification Settings -->
+        <div class="dash-section">
+          <div class="dash-section-header">
+            <div class="dash-section-title">通知設定</div>
+            <a href="#" class="dash-link">保存 &#8599;</a>
+          </div>
+          <div class="dash-widget" style="max-width: 600px;">
+            <div class="dash-list-item">
+              <span class="item-name">メール通知</span>
+              <span class="badge badge-active">ON</span>
+            </div>
+            <div class="dash-list-item">
+              <span class="item-name">課題リマインド</span>
+              <span class="badge badge-active">ON</span>
+            </div>
+            <div class="dash-list-item">
+              <span class="item-name">コース更新通知</span>
+              <span class="badge badge-active">ON</span>
+            </div>
+            <div class="dash-list-item">
+              <span class="item-name">企業オファー通知</span>
+              <span class="badge badge-active">ON</span>
+            </div>
+            <div class="dash-list-item">
+              <span class="item-name">コミュニティ通知</span>
+              <span class="badge badge-done">OFF</span>
+            </div>
+            <div class="dash-list-item">
+              <span class="item-name">プロモーション</span>
+              <span class="badge badge-done">OFF</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</body>
+</html>

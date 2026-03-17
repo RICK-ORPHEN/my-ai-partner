@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>マーケティング | AI SCHOOL ADMIN</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/dashboard.css">
+  <style>.dash-sidebar-brand span { color: var(--orange-red); font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; }</style>
+</head>
+<body class="dash-body">
+  <div class="dash">
+
+    <aside class="dash-sidebar">
+      <div class="dash-sidebar-brand"><a href="../index.html">AI SCHOOL</a><span>Admin</span></div>
+      <nav class="dash-sidebar-nav">
+        <span class="nav-section-label">Overview</span><a href="./admin.html">ダッシュボード</a>
+        <span class="nav-section-label">Management</span><a href="./admin-users.html">ユーザー管理</a><a href="./admin-courses.html">コース管理</a><a href="./admin-assignments.html">課題管理</a><a href="./admin-skills.html">AIスキル評価管理</a>
+        <span class="nav-section-label">Matching</span><a href="./admin-talent.html">AI人材データベース</a><a href="./admin-projects.html">企業案件管理</a>
+        <span class="nav-section-label">Content</span><a href="./admin-content.html">コンテンツ管理</a><a href="./admin-marketing.html" class="active">マーケティング</a>
+        <span class="nav-section-label">Finance</span><a href="./admin-revenue.html">売上管理</a><a href="./admin-system.html">システム設定</a>
+      </nav>
+      <div class="dash-sidebar-footer"><a href="./dashboard.html">ユーザー画面へ</a><a href="#">ログアウト</a></div>
+    </aside>
+
+    <div class="dash-main">
+      <header class="dash-topbar">
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <button class="dash-mobile-toggle" onclick="document.querySelector('.dash-sidebar').classList.toggle('open')">&#9776;</button>
+          <div class="dash-topbar-title">マーケティング</div>
+        </div>
+        <div class="dash-topbar-actions"><div class="dash-topbar-user"><span>管理者</span><div class="dash-topbar-avatar">PHOTO</div></div></div>
+      </header>
+
+      <div class="dash-content">
+
+        <!-- メール配信 -->
+        <div class="dash-section">
+          <div class="dash-section-header"><div class="dash-section-title">メール配信</div><a href="#" class="btn btn-orange" style="padding: 6px 16px; font-size: 11px;">新規配信 &#8599;</a></div>
+          <div class="dash-stats" style="grid-template-columns: repeat(4,1fr);">
+            <div class="dash-stat-card"><div class="stat-val">24</div><div class="stat-lbl">配信済みキャンペーン</div></div>
+            <div class="dash-stat-card"><div class="stat-val">32%</div><div class="stat-lbl">平均開封率</div></div>
+            <div class="dash-stat-card"><div class="stat-val">8.5%</div><div class="stat-lbl">平均クリック率</div></div>
+            <div class="dash-stat-card"><div class="stat-val">3,240</div><div class="stat-lbl">配信リスト</div></div>
+          </div>
+          <table class="dash-table">
+            <thead><tr><th>ステータス</th><th>件名</th><th>対象</th><th>配信日</th><th>開封率</th><th>CTR</th><th></th></tr></thead>
+            <tbody>
+              <tr><td><span class="badge badge-new">予約</span></td><td style="font-weight:400;">新コース公開のお知らせ</td><td>全ユーザー</td><td style="font-size:12px;">2026/03/20</td><td>—</td><td>—</td><td><a href="#" class="dash-link">編集 &#8599;</a></td></tr>
+              <tr><td><span class="badge badge-done">配信済</span></td><td style="font-weight:400;">3月のおすすめコース</td><td>アクティブ</td><td style="font-size:12px;">2026/03/05</td><td style="font-family:var(--font-heading-en);color:var(--orange-red);">35%</td><td style="font-family:var(--font-heading-en);">9.2%</td><td><a href="#" class="dash-link">詳細 &#8599;</a></td></tr>
+              <tr><td><span class="badge badge-done">配信済</span></td><td style="font-weight:400;">エキスパートプラン特別キャンペーン</td><td>プロプラン</td><td style="font-size:12px;">2026/02/20</td><td style="font-family:var(--font-heading-en);color:var(--orange-red);">42%</td><td style="font-family:var(--font-heading-en);">12.8%</td><td><a href="#" class="dash-link">詳細 &#8599;</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- セミナー管理 -->
+        <div class="dash-section">
+          <div class="dash-section-header"><div class="dash-section-title">セミナー管理</div><a href="#" class="btn btn-orange" style="padding: 6px 16px; font-size: 11px;">セミナー作成 &#8599;</a></div>
+          <table class="dash-table">
+            <thead><tr><th>ステータス</th><th>セミナー名</th><th>日時</th><th>定員</th><th>申込数</th><th></th></tr></thead>
+            <tbody>
+              <tr><td><span class="badge badge-active">受付中</span></td><td style="font-weight:400;">AI開発 最前線 2026</td><td>2026/04/10 19:00</td><td>200</td><td style="font-family:var(--font-heading-en);color:var(--orange-red);">142</td><td><a href="#" class="dash-link">管理 &#8599;</a></td></tr>
+              <tr><td><span class="badge badge-active">受付中</span></td><td style="font-weight:400;">画像生成AI 活用セミナー</td><td>2026/04/05 14:00</td><td>100</td><td style="font-family:var(--font-heading-en);color:var(--orange-red);">89</td><td><a href="#" class="dash-link">管理 &#8599;</a></td></tr>
+              <tr><td><span class="badge badge-done">終了</span></td><td style="font-weight:400;">プロンプトエンジニアリング入門</td><td>2026/03/08 19:00</td><td>150</td><td style="font-family:var(--font-heading-en);">150</td><td><a href="#" class="dash-link">レポート &#8599;</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- クーポン -->
+        <div class="dash-section">
+          <div class="dash-section-header"><div class="dash-section-title">クーポン</div><a href="#" class="btn btn-orange" style="padding: 6px 16px; font-size: 11px;">クーポン作成 &#8599;</a></div>
+          <table class="dash-table">
+            <thead><tr><th>ステータス</th><th>コード</th><th>割引</th><th>使用回数</th><th>有効期限</th><th></th></tr></thead>
+            <tbody>
+              <tr><td><span class="badge badge-active">有効</span></td><td style="font-family:var(--font-heading-en);font-weight:400;">SPRING2026</td><td style="font-family:var(--font-heading-en);color:var(--orange-red);">20%OFF</td><td style="font-family:var(--font-heading-en);">45 / 200</td><td style="font-size:12px;">2026/03/31</td><td><a href="#" class="dash-link">編集 &#8599;</a></td></tr>
+              <tr><td><span class="badge badge-active">有効</span></td><td style="font-family:var(--font-heading-en);font-weight:400;">WELCOME10</td><td style="font-family:var(--font-heading-en);color:var(--orange-red);">10%OFF</td><td style="font-family:var(--font-heading-en);">320 / ∞</td><td style="font-size:12px;">無期限</td><td><a href="#" class="dash-link">編集 &#8599;</a></td></tr>
+              <tr><td><span class="badge badge-done">期限切れ</span></td><td style="font-family:var(--font-heading-en);font-weight:400;">NEWYEAR26</td><td style="font-family:var(--font-heading-en);">30%OFF</td><td style="font-family:var(--font-heading-en);">180 / 200</td><td style="font-size:12px;">2026/01/31</td><td><a href="#" class="dash-link">詳細 &#8599;</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</body>
+</html>

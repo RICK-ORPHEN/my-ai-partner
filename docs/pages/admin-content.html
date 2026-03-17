@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>コンテンツ管理 | AI SCHOOL ADMIN</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/dashboard.css">
+  <style>.dash-sidebar-brand span { color: var(--orange-red); font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; }</style>
+</head>
+<body class="dash-body">
+  <div class="dash">
+
+    <aside class="dash-sidebar">
+      <div class="dash-sidebar-brand"><a href="../index.html">AI SCHOOL</a><span>Admin</span></div>
+      <nav class="dash-sidebar-nav">
+        <span class="nav-section-label">Overview</span><a href="./admin.html">ダッシュボード</a>
+        <span class="nav-section-label">Management</span><a href="./admin-users.html">ユーザー管理</a><a href="./admin-courses.html">コース管理</a><a href="./admin-assignments.html">課題管理</a><a href="./admin-skills.html">AIスキル評価管理</a>
+        <span class="nav-section-label">Matching</span><a href="./admin-talent.html">AI人材データベース</a><a href="./admin-projects.html">企業案件管理</a>
+        <span class="nav-section-label">Content</span><a href="./admin-content.html" class="active">コンテンツ管理</a><a href="./admin-marketing.html">マーケティング</a>
+        <span class="nav-section-label">Finance</span><a href="./admin-revenue.html">売上管理</a><a href="./admin-system.html">システム設定</a>
+      </nav>
+      <div class="dash-sidebar-footer"><a href="./dashboard.html">ユーザー画面へ</a><a href="#">ログアウト</a></div>
+    </aside>
+
+    <div class="dash-main">
+      <header class="dash-topbar">
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <button class="dash-mobile-toggle" onclick="document.querySelector('.dash-sidebar').classList.toggle('open')">&#9776;</button>
+          <div class="dash-topbar-title">コンテンツ管理</div>
+        </div>
+        <div class="dash-topbar-actions">
+          <a href="#" class="btn btn-orange" style="padding: 8px 20px; font-size: 12px;">新規作成 &#8599;</a>
+          <div class="dash-topbar-user"><span>管理者</span><div class="dash-topbar-avatar">PHOTO</div></div>
+        </div>
+      </header>
+
+      <div class="dash-content">
+
+        <!-- ブログ -->
+        <div class="dash-section">
+          <div class="dash-section-header"><div class="dash-section-title">ブログ</div><span class="dash-section-label">Blog</span></div>
+          <div class="dash-filters">
+            <div class="dash-filter-group"><label>ステータス</label><select><option>すべて</option><option>公開</option><option>下書き</option><option>予約</option></select></div>
+            <div class="dash-filter-group"><label>カテゴリ</label><select><option>すべて</option><option>AI活用</option><option>技術解説</option><option>事例紹介</option></select></div>
+          </div>
+          <table class="dash-table">
+            <thead><tr><th>公開</th><th>タイトル</th><th>カテゴリ</th><th>著者</th><th>PV</th><th>公開日</th><th></th></tr></thead>
+            <tbody>
+              <tr><td><span class="badge badge-active">公開</span></td><td style="font-weight:400;">Claude 4.5で変わるAI開発の未来</td><td>技術解説</td><td>編集部</td><td style="font-family:var(--font-heading-en);color:var(--orange-red);">12,450</td><td style="font-size:12px;">2026/03/14</td><td><a href="#" class="dash-link">編集 &#8599;</a></td></tr>
+              <tr><td><span class="badge badge-active">公開</span></td><td style="font-weight:400;">AI業務効率化 成功事例5選</td><td>事例紹介</td><td>渡辺</td><td style="font-family:var(--font-heading-en);color:var(--orange-red);">8,920</td><td style="font-size:12px;">2026/03/10</td><td><a href="#" class="dash-link">編集 &#8599;</a></td></tr>
+              <tr><td><span class="badge badge-pending">下書き</span></td><td style="font-weight:400;">Midjourney v7 完全ガイド</td><td>技術解説</td><td>木村</td><td>—</td><td>—</td><td><a href="#" class="dash-link">編集 &#8599;</a></td></tr>
+              <tr><td><span class="badge badge-new">予約</span></td><td style="font-weight:400;">AI人材市場レポート 2026年版</td><td>AI活用</td><td>編集部</td><td>—</td><td style="font-size:12px;">2026/03/20</td><td><a href="#" class="dash-link">編集 &#8599;</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- AIナレッジ -->
+        <div class="dash-section">
+          <div class="dash-section-header"><div class="dash-section-title">AIナレッジ</div><span class="dash-section-label">Knowledge</span></div>
+          <table class="dash-table">
+            <thead><tr><th>公開</th><th>タイトル</th><th>カテゴリ</th><th>PV</th><th></th></tr></thead>
+            <tbody>
+              <tr><td><span class="badge badge-active">公開</span></td><td style="font-weight:400;">プロンプトエンジニアリング完全ガイド</td><td>基礎知識</td><td style="font-family:var(--font-heading-en);color:var(--orange-red);">24,800</td><td><a href="#" class="dash-link">編集 &#8599;</a></td></tr>
+              <tr><td><span class="badge badge-active">公開</span></td><td style="font-weight:400;">LLM比較 2026年版</td><td>ツール比較</td><td style="font-family:var(--font-heading-en);color:var(--orange-red);">18,200</td><td><a href="#" class="dash-link">編集 &#8599;</a></td></tr>
+              <tr><td><span class="badge badge-active">公開</span></td><td style="font-weight:400;">AIエージェントの仕組み解説</td><td>技術解説</td><td style="font-family:var(--font-heading-en);color:var(--orange-red);">15,600</td><td><a href="#" class="dash-link">編集 &#8599;</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- お知らせ -->
+        <div class="dash-section">
+          <div class="dash-section-header"><div class="dash-section-title">お知らせ</div><span class="dash-section-label">Announcements</span></div>
+          <table class="dash-table">
+            <thead><tr><th>公開</th><th>タイトル</th><th>対象</th><th>公開日</th><th></th></tr></thead>
+            <tbody>
+              <tr><td><span class="badge badge-active">公開</span></td><td style="font-weight:400;">新コース「RAG構築マスター」近日公開</td><td>全ユーザー</td><td style="font-size:12px;">2026/03/15</td><td><a href="#" class="dash-link">編集 &#8599;</a></td></tr>
+              <tr><td><span class="badge badge-active">公開</span></td><td style="font-weight:400;">メンテナンスのお知らせ（3/20）</td><td>全ユーザー</td><td style="font-size:12px;">2026/03/12</td><td><a href="#" class="dash-link">編集 &#8599;</a></td></tr>
+              <tr><td><span class="badge badge-active">公開</span></td><td style="font-weight:400;">プロフェッショナルプラン 新機能追加</td><td>有料会員</td><td style="font-size:12px;">2026/03/01</td><td><a href="#" class="dash-link">編集 &#8599;</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</body>
+</html>
