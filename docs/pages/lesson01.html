@@ -1,0 +1,1456 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>01 Prompt Engineering | AI SCHOOL</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/dashboard.css">
+  <style>
+    /* === Interactive Course Layout === */
+    .course-layout {
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      grid-template-rows: 1fr auto;
+      gap: 0;
+      height: calc(100vh - 64px);
+      overflow: hidden;
+    }
+
+    /* --- Left: Lecture Content --- */
+    .course-lecture {
+      overflow-y: auto;
+      padding: 40px;
+      border-right: 1px solid var(--rule-dark);
+    }
+
+    .course-lecture-label {
+      font-family: var(--font-body-en);
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: rgba(0,0,0,0.35);
+      margin-bottom: 8px;
+    }
+
+    .course-lecture-title {
+      font-family: var(--font-heading-en);
+      font-size: 28px;
+      color: var(--black);
+      line-height: 1.2;
+      margin: 0 0 6px;
+      letter-spacing: 0.02em;
+    }
+
+    .course-lecture-subtitle {
+      font-family: var(--font-heading-ja);
+      font-size: 15px;
+      font-weight: 900;
+      color: var(--black);
+      margin: 0 0 24px;
+    }
+
+    .course-desc {
+      font-size: 14px;
+      font-weight: 300;
+      line-height: 1.8;
+      color: rgba(0,0,0,0.7);
+      margin: 0 0 16px;
+    }
+
+    .course-desc strong {
+      font-weight: 600;
+      color: var(--black);
+    }
+
+    .course-feature-list {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 24px;
+    }
+
+    .course-feature-list li {
+      font-size: 13px;
+      font-weight: 400;
+      color: rgba(0,0,0,0.7);
+      padding: 6px 0;
+      padding-left: 20px;
+      position: relative;
+    }
+
+    .course-feature-list li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 12px;
+      width: 8px;
+      height: 8px;
+      border: 2px solid var(--orange-red);
+    }
+
+    /* --- Step Progress --- */
+    .step-progress {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      margin-bottom: 32px;
+      padding: 20px 0;
+      border-top: 1px solid var(--rule-dark);
+      border-bottom: 1px solid var(--rule-dark);
+    }
+
+    .step-dot {
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-body-en);
+      font-size: 12px;
+      font-weight: 700;
+      border: 2px solid rgba(0,0,0,0.15);
+      color: rgba(0,0,0,0.3);
+      cursor: pointer;
+      transition: all 0.2s;
+      flex-shrink: 0;
+    }
+
+    .step-dot.active {
+      border-color: var(--orange-red);
+      color: var(--white);
+      background: var(--orange-red);
+    }
+
+    .step-dot.completed {
+      border-color: var(--black);
+      color: var(--white);
+      background: var(--black);
+    }
+
+    .step-line {
+      flex: 1;
+      height: 2px;
+      background: rgba(0,0,0,0.1);
+    }
+
+    .step-line.completed {
+      background: var(--black);
+    }
+
+    /* --- Step Content --- */
+    .step-panel {
+      display: none;
+    }
+
+    .step-panel.active {
+      display: block;
+    }
+
+    .step-panel h2 {
+      font-family: var(--font-heading-ja);
+      font-size: 18px;
+      font-weight: 900;
+      color: var(--black);
+      margin: 0 0 8px;
+    }
+
+    .step-panel h3 {
+      font-family: var(--font-body-ja);
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--black);
+      margin: 24px 0 8px;
+    }
+
+    .step-panel p {
+      font-size: 14px;
+      font-weight: 300;
+      line-height: 1.8;
+      color: rgba(0,0,0,0.7);
+      margin: 0 0 16px;
+    }
+
+    .step-label {
+      font-family: var(--font-body-en);
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--orange-red);
+      margin-bottom: 8px;
+    }
+
+    /* --- Forms --- */
+    .course-form-group {
+      margin-bottom: 20px;
+    }
+
+    .course-form-group label {
+      display: block;
+      font-size: 12px;
+      font-weight: 600;
+      color: rgba(0,0,0,0.55);
+      letter-spacing: 0.04em;
+      margin-bottom: 6px;
+    }
+
+    .course-form-group input,
+    .course-form-group select {
+      width: 100%;
+      padding: 12px 16px;
+      font-family: var(--font-body-ja);
+      font-size: 14px;
+      border: 1px solid var(--rule-dark);
+      background: var(--white);
+      color: var(--black);
+      outline: none;
+      box-sizing: border-box;
+      transition: border-color 0.15s;
+    }
+
+    .course-form-group input:focus,
+    .course-form-group select:focus {
+      border-color: var(--orange-red);
+    }
+
+    .course-form-group input::placeholder {
+      color: rgba(0,0,0,0.3);
+    }
+
+    /* --- Textarea (Prompt Editor) --- */
+    .prompt-editor {
+      width: 100%;
+      min-height: 200px;
+      padding: 16px 20px;
+      font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+      font-size: 13px;
+      line-height: 1.7;
+      border: 1px solid var(--rule-dark);
+      background: rgba(0,0,0,0.02);
+      color: var(--black);
+      outline: none;
+      resize: vertical;
+      box-sizing: border-box;
+      transition: border-color 0.15s;
+    }
+
+    .prompt-editor:focus {
+      border-color: var(--orange-red);
+      background: var(--white);
+    }
+
+    .prompt-display {
+      padding: 16px 20px;
+      border: 1px solid var(--rule-dark);
+      background: rgba(0,0,0,0.02);
+      font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+      font-size: 13px;
+      line-height: 1.7;
+      color: var(--black);
+      white-space: pre-wrap;
+      border-left: 3px solid var(--orange-red);
+    }
+
+    /* --- Buttons --- */
+    .course-btn {
+      display: inline-block;
+      padding: 13px 36px;
+      font-family: var(--font-body-ja);
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--white);
+      background: var(--orange-red);
+      border: none;
+      cursor: pointer;
+      letter-spacing: 0.04em;
+      transition: background 0.15s;
+    }
+
+    .course-btn:hover {
+      background: var(--orange-hover);
+    }
+
+    .course-btn:disabled {
+      background: rgba(0,0,0,0.15);
+      cursor: not-allowed;
+    }
+
+    .course-btn-outline {
+      display: inline-block;
+      padding: 12px 28px;
+      font-family: var(--font-body-ja);
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--black);
+      background: none;
+      border: 1px solid var(--black);
+      cursor: pointer;
+      letter-spacing: 0.04em;
+      transition: all 0.15s;
+    }
+
+    .course-btn-outline:hover {
+      background: var(--black);
+      color: var(--white);
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    /* --- Right: AI Assistant Panel --- */
+    .course-assistant {
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      background: #FAFAFA;
+    }
+
+    .assistant-header {
+      padding: 20px 24px;
+      border-bottom: 1px solid var(--rule-dark);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .assistant-title {
+      font-family: var(--font-body-en);
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--black);
+      letter-spacing: 0.04em;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .assistant-status {
+      width: 8px;
+      height: 8px;
+      background: #2ECC40;
+      border-radius: 50%;
+    }
+
+    .assistant-messages {
+      flex: 1;
+      overflow-y: auto;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .msg {
+      max-width: 95%;
+      padding: 14px 18px;
+      font-size: 13px;
+      line-height: 1.7;
+      font-weight: 300;
+    }
+
+    .msg-ai {
+      background: var(--white);
+      border: 1px solid var(--rule-dark);
+      color: var(--black);
+      align-self: flex-start;
+    }
+
+    .msg-user {
+      background: var(--black);
+      color: var(--white);
+      align-self: flex-end;
+    }
+
+    .msg-label {
+      font-family: var(--font-body-en);
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 6px;
+      display: block;
+    }
+
+    .msg-ai .msg-label {
+      color: var(--orange-red);
+    }
+
+    .msg-user .msg-label {
+      color: rgba(255,255,255,0.5);
+    }
+
+    .assistant-input {
+      padding: 16px 24px;
+      border-top: 1px solid var(--rule-dark);
+      display: flex;
+      gap: 8px;
+    }
+
+    .assistant-input input {
+      flex: 1;
+      padding: 10px 14px;
+      font-family: var(--font-body-ja);
+      font-size: 13px;
+      border: 1px solid var(--rule-dark);
+      background: var(--white);
+      color: var(--black);
+      outline: none;
+    }
+
+    .assistant-input input:focus {
+      border-color: var(--orange-red);
+    }
+
+    .assistant-input button {
+      padding: 10px 20px;
+      font-family: var(--font-body-ja);
+      font-size: 13px;
+      font-weight: 600;
+      background: var(--black);
+      color: var(--white);
+      border: none;
+      cursor: pointer;
+    }
+
+    /* --- Bottom: Output Area --- */
+    .course-output {
+      grid-column: 1 / -1;
+      border-top: 1px solid var(--rule-dark);
+      display: none;
+      overflow: hidden;
+    }
+
+    .course-output.visible {
+      display: flex;
+      height: 320px;
+    }
+
+    .output-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 24px;
+      border-bottom: 1px solid var(--rule-dark);
+      background: var(--white);
+    }
+
+    .output-title {
+      font-family: var(--font-body-en);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: rgba(0,0,0,0.45);
+    }
+
+    .output-close {
+      background: none;
+      border: none;
+      font-size: 18px;
+      cursor: pointer;
+      color: rgba(0,0,0,0.4);
+    }
+
+    .output-body {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      width: 100%;
+    }
+
+    .output-tabs {
+      display: flex;
+      gap: 0;
+      border-bottom: 1px solid var(--rule-dark);
+      background: var(--white);
+    }
+
+    .output-tab {
+      padding: 10px 20px;
+      font-family: var(--font-body-en);
+      font-size: 12px;
+      font-weight: 600;
+      color: rgba(0,0,0,0.4);
+      background: none;
+      border: none;
+      border-bottom: 2px solid transparent;
+      cursor: pointer;
+      letter-spacing: 0.04em;
+    }
+
+    .output-tab.active {
+      color: var(--orange-red);
+      border-bottom-color: var(--orange-red);
+    }
+
+    .output-preview {
+      flex: 1;
+      overflow: auto;
+    }
+
+    .output-preview iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      background: var(--white);
+    }
+
+    .output-code {
+      flex: 1;
+      overflow: auto;
+      padding: 16px 24px;
+      font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+      font-size: 12px;
+      line-height: 1.6;
+      background: rgba(0,0,0,0.02);
+      white-space: pre-wrap;
+      display: none;
+    }
+
+    /* --- Evaluation Card --- */
+    .eval-card {
+      border: 1px solid var(--rule-dark);
+      margin-top: 24px;
+    }
+
+    .eval-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--rule-dark);
+    }
+
+    .eval-score {
+      font-family: var(--font-heading-en);
+      font-size: 48px;
+      color: var(--orange-red);
+      line-height: 1;
+    }
+
+    .eval-score-label {
+      font-family: var(--font-body-en);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(0,0,0,0.35);
+    }
+
+    .eval-bar {
+      height: 4px;
+      background: rgba(0,0,0,0.06);
+    }
+
+    .eval-bar-fill {
+      height: 100%;
+      background: var(--orange-red);
+      transition: width 0.8s ease;
+    }
+
+    .eval-body {
+      padding: 20px;
+    }
+
+    .eval-section {
+      margin-bottom: 16px;
+    }
+
+    .eval-section:last-child {
+      margin-bottom: 0;
+    }
+
+    .eval-section-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: rgba(0,0,0,0.45);
+      letter-spacing: 0.05em;
+      margin-bottom: 4px;
+    }
+
+    .eval-section-text {
+      font-size: 14px;
+      font-weight: 300;
+      line-height: 1.7;
+      color: rgba(0,0,0,0.7);
+    }
+
+    .eval-criteria-list {
+      display: flex;
+      gap: 12px;
+      margin-top: 16px;
+      padding-top: 16px;
+      border-top: 1px solid rgba(0,0,0,0.06);
+    }
+
+    .eval-criteria-item {
+      flex: 1;
+      text-align: center;
+      padding: 12px;
+      border: 1px solid var(--rule-dark);
+    }
+
+    .eval-criteria-val {
+      font-family: var(--font-heading-en);
+      font-size: 20px;
+      color: var(--orange-red);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .eval-criteria-name {
+      font-size: 10px;
+      font-weight: 600;
+      color: rgba(0,0,0,0.4);
+      letter-spacing: 0.04em;
+    }
+
+    /* --- Loading Animation --- */
+    .loading-dots {
+      display: inline-flex;
+      gap: 4px;
+      align-items: center;
+    }
+
+    .loading-dots span {
+      width: 6px;
+      height: 6px;
+      background: var(--orange-red);
+      border-radius: 50%;
+      animation: dotPulse 1.2s infinite ease-in-out;
+    }
+
+    .loading-dots span:nth-child(2) { animation-delay: 0.2s; }
+    .loading-dots span:nth-child(3) { animation-delay: 0.4s; }
+
+    @keyframes dotPulse {
+      0%, 80%, 100% { opacity: 0.2; transform: scale(0.8); }
+      40% { opacity: 1; transform: scale(1); }
+    }
+
+    /* --- Concept Box --- */
+    .concept-box {
+      padding: 20px 24px;
+      border: 1px solid var(--orange-red);
+      background: rgba(217,59,0,0.03);
+      margin: 20px 0;
+    }
+
+    .concept-box p {
+      margin: 0;
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--black);
+      line-height: 1.8;
+      text-align: center;
+    }
+
+    .concept-box .sub {
+      font-size: 13px;
+      font-weight: 300;
+      color: rgba(0,0,0,0.55);
+      margin-top: 8px;
+    }
+
+    /* --- Goal Cards --- */
+    .goal-cards {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin: 20px 0;
+    }
+
+    .goal-card {
+      padding: 16px 20px;
+      border: 1px solid var(--rule-dark);
+    }
+
+    .goal-card .goal-num {
+      font-family: var(--font-body-en);
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--orange-red);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .goal-card .goal-text {
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--black);
+    }
+
+    /* --- Flow Diagram --- */
+    .flow-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin: 24px 0;
+    }
+
+    .flow-item {
+      flex: 1;
+      padding: 14px 12px;
+      text-align: center;
+      font-size: 12px;
+      font-weight: 600;
+      border: 1px solid var(--rule-dark);
+      color: var(--black);
+    }
+
+    .flow-item.highlight {
+      border-color: var(--orange-red);
+      background: rgba(217,59,0,0.04);
+      color: var(--orange-red);
+    }
+
+    .flow-arrow {
+      font-size: 16px;
+      color: rgba(0,0,0,0.25);
+      flex-shrink: 0;
+    }
+
+    /* --- Hint Cards --- */
+    .hint-block {
+      margin-bottom: 20px;
+    }
+
+    .hint-block-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .hint-block-num {
+      width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--orange-red);
+      color: var(--white);
+      font-family: var(--font-body-en);
+      font-size: 11px;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .hint-block-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--black);
+    }
+
+    .hint-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      padding-left: 34px;
+    }
+
+    .hint-list li {
+      font-size: 13px;
+      font-weight: 300;
+      color: rgba(0,0,0,0.7);
+      line-height: 1.8;
+      padding: 2px 0;
+      padding-left: 16px;
+      position: relative;
+    }
+
+    .hint-list li::before {
+      content: '\2022';
+      position: absolute;
+      left: 0;
+      color: var(--orange-red);
+      font-weight: 700;
+    }
+
+    .hint-list.warning li::before {
+      content: '\26A0';
+      font-size: 11px;
+    }
+
+    .hint-divider {
+      border: none;
+      border-top: 1px solid rgba(0,0,0,0.06);
+      margin: 16px 0;
+    }
+
+    /* --- Responsive --- */
+    @media (max-width: 1024px) {
+      .course-layout {
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr auto;
+      }
+      .course-lecture {
+        border-right: none;
+      }
+      .course-assistant {
+        display: none;
+      }
+      .goal-cards {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .course-lecture {
+        padding: 24px;
+      }
+      .flow-row {
+        flex-wrap: wrap;
+      }
+      .flow-item {
+        flex: 1 1 40%;
+      }
+      .eval-criteria-list {
+        flex-wrap: wrap;
+      }
+      .eval-criteria-item {
+        flex: 1 1 40%;
+      }
+    }
+  </style>
+</head>
+<body class="dash-body">
+  <div class="dash">
+
+    <!-- SIDEBAR -->
+    <aside class="dash-sidebar">
+      <div class="dash-sidebar-brand">
+        <a href="../index.html">AI SCHOOL</a>
+        <span>User Dashboard</span>
+      </div>
+      <nav class="dash-sidebar-nav">
+        <span class="nav-section-label">Main</span>
+        <a href="./dashboard.html">ダッシュボード</a>
+        <a href="./dashboard-courses.html">学習コース</a>
+        <a href="./dashboard-assignments.html">課題提出</a>
+        <span class="nav-section-label">Project</span>
+        <a href="./dashboard-projects.html">AIプロジェクト</a>
+        <a href="./dashboard-skills.html">AIスキル評価</a>
+        <a href="./dashboard-profile.html">AI人材プロフィール</a>
+        <span class="nav-section-label">Career</span>
+        <a href="./dashboard-offers.html">企業オファー</a>
+        <a href="./dashboard-community.html">コミュニティ</a>
+        <a href="./dashboard-history.html">学習履歴</a>
+        <span class="nav-section-label">Account</span>
+        <a href="./dashboard-billing.html">支払い管理</a>
+        <a href="./dashboard-settings.html">アカウント設定</a>
+      </nav>
+      <div class="dash-sidebar-footer">
+        <a href="#">利用規約</a>
+        <a href="#">プライバシーポリシー</a>
+        <a href="#">ログアウト</a>
+      </div>
+    </aside>
+
+    <!-- MAIN -->
+    <div class="dash-main">
+      <header class="dash-topbar">
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <button class="dash-mobile-toggle" onclick="document.querySelector('.dash-sidebar').classList.toggle('open')">&#9776;</button>
+          <div class="dash-topbar-title">01 Prompt Engineering</div>
+        </div>
+        <div class="dash-topbar-actions">
+          <span class="badge badge-active">受講中</span>
+          <div class="dash-topbar-user">
+            <span>山田 太郎</span>
+            <div class="dash-topbar-avatar">PHOTO</div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Course Layout: 3-panel -->
+      <div class="course-layout">
+
+        <!-- LEFT: Lecture Content -->
+        <div class="course-lecture">
+          <div class="course-lecture-label">Course 01</div>
+          <div class="course-lecture-title">PROMPT ENGINEERING</div>
+          <div class="course-lecture-subtitle">インタラクティブ教材 ― プロダクション版</div>
+
+          <!-- Step Progress -->
+          <div class="step-progress">
+            <div class="step-dot active" data-step="0">0</div>
+            <div class="step-line"></div>
+            <div class="step-dot" data-step="1">1</div>
+            <div class="step-line"></div>
+            <div class="step-dot" data-step="2">2</div>
+            <div class="step-line"></div>
+            <div class="step-dot" data-step="3">3</div>
+            <div class="step-line"></div>
+            <div class="step-dot" data-step="4">4</div>
+            <div class="step-line"></div>
+            <div class="step-dot" data-step="5">5</div>
+          </div>
+
+          <!-- ===== STEP 0: Introduction ===== -->
+          <div class="step-panel active" id="step-0">
+            <div class="step-label">Step 0</div>
+            <h2>この講座について</h2>
+            <p>本講座は「静的な教材」ではありません。<strong>学習 + プロダクト生成 + 評価</strong> を一体化したインタラクティブシステムです。</p>
+
+            <div class="concept-box">
+              <p>AIは「答え」を出さない<br>AIは「思考の質」を上げる</p>
+              <p class="sub">自分で考えてプロンプトを作れる状態になること ― それがゴールです。</p>
+            </div>
+
+            <h3>何ができるようになるか</h3>
+            <div class="goal-cards">
+              <div class="goal-card">
+                <div class="goal-num">Goal 01</div>
+                <div class="goal-text">自分のビジネスに最適化されたプロンプトを<strong>自分で</strong>設計できる</div>
+              </div>
+              <div class="goal-card">
+                <div class="goal-num">Goal 02</div>
+                <div class="goal-text">AIのヒントを活かして、思考の質を高められる</div>
+              </div>
+              <div class="goal-card">
+                <div class="goal-num">Goal 03</div>
+                <div class="goal-text">プロンプトの品質をAIで定量評価できる</div>
+              </div>
+              <div class="goal-card">
+                <div class="goal-num">Goal 04</div>
+                <div class="goal-text">プロンプトから実務アウトプット（WEBサイト等）を生成できる</div>
+              </div>
+            </div>
+
+            <h3>学習の流れ</h3>
+            <div class="flow-row">
+              <div class="flow-item">ビジネス入力</div>
+              <div class="flow-arrow">&rarr;</div>
+              <div class="flow-item">AIヒント</div>
+              <div class="flow-arrow">&rarr;</div>
+              <div class="flow-item highlight">自分で作成</div>
+              <div class="flow-arrow">&rarr;</div>
+              <div class="flow-item">AI評価</div>
+            </div>
+            <p>AIが答えを出すのではなく、<strong>あなた自身が考え、作る</strong>。このループが学習の本質です。</p>
+
+            <div class="btn-group">
+              <button class="course-btn" onclick="goToStep(1)">スタート</button>
+            </div>
+          </div>
+
+          <!-- ===== STEP 1: Business Input ===== -->
+          <div class="step-panel" id="step-1">
+            <div class="step-label">Step 1 &mdash; Business Input</div>
+            <h2>ビジネス情報を入力</h2>
+            <p>あなたのビジネスについて教えてください。<br>この情報をもとに、AIが<strong>「より良いプロンプトを書くためのヒント」</strong>を提示します。</p>
+
+            <div class="concept-box" style="margin-bottom: 24px;">
+              <p style="font-size: 13px; font-weight: 400;">※ここでは答えは出ません。あなた自身がプロンプトを設計します。</p>
+            </div>
+
+            <div class="course-form-group">
+              <label>あなたの業種は？</label>
+              <input type="text" id="input-business" placeholder="例：美容室、ECサイト、コンサルティング会社">
+            </div>
+
+            <div class="course-form-group">
+              <label>ターゲットユーザーは？</label>
+              <input type="text" id="input-target" placeholder="例：20〜30代の女性、中小企業の経営者、学生">
+            </div>
+
+            <div class="course-form-group">
+              <label>目的は？</label>
+              <select id="input-goal">
+                <option value="">選択してください</option>
+                <option value="集客">集客（アクセスを増やしたい）</option>
+                <option value="販売">販売（商品・サービスを売りたい）</option>
+                <option value="ブランディング">ブランディング（認知度を上げたい）</option>
+                <option value="採用">採用（人材を獲得したい）</option>
+                <option value="情報発信">情報発信（コンテンツを届けたい）</option>
+              </select>
+            </div>
+
+            <div class="course-form-group">
+              <label>提供する価値・サービスは？</label>
+              <input type="text" id="input-product" placeholder="例：カット＆カラー、オーガニック食品販売、DXコンサルティング">
+            </div>
+
+            <div class="btn-group">
+              <button class="course-btn-outline" onclick="goToStep(0)">&larr; 戻る</button>
+              <button class="course-btn" id="btn-generate" onclick="generateHints()">ヒントをもらう</button>
+            </div>
+          </div>
+
+          <!-- ===== STEP 2: Hint Generation ===== -->
+          <div class="step-panel" id="step-2">
+            <div class="step-label">Step 2 &mdash; AI Hints</div>
+            <h2>AIからのヒント</h2>
+            <p>AIが<strong>完成されたプロンプトではなく、あなたが良いプロンプトを作るためのヒント</strong>を生成しました。<br>これを参考に、次のステップで自分のプロンプトを設計してください。</p>
+
+            <div id="hints-container">
+              <!-- Hints will be injected here by JS -->
+            </div>
+
+            <div class="concept-box" style="margin-top: 24px;">
+              <p style="font-size: 13px; font-weight: 400;">AIは答えを出しません。ヒントを読んで、次のステップで<strong>自分の言葉で</strong>プロンプトを書いてください。</p>
+            </div>
+
+            <div class="btn-group">
+              <button class="course-btn-outline" onclick="goToStep(1)">&larr; 戻る</button>
+              <button class="course-btn" onclick="goToStep(3)">プロンプトを自分で作成する</button>
+            </div>
+          </div>
+
+          <!-- ===== STEP 3: Create Prompt ===== -->
+          <div class="step-panel" id="step-3">
+            <div class="step-label">Step 3 &mdash; Your Prompt</div>
+            <h2>プロンプトを作成する</h2>
+            <p>上記のヒントを参考に、<strong>あなた自身のプロンプトを作成してください。</strong></p>
+
+            <div class="concept-box" style="margin-bottom: 24px; border-color: var(--rule-dark); background: rgba(0,0,0,0.02);">
+              <p style="font-size: 13px; font-weight: 400; text-align: left;">考えてみましょう：</p>
+              <p style="font-size: 13px; font-weight: 300; text-align: left; color: rgba(0,0,0,0.6); margin-top: 4px;">
+                ・AIにどんな「役割」を与えますか？<br>
+                ・何を出力してほしいですか？<br>
+                ・どんな形式で出力しますか？<br>
+                ・ターゲットは誰ですか？<br>
+                ・制約条件はありますか？
+              </p>
+            </div>
+
+            <textarea class="prompt-editor" id="edit-prompt" placeholder="ここにあなたのプロンプトを書いてください...&#10;&#10;例：&#10;あなたは○○の専門家です。&#10;以下の条件で○○を作成してください。&#10;..."></textarea>
+
+            <p style="margin-top: 12px; font-size: 12px; color: rgba(0,0,0,0.4);">
+              ※ ヒントを見返したい場合は「戻る」ボタンで確認できます。
+            </p>
+
+            <div class="btn-group">
+              <button class="course-btn-outline" onclick="goToStep(2)">&larr; ヒントを見返す</button>
+              <button class="course-btn" onclick="evaluatePrompt()">AIに評価してもらう</button>
+            </div>
+          </div>
+
+          <!-- ===== STEP 4: Evaluation ===== -->
+          <div class="step-panel" id="step-4">
+            <div class="step-label">Step 4 &mdash; AI Evaluation</div>
+            <h2>AI評価結果</h2>
+            <p>あなたのプロンプトをAIが4つの基準で評価しました。</p>
+
+            <div class="eval-card" id="eval-result">
+              <div class="eval-header">
+                <div>
+                  <div class="eval-score-label">Total Score</div>
+                  <div class="eval-score" id="eval-score">--</div>
+                </div>
+                <div style="text-align: right;">
+                  <span class="badge badge-active" id="eval-badge">評価中</span>
+                </div>
+              </div>
+              <div class="eval-bar">
+                <div class="eval-bar-fill" id="eval-bar-fill" style="width: 0%;"></div>
+              </div>
+              <div class="eval-body">
+                <div class="eval-section">
+                  <div class="eval-section-label">良い点 (Strength)</div>
+                  <div class="eval-section-text" id="eval-strength">---</div>
+                </div>
+                <div class="eval-section">
+                  <div class="eval-section-label">改善点 (Feedback)</div>
+                  <div class="eval-section-text" id="eval-feedback">---</div>
+                </div>
+                <div class="eval-criteria-list" id="eval-criteria">
+                  <div class="eval-criteria-item">
+                    <div class="eval-criteria-val" id="eval-c1">--</div>
+                    <div class="eval-criteria-name">明確性</div>
+                  </div>
+                  <div class="eval-criteria-item">
+                    <div class="eval-criteria-val" id="eval-c2">--</div>
+                    <div class="eval-criteria-name">再現性</div>
+                  </div>
+                  <div class="eval-criteria-item">
+                    <div class="eval-criteria-val" id="eval-c3">--</div>
+                    <div class="eval-criteria-name">実用性</div>
+                  </div>
+                  <div class="eval-criteria-item">
+                    <div class="eval-criteria-val" id="eval-c4">--</div>
+                    <div class="eval-criteria-name">構造</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="btn-group">
+              <button class="course-btn-outline" onclick="goToStep(3)">&larr; 再編集する</button>
+              <button class="course-btn" onclick="generateHtml()">HTMLを生成する</button>
+            </div>
+          </div>
+
+          <!-- ===== STEP 5: HTML Generation ===== -->
+          <div class="step-panel" id="step-5">
+            <div class="step-label">Step 5 &mdash; HTML Generation</div>
+            <h2>WEBサイトを生成</h2>
+            <p>あなたのプロンプトを元にランディングページ（LP）を生成しました。</p>
+
+            <div style="display: flex; gap: 12px; margin-bottom: 16px;">
+              <button class="output-tab active" id="tab-preview" onclick="switchOutputTab('preview')">Preview</button>
+              <button class="output-tab" id="tab-code" onclick="switchOutputTab('code')">HTML Code</button>
+            </div>
+
+            <div id="output-preview-area" style="border: 1px solid var(--rule-dark); height: 400px; overflow: hidden;">
+              <iframe id="html-preview" style="width: 100%; height: 100%; border: none;"></iframe>
+            </div>
+            <div id="output-code-area" style="display: none; border: 1px solid var(--rule-dark); height: 400px; overflow: auto; padding: 16px 20px; font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace; font-size: 12px; line-height: 1.6; background: rgba(0,0,0,0.02); white-space: pre-wrap;">
+            </div>
+
+            <h3>成果物</h3>
+            <div class="goal-cards">
+              <div class="goal-card">
+                <div class="goal-num">Output 01</div>
+                <div class="goal-text" id="result-prompt-status">自分専用プロンプト</div>
+              </div>
+              <div class="goal-card">
+                <div class="goal-num">Output 02</div>
+                <div class="goal-text" id="result-eval-status">AI評価スコア</div>
+              </div>
+              <div class="goal-card">
+                <div class="goal-num">Output 03</div>
+                <div class="goal-text">改善済みプロンプト</div>
+              </div>
+              <div class="goal-card">
+                <div class="goal-num">Output 04</div>
+                <div class="goal-text">WEBサイトHTML</div>
+              </div>
+            </div>
+
+            <div class="concept-box" style="margin-top: 32px;">
+              <p>おめでとうございます！<br><strong>自分で考えて作った</strong>プロンプトとWEBサイトが完成しました。</p>
+              <p class="sub">AIは答えを出さなかった。あなた自身の思考で、ここまで来た。</p>
+            </div>
+
+            <div class="btn-group">
+              <button class="course-btn-outline" onclick="goToStep(4)">&larr; 戻る</button>
+              <button class="course-btn" onclick="goToStep(0)">最初からやり直す</button>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- RIGHT: AI Assistant -->
+        <div class="course-assistant">
+          <div class="assistant-header">
+            <div class="assistant-title">
+              <div class="assistant-status"></div>
+              AI Assistant
+            </div>
+            <span style="font-size: 11px; color: rgba(0,0,0,0.35);">Online</span>
+          </div>
+          <div class="assistant-messages" id="assistant-messages">
+            <div class="msg msg-ai">
+              <span class="msg-label">AI</span>
+              こんにちは！Prompt Engineering講座へようこそ。<br><br>
+              この講座では、AIが答えを出すのではなく、<strong>あなた自身がプロンプトを設計する力</strong>を身につけます。<br><br>
+              AIはヒントと評価でサポートします。まずは「スタート」を押しましょう。
+            </div>
+          </div>
+          <div class="assistant-input">
+            <input type="text" id="assistant-input-field" placeholder="質問を入力..." onkeydown="if(event.key==='Enter')sendAssistantMsg()">
+            <button onclick="sendAssistantMsg()">送信</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+<script>
+// ===== State =====
+const state = {
+  step: 0,
+  business_type: '',
+  target_user: '',
+  goal: '',
+  product_or_service: '',
+  edited_prompt: '',
+  evaluation: {
+    score: 0,
+    feedback: '',
+    strength: '',
+    criteria: { clarity: 0, reproducibility: 0, practicality: 0, structure: 0 }
+  }
+};
+
+// ===== Step Navigation =====
+function goToStep(n) {
+  state.step = n;
+
+  // Update panels
+  document.querySelectorAll('.step-panel').forEach(p => p.classList.remove('active'));
+  const panel = document.getElementById('step-' + n);
+  if (panel) panel.classList.add('active');
+
+  // Update dots
+  document.querySelectorAll('.step-dot').forEach(dot => {
+    const s = parseInt(dot.dataset.step);
+    dot.classList.remove('active', 'completed');
+    if (s === n) dot.classList.add('active');
+    else if (s < n) dot.classList.add('completed');
+  });
+
+  // Update lines
+  const lines = document.querySelectorAll('.step-line');
+  lines.forEach((line, i) => {
+    line.classList.toggle('completed', i < n);
+  });
+
+  // Scroll lecture to top
+  document.querySelector('.course-lecture').scrollTop = 0;
+}
+
+// ===== Step 2: Generate Hints =====
+function generateHints() {
+  const business = document.getElementById('input-business').value.trim();
+  const target = document.getElementById('input-target').value.trim();
+  const goal = document.getElementById('input-goal').value;
+  const product = document.getElementById('input-product').value.trim();
+
+  if (!business || !goal) {
+    addAiMessage('少なくとも「業種」と「目的」を入力してください。');
+    return;
+  }
+
+  state.business_type = business;
+  state.target_user = target;
+  state.goal = goal;
+  state.product_or_service = product;
+
+  addAiMessage('ビジネス情報を分析し、ヒントを生成中です...\n\n※完成されたプロンプトは出しません。あなた自身が作るためのヒントです。');
+
+  // Simulate AI hint generation
+  setTimeout(() => {
+    const container = document.getElementById('hints-container');
+
+    // Build dynamic hints based on user input
+    const elementsHints = [
+      '「役割設定」を明記しましょう（例：' + business + '業界に詳しいマーケター）',
+      '「ターゲット」を具体的に書きましょう' + (target ? '（あなたの場合：' + target + '）' : ''),
+      '「' + goal + '」という目的を達成するための具体的な成果物を指定しましょう',
+      product ? '「' + product + '」の強みや差別化ポイントをプロンプトに含めましょう' : '提供する価値やサービスの特徴を含めると精度が上がります',
+      '出力形式を明確に指定しましょう（箇条書き / JSON / HTML / テーブル）',
+      '制約条件（文字数、トーン、禁止事項）を設定しましょう'
+    ];
+
+    const mistakeHints = [
+      '「いい感じにして」のような抽象的な指示 → 具体的な条件を書く',
+      'ゴールが曖昧 → 「' + goal + 'のために何を出力するか」を明記',
+      '出力形式が未指定 → 毎回異なる結果になってしまう',
+      '情報の詰め込みすぎ → 1つのプロンプトに1つの目的'
+    ];
+
+    const designHints = [
+      '最初に「あなたは○○です」と役割を設定する',
+      '次に「以下の条件で○○してください」と目的を伝える',
+      '具体的な入力情報（業種、ターゲット等）を箇条書きで渡す',
+      '「以下の形式で出力してください」と出力フォーマットを指定する',
+      '最後に制約条件やNG事項を追加する'
+    ];
+
+    const formatHints = [
+      '箇条書き：シンプルなリストが欲しいとき',
+      'JSON：プログラムで処理したいとき',
+      'HTML：そのままWEBに使いたいとき',
+      'テーブル：比較表や料金表のとき',
+      'マークダウン：ドキュメントとして残したいとき'
+    ];
+
+    container.innerHTML = '<div class="hint-block">'
+      + '<div class="hint-block-header"><div class="hint-block-num">1</div><div class="hint-block-title">プロンプトに含めるべき要素</div></div>'
+      + '<ul class="hint-list">' + elementsHints.map(h => '<li>' + h + '</li>').join('') + '</ul>'
+      + '</div>'
+      + '<hr class="hint-divider">'
+      + '<div class="hint-block">'
+      + '<div class="hint-block-header"><div class="hint-block-num">2</div><div class="hint-block-title">初心者がよくやるミス</div></div>'
+      + '<ul class="hint-list warning">' + mistakeHints.map(h => '<li>' + h + '</li>').join('') + '</ul>'
+      + '</div>'
+      + '<hr class="hint-divider">'
+      + '<div class="hint-block">'
+      + '<div class="hint-block-header"><div class="hint-block-num">3</div><div class="hint-block-title">プロンプト設計のヒント</div></div>'
+      + '<ul class="hint-list">' + designHints.map(h => '<li>' + h + '</li>').join('') + '</ul>'
+      + '</div>'
+      + '<hr class="hint-divider">'
+      + '<div class="hint-block">'
+      + '<div class="hint-block-header"><div class="hint-block-num">4</div><div class="hint-block-title">出力形式の指定方法</div></div>'
+      + '<ul class="hint-list">' + formatHints.map(h => '<li>' + h + '</li>').join('') + '</ul>'
+      + '</div>';
+
+    addAiMessage('ヒントを生成しました！\n\nこれは「答え」ではありません。\nこのヒントを参考に、次のステップであなた自身のプロンプトを作成してください。');
+
+    goToStep(2);
+  }, 1500);
+}
+
+// ===== Step 4: Evaluate Prompt =====
+function evaluatePrompt() {
+  const editedPrompt = document.getElementById('edit-prompt').value.trim();
+  if (!editedPrompt) {
+    addAiMessage('プロンプトが空です。まずは自分でプロンプトを書いてみましょう！\nヒントを参考に、できるところから始めてください。');
+    return;
+  }
+
+  state.edited_prompt = editedPrompt;
+  goToStep(4);
+
+  addAiMessage('プロンプトを評価中です...');
+
+  // Simulate evaluation
+  setTimeout(() => {
+    // Score based on prompt quality heuristics
+    const len = editedPrompt.length;
+    const hasStructure = editedPrompt.includes('\n') && editedPrompt.split('\n').length > 5;
+    const hasSpecifics = editedPrompt.includes('出力') || editedPrompt.includes('形式') || editedPrompt.includes('制約');
+    const hasTarget = editedPrompt.includes('ターゲット') || editedPrompt.includes('対象');
+    const hasExamples = editedPrompt.includes('例') || editedPrompt.includes('サンプル');
+
+    let baseScore = 60;
+    if (len > 200) baseScore += 8;
+    if (len > 400) baseScore += 5;
+    if (hasStructure) baseScore += 8;
+    if (hasSpecifics) baseScore += 7;
+    if (hasTarget) baseScore += 6;
+    if (hasExamples) baseScore += 6;
+
+    const score = Math.min(baseScore, 98);
+    const clarity = Math.min(Math.round(score * (0.9 + Math.random() * 0.2)), 100);
+    const reproducibility = Math.min(Math.round(score * (0.85 + Math.random() * 0.2)), 100);
+    const practicality = Math.min(Math.round(score * (0.9 + Math.random() * 0.15)), 100);
+    const structure = Math.min(Math.round(score * (0.88 + Math.random() * 0.2)), 100);
+
+    state.evaluation = {
+      score: score,
+      feedback: !hasExamples
+        ? '具体的な出力例を追加すると、AIの出力精度がさらに向上します。'
+        : !hasTarget
+        ? 'ターゲットユーザーをより詳細に定義すると、より効果的なプロンプトになります。'
+        : '出力形式をJSON等の構造化フォーマットで指定すると、後処理が容易になります。',
+      strength: score >= 80
+        ? '自分の力で素晴らしいプロンプトを作りました！目的が明確で構造化された指示が優れています。'
+        : score >= 70
+        ? 'よく考えられたプロンプトです。基本的な要素が網羅されていて、目的も明確です。'
+        : 'まずは自分で書けたことが大事です！ここからヒントを見返して改善していきましょう。',
+      criteria: { clarity, reproducibility, practicality, structure }
+    };
+
+    // Update UI
+    document.getElementById('eval-score').textContent = score;
+    document.getElementById('eval-bar-fill').style.width = score + '%';
+    document.getElementById('eval-strength').textContent = state.evaluation.strength;
+    document.getElementById('eval-feedback').textContent = state.evaluation.feedback;
+    document.getElementById('eval-c1').textContent = clarity;
+    document.getElementById('eval-c2').textContent = reproducibility;
+    document.getElementById('eval-c3').textContent = practicality;
+    document.getElementById('eval-c4').textContent = structure;
+
+    const badgeEl = document.getElementById('eval-badge');
+    if (score >= 80) {
+      badgeEl.textContent = '優秀';
+      badgeEl.className = 'badge badge-active';
+    } else if (score >= 60) {
+      badgeEl.textContent = '良好';
+      badgeEl.className = 'badge badge-pending';
+    } else {
+      badgeEl.textContent = '改善推奨';
+      badgeEl.className = 'badge badge-done';
+    }
+
+    addAiMessage('評価完了！スコア: ' + score + '/100\n\n' + state.evaluation.strength + '\n\n改善点: ' + state.evaluation.feedback);
+
+  }, 2000);
+}
+
+// ===== Step 5: Generate HTML =====
+function generateHtml() {
+  goToStep(5);
+  addAiMessage('HTMLを生成しています...');
+
+  setTimeout(() => {
+    const html = generateLPHtml(state.business_type, state.goal);
+
+    // Preview
+    const iframe = document.getElementById('html-preview');
+    const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+    iframeDoc.open();
+    iframeDoc.write(html);
+    iframeDoc.close();
+
+    // Code view
+    document.getElementById('output-code-area').textContent = html;
+
+    // Update results
+    document.getElementById('result-prompt-status').textContent = '自分で作成したプロンプト (' + state.edited_prompt.length + '文字)';
+    document.getElementById('result-eval-status').textContent = 'AI評価スコア: ' + state.evaluation.score + '/100';
+
+    addAiMessage('HTMLの生成が完了しました！\n\nあなたが自分で考えて作ったプロンプトから、WEBサイトが生まれました。\n\nこれが「自分で作れる」ということです。おめでとうございます！');
+  }, 2000);
+}
+
+function generateLPHtml(business, goal) {
+  return '<!DOCTYPE html>\n<html lang="ja">\n<head>\n<meta charset="UTF-8">\n<meta name="viewport" content="width=device-width, initial-scale=1.0">\n<title>' + business + ' | ' + goal + '</title>\n<style>\n* { margin: 0; padding: 0; box-sizing: border-box; }\nbody { font-family: "Noto Sans JP", "Hiragino Sans", sans-serif; color: #1a1a1a; }\n.hero { background: linear-gradient(135deg, #0a0a0a 0%, #2d2d2d 100%); color: #fff; padding: 80px 24px; text-align: center; }\n.hero h1 { font-size: 32px; font-weight: 900; margin-bottom: 16px; }\n.hero p { font-size: 16px; opacity: 0.8; margin-bottom: 32px; }\n.hero .cta { display: inline-block; padding: 14px 40px; background: #D93B00; color: #fff; font-weight: 700; text-decoration: none; }\nsection { padding: 64px 24px; max-width: 900px; margin: 0 auto; }\nsection h2 { font-size: 24px; font-weight: 900; margin-bottom: 24px; text-align: center; }\n.features { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 24px; margin-top: 32px; }\n.feature { padding: 24px; border: 1px solid #e0e0e0; }\n.feature h3 { font-size: 16px; font-weight: 700; margin-bottom: 8px; color: #D93B00; }\n.feature p { font-size: 14px; line-height: 1.7; color: #555; }\n.testimonials { background: #f8f8f8; padding: 64px 24px; }\n.testimonials .inner { max-width: 900px; margin: 0 auto; }\n.testimonial { padding: 24px; background: #fff; border: 1px solid #e0e0e0; margin-bottom: 16px; }\n.testimonial p { font-size: 14px; line-height: 1.7; color: #555; }\n.testimonial .name { font-weight: 700; color: #1a1a1a; margin-top: 8px; font-size: 13px; }\n.cta-section { background: #0a0a0a; color: #fff; padding: 64px 24px; text-align: center; }\n.cta-section h2 { color: #fff; }\n.cta-section p { color: rgba(255,255,255,0.7); margin-bottom: 32px; }\n.cta-section .cta { display: inline-block; padding: 16px 48px; background: #D93B00; color: #fff; font-weight: 700; font-size: 16px; text-decoration: none; }\nfooter { padding: 24px; text-align: center; font-size: 12px; color: #999; }\n</style>\n</head>\n<body>\n<div class="hero">\n  <h1>' + business + 'の未来を、ここから。</h1>\n  <p>' + goal + 'を実現する、あなただけのソリューション</p>\n  <a href="#contact" class="cta">今すぐ相談する</a>\n</div>\n<section>\n  <h2>選ばれる3つの理由</h2>\n  <div class="features">\n    <div class="feature">\n      <h3>01 / 専門性</h3>\n      <p>' + business + '業界に特化した深い知見と実績で、最適なソリューションを提供します。</p>\n    </div>\n    <div class="feature">\n      <h3>02 / 成果主義</h3>\n      <p>' + goal + 'という目標に向けて、数値で見える成果をお約束します。</p>\n    </div>\n    <div class="feature">\n      <h3>03 / サポート</h3>\n      <p>導入から運用まで、専任チームが継続的にサポートいたします。</p>\n    </div>\n  </div>\n</section>\n<div class="testimonials">\n  <div class="inner">\n    <h2>お客様の声</h2>\n    <div class="testimonial">\n      <p>「期待以上の成果でした。' + goal + 'の目標を大幅に上回る結果が出ています。」</p>\n      <div class="name">A社 代表取締役</div>\n    </div>\n    <div class="testimonial">\n      <p>「' + business + '業界の課題をよく理解してくれていて、的確な提案をいただけました。」</p>\n      <div class="name">B社 マーケティング部長</div>\n    </div>\n    <div class="testimonial">\n      <p>「サポート体制が素晴らしく、安心して任せることができました。」</p>\n      <div class="name">C社 CEO</div>\n    </div>\n  </div>\n</div>\n<div class="cta-section" id="contact">\n  <h2>まずはお気軽にご相談ください</h2>\n  <p>' + business + 'の' + goal + 'を一緒に実現しましょう。</p>\n  <a href="#" class="cta">無料相談を予約する</a>\n</div>\n<footer>&copy; 2026 ' + business + ' All rights reserved.</footer>\n</body>\n</html>';
+}
+
+// ===== Output Tab Switch =====
+function switchOutputTab(tab) {
+  document.getElementById('tab-preview').classList.toggle('active', tab === 'preview');
+  document.getElementById('tab-code').classList.toggle('active', tab === 'code');
+  document.getElementById('output-preview-area').style.display = tab === 'preview' ? 'block' : 'none';
+  document.getElementById('output-code-area').style.display = tab === 'code' ? 'block' : 'none';
+}
+
+// ===== AI Assistant Messages =====
+function addAiMessage(text) {
+  const container = document.getElementById('assistant-messages');
+  const msg = document.createElement('div');
+  msg.className = 'msg msg-ai';
+  msg.innerHTML = '<span class="msg-label">AI</span>' + text.replace(/\n/g, '<br>');
+  container.appendChild(msg);
+  container.scrollTop = container.scrollHeight;
+}
+
+function addUserMessage(text) {
+  const container = document.getElementById('assistant-messages');
+  const msg = document.createElement('div');
+  msg.className = 'msg msg-user';
+  msg.innerHTML = '<span class="msg-label">You</span>' + text.replace(/\n/g, '<br>');
+  container.appendChild(msg);
+  container.scrollTop = container.scrollHeight;
+}
+
+function sendAssistantMsg() {
+  const input = document.getElementById('assistant-input-field');
+  const text = input.value.trim();
+  if (!text) return;
+
+  addUserMessage(text);
+  input.value = '';
+
+  // Response logic - coaching style, never give answers
+  setTimeout(() => {
+    if (text.includes('プロンプト') && (text.includes('書いて') || text.includes('作って') || text.includes('教えて'))) {
+      addAiMessage('プロンプトの「答え」をお伝えすることはできません。\n\nでもヒントは出せます：\n- まず「役割」を決めましょう\n- 次に「目的」を明確にしましょう\n- そして「出力形式」を指定しましょう\n\n自分で考えて書いてみることが、一番の学びです！');
+    } else if (text.includes('プロンプト')) {
+      addAiMessage('良いプロンプトには以下の要素が必要です：\n- 明確な役割設定\n- 具体的な出力形式\n- 制約条件\n- コンテキスト情報\n\nStep 2のヒントも参考にしてみてください。自分で書くことで身につきます！');
+    } else if (text.includes('評価') || text.includes('スコア')) {
+      addAiMessage('評価は以下の4つの基準で行います：\n\n1. 明確性 - 指示が曖昧でないか\n2. 再現性 - 同じ結果が得られるか\n3. 実用性 - 実務で使えるか\n4. 構造 - 論理的に整理されているか\n\nStep 4で詳しい結果を確認できます。');
+    } else if (text.includes('わからない') || text.includes('難しい') || text.includes('できない')) {
+      addAiMessage('最初は難しく感じるかもしれません。でも大丈夫です。\n\n完璧でなくてOK。まずは書いてみましょう。\n\nヒント：「あなたは○○です。○○してください。」\nこの一文から始めてみてください。');
+    } else if (text.includes('HTML') || text.includes('サイト')) {
+      addAiMessage('Step 5で、あなたが作ったプロンプトを元にLPのHTMLを自動生成します。\n\nだからこそ、良いプロンプトを自分で作ることが重要なんです。');
+    } else {
+      addAiMessage('ご質問ありがとうございます。\n\nこの講座のポリシーとして、答えそのものは提供しません。\nでもヒントや方向性はいつでもお伝えできます。\n\n困ったことがあれば「どう考えればいい？」と聞いてみてください。');
+    }
+  }, 800);
+}
+</script>
+</body>
+</html>

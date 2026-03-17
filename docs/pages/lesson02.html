@@ -1,0 +1,1228 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>02 AI API Integration | AI SCHOOL</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/dashboard.css">
+  <style>
+    /* === Interactive Course Layout === */
+    .course-layout {
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      grid-template-rows: 1fr auto;
+      gap: 0;
+      height: calc(100vh - 64px);
+      overflow: hidden;
+    }
+
+    .course-lecture {
+      overflow-y: auto;
+      padding: 40px;
+      border-right: 1px solid var(--rule-dark);
+    }
+
+    .course-lecture-label {
+      font-family: var(--font-body-en);
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: rgba(0,0,0,0.35);
+      margin-bottom: 8px;
+    }
+
+    .course-lecture-title {
+      font-family: var(--font-heading-en);
+      font-size: 28px;
+      color: var(--black);
+      line-height: 1.2;
+      margin: 0 0 6px;
+      letter-spacing: 0.02em;
+    }
+
+    .course-lecture-subtitle {
+      font-family: var(--font-heading-ja);
+      font-size: 15px;
+      font-weight: 900;
+      color: var(--black);
+      margin: 0 0 24px;
+    }
+
+    /* --- Step Progress --- */
+    .step-progress {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      margin-bottom: 32px;
+      padding: 20px 0;
+      border-top: 1px solid var(--rule-dark);
+      border-bottom: 1px solid var(--rule-dark);
+    }
+
+    .step-dot {
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-body-en);
+      font-size: 12px;
+      font-weight: 700;
+      border: 2px solid rgba(0,0,0,0.15);
+      color: rgba(0,0,0,0.3);
+      cursor: pointer;
+      transition: all 0.2s;
+      flex-shrink: 0;
+    }
+
+    .step-dot.active {
+      border-color: var(--orange-red);
+      color: var(--white);
+      background: var(--orange-red);
+    }
+
+    .step-dot.completed {
+      border-color: var(--black);
+      color: var(--white);
+      background: var(--black);
+    }
+
+    .step-line {
+      flex: 1;
+      height: 2px;
+      background: rgba(0,0,0,0.1);
+    }
+
+    .step-line.completed {
+      background: var(--black);
+    }
+
+    /* --- Step Content --- */
+    .step-panel { display: none; }
+    .step-panel.active { display: block; }
+
+    .step-panel h2 {
+      font-family: var(--font-heading-ja);
+      font-size: 18px;
+      font-weight: 900;
+      color: var(--black);
+      margin: 0 0 8px;
+    }
+
+    .step-panel h3 {
+      font-family: var(--font-body-ja);
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--black);
+      margin: 24px 0 8px;
+    }
+
+    .step-panel p {
+      font-size: 14px;
+      font-weight: 300;
+      line-height: 1.8;
+      color: rgba(0,0,0,0.7);
+      margin: 0 0 16px;
+    }
+
+    .step-label {
+      font-family: var(--font-body-en);
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--orange-red);
+      margin-bottom: 8px;
+    }
+
+    /* --- Forms --- */
+    .course-form-group {
+      margin-bottom: 20px;
+    }
+
+    .course-form-group label {
+      display: block;
+      font-size: 12px;
+      font-weight: 600;
+      color: rgba(0,0,0,0.55);
+      letter-spacing: 0.04em;
+      margin-bottom: 6px;
+    }
+
+    .course-form-group input,
+    .course-form-group select {
+      width: 100%;
+      padding: 12px 16px;
+      font-family: var(--font-body-ja);
+      font-size: 14px;
+      border: 1px solid var(--rule-dark);
+      background: var(--white);
+      color: var(--black);
+      outline: none;
+      box-sizing: border-box;
+      transition: border-color 0.15s;
+    }
+
+    .course-form-group input:focus,
+    .course-form-group select:focus {
+      border-color: var(--orange-red);
+    }
+
+    .course-form-group input::placeholder {
+      color: rgba(0,0,0,0.3);
+    }
+
+    /* --- Textarea --- */
+    .prompt-editor {
+      width: 100%;
+      min-height: 220px;
+      padding: 16px 20px;
+      font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+      font-size: 13px;
+      line-height: 1.7;
+      border: 1px solid var(--rule-dark);
+      background: rgba(0,0,0,0.02);
+      color: var(--black);
+      outline: none;
+      resize: vertical;
+      box-sizing: border-box;
+      transition: border-color 0.15s;
+    }
+
+    .prompt-editor:focus {
+      border-color: var(--orange-red);
+      background: var(--white);
+    }
+
+    /* --- Buttons --- */
+    .course-btn {
+      display: inline-block;
+      padding: 13px 36px;
+      font-family: var(--font-body-ja);
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--white);
+      background: var(--orange-red);
+      border: none;
+      cursor: pointer;
+      letter-spacing: 0.04em;
+      transition: background 0.15s;
+    }
+
+    .course-btn:hover { background: var(--orange-hover); }
+
+    .course-btn-outline {
+      display: inline-block;
+      padding: 12px 28px;
+      font-family: var(--font-body-ja);
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--black);
+      background: none;
+      border: 1px solid var(--black);
+      cursor: pointer;
+      letter-spacing: 0.04em;
+      transition: all 0.15s;
+    }
+
+    .course-btn-outline:hover {
+      background: var(--black);
+      color: var(--white);
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    /* --- Concept Box --- */
+    .concept-box {
+      padding: 20px 24px;
+      border: 1px solid var(--orange-red);
+      background: rgba(217,59,0,0.03);
+      margin: 20px 0;
+    }
+
+    .concept-box p {
+      margin: 0;
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--black);
+      line-height: 1.8;
+      text-align: center;
+    }
+
+    .concept-box .sub {
+      font-size: 13px;
+      font-weight: 300;
+      color: rgba(0,0,0,0.55);
+      margin-top: 8px;
+    }
+
+    /* --- Goal Cards --- */
+    .goal-cards {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin: 20px 0;
+    }
+
+    .goal-card {
+      padding: 16px 20px;
+      border: 1px solid var(--rule-dark);
+    }
+
+    .goal-card .goal-num {
+      font-family: var(--font-body-en);
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--orange-red);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .goal-card .goal-text {
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--black);
+    }
+
+    /* --- Flow Diagram --- */
+    .flow-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin: 24px 0;
+    }
+
+    .flow-item {
+      flex: 1;
+      padding: 14px 12px;
+      text-align: center;
+      font-size: 12px;
+      font-weight: 600;
+      border: 1px solid var(--rule-dark);
+      color: var(--black);
+    }
+
+    .flow-item.highlight {
+      border-color: var(--orange-red);
+      background: rgba(217,59,0,0.04);
+      color: var(--orange-red);
+    }
+
+    .flow-arrow {
+      font-size: 16px;
+      color: rgba(0,0,0,0.25);
+      flex-shrink: 0;
+    }
+
+    /* --- Hint Cards --- */
+    .hint-block { margin-bottom: 20px; }
+
+    .hint-block-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .hint-block-num {
+      width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--orange-red);
+      color: var(--white);
+      font-family: var(--font-body-en);
+      font-size: 11px;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .hint-block-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--black);
+    }
+
+    .hint-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      padding-left: 34px;
+    }
+
+    .hint-list li {
+      font-size: 13px;
+      font-weight: 300;
+      color: rgba(0,0,0,0.7);
+      line-height: 1.8;
+      padding: 2px 0;
+      padding-left: 16px;
+      position: relative;
+    }
+
+    .hint-list li::before {
+      content: '\2022';
+      position: absolute;
+      left: 0;
+      color: var(--orange-red);
+      font-weight: 700;
+    }
+
+    .hint-list.warning li::before {
+      content: '\26A0';
+      font-size: 11px;
+    }
+
+    .hint-divider {
+      border: none;
+      border-top: 1px solid rgba(0,0,0,0.06);
+      margin: 16px 0;
+    }
+
+    /* --- Evaluation Card --- */
+    .eval-card {
+      border: 1px solid var(--rule-dark);
+      margin-top: 24px;
+    }
+
+    .eval-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--rule-dark);
+    }
+
+    .eval-score {
+      font-family: var(--font-heading-en);
+      font-size: 48px;
+      color: var(--orange-red);
+      line-height: 1;
+    }
+
+    .eval-score-label {
+      font-family: var(--font-body-en);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(0,0,0,0.35);
+    }
+
+    .eval-bar {
+      height: 4px;
+      background: rgba(0,0,0,0.06);
+    }
+
+    .eval-bar-fill {
+      height: 100%;
+      background: var(--orange-red);
+      transition: width 0.8s ease;
+    }
+
+    .eval-body { padding: 20px; }
+
+    .eval-section { margin-bottom: 16px; }
+    .eval-section:last-child { margin-bottom: 0; }
+
+    .eval-section-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: rgba(0,0,0,0.45);
+      letter-spacing: 0.05em;
+      margin-bottom: 4px;
+    }
+
+    .eval-section-text {
+      font-size: 14px;
+      font-weight: 300;
+      line-height: 1.7;
+      color: rgba(0,0,0,0.7);
+    }
+
+    .eval-criteria-list {
+      display: flex;
+      gap: 12px;
+      margin-top: 16px;
+      padding-top: 16px;
+      border-top: 1px solid rgba(0,0,0,0.06);
+    }
+
+    .eval-criteria-item {
+      flex: 1;
+      text-align: center;
+      padding: 12px;
+      border: 1px solid var(--rule-dark);
+    }
+
+    .eval-criteria-val {
+      font-family: var(--font-heading-en);
+      font-size: 20px;
+      color: var(--orange-red);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .eval-criteria-name {
+      font-size: 10px;
+      font-weight: 600;
+      color: rgba(0,0,0,0.4);
+      letter-spacing: 0.04em;
+    }
+
+    /* --- Code Hint Block --- */
+    .code-hint {
+      padding: 16px 20px;
+      border: 1px solid var(--rule-dark);
+      background: rgba(0,0,0,0.02);
+      font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+      font-size: 13px;
+      line-height: 1.7;
+      color: var(--black);
+      white-space: pre-wrap;
+      border-left: 3px solid var(--orange-red);
+      margin: 16px 0;
+    }
+
+    /* --- Right: AI Assistant Panel --- */
+    .course-assistant {
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      background: #FAFAFA;
+    }
+
+    .assistant-header {
+      padding: 20px 24px;
+      border-bottom: 1px solid var(--rule-dark);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .assistant-title {
+      font-family: var(--font-body-en);
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--black);
+      letter-spacing: 0.04em;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .assistant-status {
+      width: 8px;
+      height: 8px;
+      background: #2ECC40;
+      border-radius: 50%;
+    }
+
+    .assistant-messages {
+      flex: 1;
+      overflow-y: auto;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .msg {
+      max-width: 95%;
+      padding: 14px 18px;
+      font-size: 13px;
+      line-height: 1.7;
+      font-weight: 300;
+    }
+
+    .msg-ai {
+      background: var(--white);
+      border: 1px solid var(--rule-dark);
+      color: var(--black);
+      align-self: flex-start;
+    }
+
+    .msg-user {
+      background: var(--black);
+      color: var(--white);
+      align-self: flex-end;
+    }
+
+    .msg-label {
+      font-family: var(--font-body-en);
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 6px;
+      display: block;
+    }
+
+    .msg-ai .msg-label { color: var(--orange-red); }
+    .msg-user .msg-label { color: rgba(255,255,255,0.5); }
+
+    .assistant-input {
+      padding: 16px 24px;
+      border-top: 1px solid var(--rule-dark);
+      display: flex;
+      gap: 8px;
+    }
+
+    .assistant-input input {
+      flex: 1;
+      padding: 10px 14px;
+      font-family: var(--font-body-ja);
+      font-size: 13px;
+      border: 1px solid var(--rule-dark);
+      background: var(--white);
+      color: var(--black);
+      outline: none;
+    }
+
+    .assistant-input input:focus { border-color: var(--orange-red); }
+
+    .assistant-input button {
+      padding: 10px 20px;
+      font-family: var(--font-body-ja);
+      font-size: 13px;
+      font-weight: 600;
+      background: var(--black);
+      color: var(--white);
+      border: none;
+      cursor: pointer;
+    }
+
+    /* --- Responsive --- */
+    @media (max-width: 1024px) {
+      .course-layout {
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr auto;
+      }
+      .course-lecture { border-right: none; }
+      .course-assistant { display: none; }
+      .goal-cards { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 768px) {
+      .course-lecture { padding: 24px; }
+      .flow-row { flex-wrap: wrap; }
+      .flow-item { flex: 1 1 40%; }
+      .eval-criteria-list { flex-wrap: wrap; }
+      .eval-criteria-item { flex: 1 1 40%; }
+    }
+  </style>
+</head>
+<body class="dash-body">
+  <div class="dash">
+
+    <!-- SIDEBAR -->
+    <aside class="dash-sidebar">
+      <div class="dash-sidebar-brand">
+        <a href="../index.html">AI SCHOOL</a>
+        <span>User Dashboard</span>
+      </div>
+      <nav class="dash-sidebar-nav">
+        <span class="nav-section-label">Main</span>
+        <a href="./dashboard.html">ダッシュボード</a>
+        <a href="./dashboard-courses.html">学習コース</a>
+        <a href="./dashboard-assignments.html">課題提出</a>
+        <span class="nav-section-label">Project</span>
+        <a href="./dashboard-projects.html">AIプロジェクト</a>
+        <a href="./dashboard-skills.html">AIスキル評価</a>
+        <a href="./dashboard-profile.html">AI人材プロフィール</a>
+        <span class="nav-section-label">Career</span>
+        <a href="./dashboard-offers.html">企業オファー</a>
+        <a href="./dashboard-community.html">コミュニティ</a>
+        <a href="./dashboard-history.html">学習履歴</a>
+        <span class="nav-section-label">Account</span>
+        <a href="./dashboard-billing.html">支払い管理</a>
+        <a href="./dashboard-settings.html">アカウント設定</a>
+      </nav>
+      <div class="dash-sidebar-footer">
+        <a href="#">利用規約</a>
+        <a href="#">プライバシーポリシー</a>
+        <a href="#">ログアウト</a>
+      </div>
+    </aside>
+
+    <!-- MAIN -->
+    <div class="dash-main">
+      <header class="dash-topbar">
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <button class="dash-mobile-toggle" onclick="document.querySelector('.dash-sidebar').classList.toggle('open')">&#9776;</button>
+          <div class="dash-topbar-title">02 AI API Integration</div>
+        </div>
+        <div class="dash-topbar-actions">
+          <span class="badge badge-pending">未開始</span>
+          <div class="dash-topbar-user">
+            <span>山田 太郎</span>
+            <div class="dash-topbar-avatar">PHOTO</div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Course Layout: 3-panel -->
+      <div class="course-layout">
+
+        <!-- LEFT: Lecture Content -->
+        <div class="course-lecture">
+          <div class="course-lecture-label">Course 02</div>
+          <div class="course-lecture-title">AI API INTEGRATION</div>
+          <div class="course-lecture-subtitle">インタラクティブ教材 ― プロダクション版</div>
+
+          <!-- Step Progress -->
+          <div class="step-progress">
+            <div class="step-dot active" data-step="0">0</div>
+            <div class="step-line"></div>
+            <div class="step-dot" data-step="1">1</div>
+            <div class="step-line"></div>
+            <div class="step-dot" data-step="2">2</div>
+            <div class="step-line"></div>
+            <div class="step-dot" data-step="3">3</div>
+            <div class="step-line"></div>
+            <div class="step-dot" data-step="4">4</div>
+            <div class="step-line"></div>
+            <div class="step-dot" data-step="5">5</div>
+          </div>
+
+          <!-- ===== STEP 0: Introduction ===== -->
+          <div class="step-panel active" id="step-0">
+            <div class="step-label">Step 0</div>
+            <h2>この講座について</h2>
+            <p>本講座は「AIをAPIで活用する方法」を学ぶインタラクティブ教材です。<br>静的な手順書ではなく、<strong>ユーザーが自分でAPI設計を考え、実装まで意識する</strong>教材です。</p>
+
+            <div class="concept-box">
+              <p>AIは「答え」を出さない<br>AIは「設計する力」を育てる</p>
+              <p class="sub">自分でAPI活用の設計ができる状態になること ― それがゴールです。</p>
+            </div>
+
+            <h3>何ができるようになるか</h3>
+            <div class="goal-cards">
+              <div class="goal-card">
+                <div class="goal-num">Goal 01</div>
+                <div class="goal-text">AI APIの呼び出し設計を<strong>自分で</strong>考えられる</div>
+              </div>
+              <div class="goal-card">
+                <div class="goal-num">Goal 02</div>
+                <div class="goal-text">APIの落とし穴やベストプラクティスを理解できる</div>
+              </div>
+              <div class="goal-card">
+                <div class="goal-num">Goal 03</div>
+                <div class="goal-text">設計の品質をAIの評価で改善できる</div>
+              </div>
+              <div class="goal-card">
+                <div class="goal-num">Goal 04</div>
+                <div class="goal-text">実務でAI APIを活用する応用力が身につく</div>
+              </div>
+            </div>
+
+            <h3>学習の流れ</h3>
+            <div class="flow-row">
+              <div class="flow-item">シナリオ入力</div>
+              <div class="flow-arrow">&rarr;</div>
+              <div class="flow-item">AIヒント</div>
+              <div class="flow-arrow">&rarr;</div>
+              <div class="flow-item highlight">自分で設計</div>
+              <div class="flow-arrow">&rarr;</div>
+              <div class="flow-item">AI評価</div>
+            </div>
+            <p>AIが設計してくれるのではなく、<strong>あなた自身が考え、設計する</strong>。このループが学習の本質です。</p>
+
+            <div class="btn-group">
+              <button class="course-btn" onclick="goToStep(1)">スタート</button>
+            </div>
+          </div>
+
+          <!-- ===== STEP 1: Scenario Input ===== -->
+          <div class="step-panel" id="step-1">
+            <div class="step-label">Step 1 &mdash; Scenario Input</div>
+            <h2>利用シナリオを入力</h2>
+            <p>あなたがAI APIを使って実現したいことを教えてください。<br>この情報をもとに、AIが<strong>「設計のためのヒント」</strong>を提示します。</p>
+
+            <div class="concept-box" style="margin-bottom: 24px;">
+              <p style="font-size: 13px; font-weight: 400;">※ここでは答えは出ません。あなた自身がAPI利用設計を考えます。</p>
+            </div>
+
+            <div class="course-form-group">
+              <label>どのAI APIを使いたいですか？</label>
+              <select id="input-api">
+                <option value="">選択してください</option>
+                <option value="OpenAI GPT API">OpenAI GPT API（テキスト生成・チャット）</option>
+                <option value="OpenAI DALL-E API">OpenAI DALL-E API（画像生成）</option>
+                <option value="OpenAI Whisper API">OpenAI Whisper API（音声認識）</option>
+                <option value="Anthropic Claude API">Anthropic Claude API（テキスト生成・分析）</option>
+                <option value="Stable Diffusion API">Stable Diffusion API（画像生成）</option>
+                <option value="Google Gemini API">Google Gemini API（マルチモーダル）</option>
+                <option value="その他">その他</option>
+              </select>
+            </div>
+
+            <div class="course-form-group">
+              <label>どんな用途で使いたいですか？</label>
+              <input type="text" id="input-usecase" placeholder="例：文章要約、画像生成、チャットボット、データ分析">
+            </div>
+
+            <div class="course-form-group">
+              <label>最終的なゴールは？</label>
+              <select id="input-goal">
+                <option value="">選択してください</option>
+                <option value="業務自動化">業務自動化（手作業を減らしたい）</option>
+                <option value="効率化">効率化（既存業務を速くしたい）</option>
+                <option value="新機能開発">新機能開発（プロダクトにAIを組み込みたい）</option>
+                <option value="コスト削減">コスト削減（人件費を最適化したい）</option>
+                <option value="品質向上">品質向上（アウトプットの質を上げたい）</option>
+              </select>
+            </div>
+
+            <div class="btn-group">
+              <button class="course-btn-outline" onclick="goToStep(0)">&larr; 戻る</button>
+              <button class="course-btn" onclick="generateHints()">ヒントをもらう</button>
+            </div>
+          </div>
+
+          <!-- ===== STEP 2: Hint Generation ===== -->
+          <div class="step-panel" id="step-2">
+            <div class="step-label">Step 2 &mdash; AI Hints</div>
+            <h2>AIからの設計ヒント</h2>
+            <p>AIが<strong>完成された設計やコードではなく、あなたが良い設計をするためのヒント</strong>を生成しました。<br>これを参考に、次のステップで自分のAPI利用設計を考えてください。</p>
+
+            <div id="hints-container"></div>
+
+            <div class="concept-box" style="margin-top: 24px;">
+              <p style="font-size: 13px; font-weight: 400;">AIはコードや完成形を出しません。ヒントを読んで、次のステップで<strong>自分で設計</strong>してください。</p>
+            </div>
+
+            <div class="btn-group">
+              <button class="course-btn-outline" onclick="goToStep(1)">&larr; 戻る</button>
+              <button class="course-btn" onclick="goToStep(3)">API設計を自分で書く</button>
+            </div>
+          </div>
+
+          <!-- ===== STEP 3: User Design ===== -->
+          <div class="step-panel" id="step-3">
+            <div class="step-label">Step 3 &mdash; Your Design</div>
+            <h2>API利用設計を作成する</h2>
+            <p>ヒントを参考に、<strong>あなた自身のAPI利用設計を書いてください。</strong><br>擬似コード、箇条書き、フローチャート風の記述、何でもOKです。</p>
+
+            <div class="concept-box" style="margin-bottom: 24px; border-color: var(--rule-dark); background: rgba(0,0,0,0.02);">
+              <p style="font-size: 13px; font-weight: 400; text-align: left;">設計で考えるべきこと：</p>
+              <p style="font-size: 13px; font-weight: 300; text-align: left; color: rgba(0,0,0,0.6); margin-top: 4px;">
+                ・どのエンドポイントを使いますか？<br>
+                ・入力データは何ですか？<br>
+                ・出力は何を期待しますか？<br>
+                ・エラー時はどう処理しますか？<br>
+                ・レート制限やコストをどう管理しますか？<br>
+                ・セキュリティ（APIキー管理）は？
+              </p>
+            </div>
+
+            <textarea class="prompt-editor" id="user-design" placeholder="ここにAPI利用設計を書いてください...&#10;&#10;例：&#10;1. ユーザーがフォームにテキストを入力&#10;2. バックエンドで○○ APIに送信&#10;3. レスポンスを受け取り、○○形式で表示&#10;4. エラー時は○○を返す&#10;..."></textarea>
+
+            <p style="margin-top: 12px; font-size: 12px; color: rgba(0,0,0,0.4);">
+              ※ ヒントを見返したい場合は「戻る」ボタンで確認できます。
+            </p>
+
+            <div class="btn-group">
+              <button class="course-btn-outline" onclick="goToStep(2)">&larr; ヒントを見返す</button>
+              <button class="course-btn" onclick="evaluateDesign()">AIに評価してもらう</button>
+            </div>
+          </div>
+
+          <!-- ===== STEP 4: Evaluation ===== -->
+          <div class="step-panel" id="step-4">
+            <div class="step-label">Step 4 &mdash; AI Evaluation</div>
+            <h2>AI評価結果</h2>
+            <p>あなたのAPI利用設計をAIが4つの基準で評価しました。</p>
+
+            <div class="eval-card" id="eval-result">
+              <div class="eval-header">
+                <div>
+                  <div class="eval-score-label">Total Score</div>
+                  <div class="eval-score" id="eval-score">--</div>
+                </div>
+                <div style="text-align: right;">
+                  <span class="badge badge-active" id="eval-badge">評価中</span>
+                </div>
+              </div>
+              <div class="eval-bar">
+                <div class="eval-bar-fill" id="eval-bar-fill" style="width: 0%;"></div>
+              </div>
+              <div class="eval-body">
+                <div class="eval-section">
+                  <div class="eval-section-label">良い点 (Strength)</div>
+                  <div class="eval-section-text" id="eval-strength">---</div>
+                </div>
+                <div class="eval-section">
+                  <div class="eval-section-label">改善点 (Feedback)</div>
+                  <div class="eval-section-text" id="eval-feedback">---</div>
+                </div>
+                <div class="eval-criteria-list">
+                  <div class="eval-criteria-item">
+                    <div class="eval-criteria-val" id="eval-c1">--</div>
+                    <div class="eval-criteria-name">明確性</div>
+                  </div>
+                  <div class="eval-criteria-item">
+                    <div class="eval-criteria-val" id="eval-c2">--</div>
+                    <div class="eval-criteria-name">実現可能性</div>
+                  </div>
+                  <div class="eval-criteria-item">
+                    <div class="eval-criteria-val" id="eval-c3">--</div>
+                    <div class="eval-criteria-name">再現性</div>
+                  </div>
+                  <div class="eval-criteria-item">
+                    <div class="eval-criteria-val" id="eval-c4">--</div>
+                    <div class="eval-criteria-name">網羅性</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="btn-group">
+              <button class="course-btn-outline" onclick="goToStep(3)">&larr; 再設計する</button>
+              <button class="course-btn" onclick="showSampleHint()">サンプルヒントを見る</button>
+            </div>
+          </div>
+
+          <!-- ===== STEP 5: Sample Hint ===== -->
+          <div class="step-panel" id="step-5">
+            <div class="step-label">Step 5 &mdash; Sample Hint</div>
+            <h2>設計サンプルヒント</h2>
+            <p>参考として、API呼び出しの<strong>抽象的な構造例</strong>を提示します。<br>これはそのまま動くコードではありません。設計の方向性を確認するためのヒントです。</p>
+
+            <div id="sample-hint-container"></div>
+
+            <h3>成果物</h3>
+            <div class="goal-cards">
+              <div class="goal-card">
+                <div class="goal-num">Output 01</div>
+                <div class="goal-text" id="result-design-status">自分で作成したAPI設計</div>
+              </div>
+              <div class="goal-card">
+                <div class="goal-num">Output 02</div>
+                <div class="goal-text" id="result-eval-status">AI評価スコア</div>
+              </div>
+              <div class="goal-card">
+                <div class="goal-num">Output 03</div>
+                <div class="goal-text">改善のための方向性</div>
+              </div>
+              <div class="goal-card">
+                <div class="goal-num">Output 04</div>
+                <div class="goal-text">抽象サンプルヒント</div>
+              </div>
+            </div>
+
+            <div class="concept-box" style="margin-top: 32px;">
+              <p>おめでとうございます！<br><strong>自分で考えた</strong>API利用設計が完成しました。</p>
+              <p class="sub">AIはコードを書かなかった。あなた自身の思考で、設計力が身についた。</p>
+            </div>
+
+            <div class="btn-group">
+              <button class="course-btn-outline" onclick="goToStep(4)">&larr; 戻る</button>
+              <button class="course-btn" onclick="goToStep(0)">最初からやり直す</button>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- RIGHT: AI Assistant -->
+        <div class="course-assistant">
+          <div class="assistant-header">
+            <div class="assistant-title">
+              <div class="assistant-status"></div>
+              AI Assistant
+            </div>
+            <span style="font-size: 11px; color: rgba(0,0,0,0.35);">Online</span>
+          </div>
+          <div class="assistant-messages" id="assistant-messages">
+            <div class="msg msg-ai">
+              <span class="msg-label">AI</span>
+              こんにちは！AI API Integration講座へようこそ。<br><br>
+              この講座では、AIが設計を教えるのではなく、<strong>あなた自身がAPI活用の設計力</strong>を身につけます。<br><br>
+              AIはヒントと評価でサポートします。まずは「スタート」を押しましょう。
+            </div>
+          </div>
+          <div class="assistant-input">
+            <input type="text" id="assistant-input-field" placeholder="質問を入力..." onkeydown="if(event.key==='Enter')sendAssistantMsg()">
+            <button onclick="sendAssistantMsg()">送信</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+<script>
+// ===== State =====
+const state = {
+  step: 0,
+  api_name: '',
+  use_case: '',
+  goal: '',
+  user_design: '',
+  evaluation: {
+    score: 0,
+    feedback: '',
+    strength: '',
+    criteria: { clarity: 0, feasibility: 0, reproducibility: 0, coverage: 0 }
+  }
+};
+
+// ===== Step Navigation =====
+function goToStep(n) {
+  state.step = n;
+  document.querySelectorAll('.step-panel').forEach(p => p.classList.remove('active'));
+  const panel = document.getElementById('step-' + n);
+  if (panel) panel.classList.add('active');
+
+  document.querySelectorAll('.step-dot').forEach(dot => {
+    const s = parseInt(dot.dataset.step);
+    dot.classList.remove('active', 'completed');
+    if (s === n) dot.classList.add('active');
+    else if (s < n) dot.classList.add('completed');
+  });
+
+  document.querySelectorAll('.step-line').forEach((line, i) => {
+    line.classList.toggle('completed', i < n);
+  });
+
+  document.querySelector('.course-lecture').scrollTop = 0;
+}
+
+// ===== Step 2: Generate Hints =====
+function generateHints() {
+  const api = document.getElementById('input-api').value;
+  const useCase = document.getElementById('input-usecase').value.trim();
+  const goal = document.getElementById('input-goal').value;
+
+  if (!api || !useCase || !goal) {
+    addAiMessage('すべての項目を入力してください。');
+    return;
+  }
+
+  state.api_name = api;
+  state.use_case = useCase;
+  state.goal = goal;
+
+  addAiMessage('シナリオを分析し、設計ヒントを生成中です...\n\n※完成コードは出しません。あなた自身が設計するためのヒントです。');
+
+  setTimeout(() => {
+    const container = document.getElementById('hints-container');
+
+    const designPoints = [
+      '「' + api + '」のAPIドキュメントを確認し、適切なエンドポイントを選びましょう',
+      '「' + useCase + '」に必要な入力パラメータを整理しましょう',
+      'レスポンス形式（JSON構造）を事前に把握しておきましょう',
+      '「' + goal + '」を達成するために、APIの出力をどう加工するか考えましょう',
+      'APIキーの管理方法を設計に含めましょう（環境変数、Secret Manager等）',
+      'レート制限（Rate Limit）とコスト管理の方針を決めましょう'
+    ];
+
+    const mistakes = [
+      'APIキーをフロントエンドに直接埋め込む → バックエンド経由にする',
+      'エラーハンドリングなし → タイムアウト、Rate Limit、認証エラーに対応',
+      'レスポンスの型チェックなし → 想定外のレスポンスで落ちる',
+      '1リクエストに大量データ → トークン制限やペイロード上限に注意',
+      'リトライなし → ネットワークエラーや一時的な障害に弱い'
+    ];
+
+    const designTips = [
+      '入力 → 前処理 → API呼び出し → 後処理 → 出力 のフローで考える',
+      'バックエンドにAPI呼び出し専用のエンドポイントを作る',
+      'レスポンスのキャッシュを検討する（同じ入力なら再利用）',
+      '非同期処理（async/await）を前提に設計する',
+      'ログ記録を設計に入れる（デバッグとコスト追跡のため）'
+    ];
+
+    container.innerHTML = '<div class="hint-block">'
+      + '<div class="hint-block-header"><div class="hint-block-num">1</div><div class="hint-block-title">設計時の注意点</div></div>'
+      + '<ul class="hint-list">' + designPoints.map(h => '<li>' + h + '</li>').join('') + '</ul>'
+      + '</div>'
+      + '<hr class="hint-divider">'
+      + '<div class="hint-block">'
+      + '<div class="hint-block-header"><div class="hint-block-num">2</div><div class="hint-block-title">よくある失敗例</div></div>'
+      + '<ul class="hint-list warning">' + mistakes.map(h => '<li>' + h + '</li>').join('') + '</ul>'
+      + '</div>'
+      + '<hr class="hint-divider">'
+      + '<div class="hint-block">'
+      + '<div class="hint-block-header"><div class="hint-block-num">3</div><div class="hint-block-title">設計ヒント（抽象レベル）</div></div>'
+      + '<ul class="hint-list">' + designTips.map(h => '<li>' + h + '</li>').join('') + '</ul>'
+      + '</div>';
+
+    addAiMessage('設計ヒントを生成しました！\n\nこれは「答え」ではありません。\nこのヒントを参考に、次のステップで自分のAPI利用設計を書いてください。');
+    goToStep(2);
+  }, 1500);
+}
+
+// ===== Step 4: Evaluate Design =====
+function evaluateDesign() {
+  const design = document.getElementById('user-design').value.trim();
+  if (!design) {
+    addAiMessage('設計が空です。まずは自分で書いてみましょう！\nヒントを参考に、できるところから始めてください。');
+    return;
+  }
+
+  state.user_design = design;
+  goToStep(4);
+  addAiMessage('API設計を評価中です...');
+
+  setTimeout(() => {
+    const len = design.length;
+    const hasFlow = design.includes('→') || design.includes('->') || (design.includes('1.') && design.includes('2.'));
+    const hasError = design.includes('エラー') || design.includes('error') || design.includes('例外');
+    const hasSecurity = design.includes('API') && (design.includes('キー') || design.includes('key') || design.includes('環境変数'));
+    const hasIO = (design.includes('入力') || design.includes('input')) && (design.includes('出力') || design.includes('output') || design.includes('レスポンス'));
+    const hasRate = design.includes('レート') || design.includes('制限') || design.includes('コスト');
+
+    let baseScore = 55;
+    if (len > 150) baseScore += 8;
+    if (len > 300) baseScore += 5;
+    if (hasFlow) baseScore += 10;
+    if (hasError) baseScore += 8;
+    if (hasSecurity) baseScore += 7;
+    if (hasIO) baseScore += 5;
+    if (hasRate) baseScore += 5;
+
+    const score = Math.min(baseScore, 98);
+    const clarity = Math.min(Math.round(score * (0.9 + Math.random() * 0.2)), 100);
+    const feasibility = Math.min(Math.round(score * (0.85 + Math.random() * 0.2)), 100);
+    const reproducibility = Math.min(Math.round(score * (0.88 + Math.random() * 0.2)), 100);
+    const coverage = Math.min(Math.round(score * (0.82 + Math.random() * 0.2)), 100);
+
+    state.evaluation = {
+      score,
+      feedback: !hasError
+        ? 'エラーハンドリングの設計を追加すると、より堅牢な設計になります。'
+        : !hasSecurity
+        ? 'APIキー管理やセキュリティの考慮を設計に含めると安全性が向上します。'
+        : !hasRate
+        ? 'レート制限やコスト管理の方針を追加すると、運用面で安定します。'
+        : 'さらに詳細なエッジケースの考慮を追加するとプロダクション品質に近づきます。',
+      strength: score >= 80
+        ? '自分の力で素晴らしい設計を作りました！フローが明確で実用的な設計です。'
+        : score >= 65
+        ? 'よく考えられた設計です。基本的な要素が含まれています。'
+        : 'まずは自分で書けたことが重要です！ヒントを見返して改善していきましょう。',
+      criteria: { clarity, feasibility, reproducibility, coverage }
+    };
+
+    document.getElementById('eval-score').textContent = score;
+    document.getElementById('eval-bar-fill').style.width = score + '%';
+    document.getElementById('eval-strength').textContent = state.evaluation.strength;
+    document.getElementById('eval-feedback').textContent = state.evaluation.feedback;
+    document.getElementById('eval-c1').textContent = clarity;
+    document.getElementById('eval-c2').textContent = feasibility;
+    document.getElementById('eval-c3').textContent = reproducibility;
+    document.getElementById('eval-c4').textContent = coverage;
+
+    const badgeEl = document.getElementById('eval-badge');
+    if (score >= 80) {
+      badgeEl.textContent = '優秀';
+      badgeEl.className = 'badge badge-active';
+    } else if (score >= 60) {
+      badgeEl.textContent = '良好';
+      badgeEl.className = 'badge badge-pending';
+    } else {
+      badgeEl.textContent = '改善推奨';
+      badgeEl.className = 'badge badge-done';
+    }
+
+    addAiMessage('評価完了！スコア: ' + score + '/100\n\n' + state.evaluation.strength + '\n\n改善点: ' + state.evaluation.feedback);
+  }, 2000);
+}
+
+// ===== Step 5: Sample Hint =====
+function showSampleHint() {
+  goToStep(5);
+
+  const container = document.getElementById('sample-hint-container');
+
+  const sampleStructure = '// === 抽象的な設計構造（ヒント） ===\n'
+    + '// ※ これはそのまま動くコードではありません\n\n'
+    + '// 1. 設定\n'
+    + '//    - APIキーを環境変数から取得\n'
+    + '//    - エンドポイントURLを定義\n'
+    + '//    - タイムアウト・リトライ設定\n\n'
+    + '// 2. 入力の準備\n'
+    + '//    - ユーザー入力を受け取る\n'
+    + '//    - バリデーション（空チェック、長さ制限）\n'
+    + '//    - APIが期待する形式に変換\n\n'
+    + '// 3. API呼び出し\n'
+    + '//    - POST /v1/... にリクエスト送信\n'
+    + '//    - ヘッダー: Authorization, Content-Type\n'
+    + '//    - ボディ: { model: "...", ... }\n\n'
+    + '// 4. レスポンス処理\n'
+    + '//    - ステータスコード確認（200, 400, 429, 500）\n'
+    + '//    - JSONパース\n'
+    + '//    - 必要なフィールドを抽出\n\n'
+    + '// 5. エラーハンドリング\n'
+    + '//    - Rate Limit → リトライ（指数バックオフ）\n'
+    + '//    - 認証エラー → ログ出力 + ユーザー通知\n'
+    + '//    - タイムアウト → リトライ or フォールバック\n\n'
+    + '// 6. ログ・モニタリング\n'
+    + '//    - リクエスト/レスポンスのログ\n'
+    + '//    - トークン使用量の記録\n'
+    + '//    - コスト追跡';
+
+  container.innerHTML = '<div class="code-hint">' + sampleStructure + '</div>'
+    + '<div class="concept-box" style="border-color: var(--rule-dark); background: rgba(0,0,0,0.02);">'
+    + '<p style="font-size: 13px; font-weight: 400;">これはコピー＆ペーストで動くコードではありません。<br>設計の「構造」を確認するためのヒントです。</p>'
+    + '</div>';
+
+  document.getElementById('result-design-status').textContent = '自分で作成したAPI設計 (' + state.user_design.length + '文字)';
+  document.getElementById('result-eval-status').textContent = 'AI評価スコア: ' + state.evaluation.score + '/100';
+
+  addAiMessage('サンプルヒントを表示しました。\n\nこれは抽象的な構造例です。あなたの設計と見比べて、不足している観点がないか確認してみてください。\n\nおめでとうございます！全ステップ完了です。');
+}
+
+// ===== AI Assistant Messages =====
+function addAiMessage(text) {
+  const container = document.getElementById('assistant-messages');
+  const msg = document.createElement('div');
+  msg.className = 'msg msg-ai';
+  msg.innerHTML = '<span class="msg-label">AI</span>' + text.replace(/\n/g, '<br>');
+  container.appendChild(msg);
+  container.scrollTop = container.scrollHeight;
+}
+
+function addUserMessage(text) {
+  const container = document.getElementById('assistant-messages');
+  const msg = document.createElement('div');
+  msg.className = 'msg msg-user';
+  msg.innerHTML = '<span class="msg-label">You</span>' + text.replace(/\n/g, '<br>');
+  container.appendChild(msg);
+  container.scrollTop = container.scrollHeight;
+}
+
+function sendAssistantMsg() {
+  const input = document.getElementById('assistant-input-field');
+  const text = input.value.trim();
+  if (!text) return;
+
+  addUserMessage(text);
+  input.value = '';
+
+  setTimeout(() => {
+    if (text.includes('コード') && (text.includes('書いて') || text.includes('作って') || text.includes('教えて'))) {
+      addAiMessage('コードの「答え」をお伝えすることはできません。\n\nでもヒントは出せます：\n- まずフローを整理しましょう\n- 入力→処理→出力の流れを考えましょう\n- エラー処理も忘れずに\n\n自分で設計することが、一番の学びです！');
+    } else if (text.includes('API') || text.includes('エンドポイント')) {
+      addAiMessage('API設計で重要なのは：\n- 適切なエンドポイントの選択\n- 入出力の型定義\n- エラーハンドリング\n- 認証方式\n\nStep 2のヒントも参考にしてみてください。');
+    } else if (text.includes('評価') || text.includes('スコア')) {
+      addAiMessage('評価は以下の4基準で行います：\n\n1. 明確性 - 設計が具体的か\n2. 実現可能性 - 実装できるか\n3. 再現性 - 他の人が理解できるか\n4. 網羅性 - エラーやセキュリティを考慮しているか');
+    } else if (text.includes('わからない') || text.includes('難しい') || text.includes('できない')) {
+      addAiMessage('最初は難しく感じるかもしれません。でも大丈夫です。\n\n完璧でなくてOK。まずは書いてみましょう。\n\nヒント：\n1. ユーザーが○○を入力\n2. APIに○○を送信\n3. 結果を○○として表示\n\nこの3行から始めてみてください。');
+    } else {
+      addAiMessage('ご質問ありがとうございます。\n\nこの講座では答えそのものは提供しません。\nでもヒントや方向性はいつでもお伝えできます。\n\n困ったら「どう考えればいい？」と聞いてみてください。');
+    }
+  }, 800);
+}
+</script>
+</body>
+</html>
