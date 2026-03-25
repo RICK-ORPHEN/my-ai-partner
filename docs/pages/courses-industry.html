@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>業種別コース一覧 | AI SCHOOL</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/dashboard.css">
+  <style>
+    /* === Industry Courses Grid === */
+    .industry-courses-header {
+      margin-bottom: 40px;
+    }
+
+    .industry-courses-title {
+      font-family: var(--font-heading-en);
+      font-size: 32px;
+      color: var(--black);
+      line-height: 1.2;
+      letter-spacing: 0.02em;
+      margin: 0 0 4px;
+    }
+
+    .industry-courses-subtitle {
+      font-family: var(--font-heading-ja);
+      font-size: 14px;
+      font-weight: 900;
+      color: rgba(0,0,0,0.5);
+      margin: 0 0 16px;
+    }
+
+    .industry-courses-desc {
+      font-size: 14px;
+      font-weight: 300;
+      line-height: 1.8;
+      color: rgba(0,0,0,0.6);
+      max-width: 600px;
+    }
+
+    /* --- Industry Card Grid --- */
+    .industry-card-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+      margin-top: 32px;
+    }
+
+    .industry-card {
+      border: 1px solid var(--rule-dark);
+      padding: 24px 28px;
+      transition: all 0.2s;
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .industry-card:hover {
+      border-color: var(--orange-red);
+      background: rgba(217,59,0,0.02);
+    }
+
+    .industry-card-emoji {
+      font-size: 40px;
+      margin-bottom: 16px;
+      display: block;
+    }
+
+    .industry-card-name {
+      font-family: var(--font-heading-ja);
+      font-size: 18px;
+      font-weight: 900;
+      color: var(--black);
+      margin-bottom: 4px;
+    }
+
+    .industry-card-desc {
+      font-family: var(--font-body-en);
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--orange-red);
+      margin-bottom: 12px;
+    }
+
+    .industry-card-detail {
+      font-size: 13px;
+      font-weight: 300;
+      line-height: 1.6;
+      color: rgba(0,0,0,0.6);
+      margin-bottom: 16px;
+      flex: 1;
+    }
+
+    .industry-card-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 16px;
+      border-top: 1px solid rgba(0,0,0,0.06);
+    }
+
+    .industry-card-lessons {
+      font-size: 12px;
+      font-weight: 600;
+      color: rgba(0,0,0,0.45);
+      letter-spacing: 0.03em;
+    }
+
+    .industry-card-cta {
+      font-family: var(--font-body-en);
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--orange-red);
+      letter-spacing: 0.04em;
+    }
+
+    /* --- Responsive --- */
+    @media (max-width: 1024px) {
+      .industry-card-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .industry-card-grid {
+        gap: 16px;
+      }
+
+      .industry-courses-title {
+        font-size: 24px;
+      }
+    }
+  </style>
+</head>
+<body class="dash-body">
+  <div class="dash">
+
+    <!-- SIDEBAR -->
+    <aside class="dash-sidebar">
+      <div class="dash-sidebar-brand">
+        <a href="../index.html">AI SCHOOL</a>
+        <span>User Dashboard</span>
+      </div>
+      <nav class="dash-sidebar-nav">
+        <span class="nav-section-label">Main</span>
+        <a href="./dashboard.html">ダッシュボード</a>
+        <a href="./dashboard-courses.html">学習コース</a>
+        <a href="./dashboard-assignments.html">課題提出</a>
+        <span class="nav-section-label">Project</span>
+        <a href="./dashboard-projects.html">AIプロジェクト</a>
+        <a href="./dashboard-skills.html">AIスキル評価</a>
+        <a href="./dashboard-profile.html">AI人材プロフィール</a>
+        <span class="nav-section-label">Career</span>
+        <a href="./dashboard-offers.html">企業オファー</a>
+        <a href="./dashboard-community.html">コミュニティ</a>
+        <a href="./dashboard-history.html">学習履歴</a>
+        <span class="nav-section-label">Account</span>
+        <a href="./dashboard-billing.html">支払い管理</a>
+        <a href="./dashboard-settings.html">アカウント設定</a>
+      </nav>
+      <div class="dash-sidebar-footer">
+        <a href="#">利用規約</a>
+        <a href="#">プライバシーポリシー</a>
+        <a href="#">ログアウト</a>
+      </div>
+    </aside>
+
+    <!-- MAIN -->
+    <div class="dash-main">
+      <header class="dash-topbar">
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <button class="dash-mobile-toggle" onclick="document.querySelector('.dash-sidebar').classList.toggle('open')">&#9776;</button>
+          <div class="dash-topbar-title">業種別コース一覧</div>
+        </div>
+        <div class="dash-topbar-actions">
+          <div class="dash-topbar-user">
+            <span>山田 太郎</span>
+            <div class="dash-topbar-avatar">PHOTO</div>
+          </div>
+        </div>
+      </header>
+
+      <div class="dash-content">
+
+        <!-- Header -->
+        <div class="industry-courses-header">
+          <div class="industry-courses-title">INDUSTRY COURSES</div>
+          <div class="industry-courses-subtitle">業種別インタラクティブレッスン</div>
+          <p class="industry-courses-desc">
+            あなたの業種に特化したAI活用方法を学べる、実践的なレッスンです。各業種の課題を解決するプロンプトを設計し、AIの評価で改善するプロセスを体験します。
+          </p>
+        </div>
+
+        <!-- Industry Grid -->
+        <div class="industry-card-grid">
+
+          <!-- 飲食業 -->
+          <a href="./lesson-restaurant-01.html" class="industry-card">
+            <span class="industry-card-emoji">🍽️</span>
+            <div class="industry-card-name">飲食業</div>
+            <div class="industry-card-desc">Food & Beverage</div>
+            <div class="industry-card-detail">
+              予約管理の自動化、SNS投稿生成、顧客分析など、飲食店の業務効率化とマーケティング強化を実現するAIスキルを習得。
+            </div>
+            <div class="industry-card-meta">
+              <span class="industry-card-lessons">7レッスン</span>
+              <span class="industry-card-cta">コースを始める →</span>
+            </div>
+          </a>
+
+          <!-- 小売業 -->
+          <a href="./lesson-retail-01.html" class="industry-card">
+            <span class="industry-card-emoji">🛍️</span>
+            <div class="industry-card-name">小売業</div>
+            <div class="industry-card-desc">Retail</div>
+            <div class="industry-card-detail">
+              在庫管理の最適化、顧客購買データ分析、EC商品ページ自動生成など、売上向上と業務効率化を実現するAIスキル。
+            </div>
+            <div class="industry-card-meta">
+              <span class="industry-card-lessons">7レッスン</span>
+              <span class="industry-card-cta">コースを始める →</span>
+            </div>
+          </a>
+
+          <!-- 不動産業 -->
+          <a href="./lesson-realestate-01.html" class="industry-card">
+            <span class="industry-card-emoji">🏠</span>
+            <div class="industry-card-name">不動産業</div>
+            <div class="industry-card-desc">Real Estate</div>
+            <div class="industry-card-detail">
+              物件マッチングAI、契約書自動化、内覧予約管理など、営業効率と顧客体験を向上させるAIシステムを構築。
+            </div>
+            <div class="industry-card-meta">
+              <span class="industry-card-lessons">7レッスン</span>
+              <span class="industry-card-cta">コースを始める →</span>
+            </div>
+          </a>
+
+          <!-- 医療 -->
+          <a href="./lesson-medical-01.html" class="industry-card">
+            <span class="industry-card-emoji">⚕️</span>
+            <div class="industry-card-name">医療</div>
+            <div class="industry-card-desc">Medical</div>
+            <div class="industry-card-detail">
+              問診票自動化、診療報酬請求自動化、カルテ要約など、医療業務の負担軽減と患者満足度向上を実現。
+            </div>
+            <div class="industry-card-meta">
+              <span class="industry-card-lessons">7レッスン</span>
+              <span class="industry-card-cta">コースを始める →</span>
+            </div>
+          </a>
+
+          <!-- 士業 -->
+          <a href="./lesson-legal-01.html" class="industry-card">
+            <span class="industry-card-emoji">⚖️</span>
+            <div class="industry-card-name">士業</div>
+            <div class="industry-card-desc">Professional Services</div>
+            <div class="industry-card-detail">
+              契約書自動作成、判例検索AI、クライアント管理など、専門業務の質向上と案件管理効率化を実現。
+            </div>
+            <div class="industry-card-meta">
+              <span class="industry-card-lessons">7レッスン</span>
+              <span class="industry-card-cta">コースを始める →</span>
+            </div>
+          </a>
+
+          <!-- 建設・製造 -->
+          <a href="./lesson-construction-01.html" class="industry-card">
+            <span class="industry-card-emoji">🏗️</span>
+            <div class="industry-card-name">建設・製造</div>
+            <div class="industry-card-desc">Construction & Manufacturing</div>
+            <div class="industry-card-detail">
+              工程管理AI、見積書自動生成、品質管理分析など、プロジェクト管理と安全性向上を実現。
+            </div>
+            <div class="industry-card-meta">
+              <span class="industry-card-lessons">7レッスン</span>
+              <span class="industry-card-cta">コースを始める →</span>
+            </div>
+          </a>
+
+          <!-- 美容 -->
+          <a href="./lesson-beauty-01.html" class="industry-card">
+            <span class="industry-card-emoji">💄</span>
+            <div class="industry-card-name">美容</div>
+            <div class="industry-card-desc">Beauty & Wellness</div>
+            <div class="industry-card-detail">
+              顧客カルテAI、メニュー提案自動化、SNS投稿生成など、顧客体験向上とリピート率向上を実現。
+            </div>
+            <div class="industry-card-meta">
+              <span class="industry-card-lessons">7レッスン</span>
+              <span class="industry-card-cta">コースを始める →</span>
+            </div>
+          </a>
+
+          <!-- 教育 -->
+          <a href="./lesson-education-01.html" class="industry-card">
+            <span class="industry-card-emoji">🎓</span>
+            <div class="industry-card-name">教育</div>
+            <div class="industry-card-desc">Education</div>
+            <div class="industry-card-detail">
+              カリキュラム自動生成、生徒管理・成績分析、教材自動作成など、個別対応と効率性を両立させるAI。
+            </div>
+            <div class="industry-card-meta">
+              <span class="industry-card-lessons">7レッスン</span>
+              <span class="industry-card-cta">コースを始める →</span>
+            </div>
+          </a>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+</body>
+</html>

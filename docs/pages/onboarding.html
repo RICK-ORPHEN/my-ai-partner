@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>オンボーディング | AI SCHOOL</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/dashboard.css">
+  <style>
+    /* === Onboarding Layout === */
+    .course-layout {
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      grid-template-rows: 1fr auto;
+      gap: 0;
+      height: calc(100vh - 64px);
+      overflow: hidden;
+    }
+
+    .course-lecture {
+      overflow-y: auto;
+      padding: 40px;
+      border-right: 1px solid var(--rule-dark);
+    }
+
+    .course-lecture-label {
+      font-family: var(--font-body-en);
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: rgba(0,0,0,0.35);
+      margin-bottom: 8px;
+    }
+
+    .course-lecture-title {
+      font-family: var(--font-heading-en);
+      font-size: 28px;
+      color: var(--black);
+      line-height: 1.2;
+      margin: 0 0 6px;
+      letter-spacing: 0.02em;
+    }
+
+    .course-lecture-subtitle {
+      font-family: var(--font-heading-ja);
+      font-size: 15px;
+      font-weight: 900;
+      color: var(--black);
+      margin: 0 0 8px;
+    }
+
+    .course-desc {
+      font-size: 13px;
+      font-weight: 300;
+      line-height: 1.7;
+      color: rgba(0,0,0,0.6);
+      margin: 0 0 24px;
+    }
+
+    /* --- Step Progress --- */
+    .step-progress {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      margin-bottom: 32px;
+      padding: 20px 0;
+      border-top: 1px solid var(--rule-dark);
+      border-bottom: 1px solid var(--rule-dark);
+    }
+
+    .step-dot {
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-body-en);
+      font-size: 12px;
+      font-weight: 700;
+      border: 2px solid rgba(0,0,0,0.15);
+      color: rgba(0,0,0,0.3);
+      cursor: pointer;
+      transition: all 0.2s;
+      flex-shrink: 0;
+    }
+
+    .step-dot.active {
+      border-color: var(--orange-red);
+      color: var(--white);
+      background: var(--orange-red);
+    }
+
+    .step-dot.completed {
+      border-color: var(--black);
+      color: var(--white);
+      background: var(--black);
+    }
+
+    .step-line {
+      flex: 1;
+      height: 2px;
+      background: rgba(0,0,0,0.1);
+    }
+
+    .step-line.completed {
+      background: var(--black);
+    }
+
+    /* --- Step Content --- */
+    .step-panel {
+      display: none;
+    }
+
+    .step-panel.active {
+      display: block;
+    }
+
+    .step-label {
+      font-family: var(--font-body-en);
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--orange-red);
+      margin-bottom: 8px;
+    }
+
+    /* --- Industry Grid --- */
+    .industry-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin: 20px 0 32px 0;
+    }
+
+    .industry-card {
+      padding: 20px;
+      border: 2px solid var(--rule-dark);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .industry-card:hover {
+      border-color: var(--orange-red);
+      background: var(--orange-light);
+    }
+
+    .industry-card.selected {
+      border-color: var(--orange-red);
+      background: var(--orange-light);
+    }
+
+    .industry-card-name {
+      font-family: var(--font-heading-ja);
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--black);
+      margin-bottom: 8px;
+    }
+
+    .industry-card-desc {
+      font-size: 13px;
+      font-weight: 300;
+      color: rgba(0,0,0,0.6);
+      line-height: 1.6;
+    }
+
+    .industry-card-example {
+      font-size: 12px;
+      font-weight: 400;
+      color: var(--orange-red);
+      margin-top: 10px;
+      line-height: 1.5;
+    }
+
+    /* --- Goals Grid --- */
+    .goals-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+      margin: 20px 0 32px 0;
+    }
+
+    .goal-card {
+      padding: 16px;
+      border: 2px solid var(--rule-dark);
+      border-left: 3px solid transparent;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .goal-card:hover {
+      border-color: var(--orange-red);
+      background: var(--orange-light);
+    }
+
+    .goal-card.selected {
+      border-color: var(--orange-red);
+      border-left-color: var(--orange-red);
+      background: var(--orange-light);
+    }
+
+    .goal-card-title {
+      font-family: var(--font-heading-ja);
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--black);
+      margin-bottom: 6px;
+    }
+
+    .goal-card-desc {
+      font-size: 12px;
+      font-weight: 300;
+      color: rgba(0,0,0,0.6);
+    }
+
+    .goal-count {
+      font-size: 12px;
+      font-weight: 400;
+      color: rgba(0,0,0,0.45);
+      margin-top: 8px;
+    }
+
+    /* --- Summary Card (Step 3) --- */
+    .summary-card {
+      border: 1px solid var(--rule-dark);
+      padding: 24px;
+      margin-bottom: 32px;
+    }
+
+    .summary-section {
+      margin-bottom: 20px;
+    }
+
+    .summary-section:last-child {
+      margin-bottom: 0;
+    }
+
+    .summary-label {
+      font-family: var(--font-body-en);
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: rgba(0,0,0,0.35);
+      margin-bottom: 6px;
+    }
+
+    .summary-value {
+      font-family: var(--font-heading-ja);
+      font-size: 16px;
+      font-weight: 900;
+      color: var(--black);
+      padding: 10px 12px;
+      background: var(--orange-light);
+      border-left: 3px solid var(--orange-red);
+      margin-bottom: 8px;
+    }
+
+    .summary-goals-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .summary-goals-list li {
+      font-size: 13px;
+      font-weight: 400;
+      color: rgba(0,0,0,0.7);
+      padding: 6px 0;
+      padding-left: 20px;
+      position: relative;
+    }
+
+    .summary-goals-list li::before {
+      content: '◆';
+      position: absolute;
+      left: 0;
+      color: var(--orange-red);
+      font-size: 8px;
+    }
+
+    /* --- Lesson List --- */
+    .lesson-preview {
+      margin: 20px 0;
+    }
+
+    .lesson-preview-title {
+      font-family: var(--font-heading-ja);
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--black);
+      margin-bottom: 12px;
+    }
+
+    /* --- Buttons --- */
+    .course-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 24px;
+      background: var(--orange-red);
+      color: var(--white);
+      font-family: var(--font-body-ja);
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .course-btn:hover {
+      background: var(--orange-hover);
+    }
+
+    .course-btn-outline {
+      background: transparent;
+      color: var(--black);
+      border: 1px solid var(--rule-dark);
+    }
+
+    .course-btn-outline:hover {
+      border-color: var(--orange-red);
+      color: var(--orange-red);
+    }
+
+    .button-group {
+      display: flex;
+      gap: 12px;
+      margin-top: 32px;
+    }
+
+    /* --- Right Panel: AI Assistant --- */
+    .course-assistant {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      background: var(--black);
+      color: var(--white);
+      padding: 24px;
+    }
+
+    .course-assistant-title {
+      font-family: var(--font-heading-ja);
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid rgba(255,255,255,0.15);
+    }
+
+    .course-assistant-content {
+      flex: 1;
+      overflow-y: auto;
+      margin-bottom: 16px;
+    }
+
+    .msg {
+      margin-bottom: 12px;
+      padding: 12px;
+      border-radius: 4px;
+      font-size: 13px;
+      font-weight: 300;
+      line-height: 1.6;
+    }
+
+    .msg-ai {
+      background: rgba(217, 59, 0, 0.2);
+      color: #fff;
+      text-align: left;
+    }
+
+    .msg-label {
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 4px;
+      display: block;
+    }
+
+    /* --- Responsive --- */
+    @media (max-width: 1200px) {
+      .course-layout {
+        grid-template-columns: 1fr 320px;
+      }
+      .course-lecture {
+        padding: 32px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .course-layout {
+        grid-template-columns: 1fr;
+      }
+      .course-assistant {
+        display: none;
+      }
+      .industry-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body class="dash-body">
+  <div class="dash">
+    <!-- Sidebar -->
+    <div class="dash-sidebar">
+      <div class="dash-sidebar-brand">
+        <a href="./dashboard.html">AI SCHOOL</a>
+        <span>FOR BUSINESS</span>
+      </div>
+      <nav class="dash-sidebar-nav">
+        <span class="nav-section-label">Main</span>
+        <a href="./onboarding.html" class="active">オンボーディング</a>
+        <a href="./dashboard.html">ダッシュボード</a>
+
+        <span class="nav-section-label">LEARNING</span>
+        <a href="./lesson01.html">レッスン01</a>
+        <a href="./lesson02.html">レッスン02</a>
+
+        <span class="nav-section-label">TOOLS</span>
+        <a href="#" onclick="alert('Cowork連携')">Cowork</a>
+        <a href="#" onclick="alert('ChatGPT連携')">ChatGPT</a>
+        <a href="#" onclick="alert('Gemini連携')">Gemini</a>
+      </nav>
+      <div class="dash-sidebar-footer">
+        <a href="#">サポート</a>
+        <a href="#">設定</a>
+        <a href="#">ログアウト</a>
+      </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="dash-main">
+      <!-- Top Bar -->
+      <div class="dash-topbar">
+        <div class="dash-topbar-title">ラーニングセットアップ</div>
+        <div class="dash-topbar-actions">
+          <div class="dash-topbar-user">
+            <span>田中太郎</span>
+            <div class="dash-topbar-avatar">TT</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Content Area -->
+      <div class="course-layout">
+        <div class="course-lecture">
+          <!-- Step Progress -->
+          <div class="step-progress">
+            <div class="step-dot active" onclick="goToStep(1)">1</div>
+            <div class="step-line"></div>
+            <div class="step-dot" onclick="goToStep(2)">2</div>
+            <div class="step-line"></div>
+            <div class="step-dot" onclick="goToStep(3)">3</div>
+          </div>
+
+          <!-- STEP 1: Industry Selection -->
+          <div class="step-panel active" id="step-1">
+            <div class="step-label">STEP 01 — INDUSTRY</div>
+            <h2 class="course-lecture-title">あなたの業種を</h2>
+            <h2 class="course-lecture-subtitle">選んでください</h2>
+            <p class="course-desc">業種に合わせたAI学習プランを作成します</p>
+
+            <div class="industry-grid">
+              <div class="industry-card" onclick="selectIndustry('food')">
+                <div class="industry-card-name">飲食業</div>
+                <div class="industry-card-desc">レストラン・カフェ</div>
+                <div class="industry-card-example">予約管理・メニュー最適化・SNS運用</div>
+              </div>
+              <div class="industry-card" onclick="selectIndustry('retail')">
+                <div class="industry-card-name">小売業</div>
+                <div class="industry-card-desc">EC・店舗</div>
+                <div class="industry-card-example">在庫管理・顧客分析・EC自動化</div>
+              </div>
+              <div class="industry-card" onclick="selectIndustry('realestate')">
+                <div class="industry-card-name">不動産業</div>
+                <div class="industry-card-desc">物件仲介・管理</div>
+                <div class="industry-card-example">物件マッチング・契約書自動化・予約AI</div>
+              </div>
+              <div class="industry-card" onclick="selectIndustry('medical')">
+                <div class="industry-card-name">医療・クリニック</div>
+                <div class="industry-card-desc">診療所・病院</div>
+                <div class="industry-card-example">予約管理・問診AI・カルテ要約</div>
+              </div>
+              <div class="industry-card" onclick="selectIndustry('professional')">
+                <div class="industry-card-name">士業</div>
+                <div class="industry-card-desc">弁護士・税理士・会計士</div>
+                <div class="industry-card-example">書類自動作成・判例検索・顧問AI</div>
+              </div>
+              <div class="industry-card" onclick="selectIndustry('manufacturing')">
+                <div class="industry-card-name">建設・製造業</div>
+                <div class="industry-card-desc">施工・工場</div>
+                <div class="industry-card-example">工程管理・安全報告・見積自動化</div>
+              </div>
+              <div class="industry-card" onclick="selectIndustry('beauty')">
+                <div class="industry-card-name">美容・サロン</div>
+                <div class="industry-card-desc">サロン・スパ</div>
+                <div class="industry-card-example">予約管理・SNS投稿・顧客カルテAI</div>
+              </div>
+              <div class="industry-card" onclick="selectIndustry('education')">
+                <div class="industry-card-name">教育・塾</div>
+                <div class="industry-card-desc">スクール・教室</div>
+                <div class="industry-card-example">カリキュラム生成・生徒管理・連絡AI</div>
+              </div>
+            </div>
+
+            <div class="button-group">
+              <button class="course-btn" onclick="goToStep(2)">次へ →</button>
+            </div>
+          </div>
+
+          <!-- STEP 2: Goal Selection -->
+          <div class="step-panel" id="step-2">
+            <div class="step-label">STEP 02 — GOALS</div>
+            <h2 class="course-lecture-title">AIで実現したいことを</h2>
+            <h2 class="course-lecture-subtitle">選んでください</h2>
+            <p class="course-desc">最大3つまで選択できます</p>
+
+            <div class="goals-grid" id="goals-container">
+              <!-- Goals will be populated based on selected industry -->
+            </div>
+
+            <div class="button-group">
+              <button class="course-btn course-btn-outline" onclick="goToStep(1)">← 戻る</button>
+              <button class="course-btn" onclick="goToStep(3)">次へ →</button>
+            </div>
+          </div>
+
+          <!-- STEP 3: Learning Plan Confirmation -->
+          <div class="step-panel" id="step-3">
+            <div class="step-label">STEP 03 — YOUR PLAN</div>
+            <h2 class="course-lecture-title">あなた専用の学習プランが</h2>
+            <h2 class="course-lecture-subtitle">完成しました</h2>
+
+            <div class="summary-card">
+              <div class="summary-section">
+                <div class="summary-label">Selected Industry</div>
+                <div class="summary-value" id="summary-industry">選択されていません</div>
+              </div>
+              <div class="summary-section">
+                <div class="summary-label">Your Goals</div>
+                <ul class="summary-goals-list" id="summary-goals">
+                  <li>選択されていません</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="lesson-preview">
+              <div class="lesson-preview-title">あなたのカリキュラム（全7レッスン・約5時間30分）</div>
+              <div class="dash-list-item">
+                <div class="item-rank">1</div>
+                <div class="item-name">プロンプトエンジニアリング基礎</div>
+                <div class="item-meta">
+                  <span class="badge badge-active">30分</span>
+                  <span class="badge badge-active" style="margin-left:8px;">Cowork</span>
+                </div>
+              </div>
+              <div class="dash-list-item">
+                <div class="item-rank">2</div>
+                <div class="item-name">ビジネス文脈でのAI活用入門</div>
+                <div class="item-meta">
+                  <span class="badge badge-active">45分</span>
+                  <span class="badge badge-active" style="margin-left:8px;">ChatGPT</span>
+                </div>
+              </div>
+              <div class="dash-list-item">
+                <div class="item-rank">3</div>
+                <div class="item-name">業種別AI活用の課題分析</div>
+                <div class="item-meta">
+                  <span class="badge badge-active">40分</span>
+                  <span class="badge badge-active" style="margin-left:8px;">ChatGPT</span>
+                </div>
+              </div>
+              <div class="dash-list-item">
+                <div class="item-rank">4</div>
+                <div class="item-name">Coworkで業務フローを設計する</div>
+                <div class="item-meta">
+                  <span class="badge badge-active">60分</span>
+                  <span class="badge badge-active" style="margin-left:8px;">Cowork</span>
+                </div>
+              </div>
+              <div class="dash-list-item">
+                <div class="item-rank">5</div>
+                <div class="item-name">Geminiでデータを分析する</div>
+                <div class="item-meta">
+                  <span class="badge badge-active">45分</span>
+                  <span class="badge badge-active" style="margin-left:8px;">Gemini</span>
+                </div>
+              </div>
+              <div class="dash-list-item">
+                <div class="item-rank">6</div>
+                <div class="item-name">AIで業務を自動化する</div>
+                <div class="item-meta">
+                  <span class="badge badge-active">50分</span>
+                  <span class="badge badge-active" style="margin-left:8px;">Cowork</span>
+                </div>
+              </div>
+              <div class="dash-list-item">
+                <div class="item-rank">7</div>
+                <div class="item-name">統合テスト＆改善ワークショップ</div>
+                <div class="item-meta">
+                  <span class="badge badge-active">60分</span>
+                  <span class="badge badge-active" style="margin-left:8px;">全ツール</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="button-group">
+              <button class="course-btn course-btn-outline" onclick="goToStep(2)">← 戻る</button>
+              <button class="course-btn" onclick="completeOnboarding()">学習を開始する ↗</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Panel: AI Assistant -->
+        <div class="course-assistant">
+          <div class="course-assistant-title">AI Assistant</div>
+          <div class="course-assistant-content">
+            <div class="msg msg-ai" id="assistant-message">
+              <span class="msg-label">Assistant</span>
+              こんにちは！AI SCHOOLへようこそ。まずはあなたの業種を教えてください。業種に合わせて、最適な学習プランを作りますね。
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const industryGoals = {
+      food: [
+        { title: '予約管理の自動化', desc: '電話対応削減・ダブルブッキング防止' },
+        { title: 'SNS投稿の自動生成', desc: 'Instagram・LINE・Google Maps' },
+        { title: 'メニュー分析・原価計算', desc: '効率化・利益率最適化' },
+        { title: '顧客レビュー分析', desc: 'ダッシュボード・改善提案' },
+        { title: '人材シフト最適化', desc: 'スタッフ配置・勤務表作成' }
+      ],
+      retail: [
+        { title: '在庫管理・発注自動化', desc: '自動発注・欠品防止' },
+        { title: '顧客購買データ分析', desc: 'セグメンテーション・RFM分析' },
+        { title: 'EC商品ページ自動生成', desc: '説明文・キャッチコピー作成' },
+        { title: 'チャットボット接客', desc: '商品推薦・問い合わせ対応' },
+        { title: '広告運用自動最適化', desc: '予算配分・入札調整' }
+      ],
+      realestate: [
+        { title: '物件マッチングAI', desc: '顧客要望に合った物件提案' },
+        { title: '契約書自動化', desc: 'テンプレート生成・チェック' },
+        { title: '内覧予約自動化', desc: 'カレンダー管理・リマインダー' },
+        { title: '物件情報自動収集', desc: 'Web収集・データベース化' },
+        { title: '顧客管理CRM構築', desc: 'コミュニケーション履歴管理' }
+      ],
+      medical: [
+        { title: '予約管理自動化', desc: 'オンライン予約・リマインダー' },
+        { title: '問診票AI', desc: '自動記入・初診対応効率化' },
+        { title: 'カルテ要約自動化', desc: '医師の記録負担軽減' },
+        { title: '患者教育資料生成', desc: '病状説明・治療方針説明' },
+        { title: '診療報酬請求自動化', desc: 'コーディング・請求書作成' }
+      ],
+      professional: [
+        { title: '契約書自動作成', desc: 'テンプレート活用・カスタマイズ' },
+        { title: '判例・法令検索AI', desc: '関連判例・法律条文の推薦' },
+        { title: 'クライアント管理AI', desc: '案件管理・請求管理・相談記録' },
+        { title: '報告書・書面生成', desc: '通知書・意見書・請求書作成' },
+        { title: '時間管理・請求自動化', desc: '記録時間の請求書生成' }
+      ],
+      manufacturing: [
+        { title: '工程管理AI', desc: '進捗管理・納期予測・遅延アラート' },
+        { title: '安全報告自動化', desc: 'KY活動・報告書テンプレート' },
+        { title: '見積書自動生成', desc: '材料費・工賃・納期自動計算' },
+        { title: '品質管理データ分析', desc: 'バラツキ分析・不良原因推定' },
+        { title: 'マニュアル・文書自動作成', desc: '作業手順書・保守マニュアル' }
+      ],
+      beauty: [
+        { title: '予約管理・顧客CRM', desc: 'オンライン予約・顧客情報管理' },
+        { title: 'SNS投稿自動生成', desc: 'インスタ投稿・TikTok・LINE' },
+        { title: '顧客カルテAI', desc: '施術履歴・提案・顧客分析' },
+        { title: 'コンサルメニュー提案AI', desc: '顧客に最適なメニュー提案' },
+        { title: 'マーケティングメール自動', desc: 'キャンペーン・リピート促進' }
+      ],
+      education: [
+        { title: 'カリキュラム自動生成', desc: '教科書分析・学習計画作成' },
+        { title: '生徒管理・成績分析', desc: '評価・苦手単元特定・個別指導' },
+        { title: '保護者連絡自動化', desc: 'メール・LINE・レポート生成' },
+        { title: '教材・問題自動作成', desc: '教科書分析・練習問題生成' },
+        { title: '進学指導AI', desc: '適性診断・志望校提案・面接対策' }
+      ]
+    };
+
+    const industryNames = {
+      food: '飲食業',
+      retail: '小売業',
+      realestate: '不動産業',
+      medical: '医療・クリニック',
+      professional: '士業',
+      manufacturing: '建設・製造業',
+      beauty: '美容・サロン',
+      education: '教育・塾'
+    };
+
+    const assistantMessages = {
+      food: 'こんにちは！飲食業ですね。素晴らしい選択です。飲食業ではAIの活用余地がとても大きいんです。次は、AIで特に実現したいことを教えてください。',
+      retail: '小売業のお客様ですね。オンライン・オフラインの融合時代、AIはとても重要な役割を果たします。次は、特に力を入れたい領域を選んでください。',
+      realestate: '不動産業ですね。物件情報の管理や顧客マッチングで、AIが劇的に効率化できます。次は、あなたのビジネスで最適なAI活用を選んでください。',
+      medical: '医療機関のお客様ですね。診療業務の効率化と患者満足度向上、両立させましょう。次は、特に改善したい業務を選んでください。',
+      professional: '士業の先生ですね。クライアント管理や書類作成など、AI化できる業務がたくさんあります。次は、特に力を入れたい領域を教えてください。',
+      manufacturing: '建設・製造業ですね。工程管理や品質管理でAIは大きな価値を発揮します。次は、最適化したい業務を選んでください。',
+      beauty: '美容・サロン業ですね。顧客体験の向上と業務効率化、両立させたいですね。次は、AIで実現したいことを選んでください。',
+      education: '教育機関のお客様ですね。個別対応と全体管理、AIで両立できます。次は、改善したい領域を選んでください。'
+    };
+
+    let currentStep = 1;
+    let selectedIndustry = null;
+    let selectedGoals = [];
+
+    function goToStep(step) {
+      if (step === 2 && !selectedIndustry) {
+        alert('業種を選択してください');
+        return;
+      }
+      if (step === 3 && selectedGoals.length === 0) {
+        alert('最低1つのゴールを選択してください');
+        return;
+      }
+
+      currentStep = step;
+      document.querySelectorAll('.step-panel').forEach(el => el.classList.remove('active'));
+      document.getElementById(`step-${step}`).classList.add('active');
+
+      document.querySelectorAll('.step-dot').forEach((el, i) => {
+        el.classList.remove('active', 'completed');
+        if (i + 1 < step) el.classList.add('completed');
+        if (i + 1 === step) el.classList.add('active');
+      });
+
+      document.querySelectorAll('.step-line').forEach((el, i) => {
+        el.classList.remove('completed');
+        if (i < step - 1) el.classList.add('completed');
+      });
+
+      if (step === 3) {
+        updateSummary();
+      }
+    }
+
+    function selectIndustry(industry) {
+      selectedIndustry = industry;
+      selectedGoals = [];
+
+      document.querySelectorAll('.industry-card').forEach(el => el.classList.remove('selected'));
+      event.currentTarget.classList.add('selected');
+
+      const goalsContainer = document.getElementById('goals-container');
+      goalsContainer.innerHTML = '';
+
+      (industryGoals[industry] || []).forEach((goal, idx) => {
+        const card = document.createElement('div');
+        card.className = 'goal-card';
+        card.onclick = (e) => selectGoal(industry, idx, e.currentTarget);
+        card.innerHTML = `
+          <div class="goal-card-title">${goal.title}</div>
+          <div class="goal-card-desc">${goal.desc}</div>
+          <div class="goal-count">選択可能: ${selectedGoals.includes(idx) ? '✓' : ''}</div>
+        `;
+        goalsContainer.appendChild(card);
+      });
+
+      const msg = assistantMessages[industry] || 'ご選択ありがとうございます。では、次のステップに進みましょう。';
+      document.getElementById('assistant-message').innerHTML = `
+        <span class="msg-label">Assistant</span>
+        ${msg}
+      `;
+    }
+
+    function selectGoal(industry, goalIdx, element) {
+      if (selectedGoals.includes(goalIdx)) {
+        selectedGoals = selectedGoals.filter(i => i !== goalIdx);
+        element.classList.remove('selected');
+      } else {
+        if (selectedGoals.length >= 3) {
+          alert('最大3つまで選択できます');
+          return;
+        }
+        selectedGoals.push(goalIdx);
+        element.classList.add('selected');
+      }
+
+      const goalName = industryGoals[industry][goalIdx].title;
+      const countText = selectedGoals.length === 0 ? '選択: 0/3' : `選択: ${selectedGoals.length}/3`;
+
+      document.getElementById('assistant-message').innerHTML = `
+        <span class="msg-label">Assistant</span>
+        「${goalName}」を選択されましたね。${countText}。次へボタンで進めます。
+      `;
+    }
+
+    function updateSummary() {
+      const industryName = industryNames[selectedIndustry] || '未選択';
+      document.getElementById('summary-industry').textContent = industryName;
+
+      const goalsList = document.getElementById('summary-goals');
+      goalsList.innerHTML = '';
+
+      selectedGoals.forEach(goalIdx => {
+        const goal = industryGoals[selectedIndustry][goalIdx];
+        const li = document.createElement('li');
+        li.textContent = goal.title;
+        goalsList.appendChild(li);
+      });
+
+      const completionMsg = `学習プランが完成しました！全7レッスン、約5時間30分のカリキュラムです。Cowork・ChatGPT・Geminiを実際に使いながら、あなたのビジネスに直結するスキルを身につけていきましょう。`;
+      document.getElementById('assistant-message').innerHTML = `
+        <span class="msg-label">Assistant</span>
+        ${completionMsg}
+      `;
+    }
+
+    function completeOnboarding() {
+      alert('学習を開始します！レッスン01に進みます。');
+      window.location.href = './lesson01.html';
+    }
+  </script>
+</body>
+</html>

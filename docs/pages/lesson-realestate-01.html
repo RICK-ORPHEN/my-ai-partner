@@ -1,0 +1,1122 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>03 Property Matching | AI SCHOOL</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/dashboard.css">
+  <style>
+    /* === Interactive Course Layout === */
+    .course-layout {
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      grid-template-rows: 1fr auto;
+      gap: 0;
+      height: calc(100vh - 64px);
+      overflow: hidden;
+    }
+
+    .course-lecture {
+      overflow-y: auto;
+      padding: 40px;
+      border-right: 1px solid var(--rule-dark);
+    }
+
+    .course-lecture-label {
+      font-family: var(--font-body-en);
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: rgba(0,0,0,0.35);
+      margin-bottom: 8px;
+    }
+
+    .course-lecture-title {
+      font-family: var(--font-heading-en);
+      font-size: 28px;
+      color: var(--black);
+      line-height: 1.2;
+      margin: 0 0 6px;
+      letter-spacing: 0.02em;
+    }
+
+    .course-lecture-subtitle {
+      font-family: var(--font-heading-ja);
+      font-size: 15px;
+      font-weight: 900;
+      color: var(--black);
+      margin: 0 0 24px;
+    }
+
+    .course-desc {
+      font-size: 14px;
+      font-weight: 300;
+      line-height: 1.8;
+      color: rgba(0,0,0,0.7);
+      margin: 0 0 16px;
+    }
+
+    .course-desc strong {
+      font-weight: 600;
+      color: var(--black);
+    }
+
+    /* --- Step Progress --- */
+    .step-progress {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      margin-bottom: 32px;
+      padding: 20px 0;
+      border-top: 1px solid var(--rule-dark);
+      border-bottom: 1px solid var(--rule-dark);
+      overflow-x: auto;
+    }
+
+    .step-dot {
+      width: 32px;
+      height: 32px;
+      min-width: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-body-en);
+      font-size: 12px;
+      font-weight: 700;
+      border: 2px solid rgba(0,0,0,0.15);
+      color: rgba(0,0,0,0.3);
+      cursor: pointer;
+      transition: all 0.2s;
+      flex-shrink: 0;
+    }
+
+    .step-dot.active {
+      border-color: var(--orange-red);
+      color: var(--white);
+      background: var(--orange-red);
+    }
+
+    .step-dot.completed {
+      border-color: var(--black);
+      color: var(--white);
+      background: var(--black);
+    }
+
+    .step-line {
+      flex: 1;
+      min-width: 12px;
+      height: 2px;
+      background: rgba(0,0,0,0.1);
+    }
+
+    .step-line.completed { background: var(--black); }
+
+    /* --- Step Content --- */
+    .step-panel { display: none; }
+    .step-panel.active { display: block; }
+
+    .step-panel h2 {
+      font-family: var(--font-heading-ja);
+      font-size: 18px;
+      font-weight: 900;
+      color: var(--black);
+      margin: 0 0 8px;
+    }
+
+    .step-panel h3 {
+      font-family: var(--font-body-ja);
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--black);
+      margin: 24px 0 8px;
+    }
+
+    .step-panel p {
+      font-size: 14px;
+      font-weight: 300;
+      line-height: 1.8;
+      color: rgba(0,0,0,0.7);
+      margin: 0 0 16px;
+    }
+
+    .step-label {
+      font-family: var(--font-body-en);
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--orange-red);
+      margin-bottom: 8px;
+    }
+
+    /* --- Forms --- */
+    .course-form-group {
+      margin-bottom: 20px;
+    }
+
+    .course-form-group label {
+      display: block;
+      font-size: 12px;
+      font-weight: 600;
+      color: rgba(0,0,0,0.55);
+      letter-spacing: 0.04em;
+      margin-bottom: 6px;
+    }
+
+    .course-form-group input,
+    .course-form-group select {
+      width: 100%;
+      padding: 12px 16px;
+      font-family: var(--font-body-ja);
+      font-size: 14px;
+      border: 1px solid var(--rule-dark);
+      background: var(--white);
+      color: var(--black);
+      outline: none;
+      box-sizing: border-box;
+      transition: border-color 0.15s;
+    }
+
+    .course-form-group input:focus,
+    .course-form-group select:focus { border-color: var(--orange-red); }
+    .course-form-group input::placeholder { color: rgba(0,0,0,0.3); }
+
+    /* --- Textarea --- */
+    .prompt-editor {
+      width: 100%;
+      min-height: 200px;
+      padding: 16px 20px;
+      font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+      font-size: 13px;
+      line-height: 1.7;
+      border: 1px solid var(--rule-dark);
+      background: rgba(0,0,0,0.02);
+      color: var(--black);
+      outline: none;
+      resize: vertical;
+      box-sizing: border-box;
+      transition: border-color 0.15s;
+    }
+
+    .prompt-editor:focus {
+      border-color: var(--orange-red);
+      background: var(--white);
+    }
+
+    .prompt-display {
+      padding: 16px 20px;
+      border: 1px solid var(--rule-dark);
+      background: rgba(0,0,0,0.02);
+      font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+      font-size: 13px;
+      line-height: 1.7;
+      color: var(--black);
+      white-space: pre-wrap;
+      border-left: 3px solid var(--orange-red);
+    }
+
+    /* --- Buttons --- */
+    .course-btn {
+      display: inline-block;
+      padding: 13px 36px;
+      font-family: var(--font-body-ja);
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--white);
+      background: var(--orange-red);
+      border: none;
+      cursor: pointer;
+      letter-spacing: 0.04em;
+      transition: background 0.15s;
+    }
+
+    .course-btn:hover { background: var(--orange-hover); }
+
+    .course-btn-outline {
+      display: inline-block;
+      padding: 12px 28px;
+      font-family: var(--font-body-ja);
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--black);
+      background: none;
+      border: 1px solid var(--black);
+      cursor: pointer;
+      letter-spacing: 0.04em;
+      transition: all 0.15s;
+    }
+
+    .course-btn-outline:hover {
+      background: var(--black);
+      color: var(--white);
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    /* --- Concept Box --- */
+    .concept-box {
+      padding: 20px 24px;
+      border: 1px solid var(--orange-red);
+      background: rgba(217,59,0,0.03);
+      margin: 20px 0;
+    }
+
+    .concept-box p {
+      margin: 0;
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--black);
+      line-height: 1.8;
+      text-align: center;
+    }
+
+    .concept-box .sub {
+      font-size: 13px;
+      font-weight: 300;
+      color: rgba(0,0,0,0.55);
+      margin-top: 8px;
+    }
+
+    /* --- Goal Cards --- */
+    .goal-cards {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin: 20px 0;
+    }
+
+    .goal-card {
+      padding: 16px 20px;
+      border: 1px solid var(--rule-dark);
+    }
+
+    .goal-card .goal-num {
+      font-family: var(--font-body-en);
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--orange-red);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .goal-card .goal-text {
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--black);
+    }
+
+    /* --- Flow Diagram --- */
+    .flow-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin: 24px 0;
+      flex-wrap: wrap;
+    }
+
+    .flow-item {
+      flex: 1;
+      min-width: 100px;
+      padding: 14px 12px;
+      text-align: center;
+      font-size: 12px;
+      font-weight: 600;
+      border: 1px solid var(--rule-dark);
+      color: var(--black);
+    }
+
+    .flow-item.highlight {
+      border-color: var(--orange-red);
+      background: rgba(217,59,0,0.04);
+      color: var(--orange-red);
+    }
+
+    .flow-arrow {
+      font-size: 16px;
+      color: rgba(0,0,0,0.25);
+      flex-shrink: 0;
+    }
+
+    /* --- Hint Cards --- */
+    .hint-block {
+      margin-bottom: 20px;
+    }
+
+    .hint-block-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .hint-block-num {
+      width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--orange-red);
+      color: var(--white);
+      font-family: var(--font-body-en);
+      font-size: 11px;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .hint-block-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--black);
+    }
+
+    .hint-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      padding-left: 34px;
+    }
+
+    .hint-list li {
+      font-size: 13px;
+      font-weight: 300;
+      color: rgba(0,0,0,0.7);
+      line-height: 1.8;
+      padding: 2px 0;
+      padding-left: 16px;
+      position: relative;
+    }
+
+    .hint-list li::before {
+      content: '\2022';
+      position: absolute;
+      left: 0;
+      color: var(--orange-red);
+      font-weight: 700;
+    }
+
+    /* --- Badges --- */
+    .badge-earned {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 120px;
+      height: 120px;
+      border: 3px solid var(--orange-red);
+      border-radius: 50%;
+      font-family: var(--font-body-ja);
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--orange-red);
+      background: rgba(217,59,0,0.05);
+      text-align: center;
+      padding: 12px;
+      margin: 20px auto;
+    }
+
+    /* --- Right: AI Assistant Panel --- */
+    .course-assistant {
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      background: #FAFAFA;
+    }
+
+    .assistant-header {
+      padding: 20px 24px;
+      border-bottom: 1px solid var(--rule-dark);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .assistant-title {
+      font-family: var(--font-body-en);
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--black);
+      letter-spacing: 0.04em;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .assistant-status {
+      width: 8px;
+      height: 8px;
+      background: #2ECC40;
+      border-radius: 50%;
+    }
+
+    .assistant-messages {
+      flex: 1;
+      overflow-y: auto;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .msg {
+      max-width: 95%;
+      padding: 14px 18px;
+      font-size: 13px;
+      line-height: 1.7;
+      font-weight: 300;
+      border-radius: 4px;
+    }
+
+    .msg-ai {
+      background: var(--white);
+      border: 1px solid var(--rule-dark);
+      color: var(--black);
+      align-self: flex-start;
+    }
+
+    .msg-user {
+      background: var(--black);
+      color: var(--white);
+      align-self: flex-end;
+    }
+
+    .msg-label {
+      font-family: var(--font-body-en);
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 6px;
+      display: block;
+    }
+
+    .msg-ai .msg-label {
+      color: var(--orange-red);
+    }
+
+    .msg-user .msg-label {
+      color: rgba(255,255,255,0.5);
+    }
+
+    .assistant-input {
+      padding: 16px 24px;
+      border-top: 1px solid var(--rule-dark);
+      display: flex;
+      gap: 8px;
+    }
+
+    .assistant-input input {
+      flex: 1;
+      padding: 10px 14px;
+      font-family: var(--font-body-ja);
+      font-size: 13px;
+      border: 1px solid var(--rule-dark);
+      background: var(--white);
+      color: var(--black);
+      outline: none;
+    }
+
+    .assistant-input input:focus {
+      border-color: var(--orange-red);
+    }
+
+    .assistant-input button {
+      padding: 10px 20px;
+      font-family: var(--font-body-ja);
+      font-size: 13px;
+      font-weight: 600;
+      background: var(--black);
+      color: var(--white);
+      border: none;
+      cursor: pointer;
+    }
+
+    /* --- Bottom: Output Area --- */
+    .course-output {
+      grid-column: 1 / -1;
+      border-top: 1px solid var(--rule-dark);
+      display: none;
+      overflow: hidden;
+    }
+
+    .course-output.visible {
+      display: flex;
+      height: 320px;
+    }
+
+    .output-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 24px;
+      border-bottom: 1px solid var(--rule-dark);
+      background: var(--white);
+    }
+
+    .output-title {
+      font-family: var(--font-body-en);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: rgba(0,0,0,0.45);
+    }
+
+    .output-body {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      width: 100%;
+    }
+
+    .output-tabs {
+      display: flex;
+      gap: 0;
+      border-bottom: 1px solid var(--rule-dark);
+      background: var(--white);
+    }
+
+    .output-tab {
+      padding: 10px 20px;
+      font-family: var(--font-body-en);
+      font-size: 12px;
+      font-weight: 600;
+      color: rgba(0,0,0,0.4);
+      background: none;
+      border: none;
+      border-bottom: 2px solid transparent;
+      cursor: pointer;
+      letter-spacing: 0.04em;
+    }
+
+    .output-tab.active {
+      color: var(--orange-red);
+      border-bottom-color: var(--orange-red);
+    }
+
+    .output-content {
+      flex: 1;
+      overflow-y: auto;
+      padding: 20px 24px;
+      font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+      font-size: 12px;
+      line-height: 1.6;
+      color: rgba(0,0,0,0.8);
+      white-space: pre-wrap;
+    }
+
+    /* --- Responsive --- */
+    @media (max-width: 1024px) {
+      .course-layout {
+        grid-template-columns: 1fr;
+      }
+      .course-lecture {
+        border-right: none;
+      }
+      .course-assistant {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body class="dash-body">
+  <div class="dash">
+    <!-- SIDEBAR -->
+    <aside class="dash-sidebar">
+      <div class="dash-sidebar-brand">
+        <a href="../index.html">AI SCHOOL</a>
+        <span>User Dashboard</span>
+      </div>
+      <nav class="dash-sidebar-nav">
+        <span class="nav-section-label">Main</span>
+        <a href="./dashboard.html">ダッシュボード</a>
+        <a href="./dashboard-courses.html">学習コース</a>
+        <a href="./dashboard-assignments.html">課題提出</a>
+        <span class="nav-section-label">Project</span>
+        <a href="./dashboard-projects.html">AIプロジェクト</a>
+        <a href="./dashboard-skills.html">AIスキル評価</a>
+        <a href="./dashboard-profile.html">AI人材プロフィール</a>
+        <span class="nav-section-label">Career</span>
+        <a href="./dashboard-offers.html">企業オファー</a>
+        <a href="./dashboard-community.html">コミュニティ</a>
+        <a href="./dashboard-history.html">学習履歴</a>
+        <span class="nav-section-label">Account</span>
+        <a href="./dashboard-billing.html">支払い管理</a>
+        <a href="./dashboard-settings.html">アカウント設定</a>
+      </nav>
+      <div class="dash-sidebar-footer">
+        <a href="#">利用規約</a>
+        <a href="#">プライバシーポリシー</a>
+        <a href="#">ログアウト</a>
+      </div>
+    </aside>
+
+    <!-- MAIN -->
+    <div class="dash-main">
+      <header class="dash-topbar">
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <button class="dash-mobile-toggle" onclick="document.querySelector('.dash-sidebar').classList.toggle('open')">&#9776;</button>
+          <div class="dash-topbar-title">03 Property Matching</div>
+        </div>
+        <div class="dash-topbar-actions">
+          <span class="badge badge-active">受講中</span>
+          <div class="dash-topbar-user">
+            <span>山田 太郎</span>
+            <div class="dash-topbar-avatar">PHOTO</div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Course Layout: 3-panel -->
+      <div class="course-layout">
+
+        <!-- LEFT: Lecture Content -->
+        <div class="course-lecture">
+          <div class="course-lecture-label">Course 03 - Real Estate</div>
+          <div class="course-lecture-title">PROPERTY MATCHING</div>
+          <div class="course-lecture-subtitle">Coworkで物件マッチングツールを作る</div>
+
+          <!-- Step Progress -->
+          <div class="step-progress">
+            <div class="step-dot active" data-step="0">0</div>
+            <div class="step-line"></div>
+            <div class="step-dot" data-step="1">1</div>
+            <div class="step-line"></div>
+            <div class="step-dot" data-step="2">2</div>
+            <div class="step-line"></div>
+            <div class="step-dot" data-step="3">3</div>
+            <div class="step-line"></div>
+            <div class="step-dot" data-step="4">4</div>
+            <div class="step-line"></div>
+            <div class="step-dot" data-step="5">5</div>
+            <div class="step-line"></div>
+            <div class="step-dot" data-step="6">6</div>
+          </div>
+
+          <!-- ===== STEP 0: Introduction ===== -->
+          <div class="step-panel active" id="step-0">
+            <div class="step-label">Step 0</div>
+            <h2>不動産業の課題</h2>
+            <p>不動産仲介の最大課題は、<strong>多くの顧客ニーズの中から「最適な物件」を素早く見つけること</strong>です。条件の複雑さと物件情報の多さが、業務効率を圧迫しています。</p>
+
+            <div class="concept-box">
+              <p>Coworkなら<br>AIがUIを生成して、マッチングツール化する</p>
+              <p class="sub">顧客の条件を入力するだけで、最適な物件をAIが提案—その仕組みを自分で作ります。</p>
+            </div>
+
+            <h3>このレッスンで学べること</h3>
+            <div class="goal-cards">
+              <div class="goal-card">
+                <div class="goal-num">Goal 01</div>
+                <div class="goal-text">顧客ニーズを体系的に整理できる</div>
+              </div>
+              <div class="goal-card">
+                <div class="goal-num">Goal 02</div>
+                <div class="goal-text">Coworkを活用してマッチングUIを生成できる</div>
+              </div>
+              <div class="goal-card">
+                <div class="goal-num">Goal 03</div>
+                <div class="goal-text">物件検索フォームを自動化できる</div>
+              </div>
+              <div class="goal-card">
+                <div class="goal-num">Goal 04</div>
+                <div class="goal-text">営業効率を3倍以上に高める仕組みを構築できる</div>
+              </div>
+            </div>
+
+            <h3>学習の流れ</h3>
+            <div class="flow-row">
+              <div class="flow-item">営業データ入力</div>
+              <div class="flow-arrow">&rarr;</div>
+              <div class="flow-item">課題分析</div>
+              <div class="flow-arrow">&rarr;</div>
+              <div class="flow-item highlight">ツール設計</div>
+              <div class="flow-arrow">&rarr;</div>
+              <div class="flow-item">Cowork実行</div>
+            </div>
+            <p>あなたの営業現場の課題を理解し、<strong>Coworkを使ったマッチングツール</strong>の仕組みを自分で設計します。</p>
+
+            <div class="btn-group">
+              <button class="course-btn" onclick="goToStep(1)">スタート</button>
+            </div>
+          </div>
+
+          <!-- ===== STEP 1: Business Input ===== -->
+          <div class="step-panel" id="step-1">
+            <div class="step-label">Step 1 &mdash; Business Input</div>
+            <h2>営業情報を入力</h2>
+            <p>あなたの不動産会社について教えてください。<br>この情報をもとに、<strong>物件マッチングツール</strong>を設計していきます。</p>
+
+            <div class="course-form-group">
+              <label>会社名</label>
+              <input type="text" id="input-company" placeholder="例：ABC不動産">
+            </div>
+
+            <div class="course-form-group">
+              <label>取扱物件タイプ</label>
+              <select id="input-property-type">
+                <option value="">選択してください</option>
+                <option value="rent">賃貸</option>
+                <option value="sale">売買</option>
+                <option value="both">賃貸＆売買</option>
+              </select>
+            </div>
+
+            <div class="course-form-group">
+              <label>月間問い合わせ数</label>
+              <input type="number" id="input-inquiries" placeholder="例：150">
+            </div>
+
+            <div class="course-form-group">
+              <label>登録物件数</label>
+              <input type="number" id="input-properties" placeholder="例：500">
+            </div>
+
+            <div class="course-form-group">
+              <label>現在のマッチング方法</label>
+              <select id="input-matching">
+                <option value="">選択してください</option>
+                <option value="manual">営業担当者の手作業</option>
+                <option value="system">簡易システム利用</option>
+                <option value="advanced">高度な管理ツール</option>
+              </select>
+            </div>
+
+            <div class="course-form-group">
+              <label>今、一番困っていることは？</label>
+              <input type="text" id="input-challenge" placeholder="例：条件整理に時間がかかる">
+            </div>
+
+            <div class="btn-group">
+              <button class="course-btn-outline" onclick="goToStep(0)">&larr; 戻る</button>
+              <button class="course-btn" onclick="analyzeMatching()">分析を開始</button>
+            </div>
+          </div>
+
+          <!-- ===== STEP 2: Problem Analysis ===== -->
+          <div class="step-panel" id="step-2">
+            <div class="step-label">Step 2 &mdash; Problem Analysis</div>
+            <h2>物件マッチングの課題</h2>
+            <p>AIが入力情報から、<strong>あなたの営業現場の主要課題</strong>を抽出しました。</p>
+
+            <div id="analysis-container">
+              <!-- Analysis will be injected here by JS -->
+            </div>
+
+            <div class="concept-box" style="margin-top: 24px;">
+              <p style="font-size: 13px; font-weight: 400;">次のステップで、これらの課題を解決するための<strong>Coworkプロンプト</strong>を設計します。</p>
+            </div>
+
+            <div class="btn-group">
+              <button class="course-btn-outline" onclick="goToStep(1)">&larr; 戻る</button>
+              <button class="course-btn" onclick="goToStep(3)">Cowork紹介を見る</button>
+            </div>
+          </div>
+
+          <!-- ===== STEP 3: Tool Intro ===== -->
+          <div class="step-panel" id="step-3">
+            <div class="step-label">Step 3 &mdash; Tool Introduction</div>
+            <h2>Coworkの活用方法</h2>
+            <p>Coworkはプロンプトから<strong>UIを自動生成</strong>し、すぐに使える営業ツールに変えることができます。</p>
+
+            <h3>Coworkが得意なこと</h3>
+            <div class="hint-block">
+              <div class="hint-block-header">
+                <div class="hint-block-num">1</div>
+                <div class="hint-block-title">検索フォーム生成</div>
+              </div>
+              <ul class="hint-list">
+                <li>顧客条件を入力するUIを自動生成</li>
+                <li>エリア、広さ、予算などの複雑な条件に対応</li>
+              </ul>
+            </div>
+
+            <div class="hint-block">
+              <div class="hint-block-header">
+                <div class="hint-block-num">2</div>
+                <div class="hint-block-title">マッチング結果の可視化</div>
+              </div>
+              <ul class="hint-list">
+                <li>AIが条件に合った物件を順序付けして表示</li>
+                <li>営業担当者の提案精度が大幅に向上</li>
+              </ul>
+            </div>
+
+            <div class="hint-block">
+              <div class="hint-block-header">
+                <div class="hint-block-num">3</div>
+                <div class="hint-block-title">ワークフロー自動化</div>
+              </div>
+              <ul class="hint-list">
+                <li>内覧予約フローを含めたツール化</li>
+                <li>営業時間外もAIが顧客対応</li>
+              </ul>
+            </div>
+
+            <div class="btn-group">
+              <button class="course-btn-outline" onclick="goToStep(2)">&larr; 戻る</button>
+              <button class="course-btn" onclick="goToStep(4)">ツール設計へ</button>
+            </div>
+          </div>
+
+          <!-- ===== STEP 4: Tool Design ===== -->
+          <div class="step-panel" id="step-4">
+            <div class="step-label">Step 4 &mdash; Tool Design</div>
+            <h2>マッチングツールを設計</h2>
+            <p>下のテンプレートを参考にしながら、<strong>あなたの営業現場に最適なマッチングツール</strong>を自分で設計してください。</p>
+
+            <h3>テンプレート</h3>
+            <div class="prompt-display">あなたは不動産マッチングAIです。以下の物件データと顧客条件をもとに、最適な提案を生成してください：
+
+営業情報：
+- 会社：[会社名]
+- 取扱タイプ：[タイプ]
+- 物件数：[登録物件数]
+
+顧客ニーズ体系：
+1. エリア条件（駅距離、県、市区町村）
+2. 物件タイプ（新築/中古、一戸建て/マンション）
+3. 予算（購入価格/月額賃料）
+4. 面積・間取り（㎡、LDK構成）
+5. 特別な要望（ペット可、駐車場、バリアフリー）
+
+出力：
+- マッチング順位TOP3
+- 各物件の「おすすめポイント」
+- 次のアクション提案</div>
+
+            <h3>あなたのプロンプト</h3>
+            <textarea class="prompt-editor" id="prompt-input" placeholder="テンプレートを参考に設計してください"></textarea>
+
+            <div class="btn-group">
+              <button class="course-btn-outline" onclick="goToStep(3)">&larr; 戻る</button>
+              <button class="course-btn" onclick="goToStep(5)">ツール生成へ</button>
+            </div>
+          </div>
+
+          <!-- ===== STEP 5: Tool Generation ===== -->
+          <div class="step-panel" id="step-5">
+            <div class="step-label">Step 5 &mdash; Tool Generation</div>
+            <h2>Coworkでツール生成</h2>
+            <p><strong>あなたが設計したプロンプト</strong>をCoworkで実行すると、どのようなマッチングツールが生成されるかをシミュレーション表示します。</p>
+
+            <button class="course-btn" onclick="generateTool()" style="margin-bottom: 24px;">ツール生成</button>
+
+            <div id="tool-output" style="display: none;">
+              <h3>生成されたツール</h3>
+              <div class="output-content" id="tool-content"></div>
+            </div>
+
+            <div class="btn-group" style="margin-top: 24px;">
+              <button class="course-btn-outline" onclick="goToStep(4)">&larr; 再設計する</button>
+              <button class="course-btn" onclick="goToStep(6)">評価と完了へ</button>
+            </div>
+          </div>
+
+          <!-- ===== STEP 6: Evaluation & Badge ===== -->
+          <div class="step-panel" id="step-6">
+            <div class="step-label">Step 6 &mdash; Evaluation</div>
+            <h2>完了！</h2>
+            <p>このレッスンで、<strong>Coworkを用いた物件マッチングツール</strong>を設計・構築できるようになりました。</p>
+
+            <div class="badge-earned">
+              物件マッチング<br>AI<br>— 基礎 —
+            </div>
+
+            <h3>このレッスンで身につけたスキル</h3>
+            <ul style="padding-left: 20px;">
+              <li>顧客ニーズの体系化と構造化</li>
+              <li>Coworkを活用したUIジェネレーション</li>
+              <li>物件マッチングロジックの設計</li>
+              <li>営業効率化ツールの実装能力</li>
+            </ul>
+
+            <h3>次のステップ</h3>
+            <p>次は「医療・クリニック」の問診AIアシスタント設計に進んでください。</p>
+
+            <div class="btn-group">
+              <button class="course-btn-outline" onclick="goToStep(0)">最初からやり直す</button>
+              <button class="course-btn" onclick="alert('ダッシュボードに戻ります'); window.location.href = './dashboard.html';">ダッシュボードへ</button>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- RIGHT: AI Assistant Panel -->
+        <div class="course-assistant">
+          <div class="assistant-header">
+            <span class="assistant-title">
+              <span class="assistant-status"></span>
+              ASSISTANT
+            </span>
+          </div>
+          <div class="assistant-messages" id="messages">
+            <div class="msg msg-ai">
+              <span class="msg-label">AI</span>
+              物件マッチングについて質問がありますか？Coworkを使って営業効率を3倍に高める仕組みを一緒に作ります。
+            </div>
+          </div>
+          <div class="assistant-input">
+            <input type="text" id="user-input" placeholder="質問を入力...">
+            <button onclick="sendMessage()">送信</button>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <script>
+    function goToStep(n) {
+      document.querySelectorAll('.step-panel').forEach(el => el.classList.remove('active'));
+      document.querySelectorAll('.step-dot').forEach(el => el.classList.remove('active'));
+      document.getElementById('step-' + n).classList.add('active');
+      document.querySelector('[data-step="' + n + '"]').classList.add('active');
+      document.querySelector('.course-lecture').scrollTop = 0;
+    }
+
+    function analyzeMatching() {
+      const company = document.getElementById('input-company').value || '不動産会社';
+      const challenge = document.getElementById('input-challenge').value || '営業効率化';
+
+      const analysisHTML = `
+        <div class="hint-block">
+          <div class="hint-block-header">
+            <div class="hint-block-num">1</div>
+            <div class="hint-block-title">条件整理に時間がかかる</div>
+          </div>
+          <ul class="hint-list">
+            <li>顧客の口頭ニーズを営業が手書きで記録</li>
+            <li>その後、システムに手入力するため、ダブルワーク発生</li>
+          </ul>
+        </div>
+
+        <div class="hint-block">
+          <div class="hint-block-header">
+            <div class="hint-block-num">2</div>
+            <div class="hint-block-title">提案精度のばらつき</div>
+          </div>
+          <ul class="hint-list">
+            <li>営業担当者の経験度により、提案物件がバラバラ</li>
+            <li>顧客満足度が営業スキルに大きく依存</li>
+          </ul>
+        </div>
+
+        <div class="hint-block">
+          <div class="hint-block-header">
+            <div class="hint-block-num">3</div>
+            <div class="hint-block-title">営業時間外の対応がない</div>
+          </div>
+          <ul class="hint-list">
+            <li>${company}では営業時間外の問い合わせに対応できない</li>
+            <li>Coworkなら24時間自動対応が可能</li>
+          </ul>
+        </div>
+      `;
+
+      document.getElementById('analysis-container').innerHTML = analysisHTML;
+      goToStep(2);
+    }
+
+    function generateTool() {
+      const toolOutput = `【Cowork生成：物件マッチングツール】
+
+▼ 検索フォーム（自動生成UI）
+┌─────────────────────────────────┐
+│ 物件マッチングツール v1.0        │
+├─────────────────────────────────┤
+│ エリア選択                        │
+│ ┌──────────────────────────────┐ │
+│ │都道府県：□東京都  □神奈川県   │ │
+│ │駅：池袋駅より半径□km以内     │ │
+│ └──────────────────────────────┘ │
+│                                 │
+│ 予算範囲                          │
+│ ┌──────────────────────────────┐ │
+│ │月額：□〜□万円                │ │
+│ │購入：□〜□百万円              │ │
+│ └──────────────────────────────┘ │
+│                                 │
+│ 物件タイプ                        │
+│ ┌──────────────────────────────┐ │
+│ │□新築  □中古  □一戸建  □Apt  │ │
+│ └──────────────────────────────┘ │
+│                                 │
+│ 特別要望                          │
+│ □ペット可  □駐車場  □バリア    │
+│                                 │
+│           【検索開始】            │
+└─────────────────────────────────┘
+
+▼ マッチング結果（AI提案）
+【TOP1】渋谷区松濤2丁目
+  価格：3,500万円 / 新築マンション
+  理由：ご指定の予算＆エリア最高のポイント
+  詳細：3LDK / 75㎡ / 駐車場付
+
+【TOP2】渋谷区神宮前3丁目
+  価格：3,200万円 / 中古マンション
+  理由：駅まで徒歩3分＆ペット対応
+
+【TOP3】世田谷区北沢4丁目
+  価格：3,100万円 / リノベ一戸建
+  理由：予算＋広さ＆庭あり
+
+▼ 営業フロー自動化
+・内覧予約 → AIが顧客と調整
+・見積生成 → ローン計算を自動出力
+・フォローアップ → 営業時間外も対応`;
+
+      document.getElementById('tool-content').textContent = toolOutput;
+      document.getElementById('tool-output').style.display = 'block';
+    }
+
+    function sendMessage() {
+      const input = document.getElementById('user-input');
+      const text = input.value.trim();
+      if (!text) return;
+
+      const messagesDiv = document.getElementById('messages');
+
+      const userMsg = document.createElement('div');
+      userMsg.className = 'msg msg-user';
+      userMsg.innerHTML = `<span class="msg-label">YOU</span>${text}`;
+      messagesDiv.appendChild(userMsg);
+
+      input.value = '';
+
+      setTimeout(() => {
+        const aiResponse = getAIResponse(text);
+        const aiMsg = document.createElement('div');
+        aiMsg.className = 'msg msg-ai';
+        aiMsg.innerHTML = `<span class="msg-label">AI</span>${aiResponse}`;
+        messagesDiv.appendChild(aiMsg);
+        messagesDiv.scrollTop = messagesDiv.scrollHeight;
+      }, 600);
+    }
+
+    function getAIResponse(text) {
+      const responses = {
+        '条件': 'Coworkでマッチングツールを生成する際の最大のコツは、顧客条件を「構造化」することです。エリア、予算、物件タイプを階層的に整理するプロンプトにしましょう。',
+        'UI': 'Coworkが生成したUIに対して「ボタンのラベルを〇〇に変更」など、細かい指示も可能です。営業現場の実際の使い勝手に合わせてカスタマイズできます。',
+        '時間': '手作業での条件整理が1件30分 → Coworkツールなら自動で30秒。月150件なら、営業人員1名分の時間が浮きます。',
+        'default': 'それは良い質問ですね。物件マッチングの精度を上げるには、顧客条件以外に「成約実績」「エリア需要トレンド」などを学習データとして組み込むと更に効果的です。'
+      };
+
+      for (const key in responses) {
+        if (text.includes(key)) return responses[key];
+      }
+      return responses.default;
+    }
+  </script>
+
+</body>
+</html>
