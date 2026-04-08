@@ -3,209 +3,24 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>コミュニティ | AI SCHOOL</title>
+  <meta http-equiv="refresh" content="3; url=./dashboard-v2.html">
+  <link rel="canonical" href="./dashboard-v2.html">
+  <title>このページは移動しました | AI SCHOOL</title>
   <link rel="stylesheet" href="../css/style.css">
-  <link rel="stylesheet" href="../css/dashboard.css">
+  <style>
+    .retired-wrap {max-width:640px;margin:120px auto;padding:48px 24px;text-align:center;}
+    .retired-badge {display:inline-block;background:#D93B00;color:#fff;padding:6px 16px;font-size:12px;letter-spacing:2px;margin-bottom:24px;}
+    .retired-wrap h1 {font-size:28px;line-height:1.5;margin-bottom:16px;color:#0A0A0A;}
+    .retired-wrap p {color:#666;margin-bottom:32px;}
+    .retired-wrap .btn {display:inline-block;background:#D93B00;color:#fff;padding:16px 40px;text-decoration:none;font-weight:bold;}
+  </style>
 </head>
-<body class="dash-body">
-  <div class="dash">
-
-    <!-- SIDEBAR -->
-    <aside class="dash-sidebar">
-      <div class="dash-sidebar-brand">
-        <a href="../index.html">AI SCHOOL</a>
-        <span>User Dashboard</span>
-      </div>
-      <nav class="dash-sidebar-nav">
-        <span class="nav-section-label">Main</span>
-        <a href="./dashboard.html">ダッシュボード</a>
-        <a href="./dashboard-courses.html">学習コース</a>
-        <a href="./dashboard-assignments.html">課題提出</a>
-        <span class="nav-section-label">Project</span>
-        <a href="./dashboard-projects.html">AIプロジェクト</a>
-        <a href="./dashboard-skills.html">AIスキル評価</a>
-        <a href="./dashboard-profile.html">AI人材プロフィール</a>
-        <span class="nav-section-label">Career</span>
-        <a href="./dashboard-offers.html">企業オファー</a>
-        <a href="./dashboard-community.html" class="active">コミュニティ</a>
-        <a href="./dashboard-history.html">学習履歴</a>
-        <span class="nav-section-label">Account</span>
-        <a href="./dashboard-billing.html">支払い管理</a>
-        <a href="./dashboard-settings.html">アカウント設定</a>
-      </nav>
-      <div class="dash-sidebar-footer">
-        <a href="#">利用規約</a>
-        <a href="#">プライバシーポリシー</a>
-        <a href="#">ログアウト</a>
-      </div>
-    </aside>
-
-    <!-- MAIN -->
-    <div class="dash-main">
-      <header class="dash-topbar">
-        <div style="display: flex; align-items: center; gap: 12px;">
-          <button class="dash-mobile-toggle" onclick="document.querySelector('.dash-sidebar').classList.toggle('open')">&#9776;</button>
-          <div class="dash-topbar-title">コミュニティ</div>
-        </div>
-        <div class="dash-topbar-actions">
-          <a href="#" class="btn btn-orange" style="padding: 8px 20px; font-size: 12px;">新規投稿 &#8599;</a>
-          <div class="dash-topbar-user">
-            <span>山田 太郎</span>
-            <div class="dash-topbar-avatar">PHOTO</div>
-          </div>
-        </div>
-      </header>
-
-      <div class="dash-content">
-
-        <!-- Forum -->
-        <div class="dash-section">
-          <div class="dash-section-header">
-            <div class="dash-section-title">フォーラム</div>
-            <span class="dash-section-label">Forum</span>
-          </div>
-          <table class="dash-table">
-            <thead>
-              <tr>
-                <th>トピック</th>
-                <th>カテゴリ</th>
-                <th>投稿者</th>
-                <th>返信</th>
-                <th>最終更新</th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td style="font-weight: 400;">Claude APIの効率的な使い方まとめ</td>
-                <td><span class="badge badge-active">AI開発</span></td>
-                <td>田中 花子</td>
-                <td style="font-family: var(--font-heading-en); color: var(--orange-red);">12</td>
-                <td style="font-size: 12px; color: rgba(0,0,0,0.5);">3/16 09:30</td>
-                <td><a href="#" class="dash-link">開く &#8599;</a></td>
-              </tr>
-              <tr>
-                <td style="font-weight: 400;">Midjourney v7 新機能レビュー</td>
-                <td><span class="badge badge-active">クリエイター</span></td>
-                <td>佐藤 次郎</td>
-                <td style="font-family: var(--font-heading-en); color: var(--orange-red);">28</td>
-                <td style="font-size: 12px; color: rgba(0,0,0,0.5);">3/15 18:45</td>
-                <td><a href="#" class="dash-link">開く &#8599;</a></td>
-              </tr>
-              <tr>
-                <td style="font-weight: 400;">業務自動化のベストプラクティス</td>
-                <td><span class="badge badge-active">効率化</span></td>
-                <td>山田 太郎</td>
-                <td style="font-family: var(--font-heading-en); color: var(--orange-red);">45</td>
-                <td style="font-size: 12px; color: rgba(0,0,0,0.5);">3/14 14:20</td>
-                <td><a href="#" class="dash-link">開く &#8599;</a></td>
-              </tr>
-              <tr>
-                <td style="font-weight: 400;">RAG構築のコツと注意点</td>
-                <td><span class="badge badge-active">AI開発</span></td>
-                <td>鈴木 一郎</td>
-                <td style="font-family: var(--font-heading-en); color: var(--orange-red);">19</td>
-                <td style="font-size: 12px; color: rgba(0,0,0,0.5);">3/13 11:00</td>
-                <td><a href="#" class="dash-link">開く &#8599;</a></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
-        <!-- Q&A -->
-        <div class="dash-section">
-          <div class="dash-section-header">
-            <div class="dash-section-title">質問</div>
-            <span class="dash-section-label">Q&A</span>
-          </div>
-          <table class="dash-table">
-            <thead>
-              <tr>
-                <th>ステータス</th>
-                <th>質問</th>
-                <th>投稿者</th>
-                <th>回答数</th>
-                <th>投稿日</th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><span class="badge badge-new">未回答</span></td>
-                <td style="font-weight: 400;">LangChainの接続エラーについて</td>
-                <td>木村 健</td>
-                <td>0</td>
-                <td style="font-size: 12px; color: rgba(0,0,0,0.5);">3/16</td>
-                <td><a href="#" class="dash-link">回答する &#8599;</a></td>
-              </tr>
-              <tr>
-                <td><span class="badge badge-done">解決</span></td>
-                <td style="font-weight: 400;">API料金の最適化方法</td>
-                <td>高橋 美咲</td>
-                <td style="font-family: var(--font-heading-en); color: var(--orange-red);">3</td>
-                <td style="font-size: 12px; color: rgba(0,0,0,0.5);">3/14</td>
-                <td><a href="#" class="dash-link">詳細 &#8599;</a></td>
-              </tr>
-              <tr>
-                <td><span class="badge badge-done">解決</span></td>
-                <td style="font-weight: 400;">画像生成の解像度設定</td>
-                <td>渡辺 翔太</td>
-                <td style="font-family: var(--font-heading-en); color: var(--orange-red);">5</td>
-                <td style="font-size: 12px; color: rgba(0,0,0,0.5);">3/12</td>
-                <td><a href="#" class="dash-link">詳細 &#8599;</a></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
-        <!-- Team Recruitment -->
-        <div class="dash-section">
-          <div class="dash-section-header">
-            <div class="dash-section-title">チーム募集</div>
-            <span class="dash-section-label">Team Recruitment</span>
-          </div>
-          <table class="dash-table">
-            <thead>
-              <tr>
-                <th>ステータス</th>
-                <th>プロジェクト名</th>
-                <th>募集者</th>
-                <th>メンバー</th>
-                <th>求めるスキル</th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><span class="badge badge-active">募集中</span></td>
-                <td style="font-weight: 400;">AI ECサイト開発</td>
-                <td>中村 大輝</td>
-                <td>3 / 5名</td>
-                <td style="font-size: 12px; color: rgba(0,0,0,0.5);">React, Python, API設計</td>
-                <td><a href="#" class="dash-link">応募 &#8599;</a></td>
-              </tr>
-              <tr>
-                <td><span class="badge badge-active">募集中</span></td>
-                <td style="font-weight: 400;">動画生成ツール開発</td>
-                <td>松本 あゆみ</td>
-                <td>2 / 4名</td>
-                <td style="font-size: 12px; color: rgba(0,0,0,0.5);">Runway, デザイン, UI/UX</td>
-                <td><a href="#" class="dash-link">応募 &#8599;</a></td>
-              </tr>
-              <tr>
-                <td><span class="badge badge-done">締切</span></td>
-                <td style="font-weight: 400;">AI分析ダッシュボード</td>
-                <td>小林 誠</td>
-                <td>4 / 4名</td>
-                <td style="font-size: 12px; color: rgba(0,0,0,0.5);">データ分析, Python</td>
-                <td><a href="#" class="dash-link">詳細 &#8599;</a></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
-      </div>
-    </div>
-  </div>
+<body>
+  <main class="retired-wrap">
+    <p class="retired-badge">MOVED</p>
+    <h1>このページは新しいコミュニティ画面へ統合されました</h1>
+    <p>3秒後に自動で移動します。移動しない場合は下のボタンから。</p>
+    <a class="btn" href="./dashboard-v2.html">新しいページへ移動する</a>
+  </main>
 </body>
 </html>

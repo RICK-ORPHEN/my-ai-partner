@@ -3,175 +3,24 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>課題提出 | AI SCHOOL</title>
+  <meta http-equiv="refresh" content="3; url=./dashboard-v2.html">
+  <link rel="canonical" href="./dashboard-v2.html">
+  <title>このページは移動しました | AI SCHOOL</title>
   <link rel="stylesheet" href="../css/style.css">
-  <link rel="stylesheet" href="../css/dashboard.css">
+  <style>
+    .retired-wrap {max-width:640px;margin:120px auto;padding:48px 24px;text-align:center;}
+    .retired-badge {display:inline-block;background:#D93B00;color:#fff;padding:6px 16px;font-size:12px;letter-spacing:2px;margin-bottom:24px;}
+    .retired-wrap h1 {font-size:28px;line-height:1.5;margin-bottom:16px;color:#0A0A0A;}
+    .retired-wrap p {color:#666;margin-bottom:32px;}
+    .retired-wrap .btn {display:inline-block;background:#D93B00;color:#fff;padding:16px 40px;text-decoration:none;font-weight:bold;}
+  </style>
 </head>
-<body class="dash-body">
-  <div class="dash">
-
-    <!-- SIDEBAR -->
-    <aside class="dash-sidebar">
-      <div class="dash-sidebar-brand">
-        <a href="../index.html">AI SCHOOL</a>
-        <span>User Dashboard</span>
-      </div>
-      <nav class="dash-sidebar-nav">
-        <span class="nav-section-label">Main</span>
-        <a href="./dashboard.html">ダッシュボード</a>
-        <a href="./dashboard-courses.html">学習コース</a>
-        <a href="./dashboard-assignments.html" class="active">課題提出</a>
-        <span class="nav-section-label">Project</span>
-        <a href="./dashboard-projects.html">AIプロジェクト</a>
-        <a href="./dashboard-skills.html">AIスキル評価</a>
-        <a href="./dashboard-profile.html">AI人材プロフィール</a>
-        <span class="nav-section-label">Career</span>
-        <a href="./dashboard-offers.html">企業オファー</a>
-        <a href="./dashboard-community.html">コミュニティ</a>
-        <a href="./dashboard-history.html">学習履歴</a>
-        <span class="nav-section-label">Account</span>
-        <a href="./dashboard-billing.html">支払い管理</a>
-        <a href="./dashboard-settings.html">アカウント設定</a>
-      </nav>
-      <div class="dash-sidebar-footer">
-        <a href="#">利用規約</a>
-        <a href="#">プライバシーポリシー</a>
-        <a href="#">ログアウト</a>
-      </div>
-    </aside>
-
-    <!-- MAIN -->
-    <div class="dash-main">
-      <header class="dash-topbar">
-        <div style="display: flex; align-items: center; gap: 12px;">
-          <button class="dash-mobile-toggle" onclick="document.querySelector('.dash-sidebar').classList.toggle('open')">&#9776;</button>
-          <div class="dash-topbar-title">課題提出</div>
-        </div>
-        <div class="dash-topbar-actions">
-          <div class="dash-topbar-user">
-            <span>山田 太郎</span>
-            <div class="dash-topbar-avatar">PHOTO</div>
-          </div>
-        </div>
-      </header>
-
-      <div class="dash-content">
-
-        <!-- Stats -->
-        <div class="dash-stats" style="grid-template-columns: repeat(3, 1fr);">
-          <div class="dash-stat-card">
-            <div class="stat-val">2</div>
-            <div class="stat-lbl">未提出</div>
-          </div>
-          <div class="dash-stat-card">
-            <div class="stat-val">1</div>
-            <div class="stat-lbl">提出済み（FB待ち）</div>
-          </div>
-          <div class="dash-stat-card">
-            <div class="stat-val">8</div>
-            <div class="stat-lbl">フィードバック済み</div>
-          </div>
-        </div>
-
-        <!-- Filters -->
-        <div class="dash-filters">
-          <div class="dash-filter-group">
-            <label>ステータス</label>
-            <select>
-              <option>すべて</option>
-              <option>未提出</option>
-              <option>提出済み</option>
-              <option>フィードバック済み</option>
-            </select>
-          </div>
-          <div class="dash-filter-group">
-            <label>コース</label>
-            <select>
-              <option>すべて</option>
-              <option>AIツール実践マスター</option>
-              <option>画像生成AIマスター</option>
-              <option>AIエージェント開発入門</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="dash-count-bar">
-          <span class="count-text"><strong>1〜6件</strong>（全11件）</span>
-          <div class="dash-filter-group" style="flex-direction: row; align-items: center; gap: 8px;">
-            <label style="margin: 0;">表示件数</label>
-            <select style="min-width: 100px;">
-              <option>20件表示</option>
-              <option>50件表示</option>
-            </select>
-          </div>
-        </div>
-
-        <!-- Table -->
-        <table class="dash-table">
-          <thead>
-            <tr>
-              <th>ステータス</th>
-              <th>課題名</th>
-              <th>コース</th>
-              <th>締切</th>
-              <th>スコア</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><span class="badge badge-new">未提出</span></td>
-              <td style="font-weight: 400;">AIチャットボット構築</td>
-              <td>AIエージェント開発入門</td>
-              <td>2026/03/25</td>
-              <td>—</td>
-              <td><a href="#" class="dash-link">提出 &#8599;</a></td>
-            </tr>
-            <tr>
-              <td><span class="badge badge-new">未提出</span></td>
-              <td style="font-weight: 400;">画像生成プロンプト設計</td>
-              <td>画像生成AIマスター</td>
-              <td>2026/03/30</td>
-              <td>—</td>
-              <td><a href="#" class="dash-link">提出 &#8599;</a></td>
-            </tr>
-            <tr>
-              <td><span class="badge badge-active">提出済み</span></td>
-              <td style="font-weight: 400;">業務効率化レポート</td>
-              <td>AIツール実践マスター</td>
-              <td>2026/03/15</td>
-              <td>—</td>
-              <td><a href="#" class="dash-link">確認 &#8599;</a></td>
-            </tr>
-            <tr>
-              <td><span class="badge badge-done">FB済み</span></td>
-              <td style="font-weight: 400;">プロンプト設計演習</td>
-              <td>AIツール実践マスター</td>
-              <td>2026/03/08</td>
-              <td style="font-family: var(--font-heading-en); color: var(--orange-red);">92</td>
-              <td><a href="#" class="dash-link">FB確認 &#8599;</a></td>
-            </tr>
-            <tr>
-              <td><span class="badge badge-done">FB済み</span></td>
-              <td style="font-weight: 400;">AI画像バナー制作</td>
-              <td>画像生成AIマスター</td>
-              <td>2026/03/01</td>
-              <td style="font-family: var(--font-heading-en); color: var(--orange-red);">87</td>
-              <td><a href="#" class="dash-link">FB確認 &#8599;</a></td>
-            </tr>
-            <tr>
-              <td><span class="badge badge-done">FB済み</span></td>
-              <td style="font-weight: 400;">ワークフロー自動化設計</td>
-              <td>AIツール実践マスター</td>
-              <td>2026/02/22</td>
-              <td style="font-family: var(--font-heading-en); color: var(--orange-red);">78</td>
-              <td><a href="#" class="dash-link">FB確認 &#8599;</a></td>
-            </tr>
-          </tbody>
-        </table>
-
-      </div>
-    </div>
-  </div>
+<body>
+  <main class="retired-wrap">
+    <p class="retired-badge">MOVED</p>
+    <h1>このページは新しい課題画面へ統合されました</h1>
+    <p>3秒後に自動で移動します。移動しない場合は下のボタンから。</p>
+    <a class="btn" href="./dashboard-v2.html">新しいページへ移動する</a>
+  </main>
 </body>
 </html>

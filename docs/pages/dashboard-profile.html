@@ -3,175 +3,24 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AI人材プロフィール | AI SCHOOL</title>
+  <meta http-equiv="refresh" content="3; url=./dashboard-v2.html">
+  <link rel="canonical" href="./dashboard-v2.html">
+  <title>このページは移動しました | AI SCHOOL</title>
   <link rel="stylesheet" href="../css/style.css">
-  <link rel="stylesheet" href="../css/dashboard.css">
+  <style>
+    .retired-wrap {max-width:640px;margin:120px auto;padding:48px 24px;text-align:center;}
+    .retired-badge {display:inline-block;background:#D93B00;color:#fff;padding:6px 16px;font-size:12px;letter-spacing:2px;margin-bottom:24px;}
+    .retired-wrap h1 {font-size:28px;line-height:1.5;margin-bottom:16px;color:#0A0A0A;}
+    .retired-wrap p {color:#666;margin-bottom:32px;}
+    .retired-wrap .btn {display:inline-block;background:#D93B00;color:#fff;padding:16px 40px;text-decoration:none;font-weight:bold;}
+  </style>
 </head>
-<body class="dash-body">
-  <div class="dash">
-
-    <!-- SIDEBAR -->
-    <aside class="dash-sidebar">
-      <div class="dash-sidebar-brand">
-        <a href="../index.html">AI SCHOOL</a>
-        <span>User Dashboard</span>
-      </div>
-      <nav class="dash-sidebar-nav">
-        <span class="nav-section-label">Main</span>
-        <a href="./dashboard.html">ダッシュボード</a>
-        <a href="./dashboard-courses.html">学習コース</a>
-        <a href="./dashboard-assignments.html">課題提出</a>
-        <span class="nav-section-label">Project</span>
-        <a href="./dashboard-projects.html">AIプロジェクト</a>
-        <a href="./dashboard-skills.html">AIスキル評価</a>
-        <a href="./dashboard-profile.html" class="active">AI人材プロフィール</a>
-        <span class="nav-section-label">Career</span>
-        <a href="./dashboard-offers.html">企業オファー</a>
-        <a href="./dashboard-community.html">コミュニティ</a>
-        <a href="./dashboard-history.html">学習履歴</a>
-        <span class="nav-section-label">Account</span>
-        <a href="./dashboard-billing.html">支払い管理</a>
-        <a href="./dashboard-settings.html">アカウント設定</a>
-      </nav>
-      <div class="dash-sidebar-footer">
-        <a href="#">利用規約</a>
-        <a href="#">プライバシーポリシー</a>
-        <a href="#">ログアウト</a>
-      </div>
-    </aside>
-
-    <!-- MAIN -->
-    <div class="dash-main">
-      <header class="dash-topbar">
-        <div style="display: flex; align-items: center; gap: 12px;">
-          <button class="dash-mobile-toggle" onclick="document.querySelector('.dash-sidebar').classList.toggle('open')">&#9776;</button>
-          <div class="dash-topbar-title">AI人材プロフィール</div>
-        </div>
-        <div class="dash-topbar-actions">
-          <div class="dash-topbar-user">
-            <span>山田 太郎</span>
-            <div class="dash-topbar-avatar">PHOTO</div>
-          </div>
-        </div>
-      </header>
-
-      <div class="dash-content">
-
-        <!-- Profile Edit -->
-        <div class="dash-section">
-          <div class="dash-section-header">
-            <div class="dash-section-title">プロフィール編集</div>
-            <a href="#" class="dash-link">保存 &#8599;</a>
-          </div>
-          <div class="dash-widget-grid">
-            <div class="dash-widget">
-              <div style="display: flex; align-items: center; gap: 20px; margin-bottom: 24px;">
-                <div class="dash-img-placeholder" style="width: 80px; height: 80px; min-width: 80px;">PHOTO</div>
-                <div>
-                  <div style="font-weight: 600; font-size: 18px; margin-bottom: 4px;">山田 太郎</div>
-                  <div style="font-size: 13px; color: rgba(0,0,0,0.45);">yamada@example.com</div>
-                  <a href="#" class="dash-link" style="margin-top: 8px; display: inline-block;">写真を変更</a>
-                </div>
-              </div>
-              <div class="dash-list-item">
-                <span class="item-name" style="color: rgba(0,0,0,0.45); min-width: 100px;">氏名</span>
-                <span class="item-meta">山田 太郎</span>
-              </div>
-              <div class="dash-list-item">
-                <span class="item-name" style="color: rgba(0,0,0,0.45); min-width: 100px;">所属</span>
-                <span class="item-meta">株式会社サンプル</span>
-              </div>
-              <div class="dash-list-item">
-                <span class="item-name" style="color: rgba(0,0,0,0.45); min-width: 100px;">職種</span>
-                <span class="item-meta">エンジニア</span>
-              </div>
-              <div class="dash-list-item">
-                <span class="item-name" style="color: rgba(0,0,0,0.45); min-width: 100px;">経験年数</span>
-                <span class="item-meta">5年</span>
-              </div>
-              <div class="dash-list-item">
-                <span class="item-name" style="color: rgba(0,0,0,0.45); min-width: 100px;">自己紹介</span>
-                <span class="item-meta">AI技術を活用したプロダクト開発に従事。特にLLMを活用した業務効率化に強みがあります。</span>
-              </div>
-            </div>
-            <div class="dash-widget">
-              <div class="dash-widget-title">
-                <span>公開設定</span>
-                <a href="#" class="dash-link">変更 &#8599;</a>
-              </div>
-              <div class="dash-list-item">
-                <span class="item-name">プロフィール公開</span>
-                <span class="badge badge-active">公開</span>
-              </div>
-              <div class="dash-list-item">
-                <span class="item-name">スキル情報</span>
-                <span class="badge badge-active">公開</span>
-              </div>
-              <div class="dash-list-item">
-                <span class="item-name">ポートフォリオ</span>
-                <span class="badge badge-active">公開</span>
-              </div>
-              <div class="dash-list-item">
-                <span class="item-name">連絡先</span>
-                <span class="badge badge-done">非公開</span>
-              </div>
-              <div class="dash-list-item">
-                <span class="item-name">学習履歴</span>
-                <span class="badge badge-done">非公開</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Skill Tags -->
-        <div class="dash-section">
-          <div class="dash-section-header">
-            <div class="dash-section-title">スキル登録</div>
-            <a href="#" class="dash-link">編集 &#8599;</a>
-          </div>
-          <div style="display: flex; flex-wrap: wrap; gap: 8px;">
-            <span class="badge badge-active">Python</span>
-            <span class="badge badge-active">Prompt Engineering</span>
-            <span class="badge badge-active">LangChain</span>
-            <span class="badge badge-active">Midjourney</span>
-            <span class="badge badge-active">API設計</span>
-            <span class="badge badge-active">ChatGPT</span>
-            <span class="badge badge-active">Claude</span>
-            <span class="badge badge-active">Figma</span>
-            <span class="badge badge-active">Stable Diffusion</span>
-            <span class="badge badge-active">データ分析</span>
-            <span class="badge badge-active">React</span>
-            <span class="badge badge-active">Node.js</span>
-          </div>
-        </div>
-
-        <!-- Portfolio -->
-        <div class="dash-section">
-          <div class="dash-section-header">
-            <div class="dash-section-title">ポートフォリオ</div>
-            <a href="#" class="dash-link">追加 &#8599;</a>
-          </div>
-          <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;">
-            <div>
-              <div class="dash-img-placeholder" style="width: 100%; aspect-ratio: 16/9; margin-bottom: 10px;">PHOTO</div>
-              <div style="font-size: 13px; font-weight: 600; margin-bottom: 2px;">AIチャットボット</div>
-              <div style="font-size: 11px; color: rgba(0,0,0,0.4);">2026.02 — LangChain / Claude API</div>
-            </div>
-            <div>
-              <div class="dash-img-placeholder" style="width: 100%; aspect-ratio: 16/9; margin-bottom: 10px;">PHOTO</div>
-              <div style="font-size: 13px; font-weight: 600; margin-bottom: 2px;">画像生成ツール</div>
-              <div style="font-size: 11px; color: rgba(0,0,0,0.4);">2026.01 — Stable Diffusion / React</div>
-            </div>
-            <div>
-              <div class="dash-img-placeholder" style="width: 100%; aspect-ratio: 16/9; margin-bottom: 10px;">PHOTO</div>
-              <div style="font-size: 13px; font-weight: 600; margin-bottom: 2px;">業務自動化ダッシュボード</div>
-              <div style="font-size: 11px; color: rgba(0,0,0,0.4);">2025.12 — Python / FastAPI</div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </div>
+<body>
+  <main class="retired-wrap">
+    <p class="retired-badge">MOVED</p>
+    <h1>このページは新しいプロフィール画面へ統合されました</h1>
+    <p>3秒後に自動で移動します。移動しない場合は下のボタンから。</p>
+    <a class="btn" href="./dashboard-v2.html">新しいページへ移動する</a>
+  </main>
 </body>
 </html>
