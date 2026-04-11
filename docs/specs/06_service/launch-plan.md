@@ -1,41 +1,55 @@
-# ローンチ計画 / Launch Plan
+# ローンチ計画 v2 — 課金検証先行・飲食特化
 
-## Phase 1 — サイト統治の回復（〜2週間）
-- [ ] リンク切れ修正（link-fix-plan.md）
-- [ ] v1 / v2 統廃合（v1-v2-consolidation.md）
-- [ ] 退役テンプレートの配置
-- [ ] specs 全書き起こし（本フォルダ群）
-- [ ] contact.html / terms.html 新規作成
-- [ ] 画像最適化（asset-optimization-plan.md）
-- [ ] deploy-verify スキルで死活監視
+> v1 からの変更: Phase 0（課金検証）を最優先に追加。Phase 順序を全面再編。
+> 詳細は `01_overview/development-roadmap-v2.md` を参照。
 
-## Phase 2 — AIスクール骨格固定（〜4週間）
-- [ ] interactive-onboarding.html の分岐型 UI 実装
-- [ ] lesson-interactive-v2.html の差分注入対応
-- [ ] dashboard-v2.html の進捗可視化
-- [ ] curriculum 生成ロジック（ルール表方式）
-- [ ] data/ JSON 配置（courses / rules）
+## Phase 0 — 課金検証（Week 1-2）✦ 最重要
+- [ ] LP を飲食特化に改修
+- [ ] Stripe Checkout 決済（¥49,800/月）
+- [ ] Supabase Auth + 最小 DB
+- [ ] Lesson 1-2 無料体験を公開
+- [ ] GPT-5.4 評価エンジン最小版（Lesson 2 用）
+- [ ] 集客開始（X / Google広告 / 直接営業）
+- [ ] **有料転換 0 社ならピボット判断**
 
-## Phase 3 — チャットbotコース完成（〜6週間）
-- [ ] Lesson 1〜7 の JSON 全埋め
-- [ ] 業種差分 × 3業種、目的差分 × 3目的、レベル差分 × 3
-- [ ] GPT-5.4 プロンプトの固定化
-- [ ] 評価エンジンのスコア安定性チェック
-- [ ] ベータユーザー 5 社でドッグフーディング
+## Phase 1 — 1コース完走（Week 3-6）
+- [ ] Supabase テーブル（users / enrollments / progress / submissions / evaluations）
+- [ ] RLS ポリシー
+- [ ] 評価エンジン全7レッスン対応
+- [ ] lesson-engine.js → Supabase API 接続
+- [ ] dashboard-v2 にリアルデータ接続
+- [ ] 有料5社のフィードバックで磨き込み
 
-## Phase 4 — 学習導線の完成（〜8週間）
-- [ ] ダッシュボードの進捗 / 次課題 / 提出 / 評価 / 次アクション
-- [ ] 人材DB（talent.html）連携の初期版
-- [ ] 法人向けプラン決済（Stripe 検討）
+## Phase 2 — ポートフォリオ（Week 7-9）
+- [ ] skill_scores / portfolios / certifications テーブル
+- [ ] 公開プロフィール URL 生成
+- [ ] PDF 認定証出力
+- [ ] dashboard-skills-v2 にリアルデータ接続
 
-## Phase 5 — 残りコース量産（〜6ヶ月）
-- LINE bot / 営業管理 / マニュアル / 企画書 / Web制作 / プロダクト開発 / シフト
+## Phase 3 — 横展開判断（Week 10+）
+- 条件: 飲食30社 / 完走率40% / チャーン5%以下
+- [ ] 2業種目のコース JSON 追加
+- [ ] LP 業種選択の有効化
+- [ ] 価格改定 ¥69,800/月
 
-## Phase 6 — Next.js 移行判断（6〜9ヶ月）
-- 移行開始条件（future-nextjs-migration-plan.md）を満たした場合のみ実行
+## Phase 4 — マッチング判断（修了者100名+）
+- 条件: 企業からの引き合い月5件以上
+- [ ] 企業ダッシュボード（簡易版）
+- [ ] オファー機能
+- または: 外部プラットフォーム連携で代替
 
-## 成功判定（半年後）
-- 法人契約: 20 社
-- MRR: ¥2,000,000
+## 成功判定
+
+### 2週間後（Phase 0 完了）
+- 有料転換: 1社以上（0 社 → ピボット）
+
+### 6週間後（Phase 1 完了）
+- 有料顧客: 10社
+- MRR: ¥498,000
+- 継続率: 80%以上
+
+### 6ヶ月後
+- 有料顧客: 30社
+- MRR: ¥1,494,000
 - 完走率: 40%
-- 修了者の AI 人材 DB 登録: 50 名
+- 月間チャーン: 5%以下
