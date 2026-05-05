@@ -2,40 +2,48 @@ import Link from 'next/link';
 
 export function Footer() {
   return (
-    <footer className="border-t border-ink/5 bg-ink text-white/85">
-      <div className="mx-auto max-w-7xl px-6 md:px-10 py-14 grid md:grid-cols-4 gap-10">
-        <div>
-          <div className="text-display text-3xl text-brand">MY AI</div>
-          <div className="text-display text-3xl">PARTNER</div>
-          <p className="text-sm text-white/60 mt-4">業種×横断スキルで、作って公開できるAIスクール。</p>
+    <footer className="bg-ink text-cream-50 mt-32">
+      <div className="container-editorial py-20">
+        <div className="grid md:grid-cols-12 gap-10">
+          <div className="md:col-span-5">
+            <div className="h-display text-5xl leading-[0.92] tracking-tightest">
+              業種×横断スキルで<br/>
+              <span className="text-vermilion">作って公開できる</span>、<br/>
+              実行型のAIスクール。
+            </div>
+            <div className="tag text-cream-50/55 mt-8">EST. 2026 — TOKYO</div>
+          </div>
+          <div className="md:col-span-2">
+            <div className="tag text-cream-50/55 mb-4">Course</div>
+            <ul className="space-y-2 text-sm">
+              <li><Link href="/courses">業種別コース</Link></li>
+              <li><Link href="/courses#cross">横断スキル</Link></li>
+              <li><Link href="/cases">受講生作品</Link></li>
+            </ul>
+          </div>
+          <div className="md:col-span-2">
+            <div className="tag text-cream-50/55 mb-4">Publish</div>
+            <ul className="space-y-2 text-sm">
+              <li><Link href="/courses#track-a">Track A — Vercel派</Link></li>
+              <li><Link href="/courses#track-b">Track B — Squarespace派</Link></li>
+              <li><Link href="/portfolio">ポートフォリオ</Link></li>
+            </ul>
+          </div>
+          <div className="md:col-span-3">
+            <div className="tag text-cream-50/55 mb-4">Company</div>
+            <ul className="space-y-2 text-sm">
+              <li><Link href="/about">運営</Link></li>
+              <li><Link href="/legal">特定商取引法</Link></li>
+              <li><Link href="/privacy">プライバシー</Link></li>
+              <li><Link href="/contact">お問い合わせ</Link></li>
+            </ul>
+          </div>
         </div>
-        <div>
-          <h4 className="font-semibold mb-3">コース</h4>
-          <ul className="space-y-2 text-sm text-white/70">
-            <li><Link href="/courses">業種別コース</Link></li>
-            <li><Link href="/courses#cross">横断スキルコース</Link></li>
-            <li><Link href="/cases">受講生作品</Link></li>
-          </ul>
-        </div>
-        <div>
-          <h4 className="font-semibold mb-3">公開ルート</h4>
-          <ul className="space-y-2 text-sm text-white/70">
-            <li><Link href="/courses#track-a">Vercel + Supabase 派</Link></li>
-            <li><Link href="/courses#track-b">Squarespace 派</Link></li>
-            <li><Link href="/portfolio">ポートフォリオ</Link></li>
-          </ul>
-        </div>
-        <div>
-          <h4 className="font-semibold mb-3">運営</h4>
-          <ul className="space-y-2 text-sm text-white/70">
-            <li><Link href="/about">運営会社</Link></li>
-            <li><Link href="/legal">特定商取引法</Link></li>
-            <li><Link href="/privacy">プライバシー</Link></li>
-            <li><Link href="/contact">お問い合わせ</Link></li>
-          </ul>
+        <div className="border-t border-cream-50/15 mt-16 pt-6 flex justify-between items-center text-xs text-cream-50/50">
+          <div>© 2026 My AI Partner. All rights reserved.</div>
+          <div className="tag">Vol.01 / 2026</div>
         </div>
       </div>
-      <div className="border-t border-white/10 py-5 text-center text-xs text-white/50">© 2026 My AI Partner</div>
     </footer>
   );
 }

@@ -1,23 +1,91 @@
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;500;700;900&family=Noto+Sans+JP:wght@300;400;500;700&family=Inter+Tight:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;700;900&family=JetBrains+Mono:wght@400;500&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --brand: #D93B00;
-  --ink: #0B0C0E;
-  --bg: #FFFFFF;
-  --bg-soft: #F8F8F6;
+  --cream:     #EEECE7;
+  --paper:     #FAF9F6;
+  --vermilion: #D3300A;
+  --cobalt:    #0941E1;
+  --ink:       #060E31;
+  --ink-soft:  #1A2147;
+  --ink-mute:  #5A618A;
+  --rule:      rgba(6,14,49,0.12);
 }
 
-html, body { background: var(--bg); color: var(--ink); }
-body { font-family: 'Inter','Noto Sans JP',system-ui,sans-serif; }
+html, body { background: var(--cream); color: var(--ink); }
+body {
+  font-family: 'Inter Tight','Inter','Noto Sans JP',system-ui,sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
 
-/* Decorative diagonal slash for hero */
-.brand-slash { background: linear-gradient(110deg, #D93B00 0%, #FF6018 60%, #FFB088 100%); }
-.text-display { font-family: 'Bebas Neue', Inter, sans-serif; letter-spacing: 0.02em; }
+/* Editorial display headlines */
+.h-display    { font-family: 'Noto Serif JP', 'Playfair Display', serif; font-weight: 900; letter-spacing: -0.045em; line-height: 0.95; }
+.h-serif      { font-family: 'Noto Serif JP', serif; font-weight: 700; letter-spacing: -0.025em; }
+.tag          { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; }
 
-.btn-primary { @apply inline-flex items-center justify-center rounded-md bg-brand text-white px-6 py-3 font-semibold hover:bg-brand-600 transition-colors; }
-.btn-ghost { @apply inline-flex items-center justify-center rounded-md border border-ink/10 px-6 py-3 font-semibold hover:bg-ink/5; }
-.card { @apply rounded-2xl border border-ink/5 bg-white shadow-card; }
-.section-pad { @apply px-6 md:px-10 lg:px-16 py-16 md:py-24; }
+/* Buttons */
+.btn-primary {
+  @apply inline-flex items-center justify-center bg-vermilion text-cream-50 px-7 py-4 font-medium tracking-tight transition-colors;
+  border-radius: 0;
+}
+.btn-primary:hover { background: var(--ink); }
+.btn-ghost {
+  @apply inline-flex items-center justify-center px-7 py-4 font-medium tracking-tight transition-colors;
+  border: 1px solid var(--ink);
+  border-radius: 0;
+}
+.btn-ghost:hover { background: var(--ink); color: var(--cream); }
+
+/* Editorial rules */
+.rule          { border-bottom: 1px solid var(--rule); }
+.rule-thick    { border-bottom: 2px solid var(--ink); }
+.rule-vermilion{ border-bottom: 2px solid var(--vermilion); }
+
+/* Container */
+.container-editorial { max-width: 1320px; margin: 0 auto; padding: 0 24px; }
+@media (min-width: 1024px) { .container-editorial { padding: 0 56px; } }
+
+/* Editorial grid (12 col) */
+.grid-12 { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 24px; }
+
+/* Magazine card */
+.mag-card { background: var(--paper); border: 1px solid var(--rule); padding: 28px; transition: transform .25s ease, border-color .25s ease; }
+.mag-card:hover { border-color: var(--ink); transform: translateY(-2px); }
+
+/* Numbered chip (for steps) */
+.num-chip {
+  font-family: 'Noto Serif JP', serif;
+  font-weight: 900;
+  font-size: 14px;
+  width: 36px; height: 36px;
+  display: inline-flex; align-items: center; justify-content: center;
+  background: var(--ink); color: var(--cream-50, #FAF9F6);
+  border-radius: 999px;
+}
+
+/* Vermilion underline accent for emphasis */
+.accent-underline { position: relative; display: inline-block; }
+.accent-underline::after {
+  content: ''; position: absolute; left: 0; right: 0; bottom: 0.05em;
+  height: 0.35em; background: var(--vermilion); opacity: 0.85; z-index: -1;
+}
+
+/* Marquee divider tag (editorial section break) */
+.section-break {
+  display: flex; align-items: center; gap: 16px;
+  padding: 12px 0; border-top: 1px solid var(--ink); border-bottom: 1px solid var(--ink);
+  background: var(--ink); color: var(--cream-50, #FAF9F6);
+}
+.section-break .label { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; padding: 0 16px; }
+
+/* Subtle motion */
+@keyframes fadeUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+.fade-up { animation: fadeUp .8s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+.fade-up-2 { animation: fadeUp .8s cubic-bezier(0.2, 0.8, 0.2, 1) .12s both; }
+.fade-up-3 { animation: fadeUp .8s cubic-bezier(0.2, 0.8, 0.2, 1) .24s both; }
+
+/* Image treatment for editorial photos */
+.editorial-img { filter: contrast(1.05) saturate(0.95); }
