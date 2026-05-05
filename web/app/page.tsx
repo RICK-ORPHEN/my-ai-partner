@@ -6,7 +6,28 @@ import { Container } from '@/components/Container';
 import { INDUSTRIES, CROSS_SKILLS } from '@/lib/curriculum';
 import { INDUSTRY_ICONS } from '@/components/icons/Industries';
 import { CROSS_SKILL_ICONS } from '@/components/icons/CrossSkills';
-import { SevenStepIndex } from '@/components/diagrams/SevenStep';
+import { IconIdea, IconBuild, IconPublish, IconOwn } from '@/components/icons/ValueFlow';
+import { IconStar } from '@/components/icons/Star';
+
+const SEVEN_STEPS = [
+  { n: '01', t: 'AI活用入門',         dur: '60min' },
+  { n: '02', t: 'プロンプト基礎',     dur: '60min' },
+  { n: '03', t: 'データ整理・自動化', dur: '90min' },
+  { n: '04', t: '顧客対応自動化',     dur: '90min' },
+  { n: '05', t: 'コンテンツ生成',     dur: '90min' },
+  { n: '06', t: '業務システム制作（Track分岐）', dur: '120min' },
+  { n: '07', t: '公開・運用',         dur: '60min' }
+];
+
+const PORTFOLIO_SAMPLES = [
+  { img: '/images/lp/portfolio_realestate.png', title: '不動産LP',                 score: 94 },
+  { img: '/images/lp/portfolio_restaurant.png', title: '飲食店予約システム',       score: 91 },
+  { img: '/images/lp/portfolio_beauty.png',     title: '美容サロンサイト',         score: 93 },
+  { img: '/images/lp/portfolio_linebot.png',    title: 'LINE Bot（予約）',         score: 90 },
+  { img: '/images/lp/portfolio_dashboard.png',  title: '業務自動化ダッシュボード', score: 92 },
+  { img: '/images/lp/portfolio_education.png',  title: '教育メディアサイト',       score: 88 },
+  { img: '/images/lp/portfolio_retail.png',     title: '小売ECサイト',             score: 89 }
+];
 
 export default function HomePage() {
   return (
@@ -14,333 +35,483 @@ export default function HomePage() {
       <Nav />
 
       {/* ============================================================
-           HERO — Magazine Cover (full-width photo + title overlay)
+           HERO — compact, photo right, CTA + floating badge
          ============================================================ */}
-      <section className="relative">
-        {/* Issue tag bar */}
-        <div className="border-b border-ink/10">
-          <Container className="py-3 flex items-center gap-4 text-ink-mute">
-            <span className="tag">Issue No.01</span>
-            <span className="h-px flex-1 bg-ink/15"/>
-            <span className="tag">2026 Tokyo / Generic Edition</span>
-          </Container>
-        </div>
+      <section className="relative bg-cream">
+        <Container className="pt-12 md:pt-16 pb-16 md:pb-20">
+          <div className="grid md:grid-cols-12 gap-10 md:gap-14 items-center">
+            {/* LEFT: tag + brand title + statement + paragraph + CTA */}
+            <div className="md:col-span-7 relative">
+              <div className="flex md:flex-col items-start gap-3 md:gap-1 mb-8">
+                <span className="tag text-ink-mute">Issue No.01</span>
+                <span className="hidden md:block tag text-ink-mute">Vol.01</span>
+                <span className="tag text-ink-mute">2026 Tokyo</span>
+              </div>
 
-        {/* Hero photo — full width, with text overlay on right negative space */}
-        <div className="relative">
-          {/* Desktop: ultra-wide photo with title overlaid on right */}
-          <div className="hidden md:block relative w-full overflow-hidden" style={{aspectRatio:'21/9'}}>
-            <Image src="/images/lp/kv_hero_v2.png" alt="" fill priority className="object-cover editorial-img" sizes="100vw"/>
+              {/* HUGE brand name */}
+              <h1 className="h-display text-[18vw] md:text-[12vw] lg:text-[10vw] leading-[0.9] tracking-tightest text-ink">
+                My AI<br/>Partner
+              </h1>
 
-            {/* Text overlay positioned on the right negative space */}
-            <div className="absolute inset-0">
-              <div className="container-editorial h-full">
-                <div className="grid grid-cols-12 h-full items-center">
-                  <div className="col-span-12 md:col-start-6 md:col-span-7 md:pl-4 lg:pl-8">
-                    <h1 className="h-display leading-[0.85] tracking-tightest text-[7vw] lg:text-[6.4vw] xl:text-[6vw] text-ink">
-                      作って、<br/>
-                      <span className="text-vermilion">公開する。</span>
-                    </h1>
-                    <p className="font-serif text-base lg:text-lg text-ink-soft mt-6 leading-relaxed tracking-editorial max-w-[28ch]">
-                      プロンプトを覚える時代は終わり。<br/>
-                      自分の業務を解くプロダクトを、<br/>
-                      本物のURLで世に出すスクール。
-                    </p>
-                  </div>
-                </div>
+              {/* Sub statement */}
+              <h2 className="h-display text-3xl md:text-4xl mt-8 leading-[1.15] tracking-tightest">
+                学ぶのではなく、<br/>
+                <span className="text-vermilion">作って公開する。</span>
+              </h2>
+
+              {/* Body paragraph */}
+              <p className="text-ink-soft text-sm md:text-base mt-7 max-w-[40ch] leading-relaxed">
+                プロンプトを覚えるだけのスクールはもう要らない。<br/>
+                動いて、見せられて、使われるものを作る。<br/>
+                それだけが私たちの目的です。
+              </p>
+
+              {/* CTAs */}
+              <div className="mt-8 flex flex-wrap items-center gap-5">
+                <Link href="/signup" className="btn-primary text-[14px] py-3.5 px-7">
+                  無料で始める（クレカ不要）
+                </Link>
+                <Link href="/courses" className="text-[13px] text-ink-soft hover:text-vermilion font-medium underline-offset-4 hover:underline">
+                  Lesson 1-2 完全無料体験 →
+                </Link>
+              </div>
+            </div>
+
+            {/* RIGHT: hero photo + floating badge */}
+            <div className="md:col-span-5 relative">
+              <div className="relative aspect-[4/5] overflow-hidden bg-paper">
+                <Image src="/images/lp/hero_man.png" alt="" fill priority className="object-cover editorial-img" sizes="(min-width:768px) 40vw, 100vw"/>
+              </div>
+              {/* Floating badge */}
+              <div className="absolute -bottom-6 -right-6 md:-right-10 w-32 h-32 md:w-40 md:h-40 rounded-full bg-ink text-cream-50 flex flex-col items-center justify-center text-center p-3 shadow-page">
+                <div className="font-serif font-bold text-sm md:text-base leading-tight">公開URL<br/>保証</div>
+                <div className="w-10 h-px bg-cream-50/35 my-2"/>
+                <div className="font-serif text-xs md:text-sm leading-tight">ポートフォリオ<br/>所有</div>
+                <div className="w-10 h-px bg-cream-50/35 my-2"/>
+                <div className="tag text-vermilion">AI採点付き</div>
               </div>
             </div>
           </div>
+        </Container>
+      </section>
 
-          {/* Mobile: vertical photo with text below */}
-          <div className="md:hidden relative w-full" style={{aspectRatio:'4/5'}}>
-            <Image src="/images/lp/kv_mobile.png" alt="" fill priority className="object-cover editorial-img" sizes="100vw"/>
-          </div>
-        </div>
-
-        {/* Mobile-only headline (placed below photo) */}
-        <div className="md:hidden">
-          <Container className="py-10">
-            <h1 className="h-display text-[14vw] leading-[0.85] tracking-tightest -mx-1">
-              作って、<br/>
-              <span className="text-vermilion">公開する。</span>
-            </h1>
-            <p className="font-serif text-base text-ink-soft mt-6 leading-relaxed tracking-editorial">
-              プロンプトを覚える時代は終わり。<br/>
-              自分の業務を解くプロダクトを、本物のURLで世に出すスクール。
-            </p>
-          </Container>
-        </div>
-
-        {/* Below KV — info bar: blurb + CTAs + stats */}
-        <div className="border-t border-ink/10">
-          <Container className="py-10 md:py-12">
-            <div className="grid md:grid-cols-12 gap-8 md:gap-10 items-end">
-              <div className="md:col-span-5">
-                <div className="tag text-vermilion mb-3">Editorial Note</div>
-                <p className="text-sm text-ink-soft leading-relaxed max-w-md">
-                  業種別7レッスン × 横断4スキルを横断する、実行型のAI学習プログラム。受講生は卒業時に <strong className="text-ink">公開URLとポートフォリオ</strong> を所有する。
-                </p>
+      {/* ============================================================
+           VALUE FLOW — IDEA → BUILD → PUBLISH → OWN
+         ============================================================ */}
+      <section className="border-y border-ink/10 bg-paper">
+        <Container className="py-10 md:py-12">
+          <div className="grid md:grid-cols-12 gap-8 md:gap-10 items-center">
+            <div className="md:col-span-5">
+              <div className="font-serif text-xl md:text-2xl tracking-editorial leading-snug">
+                プロンプトを覚える時代は終わった。<br/>
+                ここは、<span className="text-vermilion">プロダクトを作る場所。</span>
               </div>
-              <div className="md:col-span-4 flex flex-col gap-2">
-                <Link href="/signup" className="btn-primary justify-center text-[14px] py-3">無料で診断を受ける</Link>
-                <Link href="/courses" className="btn-ghost justify-center text-[14px] py-3">カリキュラムを見る</Link>
-                <div className="tag text-ink-mute text-center mt-1">CC不要 / 1分で開始 / Lesson 1-2 完全無料</div>
-              </div>
-              <div className="md:col-span-3 grid grid-cols-2 gap-4 md:border-l md:border-ink/15 md:pl-6">
+            </div>
+            <div className="md:col-span-7">
+              <div className="grid grid-cols-4 gap-2 md:gap-4">
                 {[
-                  { n: '08', l: '業種' },
-                  { n: '04', l: '横断' },
-                  { n: '84', l: 'レッスン' },
-                  { n: '02', l: '公開先' }
-                ].map(s=>(
-                  <div key={s.l}>
-                    <div className="h-display text-3xl leading-none tracking-tightest">{s.n}</div>
-                    <div className="tag text-ink-mute mt-1.5">{s.l}</div>
+                  { Icon: IconIdea,    en: 'IDEA',    ja: '考える' },
+                  { Icon: IconBuild,   en: 'BUILD',   ja: '作る' },
+                  { Icon: IconPublish, en: 'PUBLISH', ja: '公開する' },
+                  { Icon: IconOwn,     en: 'OWN',     ja: '自分の資産に' }
+                ].map((s, i) => (
+                  <div key={s.en} className="relative flex flex-col items-center text-center">
+                    <s.Icon className="w-8 h-8 md:w-10 md:h-10 text-ink"/>
+                    <div className="tag mt-2 text-vermilion">{s.en}</div>
+                    <div className="text-[11px] md:text-xs mt-1 text-ink-soft">{s.ja}</div>
+                    {i < 3 && <div className="absolute top-4 md:top-5 -right-2 md:-right-3 text-ink/30 text-base md:text-lg">→</div>}
                   </div>
                 ))}
               </div>
             </div>
-          </Container>
-        </div>
-      </section>
-
-      {/* ====== Manifesto — with photos ====== */}
-      <section className="bg-ink text-cream-50">
-        <div className="border-y border-cream-50/15">
-          <Container className="py-3 flex items-center gap-6 text-cream-50/85">
-            <span className="tag">Manifesto</span>
-            <span className="h-px flex-1 bg-cream-50/15"/>
-            <span className="tag">Section 01</span>
-          </Container>
-        </div>
-        <Container className="py-16 md:py-24">
-          <div className="grid md:grid-cols-3 gap-10 md:gap-12">
-            {[
-              { n: '01', t: 'プロンプトじゃなく、プロダクト。', d: '覚えるだけでは業務は変わらない。動いて見せられるものを残すことだけを目的に学ぶ。', img: '/images/lp/manifesto_01.png' },
-              { n: '02', t: '業種別の具体例で学ぶ。',         d: '飲食・小売・不動産…自分の業界の実例だけを抜き出して、最短で効く学習設計に集中する。',         img: '/images/lp/manifesto_02.png' },
-              { n: '03', t: '公開URLが残る。',                d: 'Vercel/Supabase か Squarespace で、本物のお客様に見せられる作品をひとつ持って卒業する。', img: '/images/lp/manifesto_03.png' }
-            ].map((m)=>(
-              <div key={m.n}>
-                <div className="relative aspect-square overflow-hidden mb-5">
-                  <Image src={m.img} alt="" fill className="object-cover editorial-img" sizes="(min-width: 768px) 33vw, 100vw"/>
-                </div>
-                <div className="flex items-baseline gap-3">
-                  <div className="h-display text-4xl text-vermilion leading-none tracking-tightest">{m.n}</div>
-                  <div className="h-px flex-1 bg-cream-50/30"/>
-                </div>
-                <h3 className="font-serif text-xl md:text-2xl mt-4 leading-snug tracking-editorial">{m.t}</h3>
-                <p className="mt-4 text-cream-50/70 leading-relaxed text-sm">{m.d}</p>
-              </div>
-            ))}
           </div>
         </Container>
       </section>
 
-      {/* ====== Industry section ====== */}
+      {/* ============================================================
+           CURRICULUM — 3 column dense
+         ============================================================ */}
       <section>
-        <div className="border-y border-ink">
+        <div className="border-b border-ink/10">
           <Container className="py-3 flex items-center gap-6">
-            <span className="tag text-vermilion">Industry Courses</span>
-            <span className="h-px flex-1 bg-ink/20"/>
+            <span className="tag text-vermilion">Curriculum</span>
+            <span className="h-px flex-1 bg-ink/15"/>
+            <span className="tag text-ink-mute">Section 01</span>
+          </Container>
+        </div>
+        <Container className="py-14 md:py-20">
+
+          {/* Top headline */}
+          <h2 className="h-display text-3xl md:text-5xl tracking-tightest leading-[1.05] mb-12 max-w-3xl">
+            業種 × スキルの二軸で、<br/>
+            実務に直結する<span className="text-vermilion">全84レッスン。</span>
+          </h2>
+
+          <div className="grid md:grid-cols-12 gap-8 md:gap-10">
+            {/* COL 1: 8 industries */}
+            <div className="md:col-span-4">
+              <div className="tag text-ink-mute mb-5">8つの業種コース</div>
+              <div className="grid grid-cols-4 gap-y-6 gap-x-2">
+                {INDUSTRIES.map(i=>{
+                  const Icon = INDUSTRY_ICONS[i.id];
+                  return (
+                    <Link key={i.id} href={`/courses/${i.id}`} className="flex flex-col items-center text-center group">
+                      <Icon className="w-8 h-8 text-ink group-hover:text-vermilion transition-colors"/>
+                      <div className="text-xs text-ink-soft mt-2 group-hover:text-vermilion transition-colors">{i.title}</div>
+                    </Link>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* COL 2: 7 step process */}
+            <div className="md:col-span-5">
+              <div className="tag text-ink-mute mb-5">7つのステップで、必ず公開できる。</div>
+              <div className="border-t border-ink/15">
+                {SEVEN_STEPS.map(s=>(
+                  <div key={s.n} className="grid grid-cols-12 gap-2 py-3 border-b border-ink/10 items-baseline">
+                    <span className="col-span-2 md:col-span-1 font-serif text-sm font-bold text-ink">{s.n}</span>
+                    <span className="col-span-7 md:col-span-8 text-[13px] text-ink-soft">{s.t}</span>
+                    <span className="col-span-3 flex items-center gap-1.5 justify-end">
+                      <span className="hidden md:inline-block flex-1 border-b border-dotted border-ink/20 mb-1"/>
+                      <span className="tag text-ink-mute">{s.dur}</span>
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* COL 3: 4 cross skills */}
+            <div className="md:col-span-3">
+              <div className="tag text-ink-mute mb-5">4つの横断スキルコース</div>
+              <ul className="space-y-4">
+                {CROSS_SKILLS.map(c=>{
+                  const Icon = CROSS_SKILL_ICONS[c.id];
+                  return (
+                    <li key={c.id}>
+                      <Link href={`/courses/${c.id}`} className="flex items-start gap-3 group">
+                        <div className="w-8 h-8 border border-ink/15 flex items-center justify-center group-hover:border-vermilion group-hover:text-vermilion transition-colors flex-shrink-0">
+                          <Icon className="w-5 h-5"/>
+                        </div>
+                        <div>
+                          <div className="font-serif text-sm tracking-editorial group-hover:text-vermilion transition-colors">{c.title}</div>
+                          <div className="text-[11px] text-ink-mute mt-0.5">{c.subtitle}</div>
+                        </div>
+                      </Link>
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+          </div>
+        </Container>
+      </section>
+
+      {/* ============================================================
+           COURSE TRACK — A vs B + extras column
+         ============================================================ */}
+      <section className="bg-paper">
+        <div className="border-y border-ink/10">
+          <Container className="py-3 flex items-center gap-6">
+            <span className="tag text-vermilion">Course Track</span>
+            <span className="h-px flex-1 bg-ink/15"/>
             <span className="tag text-ink-mute">Section 02</span>
           </Container>
         </div>
-        <Container className="py-16 md:py-20">
-          <div className="grid md:grid-cols-12 gap-8 md:gap-10 mb-14 items-center">
-            <div className="md:col-span-7 relative aspect-[16/10] overflow-hidden order-2 md:order-1">
-              <Image src="/images/lp/industry.png" alt="" fill className="object-cover editorial-img" sizes="(min-width:768px) 50vw, 100vw"/>
-            </div>
-            <div className="md:col-span-5 order-1 md:order-2">
-              <h2 className="h-display text-4xl md:text-6xl tracking-tightest leading-[0.95]">
-                8業種、<br/>それぞれに<br/>
-                <span className="accent-underline">7段階の道筋</span>。
-              </h2>
-              <p className="text-ink-soft leading-relaxed text-sm mt-6 max-w-md">
-                「学んで終わり」ではなく「公開して終わり」。各業種で7段のレッスンを進めると、最後には自分の業務を解くアプリやサイトが手元に残る。
-              </p>
-            </div>
-          </div>
+        <Container className="py-14 md:py-20">
+          <h2 className="h-display text-3xl md:text-5xl tracking-tightest leading-[1.05] mb-10">
+            自分に合うルートで、<span className="text-vermilion">必ず公開できる。</span>
+          </h2>
 
-          <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-px bg-ink/10 border border-ink/10">
-            {INDUSTRIES.map((i, idx)=>{
-              const Icon = INDUSTRY_ICONS[i.id];
-              return (
-                <Link key={i.id} href={`/courses/${i.id}`} className="group bg-cream hover:bg-paper p-6 transition-colors flex flex-col min-h-[180px]">
-                  <div className="flex items-start justify-between text-ink">
-                    <Icon className="w-8 h-8 group-hover:text-vermilion transition-colors" />
-                    <div className="tag text-ink-mute">{String(idx+1).padStart(2,'0')} / 08</div>
-                  </div>
-                  <div className="mt-auto pt-6">
-                    <div className="font-serif text-xl tracking-editorial">{i.title}</div>
-                    <div className="text-xs text-ink-mute mt-1.5 leading-snug">{i.subtitle}</div>
-                  </div>
-                </Link>
-              );
-            })}
+          <div className="grid md:grid-cols-12 gap-6 md:gap-8">
+            {/* TRACK A — dark navy */}
+            <div className="md:col-span-5 bg-ink text-cream-50 p-7 md:p-8">
+              <div className="flex items-baseline gap-3 mb-2">
+                <span className="font-serif text-xl font-bold">Track A</span>
+                <span className="tag text-cream-50/70">コーディング派</span>
+              </div>
+              <p className="text-cream-50/70 text-sm leading-relaxed mb-5">自分で更新したい / 技術に興味がある方</p>
+              <div className="flex items-center gap-4 mb-5 text-cream-50/85">
+                <span className="text-xs font-semibold tracking-wide">Next.js</span>
+                <span className="opacity-30">/</span>
+                <span className="text-xs font-semibold tracking-wide">Supabase</span>
+                <span className="opacity-30">/</span>
+                <span className="text-xs font-semibold tracking-wide">Vercel</span>
+              </div>
+              <ul className="space-y-2.5 text-sm border-t border-cream-50/15 pt-4">
+                {['Next.js テンプレ提供','Supabase 接続コード自動生成','Vercel ワンクリックデプロイ'].map(f=>(
+                  <li key={f} className="flex gap-2.5 items-baseline">
+                    <span className="text-vermilion">✓</span><span>{f}</span>
+                  </li>
+                ))}
+              </ul>
+              <div className="relative aspect-[16/10] mt-6 overflow-hidden">
+                <Image src="/images/lp/track_a.png" alt="" fill className="object-cover editorial-img" sizes="(min-width:768px) 40vw, 100vw"/>
+              </div>
+            </div>
+
+            {/* TRACK B — cream */}
+            <div className="md:col-span-5 bg-cream p-7 md:p-8 border border-ink/10">
+              <div className="flex items-baseline gap-3 mb-2">
+                <span className="font-serif text-xl font-bold">Track B</span>
+                <span className="tag text-ink-mute">ノーコード派</span>
+              </div>
+              <p className="text-ink-soft text-sm leading-relaxed mb-5">本業に集中したい / コードは書かない方</p>
+              <div className="flex items-center gap-2 mb-5">
+                <span className="text-xs font-bold tracking-wide">SQUARESPACE</span>
+              </div>
+              <ul className="space-y-2.5 text-sm border-t border-ink/10 pt-4">
+                {['業種別テンプレート','AI生成コピー・画像を流し込み','公開までノーコードで完結'].map(f=>(
+                  <li key={f} className="flex gap-2.5 items-baseline">
+                    <span className="text-vermilion">✓</span><span>{f}</span>
+                  </li>
+                ))}
+              </ul>
+              <div className="relative aspect-[16/10] mt-6 overflow-hidden">
+                <Image src="/images/lp/track_b.png" alt="" fill className="object-cover editorial-img" sizes="(min-width:768px) 40vw, 100vw"/>
+              </div>
+            </div>
+
+            {/* SUPPORT column */}
+            <div className="md:col-span-2 space-y-7">
+              {[
+                { t:'独自ドメイン取得',     d:'オリジナルドメインで信頼性を確保' },
+                { t:'SEO設定サポート',     d:'検索に強いサイト構造を構築' },
+                { t:'効果計測ガイド',       d:'アクセス解析・改善までサポート' }
+              ].map(s=>(
+                <div key={s.t} className="border-t border-ink/15 pt-4">
+                  <div className="font-serif text-sm font-bold tracking-editorial">{s.t}</div>
+                  <div className="text-[11px] text-ink-mute mt-1.5 leading-relaxed">{s.d}</div>
+                </div>
+              ))}
+            </div>
           </div>
         </Container>
       </section>
 
-      {/* ====== Cross-skills ====== */}
-      <section className="bg-paper">
-        <div className="border-y border-ink">
+      {/* ============================================================
+           AI GRADING — score sample + certificate
+         ============================================================ */}
+      <section>
+        <div className="border-b border-ink/10">
           <Container className="py-3 flex items-center gap-6">
-            <span className="tag text-vermilion">Cross-disciplinary Skills</span>
-            <span className="h-px flex-1 bg-ink/20"/>
+            <span className="tag text-vermilion">AI Grading</span>
+            <span className="h-px flex-1 bg-ink/15"/>
             <span className="tag text-ink-mute">Section 03</span>
           </Container>
         </div>
-        <Container className="py-16 md:py-20">
-          <div className="max-w-3xl mb-12">
-            <h2 className="h-display text-4xl md:text-6xl tracking-tightest leading-[0.95]">
-              4つの<span className="text-vermilion">土台スキル</span>が、<br/>
-              業種を超えて効く。
-            </h2>
-            <p className="text-ink-soft mt-6 leading-relaxed text-sm md:text-base max-w-2xl">
-              Claude Skill開発・LP制作・企画書・自動化チャットツール ── これら横断スキルを業種コースと並行して身につけます。すべて成果物提出 + AI採点付き。
-            </p>
-          </div>
-          <div className="grid md:grid-cols-2 gap-px bg-ink/10 border border-ink/10">
-            {CROSS_SKILLS.map((c, idx)=>{
-              const Icon = CROSS_SKILL_ICONS[c.id];
-              return (
-                <Link key={c.id} href={`/courses/${c.id}`} className="group bg-cream hover:bg-paper p-8 flex gap-5 items-start transition-colors">
-                  <div className="text-ink group-hover:text-vermilion transition-colors">
-                    <Icon className="w-10 h-10"/>
-                  </div>
-                  <div className="flex-1">
-                    <div className="tag text-ink-mute mb-1.5">Skill {String(idx+1).padStart(2,'0')}</div>
-                    <div className="font-serif text-xl md:text-2xl tracking-editorial">{c.title}</div>
-                    <div className="text-ink-mute mt-2 leading-relaxed text-sm">{c.subtitle}</div>
-                  </div>
-                </Link>
-              );
-            })}
+        <Container className="py-14 md:py-20">
+          <div className="grid md:grid-cols-12 gap-8 md:gap-10 items-start">
+            {/* Headline */}
+            <div className="md:col-span-3">
+              <h2 className="h-display text-2xl md:text-3xl tracking-tightest leading-tight">
+                AIが100点満点で採点。<br/>
+                改善点と次のステップを提示。
+              </h2>
+            </div>
+
+            {/* Score card + improvements + next */}
+            <div className="md:col-span-6 grid grid-cols-2 gap-6">
+              {/* Score */}
+              <div className="bg-paper border border-ink/10 p-5">
+                <div className="tag text-ink-mute mb-1">総合スコア</div>
+                <div className="flex items-baseline gap-1 mt-2">
+                  <div className="h-display text-5xl font-bold">92</div>
+                  <div className="text-ink-mute">/100</div>
+                </div>
+                <div className="flex gap-1 mt-3 text-vermilion">
+                  {Array.from({length:5}).map((_,i)=><IconStar key={i} className="w-4 h-4" filled={true}/>)}
+                </div>
+              </div>
+              {/* Improvements */}
+              <div className="bg-paper border border-ink/10 p-5">
+                <div className="tag text-ink-mute mb-2">改善ポイント</div>
+                <ul className="space-y-1.5 text-xs text-ink-soft">
+                  <li className="flex gap-2"><span className="text-vermilion">→</span>データの自動化をさらに強化</li>
+                  <li className="flex gap-2"><span className="text-vermilion">→</span>CTAの配置を最適化する</li>
+                  <li className="flex gap-2"><span className="text-vermilion">→</span>事例セクションを追加する</li>
+                </ul>
+              </div>
+              {/* Next step */}
+              <div className="col-span-2 bg-paper border border-ink/10 p-5">
+                <div className="flex items-baseline justify-between mb-2">
+                  <div className="tag text-ink-mute">次のステップ</div>
+                  <div className="tag text-vermilion">進捗率 68%</div>
+                </div>
+                <div className="font-serif text-sm">Lesson 24 に進みましょう</div>
+                <div className="h-1.5 bg-ink/10 rounded-full mt-3 overflow-hidden">
+                  <div className="h-full bg-vermilion" style={{ width: '68%' }}/>
+                </div>
+              </div>
+            </div>
+
+            {/* Certificate */}
+            <div className="md:col-span-3">
+              <div className="relative aspect-[4/5] overflow-hidden border border-ink/10">
+                <Image src="/images/lp/certificate.png" alt="" fill className="object-cover" sizes="(min-width:768px) 25vw, 100vw"/>
+              </div>
+              <div className="tag text-ink-mute mt-3 text-center">PDF認定証を発行</div>
+            </div>
           </div>
         </Container>
       </section>
 
-      {/* ====== 7-step Index — editorial table of contents ====== */}
+      {/* ============================================================
+           PORTFOLIO — sample gallery
+         ============================================================ */}
       <section className="bg-ink text-cream-50">
         <div className="border-y border-cream-50/15">
           <Container className="py-3 flex items-center gap-6 text-cream-50/85">
-            <span className="tag text-vermilion">Process Index</span>
+            <span className="tag text-vermilion">Portfolio</span>
             <span className="h-px flex-1 bg-cream-50/15"/>
             <span className="tag">Section 04</span>
           </Container>
         </div>
-        <Container className="py-16 md:py-24">
-          <div className="grid md:grid-cols-12 gap-6 md:gap-12 items-end">
-            <div className="md:col-span-7">
-              <h2 className="h-display text-4xl md:text-6xl tracking-tightest leading-[0.95]">
-                プロダクト完成までの、<br/>
-                <span className="text-vermilion">7段の道のり</span>。
-              </h2>
-            </div>
-            <div className="md:col-span-5">
-              <p className="text-cream-50/70 text-sm leading-relaxed max-w-md">
-                すべての業種・横断コースに共通する7ステップ。STEP 06–07 で Vercel+Supabase または Squarespace と連携し、卒業時には <strong className="text-cream-50">公開URL</strong> が手元に残る。
-              </p>
+        <Container className="py-14 md:py-20">
+          <div className="grid md:grid-cols-12 gap-8 mb-10 items-end">
+            <h2 className="md:col-span-6 h-display text-3xl md:text-5xl tracking-tightest leading-[1.05]">
+              卒業すると、<br/>
+              <span className="text-vermilion">作品が資産になる。</span>
+            </h2>
+            <div className="md:col-span-3 tag text-cream-50/55 font-mono">portfolio.aischool.app/<span className="text-vermilion">username</span></div>
+            <div className="md:col-span-3 text-right">
+              <Link href="/cases" className="text-[13px] underline-offset-4 hover:underline">作品をもっと見る →</Link>
             </div>
           </div>
 
-          <SevenStepIndex />
+          <div className="grid grid-cols-2 md:grid-cols-7 gap-3 md:gap-4">
+            {PORTFOLIO_SAMPLES.map(p=>(
+              <div key={p.title} className="group">
+                <div className="relative aspect-[3/4] overflow-hidden bg-cream-50/5">
+                  <Image src={p.img} alt="" fill className="object-cover transition-transform group-hover:scale-105" sizes="(min-width:768px) 14vw, 50vw"/>
+                </div>
+                <div className="mt-2 flex items-baseline justify-between">
+                  <div className="text-[11px] md:text-xs">{p.title}</div>
+                  <div className="tag text-vermilion">スコア {p.score}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-12 grid md:grid-cols-12 gap-6 items-center border-t border-cream-50/15 pt-8">
+            <div className="md:col-span-7">
+              <div className="font-serif text-xl tracking-editorial">AIレビューでさらに成長</div>
+              <p className="text-cream-50/65 text-sm mt-2">完成度スコア / 改善点 / 次のレベルへの示唆をAIが提示</p>
+            </div>
+          </div>
         </Container>
       </section>
 
-      {/* ====== Track A vs B — photos only (no SVG) ====== */}
+      {/* ============================================================
+           PRICE — 4 plans
+         ============================================================ */}
       <section>
-        <div className="border-y border-ink">
+        <div className="border-b border-ink/10">
           <Container className="py-3 flex items-center gap-6">
-            <span className="tag text-vermilion">Publishing Routes</span>
-            <span className="h-px flex-1 bg-ink/20"/>
+            <span className="tag text-vermilion">Price</span>
+            <span className="h-px flex-1 bg-ink/15"/>
             <span className="tag text-ink-mute">Section 05</span>
           </Container>
         </div>
-        <Container className="py-16 md:py-20">
-          <div className="grid md:grid-cols-12 gap-6 md:gap-10 items-end mb-12">
-            <h2 className="md:col-span-7 h-display text-4xl md:text-6xl tracking-tightest leading-[0.95]">
-              <span className="text-vermilion">どちらの道</span>でも、<br/>公開URLが残る。
-            </h2>
-            <p className="md:col-span-5 text-ink-soft text-sm leading-relaxed max-w-md">
-              受講生のレベルと希望にあわせて、Vercel+Supabase の本格コーディング派、または Squarespace のノーコード派、どちらかを選んで公開へ進む。
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-px bg-ink/10 border border-ink/10">
-            <div className="bg-cream">
-              <div className="relative aspect-[16/10] overflow-hidden">
-                <Image src="/images/lp/track_a.png" alt="" fill className="object-cover editorial-img" sizes="(min-width:768px) 50vw, 100vw"/>
-              </div>
-              <div className="p-8 md:p-10">
-                <div className="flex items-baseline justify-between mb-5">
-                  <div>
-                    <div className="tag text-cobalt">Track A</div>
-                    <div className="h-display text-3xl tracking-tightest mt-1">コーディング派</div>
-                  </div>
-                  <div className="h-display text-5xl text-ink/15 tracking-tightest">A</div>
-                </div>
-                <p className="text-ink-soft leading-relaxed text-sm">自分で更新したい / 技術に興味あり。</p>
-                <ul className="mt-5 space-y-2.5 text-sm">
-                  {['Next.js テンプレ提供（業種別）','Supabase 接続コード自動生成','Vercel ワンクリックデプロイ','独自ドメイン取得ガイド'].map(f=>(
-                    <li key={f} className="flex gap-3 border-b border-ink/10 pb-2.5">
-                      <span className="text-vermilion font-bold">→</span>
-                      <span>{f}</span>
-                    </li>
-                  ))}
-                </ul>
-                <div className="tag text-ink-mute mt-6">Stack: Next.js 15 + Supabase + Vercel</div>
-              </div>
+        <Container className="py-14 md:py-20">
+          <h2 className="h-display text-3xl md:text-5xl tracking-tightest leading-[1.05] mb-12">
+            あなたのペースで、<span className="text-vermilion">選べるプラン。</span>
+          </h2>
+          <div className="grid md:grid-cols-4 gap-px bg-ink/10 border border-ink/10">
+            {/* Free */}
+            <div className="bg-cream p-7">
+              <div className="font-serif text-base font-bold mb-2">Free</div>
+              <div className="h-display text-4xl font-bold">¥0</div>
+              <div className="text-xs text-ink-mute mt-1">Lesson 1-2 完全無料体験</div>
+              <Link href="/signup" className="btn-ghost w-full mt-6 text-[12px] py-2.5">無料で始める</Link>
             </div>
-
-            <div className="bg-paper">
-              <div className="relative aspect-[16/10] overflow-hidden">
-                <Image src="/images/lp/track_b.png" alt="" fill className="object-cover editorial-img" sizes="(min-width:768px) 50vw, 100vw"/>
+            {/* 月額 */}
+            <div className="bg-cream p-7">
+              <div className="font-serif text-base font-bold mb-2">月額プラン</div>
+              <div className="flex items-baseline gap-1">
+                <div className="h-display text-4xl font-bold">¥9,800</div>
+                <div className="text-xs text-ink-mute">/ 月</div>
               </div>
-              <div className="p-8 md:p-10">
-                <div className="flex items-baseline justify-between mb-5">
-                  <div>
-                    <div className="tag text-vermilion">Track B</div>
-                    <div className="h-display text-3xl tracking-tightest mt-1">ノーコード派</div>
-                  </div>
-                  <div className="h-display text-5xl text-ink/15 tracking-tightest">B</div>
-                </div>
-                <p className="text-ink-soft leading-relaxed text-sm">本業に集中したい / コードは書かない。</p>
-                <ul className="mt-5 space-y-2.5 text-sm">
-                  {['Squarespace 業種別テンプレ','AI生成コピー・画像をテンプレに流し込み','独自ドメイン購入＆SSL自動','SEO設定 / GA連携ガイド'].map(f=>(
-                    <li key={f} className="flex gap-3 border-b border-ink/10 pb-2.5">
-                      <span className="text-vermilion font-bold">→</span>
-                      <span>{f}</span>
-                    </li>
-                  ))}
-                </ul>
-                <div className="tag text-ink-mute mt-6">Stack: Squarespace Business</div>
+              <ul className="text-xs text-ink-soft mt-3 space-y-1.5">
+                <li>全コース受け放題</li>
+                <li>AI採点 無制限</li>
+              </ul>
+              <Link href="/signup" className="btn-ghost w-full mt-6 text-[12px] py-2.5">月額で始める</Link>
+            </div>
+            {/* 年額 — recommended */}
+            <div className="bg-ink text-cream-50 p-7 relative">
+              <span className="absolute -top-2 right-4 bg-vermilion text-cream-50 tag px-2 py-0.5">おすすめ</span>
+              <div className="font-serif text-base font-bold mb-2">年額プラン</div>
+              <div className="flex items-baseline gap-1">
+                <div className="h-display text-4xl font-bold">¥98,000</div>
+                <div className="text-xs text-cream-50/55">/ 年</div>
               </div>
+              <ul className="text-xs text-cream-50/75 mt-3 space-y-1.5">
+                <li>全コース＋ポートフォリオ公開</li>
+                <li>PDF認定証付き（2ヶ月分お得）</li>
+              </ul>
+              <Link href="/signup" className="bg-vermilion text-cream-50 w-full mt-6 inline-flex justify-center text-[12px] py-2.5 hover:bg-cream-50 hover:text-ink transition-colors">年額で始める</Link>
+            </div>
+            {/* 法人 */}
+            <div className="bg-cream p-7">
+              <div className="font-serif text-base font-bold mb-2">法人 / Team</div>
+              <div className="flex items-baseline gap-1">
+                <div className="h-display text-4xl font-bold">¥49,800</div>
+                <div className="text-xs text-ink-mute">/ 月（5名）</div>
+              </div>
+              <ul className="text-xs text-ink-soft mt-3 space-y-1.5">
+                <li>アドミン管理 / 進捗一括把握</li>
+                <li>カスタマーサクセス</li>
+              </ul>
+              <Link href="/contact" className="btn-ghost w-full mt-6 text-[12px] py-2.5">お問い合わせ</Link>
             </div>
           </div>
         </Container>
       </section>
 
-      {/* ====== Closing CTA ====== */}
-      <section className="bg-vermilion text-cream-50">
-        <Container className="py-20 md:py-24">
-          <div className="grid md:grid-cols-12 gap-8 items-end">
-            <div className="md:col-span-7">
-              <div className="tag text-cream-50/70">Final Call</div>
-              <h3 className="h-display text-4xl md:text-7xl tracking-tightest leading-[0.95] mt-4">
-                今日、診断を受ける。<br/>
-                3分で、<br/>
-                あなたのコースが決まる。
+      {/* ============================================================
+           CLOSING CTA — strong, simple
+         ============================================================ */}
+      <section className="bg-paper">
+        <Container className="py-14 md:py-16">
+          <div className="grid md:grid-cols-12 gap-6 items-center">
+            <div className="md:col-span-6">
+              <h3 className="h-display text-3xl md:text-5xl tracking-tightest leading-[1.05]">
+                まずは無料で、<br/>
+                <span className="text-vermilion">1つ作ってみる。</span>
               </h3>
+              <p className="text-xs text-ink-mute mt-3">クレカ不要・いつでも解約OK</p>
             </div>
-            <div className="md:col-span-5">
-              <Link href="/signup" className="inline-flex items-center gap-3 bg-ink text-cream-50 px-8 py-5 text-lg font-serif tracking-editorial w-full justify-center hover:bg-cream-50 hover:text-ink transition-colors">
-                <span>無料診断を始める</span>
-                <span>→</span>
+            <div className="md:col-span-6">
+              <Link href="/signup" className="btn-primary w-full justify-center text-base py-5 group">
+                <span>今すぐ無料で体験する</span>
+                <span className="ml-3 group-hover:translate-x-1 transition-transform">→</span>
               </Link>
-              <div className="tag text-cream-50/70 mt-4">CC不要 / 1分で開始 / Lesson 1-2 完全無料</div>
             </div>
+          </div>
+        </Container>
+      </section>
+
+      {/* ============================================================
+           TRUST BAR — bottom stats
+         ============================================================ */}
+      <section className="bg-ink text-cream-50">
+        <Container className="py-8 md:py-10">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-10">
+            {[
+              { l:'受講生満足度',          v:'4.8',   u:'/5'  },
+              { l:'専属講師の実務経験',    v:'1,200+', u:'時間' },
+              { l:'導入企業（法人プラン）',v:'100+',  u:'社'   },
+              { l:'サポート満足度',        v:'98',    u:'%'    }
+            ].map(x=>(
+              <div key={x.l} className="flex flex-col items-center text-center md:items-start md:text-left">
+                <div className="tag text-cream-50/55">{x.l}</div>
+                <div className="flex items-baseline gap-1 mt-2">
+                  <div className="h-display text-3xl md:text-4xl font-bold">{x.v}</div>
+                  <div className="text-cream-50/55 text-sm">{x.u}</div>
+                </div>
+              </div>
+            ))}
           </div>
         </Container>
       </section>
