@@ -2,6 +2,8 @@ import { createClient } from '@/lib/supabase/server';
 import { redirect } from 'next/navigation';
 import Link from 'next/link';
 
+export const dynamic = 'force-dynamic';
+
 export default async function AdminLayout({ children }: { children: React.ReactNode }) {
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
@@ -26,7 +28,7 @@ export default async function AdminLayout({ children }: { children: React.ReactN
           ))}
         </div>
       </aside>
-      <main className="bg-bg-soft" style={{ background:'#F8F8F6' }}>{children}</main>
+      <main style={{ background:'#F8F8F6' }}>{children}</main>
     </div>
   );
 }

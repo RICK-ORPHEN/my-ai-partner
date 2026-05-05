@@ -1,5 +1,8 @@
 import './globals.css';
 import type { Metadata } from 'next';
+
+export const dynamic = 'force-dynamic';
+
 export const metadata: Metadata = {
   title: 'My AI Partner — 業種×横断スキルで作って公開できるAIスクール',
   description: 'AI活用を業種別に学び、自分のプロダクトを公開しポートフォリオ化するインタラクティブAIスクール。',
@@ -9,6 +12,7 @@ export const metadata: Metadata = {
     type: 'website'
   }
 };
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="ja">

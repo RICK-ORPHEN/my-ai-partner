@@ -1,10 +1,10 @@
 'use client';
-import { useState } from 'react';
+import { Suspense, useState } from 'react';
 import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { createClient } from '@/lib/supabase/client';
 
-export default function LoginPage() {
+function LoginForm() {
   const supabase = createClient();
   const router = useRouter();
   const search = useSearchParams();
@@ -35,21 +35,29 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-bg-soft" style={{ background:'#F8F8F6' }}>
-      <div className="card p-10 w-full max-w-md">
-        <Link href="/" className="text-display text-3xl text-brand">MY AI PARTNER</Link>
-        <h1 className="text-2xl font-semibold mt-6">ログイン</h1>
-        <form onSubmit={submit} className="mt-6 space-y-4">
-          <input className="w-full border rounded-md px-4 py-3" placeholder="メールアドレス" value={email} onChange={e=>setEmail(e.target.value)} type="email" required />
-          <input className="w-full border rounded-md px-4 py-3" placeholder="パスワード" value={pw} onChange={e=>setPw(e.target.value)} type="password" />
-          {err && <div className="text-sm text-brand">{err}</div>}
-          <button disabled={loading} className="btn-primary w-full">{loading?'…':'ログイン'}</button>
-        </form>
-        <button onClick={magic} className="btn-ghost w-full mt-3">マジックリンクで送る</button>
-        <p className="text-sm text-ink/60 mt-6 text-center">
-          初めての方は <Link href="/signup" className="text-brand font-semibold">無料登録</Link>
-        </p>
-      </div>
+    <div className="card p-10 w-full max-w-md">
+      <Link href="/" className="text-display text-3xl text-brand">MY AI PARTNER</Link>
+      <h1 className="text-2xl font-semibold mt-6">ログイン</h1>
+      <form onSubmit={submit} className="mt-6 space-y-4">
+        <input className="w-full border rounded-md px-4 py-3" placeholder="メールアドレス" value={email} onChange={e=>setEmail(e.target.value)} type="email" required />
+        <input className="w-full border rounded-md px-4 py-3" placeholder="パスワード" value={pw} onChange={e=>setPw(e.target.value)} type="password" />
+        {err && <div className="text-sm text-brand">{err}</div>}
+        <button disabled={loading} className="btn-primary w-full">{loading?'…':'ログイン'}</button>
+      </form>
+      <button onClick={magic} className="btn-ghost w-full mt-3">マジックリンクで送る</button>
+      <p className="text-sm text-ink/60 mt-6 text-center">
+        初めての方は <Link href="/signup" className="text-brand font-semibold">無料登録</Link>
+      </p>
+    </div>
+  );
+}
+
+export default function LoginPage() {
+  return (
+    <div className="min-h-screen flex items-center justify-center" style={{ background:'#F8F8F6' }}>
+      <Suspense fallback={<div className="card p-10">読み込み中…</div>}>
+        <LoginForm />
+      </Suspense>
     </div>
   );
 }
