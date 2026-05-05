@@ -1,182 +1,66 @@
 {
   "project": {
     "name": "my-ai-partner",
-    "description": "業種業態別にAI活用を導き、社員がCowork・ChatGPT・Geminiを使って自ら開発できるようになるインタラクティブAIスクールプラットフォーム",
-    "north_star_goal": "業種業態ごとにカスタマイズされたインタラクティブ学習で、社員が自らAIサービスを考え・開発できる状態にする → MVP完成 → 100社導入",
+    "description": "汎用プロダクト開発スクール — 業種×横断スキルを学び、自分のプロダクトを公開してポートフォリオ化",
+    "north_star_goal": "受講生が公開URLを所有し、ポートフォリオに掲載されている状態 → MVP",
+    "version": "v3",
     "created_at": "2026-03-26T00:00:00Z",
-    "last_updated": "2026-03-26T00:00:00Z",
-    "iteration": 0,
-    "total_tokens_used": 0,
-    "token_budget": 500000
+    "last_updated": "2026-05-05T00:00:00Z",
+    "iteration": 1,
+    "phase": "phase1_v3_full_build"
   },
-
   "identity": {
     "brand_rules": [
-      "トーンは専門的だが親しみやすい。初心者が怖がらないように",
-      "配色はオレンジ（#F97316）+ ブラック + ホワイト。既存デザイン準拠",
-      "業種業態ごとの具体例を必ず入れる（抽象論だけにしない）",
-      "Cowork/ChatGPT/Geminiの実践的な使い方を中心に据える",
-      "社員が『自分でもできる』と思える体験設計"
+      "汎用プラットフォーム — 業種8 + 横断スキル4を等しく扱う",
+      "lp-03 デザイントークン（オレンジレッド #D93B00 + ブラック + ホワイト）",
+      "公開・ポートフォリオ・実プロダクト所有を最重視",
+      "Cowork/ChatGPT/Gemini を実践的に使う前提",
+      "アフィリエイト誘導は受講生メリット最優先（学習者の利便性 > 売上）"
     ],
     "non_negotiables": [
-      "誇大広告・景表法リスクのある表現は禁止",
-      "ユーザーデータを外部に送信しない",
-      "本番DBへの直接書き込みは人間承認必須",
-      "APIキーをフロントエンドに露出させない"
+      "誇大広告禁止",
+      "個人情報を不要に収集しない",
+      "本番DB破壊操作は人間承認必須",
+      "アフィリリンクは必ず明示",
+      "モック・ダミーデータをUIに残さない"
     ],
     "design_style": "lp-03",
-    "language": "ja",
-    "target_users": "AI活用を社内に浸透させたい中小〜大企業の経営者・人事・DX推進担当者、およびその社員"
+    "language": "ja"
   },
-
-  "current_phase": "phase1_dev",
-
-  "backlog": [
-    {
-      "id": "TASK-001",
-      "title": "Next.js プロジェクト初期化 + 既存HTMLからの移行基盤",
-      "priority": "critical",
-      "status": "pending",
-      "created_at": "2026-03-26T00:00:00Z"
+  "tracks": {
+    "track_a": {
+      "name": "コーディング派",
+      "stack": ["Next.js 15", "Vercel", "Supabase", "GitHub"],
+      "affiliate_targets": ["Vercel Pro", "Supabase Pro"]
     },
-    {
-      "id": "TASK-002",
-      "title": "Supabase DB スキーマ構築（業種業態テーブル追加）",
-      "priority": "critical",
-      "status": "pending",
-      "created_at": "2026-03-26T00:00:00Z"
+    "track_b": {
+      "name": "ノーコード派",
+      "stack": ["Squarespace"],
+      "affiliate_targets": ["Squarespace Business"]
     },
-    {
-      "id": "TASK-003",
-      "title": "業種業態別カリキュラムエンジン設計・実装",
-      "priority": "critical",
-      "status": "pending",
-      "created_at": "2026-03-26T00:00:00Z"
-    },
-    {
-      "id": "TASK-004",
-      "title": "インタラクティブレッスンページ（ステップバイステップ誘導UI）",
-      "priority": "high",
-      "status": "pending",
-      "created_at": "2026-03-26T00:00:00Z"
-    },
-    {
-      "id": "TASK-005",
-      "title": "Cowork活用ガイド実践レッスン（ハンズオン形式）",
-      "priority": "high",
-      "status": "pending",
-      "created_at": "2026-03-26T00:00:00Z"
-    },
-    {
-      "id": "TASK-006",
-      "title": "ChatGPT/Gemini連携レッスン（プロンプト実践）",
-      "priority": "high",
-      "status": "pending",
-      "created_at": "2026-03-26T00:00:00Z"
-    },
-    {
-      "id": "TASK-007",
-      "title": "認証システム（Supabase Auth）",
-      "priority": "high",
-      "status": "pending",
-      "created_at": "2026-03-26T00:00:00Z"
-    },
-    {
-      "id": "TASK-008",
-      "title": "ダッシュボード（学習進捗・スキルスコア・次のステップ表示）",
-      "priority": "high",
-      "status": "pending",
-      "created_at": "2026-03-26T00:00:00Z"
-    },
-    {
-      "id": "TASK-009",
-      "title": "業種別オンボーディングフロー（業種選択→目標設定→学習パス生成）",
-      "priority": "high",
-      "status": "pending",
-      "created_at": "2026-03-26T00:00:00Z"
-    },
-    {
-      "id": "TASK-010",
-      "title": "管理画面（カリキュラム管理・受講者管理）",
-      "priority": "medium",
-      "status": "pending",
-      "created_at": "2026-03-26T00:00:00Z"
+    "track_hybrid": {
+      "name": "段階的派",
+      "stack": ["Squarespace → Next.js"]
     }
-  ],
-
+  },
+  "industries": ["restaurant", "retail", "realestate", "medical", "legal", "construction", "beauty", "education"],
+  "cross_skills": ["skills_dev", "lp_design", "proposal_design", "automation_chat"],
   "tech_stack": {
     "frontend": "Next.js 15 (App Router) + React 19 + TypeScript + Tailwind CSS",
-    "backend": "Next.js API Routes + Supabase Edge Functions",
-    "database": "Supabase (PostgreSQL)",
-    "deploy": "Vercel",
-    "cdn": "Vercel Edge Network",
-    "analytics": "Vercel Analytics",
-    "other": [
-      "Supabase Auth",
-      "Supabase Realtime (進捗同期)",
-      "OpenAI API (学習パス生成)",
-      "Framer Motion (アニメーション)"
-    ]
+    "backend": "Next.js Route Handlers + Supabase",
+    "database": "Supabase (PostgreSQL) + RLS",
+    "auth": "Supabase Auth (Email/Password + Magic Link)",
+    "payments": "Stripe (subscription)",
+    "ai": "Keyless AI (alias: global.openai.main, global.gemini.main)",
+    "deploy": "Vercel"
   },
-
-  "constraints": {
-    "budget_monthly_usd": 0,
-    "deploy_platform": "vercel",
-    "performance_targets": {
-      "page_load_ms": 2000,
-      "api_response_ms": 500,
-      "uptime_percent": 99.5
-    }
-  },
-
-  "known_risks": [
-    {
-      "risk": "既存HTMLからの移行で既存ページのデザインが崩れる可能性",
-      "severity": "medium",
-      "mitigation": "段階的移行。既存CSSを保持しつつTailwindに変換",
-      "status": "open"
-    },
-    {
-      "risk": "業種業態データの初期コンテンツ不足",
-      "severity": "medium",
-      "mitigation": "MVP段階では5業種に絞って深く作り込む",
-      "status": "open"
-    }
-  ],
-
   "external_dependencies": [
-    {
-      "service": "Supabase",
-      "purpose": "DB・認証・リアルタイム",
-      "secret_key": "SUPABASE_URL, SUPABASE_ANON_KEY",
-      "configured": false,
-      "required_for_phase": "phase1_dev"
-    },
-    {
-      "service": "OpenAI API",
-      "purpose": "学習パス生成・カリキュラムAI",
-      "secret_key": "OPENAI_API_KEY",
-      "configured": false,
-      "required_for_phase": "phase1_dev"
-    },
-    {
-      "service": "Vercel",
-      "purpose": "デプロイ・ホスティング",
-      "secret_key": "VERCEL_TOKEN",
-      "configured": false,
-      "required_for_phase": "phase1_dev"
-    }
+    {"service": "Supabase", "configured": false, "purpose": "DB+Auth+Realtime"},
+    {"service": "Stripe", "configured": false, "purpose": "Subscription billing"},
+    {"service": "Vercel", "configured": false, "purpose": "Hosting + Analytics"},
+    {"service": "Keyless AI", "configured": true, "purpose": "AI APIs (OpenAI/Gemini) — keyless via alias"}
   ],
-
-  "files_modified": [],
   "consecutive_errors": 0,
-  "cycle_count": 0,
-  "last_cycle_result": null,
-
-  "llm_config": {
-    "model": "gpt-5.4",
-    "mini_model": "gpt-5.4-mini",
-    "temperature": 0.3,
-    "max_tokens": 4000
-  }
+  "cycle_count": 1,
+  "last_cycle_result": "v3 docs created"
 }
