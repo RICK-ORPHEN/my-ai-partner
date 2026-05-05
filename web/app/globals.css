@@ -26,6 +26,10 @@ body {
 .h-serif      { font-family: 'Noto Serif JP', serif; font-weight: 700; letter-spacing: -0.025em; }
 .tag          { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; }
 
+/* Japanese-aware text wrapping (no mid-word breaks) */
+.jp-text     { word-break: keep-all; line-break: strict; overflow-wrap: anywhere; }
+.jp-balance  { text-wrap: balance; word-break: keep-all; line-break: strict; }
+
 /* Buttons */
 .btn-primary {
   @apply inline-flex items-center justify-center bg-vermilion text-cream-50 px-7 py-4 font-medium tracking-tight transition-colors;
@@ -66,14 +70,14 @@ body {
   border-radius: 999px;
 }
 
-/* Vermilion underline accent for emphasis */
+/* Vermilion underline accent */
 .accent-underline { position: relative; display: inline-block; }
 .accent-underline::after {
   content: ''; position: absolute; left: 0; right: 0; bottom: 0.05em;
   height: 0.35em; background: var(--vermilion); opacity: 0.85; z-index: -1;
 }
 
-/* Marquee divider tag (editorial section break) */
+/* Section break tag bar */
 .section-break {
   display: flex; align-items: center; gap: 16px;
   padding: 12px 0; border-top: 1px solid var(--ink); border-bottom: 1px solid var(--ink);
@@ -87,5 +91,15 @@ body {
 .fade-up-2 { animation: fadeUp .8s cubic-bezier(0.2, 0.8, 0.2, 1) .12s both; }
 .fade-up-3 { animation: fadeUp .8s cubic-bezier(0.2, 0.8, 0.2, 1) .24s both; }
 
-/* Image treatment for editorial photos */
 .editorial-img { filter: contrast(1.05) saturate(0.95); }
+
+/* Hero overlay gradient (left fade-out for text readability) */
+.kv-mask::before {
+  content:''; position: absolute; inset:0; pointer-events: none;
+  background: linear-gradient(90deg, var(--cream) 0%, var(--cream) 22%, rgba(238,236,231,0.82) 38%, rgba(238,236,231,0.45) 52%, rgba(238,236,231,0) 70%);
+}
+@media (max-width: 768px) {
+  .kv-mask::before {
+    background: linear-gradient(180deg, rgba(238,236,231,0) 30%, rgba(238,236,231,0.7) 70%, var(--cream) 100%);
+  }
+}
