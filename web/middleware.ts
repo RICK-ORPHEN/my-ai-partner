@@ -1,5 +1,5 @@
 import { NextResponse, type NextRequest } from 'next/server';
-import { createServerClient } from '@supabase/ssr';
+import { createServerClient, type CookieOptions } from '@supabase/ssr';
 
 export async function middleware(req: NextRequest) {
   const res = NextResponse.next();
@@ -9,7 +9,9 @@ export async function middleware(req: NextRequest) {
     {
       cookies: {
         getAll() { return req.cookies.getAll(); },
-        setAll(cookies) { cookies.forEach((c) => res.cookies.set(c.name, c.value, c.options)); }
+        setAll(cookies: { name: string; value: string; options: CookieOptions }[]) {
+          cookies.forEach((c) => res.cookies.set(c.name, c.value, c.options));
+        }
       }
     }
   );
@@ -22,9 +24,6 @@ export async function middleware(req: NextRequest) {
     url.pathname = '/login';
     url.searchParams.set('next', path);
     return NextResponse.redirect(url);
-  }
-  if (path.startsWith('/admin') && user) {
-    // additional admin guard handled in page itself (read profile.is_admin)
   }
   return res;
 }
