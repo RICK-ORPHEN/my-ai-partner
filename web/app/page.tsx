@@ -17,13 +17,59 @@ export default function HomePage() {
       <Nav />
 
       {/* HERO ---------------------------------------------------- */}
-      <section className="relative" style={{ background: 'var(--cream)' }}>
-        <div className="max-w-[1200px] mx-auto px-6 md:px-10 pt-24 md:pt-28 pb-20 md:pb-28 grid md:grid-cols-2 gap-10 md:gap-14 items-center">
-          {/* Copy column */}
-          <div>
+      <section className="relative overflow-hidden" style={{ background: 'var(--cream)' }}>
+        {/* Full-bleed background photo (desktop wide / mobile vertical) */}
+        <div className="absolute inset-0 -z-0">
+          {/* Desktop wide image */}
+          <picture>
+            <source media="(max-width: 768px)" srcSet="/images/lp/kv_mobile_v3.png" />
+            <img
+              src="/images/lp/kv_wide.png"
+              alt=""
+              aria-hidden
+              className="w-full h-full object-cover object-right"
+            />
+          </picture>
+          {/* Cream gradient overlay — left fade-out for text readability */}
+          <div
+            className="absolute inset-0"
+            style={{
+              background:
+                'linear-gradient(90deg, var(--cream) 0%, var(--cream) 30%, rgba(238,236,231,0.92) 45%, rgba(238,236,231,0.55) 60%, rgba(238,236,231,0) 78%)',
+            }}
+          />
+          {/* Mobile vertical fade — keeps man visible at top, text readable below */}
+          <div
+            className="absolute inset-0 md:hidden"
+            style={{
+              background:
+                'linear-gradient(180deg, rgba(238,236,231,0) 0%, rgba(238,236,231,0) 38%, rgba(238,236,231,0.55) 55%, rgba(238,236,231,0.92) 70%, var(--cream) 86%)',
+            }}
+          />
+        </div>
+
+        {/* Cursive overlay - bottom right of photo */}
+        <div
+          className="absolute right-6 md:right-12 lg:right-20 bottom-12 md:bottom-16 z-10 text-cream-50/95 select-none pointer-events-none hidden sm:block"
+          style={{
+            fontFamily: '"Snell Roundhand", "Brush Script MT", cursive',
+            fontSize: 'clamp(1.5rem, 2.6vw, 2.4rem)',
+            fontStyle: 'italic',
+            lineHeight: 1.15,
+            textShadow: '0 2px 18px rgba(6,14,49,0.45)',
+          }}
+        >
+          Be who you
+          <br />
+          want to be.
+        </div>
+
+        {/* Copy panel — left side */}
+        <div className="relative z-10 max-w-[1200px] mx-auto px-6 md:px-10 pt-28 md:pt-32 pb-20 md:pb-32 min-h-[88vh] md:min-h-[640px] flex items-center">
+          <div className="max-w-xl md:max-w-2xl">
             <h1
               className="font-serif font-bold leading-[1.1] text-ink jp-balance"
-              style={{ fontSize: 'clamp(2.6rem, 5.4vw, 4.4rem)' }}
+              style={{ fontSize: 'clamp(2.4rem, 5.4vw, 4.4rem)' }}
             >
               AIと創る、
               <br />
@@ -37,7 +83,7 @@ export default function HomePage() {
             <div className="mt-9 flex flex-col sm:flex-row sm:items-center gap-5">
               <Link
                 href="/signup"
-                className="inline-flex items-center justify-center bg-vermilion hover:bg-vermilion-700 text-cream-50 rounded-xl px-7 py-4 font-medium tracking-tight transition"
+                className="inline-flex items-center justify-center bg-vermilion hover:bg-vermilion-700 text-cream-50 rounded-xl px-7 py-4 font-medium tracking-tight transition shadow-lg shadow-vermilion/20"
               >
                 無料で始める（クレカ不要）
               </Link>
@@ -48,34 +94,6 @@ export default function HomePage() {
                 Lesson 1-2 完全無料体験
                 <IconArrowRight className="w-3.5 h-3.5" />
               </Link>
-            </div>
-          </div>
-
-          {/* Photo column */}
-          <div className="relative">
-            <div className="relative aspect-[4/5] md:aspect-[3/4] w-full overflow-hidden rounded-sm">
-              <Image
-                src="/images/lp/hero_aspirational.png"
-                alt="AIと共に理想の未来を見つめる若者"
-                fill
-                priority
-                className="object-cover"
-              />
-              {/* Cursive script overlay */}
-              <div
-                className="absolute right-4 md:right-6 top-[55%] text-cream-50/95 select-none pointer-events-none"
-                style={{
-                  fontFamily: '"Snell Roundhand", "Brush Script MT", cursive',
-                  fontSize: 'clamp(1.6rem, 3vw, 2.6rem)',
-                  fontStyle: 'italic',
-                  lineHeight: 1.1,
-                  textShadow: '0 2px 18px rgba(6,14,49,0.4)',
-                }}
-              >
-                Be who you
-                <br />
-                want to be.
-              </div>
             </div>
           </div>
         </div>
