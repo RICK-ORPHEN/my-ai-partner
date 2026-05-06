@@ -44,7 +44,7 @@ export default async function DashboardPage() {
   const displayName = profile?.display_name ?? user.email?.split('@')[0] ?? 'You';
   const publishedCount = products?.filter((p: any) => p.status === 'published').length ?? 0;
   const recentScore = scores?.[0]?.score;
-  const primaryEnrollment = enrollments?.[0];
+  const primaryEnrollment = enrollments?.[0] as any;
 
   // next lesson title
   let nextLessonTitle = 'STEP 1: 課題発見ワーク';

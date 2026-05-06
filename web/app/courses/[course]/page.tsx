@@ -111,7 +111,7 @@ export default async function CourseDetail({ params }: { params: Promise<{ cours
 
           {/* Lessons grid */}
           <div className="grid md:grid-cols-2 gap-5">
-            {(lessons ?? []).map((l) => {
+            {(lessons ?? []).map((l: any) => {
               const p = progress.find((pp) => pp.lesson_id === l.id);
               const completed = p?.status === 'completed';
               const inProgress = p?.status === 'in_progress';
