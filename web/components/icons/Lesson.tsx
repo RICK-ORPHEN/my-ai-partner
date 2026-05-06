@@ -127,3 +127,67 @@ export function IconSpark(props: SVGProps<SVGSVGElement>) {
     </svg>
   );
 }
+
+export function IconArrowRight(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg {...base} {...props}>
+      <path d="M4 12h16M14 6l6 6-6 6" />
+    </svg>
+  );
+}
+export function IconLightning(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg {...base} {...props}>
+      <path d="M13 3L4 14h7l-1 7 9-11h-7z" strokeLinejoin="round" />
+    </svg>
+  );
+}
+export function IconTarget(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg {...base} {...props}>
+      <circle cx="12" cy="12" r="9" />
+      <circle cx="12" cy="12" r="6" />
+      <circle cx="12" cy="12" r="3" />
+      <circle cx="12" cy="12" r="0.8" fill="currentColor" stroke="none" />
+    </svg>
+  );
+}
+export function IconBook(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg {...base} {...props}>
+      <path d="M4 5a2 2 0 0 1 2-2h12v18H6a2 2 0 0 1-2-2V5z" />
+      <path d="M4 18a2 2 0 0 1 2-2h12" />
+    </svg>
+  );
+}
+export function IconPlay(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg {...base} {...props}>
+      <path d="M7 5l12 7-12 7z" strokeLinejoin="round" />
+    </svg>
+  );
+}
+export function IconClock(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg {...base} {...props}>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M12 7v5l3 2" strokeLinecap="round" />
+    </svg>
+  );
+}
+export function IconQuote(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg {...base} {...props}>
+      <path d="M7 7v5h-3v-3a2 2 0 0 1 3-2zm10 0v5h-3v-3a2 2 0 0 1 3-2z" />
+      <path d="M7 12c0 3-1 5-3 6m13-6c0 3-1 5-3 6" />
+    </svg>
+  );
+}
+export function IconLayer(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg {...base} {...props}>
+      <path d="M3 8l9-4 9 4-9 4z" />
+      <path d="M3 12l9 4 9-4M3 16l9 4 9-4" />
+    </svg>
+  );
+}
