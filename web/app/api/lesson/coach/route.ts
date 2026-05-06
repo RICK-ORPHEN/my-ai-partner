@@ -65,7 +65,7 @@ export async function POST(req: NextRequest) {
     lesson.title
   }」を教える AI コーチです。\n\n受講生プロフィール（既に登録済み・絶対に同じ質問をしない）:\n- 名前: ${persona.name}\n- 業種: ${persona.industry}\n- 目標: ${
     persona.goal || '未設定'
-  }\n- コーディング: ${persona.coding_level}\n- Track: ${persona.track === 'b' ? 'Squarespace（ノーコード）' : 'Vercel + Supabase（コード）'}\n\nレッスンの本質:\n${(lb.concept ?? '').slice(0, 500)}\n\nハンズオン手順:\n${(lb.hands_on?.steps ?? []).map((s: string, i: number) => `${i + 1}. ${s}`).join('\n')}\n\nゴール成果物:\n${typeof lb.deliverable === 'object' ? lb.deliverable?.what ?? '' : lb.deliverable ?? ''}\n\nルール:\n- 絵文字は絶対に使わない（サイトデザインに合わせる）\n- 同じ質問を二度しない。受講生の回答ごとに次のステップへ深く分岐\n- 「会社名は？」など登録済みの情報を再質問しない。プロフィールから推論\n- 短く、1ターンで2-4文。具体的な選択肢があれば最大3つ提示\n- 受講生が「分からない」「教えて」と言ったら、業種に合わせた具体例で先に見せてから質問\n- レッスンの目的（成果物作成）に向けて毎ターン1歩前進させる\n- ${persona.industry}業界の文脈で例える`;
+  }\n- コーディング: ${persona.coding_level}\n- Track: ${persona.track === 'b' ? 'Squarespace（ノーコード）' : 'Vercel + Supabase（コード）'}\n\nレッスンの本質:\n${(lb.concept ?? '').slice(0, 500)}\n\nハンズオン手順:\n${(lb.hands_on?.steps ?? []).map((s: string, i: number) => `${i + 1}. ${(s as string).replace(/^手順\\d+[.:：]?\\s*/, '').replace(/^ステップ\\d+[.:：]?\\s*/, '')}`).join('\n')}\n\nゴール成果物:\n${typeof lb.deliverable === 'object' ? lb.deliverable?.what ?? '' : lb.deliverable ?? ''}\n\nルール:\n- 絵文字は絶対に使わない（サイトデザインに合わせる）\n- 同じ質問を二度しない。受講生の回答ごとに次のステップへ深く分岐\n- 「会社名は？」など登録済みの情報を再質問しない。プロフィールから推論\n- 短く、1ターンで2-4文。具体的な選択肢があれば最大3つ提示\n- 受講生が「分からない」「教えて」と言ったら、業種に合わせた具体例で先に見せてから質問\n- レッスンの目的（成果物作成）に向けて毎ターン1歩前進させる\n- ${persona.industry}業界の文脈で例える`;
 
   const userPrompt = `これまでの会話:\n${
     body.history.map((h) => `[${h.role === 'student' ? persona.name : 'コーチ'}]: ${h.content}`).join('\n') ||
@@ -84,11 +84,22 @@ export async function POST(req: NextRequest) {
     };
   } catch (e) {
     // Static fallback that still uses the lesson content
-    const stepIdx = Math.min(body.history.filter((h) => h.role === 'coach').length, (lb.hands_on?.steps?.length ?? 1) - 1);
-    const step = lb.hands_on?.steps?.[stepIdx] ?? lb.next_action ?? '次のステップに進みましょう。';
+    const coachTurns = body.history.filter((h) => h.role === 'coach').length;
+    const stepCount = lb.hands_on?.steps?.length ?? 0;
+    const stepIdx = Math.min(coachTurns, Math.max(stepCount - 1, 0));
+    const rawStep = (lb.hands_on?.steps?.[stepIdx] ?? lb.next_action ?? '次のステップに進みましょう。') as string;
+    const step = rawStep.replace(/^手順\d+[\.:]?\s*/, '').replace(/^ステップ\d+[\.:]?\s*/, '');
+    const isLast = stepCount > 0 && stepIdx >= stepCount - 1;
+    // Fallback options vary by step phase to give branching feel even without Keyless AI
+    const options = isLast
+      ? ['できた、提出に進む', 'まだ不安、もう少し例を見たい']
+      : coachTurns === 0
+      ? ['具体例を見せて', 'プロンプトの型を教えて', '進めてみる']
+      : ['次へ進む', '別の業務で考えたい', 'AIに任せる範囲を相談したい'];
     resp = {
-      coach_message: `${persona.industry}の現場での次のアクション: ${step}`,
-      next_branch: stepIdx >= (lb.hands_on?.steps?.length ?? 1) - 1 ? 'ready_to_submit' : 'awaiting_input',
+      coach_message: `${persona.industry}の現場で考えてみましょう。${step}`,
+      options,
+      next_branch: isLast ? 'ready_to_submit' : 'awaiting_input',
     };
   }
 
