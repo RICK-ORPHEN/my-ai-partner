@@ -55,8 +55,8 @@ export default function HomePage() {
           <div className="relative">
             <div className="relative aspect-[4/5] md:aspect-[3/4] w-full overflow-hidden rounded-sm">
               <Image
-                src="/images/lp/hero_man.png"
-                alt="AIと共に未来を見つめる若者"
+                src="/images/lp/hero_aspirational.png"
+                alt="AIと共に理想の未来を見つめる若者"
                 fill
                 priority
                 className="object-cover"
@@ -269,7 +269,7 @@ export default function HomePage() {
               無料で始める（クレカ不要）
             </Link>
           </div>
-          <div className="grid grid-cols-3 gap-6 md:gap-10">
+          <div className="grid grid-cols-3 gap-4 md:gap-8 lg:gap-12">
             <Stat label="卒業生満足度" value="92" unit="%" />
             <Stat label="プロダクトリリース率" value="89" unit="%" />
             <Stat label="学習継続率" value="91" unit="%" />
@@ -340,19 +340,70 @@ function AlumniCard({
 
 function Stat({ label, value, unit }: { label: string; value: string; unit: string }) {
   return (
-    <div className="text-center md:text-right">
-      <div className="text-[11px] tracking-[0.2em] text-cream-50/70 mb-1">{label}</div>
-      <div className="font-serif font-bold text-cream-50 leading-none" style={{ fontSize: 'clamp(2.2rem, 4vw, 3.4rem)' }}>
-        {value}
-        <span className="text-base md:text-xl text-cream-50/80 ml-0.5">{unit}</span>
+    <div className="text-center">
+      <div className="text-[11px] tracking-[0.22em] text-cream-50/85 mb-2">{label}</div>
+      <div className="relative inline-flex items-center justify-center px-5 md:px-7">
+        <LaurelLeft className="absolute left-0 top-1/2 -translate-y-1/2 w-6 md:w-8 h-auto text-vermilion/85" />
+        <LaurelRight className="absolute right-0 top-1/2 -translate-y-1/2 w-6 md:w-8 h-auto text-vermilion/85" />
+        <div className="font-serif font-bold text-cream-50 leading-none" style={{ fontSize: 'clamp(2.4rem, 4.4vw, 3.6rem)' }}>
+          {value}
+          <span className="text-base md:text-xl text-cream-50/80 ml-0.5">{unit}</span>
+        </div>
       </div>
-      <div className="mt-2 inline-flex gap-0.5 text-vermilion text-xs">
+      <div className="mt-2 inline-flex gap-0.5 text-vermilion">
         {[0, 1, 2, 3, 4].map((i) => (
-          <svg key={i} viewBox="0 0 20 20" className="w-3 h-3" fill="currentColor">
+          <svg key={i} viewBox="0 0 20 20" className="w-2.5 h-2.5 md:w-3 md:h-3" fill="currentColor">
             <path d="M10 2l2.4 5.4 5.6.5-4.3 3.9 1.3 5.6L10 14.6 4.9 17.4l1.3-5.6L2 7.9l5.6-.5z" />
           </svg>
         ))}
       </div>
     </div>
+  );
+}
+
+function LaurelLeft({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 60 130" fill="none" xmlns="http://www.w3.org/2000/svg" className={className}>
+      <g stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" fill="none">
+        {/* central stem from bottom curving up to upper-right */}
+        <path d="M50 125 C 30 110, 18 90, 12 65 C 8 45, 14 25, 30 8" />
+        {/* leaves on the outside (left side of stem) */}
+        <path d="M44 118 q -10 -2 -16 4" />
+        <path d="M36 100 q -12 -1 -18 6" />
+        <path d="M28 80 q -14 0 -20 8" />
+        <path d="M22 60 q -14 2 -19 11" />
+        <path d="M20 40 q -12 4 -16 14" />
+        <path d="M24 22 q -8 6 -10 16" />
+        {/* leaves on the inside */}
+        <path d="M44 118 q 10 -2 14 -10" />
+        <path d="M36 100 q 12 -2 14 -12" />
+        <path d="M28 80 q 14 -2 16 -14" />
+        <path d="M22 60 q 14 -2 17 -14" />
+        <path d="M20 40 q 12 -2 14 -14" />
+        <path d="M24 22 q 8 -2 10 -12" />
+      </g>
+    </svg>
+  );
+}
+
+function LaurelRight({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 60 130" fill="none" xmlns="http://www.w3.org/2000/svg" className={className} style={{ transform: 'scaleX(-1)' }}>
+      <g stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" fill="none">
+        <path d="M50 125 C 30 110, 18 90, 12 65 C 8 45, 14 25, 30 8" />
+        <path d="M44 118 q -10 -2 -16 4" />
+        <path d="M36 100 q -12 -1 -18 6" />
+        <path d="M28 80 q -14 0 -20 8" />
+        <path d="M22 60 q -14 2 -19 11" />
+        <path d="M20 40 q -12 4 -16 14" />
+        <path d="M24 22 q -8 6 -10 16" />
+        <path d="M44 118 q 10 -2 14 -10" />
+        <path d="M36 100 q 12 -2 14 -12" />
+        <path d="M28 80 q 14 -2 16 -14" />
+        <path d="M22 60 q 14 -2 17 -14" />
+        <path d="M20 40 q 12 -2 14 -14" />
+        <path d="M24 22 q 8 -2 10 -12" />
+      </g>
+    </svg>
   );
 }
