@@ -17,59 +17,60 @@ export default function HomePage() {
 
       {/* HERO ============================================== */}
 
-      {/* MOBILE hero — stacked: full-width photo (top) + cream text block (below) */}
-      <section className="md:hidden" style={{ background: 'var(--cream)' }}>
-        {/* Photo block: full-width, fixed aspect, hero portrait */}
-        <div className="relative w-full overflow-hidden" style={{ aspectRatio: '4/5' }}>
-          <img
-            src="/images/lp/kv_wide.png"
-            alt="AIと共に理想の未来を見つめる若者"
-            className="absolute inset-0 w-full h-full object-cover"
-            style={{ objectPosition: '78% 30%' }}
-          />
-          {/* Cursive overlay bottom-right */}
-          <div
-            className="absolute right-4 bottom-6 text-cream-50/95 select-none pointer-events-none"
-            style={{
-              fontFamily: '"Snell Roundhand", "Brush Script MT", cursive',
-              fontSize: '1.4rem',
-              fontStyle: 'italic',
-              lineHeight: 1.15,
-              textShadow: '0 2px 14px rgba(6,14,49,0.5)',
-            }}
-          >
-            Be who you
-            <br />
-            want to be.
+      {/* MOBILE hero — side-by-side: text left + photo right (matches reference) */}
+      <section className="md:hidden relative" style={{ background: 'var(--cream)' }}>
+        <div className="grid grid-cols-[1fr,46%] min-h-[560px]">
+          {/* Left: text */}
+          <div className="px-5 pt-24 pb-10 flex flex-col justify-center">
+            <h1 className="font-serif font-bold leading-[1.18] text-ink jp-balance" style={{ fontSize: 'clamp(1.7rem, 7.8vw, 2.4rem)' }}>
+              AIと創る、
+              <br />
+              <span className="text-vermilion">理想の自分</span>へ。
+            </h1>
+            <p className="mt-5 text-[12.5px] text-ink jp-text leading-[1.85]">
+              AIを活用して、アイデアを形にし、人生を変えるプロダクトを生み出す。ここは、あなたの可能性が加速する場所。
+            </p>
+            <div className="mt-6 space-y-3">
+              <Link
+                href="/signup"
+                className="inline-flex items-center justify-center w-full bg-vermilion hover:bg-vermilion-700 text-cream-50 rounded-xl px-4 py-3.5 text-sm font-medium tracking-tight transition"
+              >
+                無料で始める（クレカ不要）
+              </Link>
+              <Link
+                href="/lesson/restaurant_01"
+                className="inline-flex items-center gap-1.5 text-xs text-ink hover:text-vermilion transition border-b border-ink/30 pb-0.5 self-start"
+              >
+                Lesson 1-2 完全無料体験
+                <IconArrowRight className="w-3 h-3" />
+              </Link>
+            </div>
           </div>
-        </div>
 
-        {/* Text block: solid cream, generous padding */}
-        <div className="px-6 pt-10 pb-14">
-          <h1 className="font-serif font-bold leading-[1.18] text-ink jp-balance" style={{ fontSize: 'clamp(2rem, 8vw, 2.7rem)' }}>
-            AIと創る、
-            <br />
-            <span className="text-vermilion">理想の自分</span>へ。
-          </h1>
-          <p className="mt-5 text-[15px] text-ink jp-text leading-[1.95]">
-            AIを活用して、アイデアを形にし、
-            <br />
-            人生を変えるプロダクトを生み出す。
-          </p>
-          <div className="mt-7 flex flex-col gap-3.5">
-            <Link
-              href="/signup"
-              className="inline-flex items-center justify-center bg-vermilion hover:bg-vermilion-700 text-cream-50 rounded-xl px-6 py-4 font-medium tracking-tight transition"
+          {/* Right: photo (tight crop on man's face/upper body) */}
+          <div className="relative">
+            <img
+              src="/images/lp/kv_wide.png"
+              alt="AIと共に理想の未来を見つめる若者"
+              className="absolute inset-0 w-full h-full object-cover"
+              style={{ objectPosition: '70% 25%' }}
+            />
+            {/* Cursive overlay bottom of photo column */}
+            <div
+              className="absolute left-2 right-2 bottom-6 text-cream-50/95 select-none pointer-events-none"
+              style={{
+                fontFamily: '"Snell Roundhand", "Brush Script MT", cursive',
+                fontSize: '0.95rem',
+                fontStyle: 'italic',
+                lineHeight: 1.15,
+                textAlign: 'center',
+                textShadow: '0 2px 12px rgba(6,14,49,0.55)',
+              }}
             >
-              無料で始める（クレカ不要）
-            </Link>
-            <Link
-              href="/lesson/restaurant_01"
-              className="inline-flex items-center gap-1.5 text-sm text-ink hover:text-vermilion transition self-start border-b border-ink/30 pb-1"
-            >
-              Lesson 1-2 完全無料体験
-              <IconArrowRight className="w-3.5 h-3.5" />
-            </Link>
+              Be who you
+              <br />
+              want to be.
+            </div>
           </div>
         </div>
       </section>
