@@ -395,8 +395,8 @@ function Stat({ label, value, unit }: { label: string; value: string; unit: stri
     <div className="text-center">
       <div className="text-[11px] tracking-[0.22em] text-cream-50/85 mb-2">{label}</div>
       <div className="relative inline-flex items-center justify-center px-10 md:px-14">
-        <LaurelLeft className="absolute left-0 top-1/2 -translate-y-1/2 w-8 md:w-10 h-auto text-vermilion/90" />
-        <LaurelRight className="absolute right-0 top-1/2 -translate-y-1/2 w-8 md:w-10 h-auto text-vermilion/90" />
+        <LaurelLeft className="absolute left-1 md:left-2 top-1/2 -translate-y-1/2 w-5 md:w-6 h-auto text-vermilion" />
+        <LaurelRight className="absolute right-1 md:right-2 top-1/2 -translate-y-1/2 w-5 md:w-6 h-auto text-vermilion" />
         <div className="font-serif font-bold text-cream-50 leading-none" style={{ fontSize: 'clamp(2.4rem, 4.4vw, 3.6rem)' }}>
           {value}
           <span className="text-base md:text-xl text-cream-50/80 ml-0.5">{unit}</span>
@@ -414,11 +414,11 @@ function Stat({ label, value, unit }: { label: string; value: string; unit: stri
 }
 
 function LaurelBranch({ className, mirror }: { className?: string; mirror?: boolean }) {
-  // Each leaf is a teardrop path attached to a central curving stem.
-  // viewBox is wider so leaves have room to curve naturally without spike-look.
+  // Compact half-wreath: 5 leaves in a clean quarter-arc shape that sits BESIDE the number, not around it.
+  // viewBox 40x100 (slim 2:5) so leaves form a tight vertical column near the digit.
   return (
     <svg
-      viewBox="0 0 80 160"
+      viewBox="0 0 40 100"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       className={className}
@@ -426,27 +426,12 @@ function LaurelBranch({ className, mirror }: { className?: string; mirror?: bool
       aria-hidden
     >
       <g fill="currentColor">
-        {/* main curving stem */}
-        <path
-          d="M70 152 C 50 132, 36 100, 36 70 C 36 42, 46 22, 60 6"
-          stroke="currentColor"
-          strokeWidth="1.4"
-          strokeLinecap="round"
-          fill="none"
-        />
-        {/* outer leaves (left-of-stem) — tear drops pointing outward & upward */}
-        <path d="M58 138 C 38 138 24 146 22 156 C 36 152 50 148 58 138 Z" />
-        <path d="M48 116 C 26 116 12 122 8 134 C 24 130 40 126 48 116 Z" />
-        <path d="M40 90 C 18 88 6 92 4 104 C 20 100 34 98 40 90 Z" />
-        <path d="M36 64 C 16 60 6 60 6 72 C 22 70 32 70 36 64 Z" />
-        <path d="M40 38 C 22 32 12 30 14 42 C 28 42 36 42 40 38 Z" />
-        <path d="M50 18 C 36 10 28 8 28 18 C 38 20 46 20 50 18 Z" />
-        {/* inner leaves (right-of-stem) — tear drops pointing the other way, smaller */}
-        <path d="M64 130 C 76 130 78 138 74 146 C 68 138 62 134 64 130 Z" />
-        <path d="M52 104 C 66 102 70 110 66 120 C 58 112 50 110 52 104 Z" />
-        <path d="M44 76 C 58 74 64 80 60 90 C 52 84 42 82 44 76 Z" />
-        <path d="M42 50 C 56 48 62 52 58 62 C 50 56 40 56 42 50 Z" />
-        <path d="M48 26 C 62 22 68 26 64 36 C 56 32 46 32 48 26 Z" />
+        {/* 5 teardrop leaves stacked in a gentle inward arc, all pointing to the upper-right */}
+        <path d="M34 90 C 18 88 8 94 6 100 C 20 96 30 94 34 90 Z" />
+        <path d="M30 70 C 12 66 2 70 4 78 C 18 76 26 74 30 70 Z" />
+        <path d="M28 50 C 10 46 2 48 4 56 C 16 54 24 54 28 50 Z" />
+        <path d="M30 30 C 14 24 6 26 8 34 C 20 32 28 32 30 30 Z" />
+        <path d="M34 12 C 22 6 14 6 16 14 C 26 14 32 14 34 12 Z" />
       </g>
     </svg>
   );
