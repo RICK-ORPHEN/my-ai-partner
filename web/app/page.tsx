@@ -392,19 +392,20 @@ function AlumniCard({
 
 function Stat({ label, value, unit }: { label: string; value: string; unit: string }) {
   return (
-    <div className="text-center">
-      <div className="text-[11px] tracking-[0.22em] text-cream-50/85 mb-2">{label}</div>
-      <div className="relative inline-flex items-center justify-center px-10 md:px-14">
-        <LaurelLeft className="absolute left-1 md:left-2 top-1/2 -translate-y-1/2 w-5 md:w-6 h-auto text-vermilion" />
-        <LaurelRight className="absolute right-1 md:right-2 top-1/2 -translate-y-1/2 w-5 md:w-6 h-auto text-vermilion" />
-        <div className="font-serif font-bold text-cream-50 leading-none" style={{ fontSize: 'clamp(2.4rem, 4.4vw, 3.6rem)' }}>
-          {value}
-          <span className="text-base md:text-xl text-cream-50/80 ml-0.5">{unit}</span>
-        </div>
+    <div className="text-center inline-flex flex-col items-center min-w-[120px]">
+      <div className="text-[11px] tracking-[0.22em] text-cream-50/85 mb-3">{label}</div>
+      {/* Top hairline */}
+      <div className="w-12 h-px bg-vermilion mb-3" />
+      {/* Big number */}
+      <div className="font-serif font-bold text-cream-50 leading-none" style={{ fontSize: 'clamp(2.6rem, 5vw, 4rem)' }}>
+        {value}
+        <span className="text-base md:text-xl text-cream-50/80 ml-0.5">{unit}</span>
       </div>
-      <div className="mt-2 inline-flex gap-0.5 text-vermilion">
+      {/* Bottom hairline + stars */}
+      <div className="w-12 h-px bg-vermilion mt-3 mb-2" />
+      <div className="inline-flex gap-0.5 text-vermilion">
         {[0, 1, 2, 3, 4].map((i) => (
-          <svg key={i} viewBox="0 0 20 20" className="w-2.5 h-2.5 md:w-3 md:h-3" fill="currentColor">
+          <svg key={i} viewBox="0 0 20 20" className="w-3 h-3" fill="currentColor">
             <path d="M10 2l2.4 5.4 5.6.5-4.3 3.9 1.3 5.6L10 14.6 4.9 17.4l1.3-5.6L2 7.9l5.6-.5z" />
           </svg>
         ))}
@@ -413,34 +414,3 @@ function Stat({ label, value, unit }: { label: string; value: string; unit: stri
   );
 }
 
-function LaurelBranch({ className, mirror }: { className?: string; mirror?: boolean }) {
-  // Compact half-wreath: 5 leaves in a clean quarter-arc shape that sits BESIDE the number, not around it.
-  // viewBox 40x100 (slim 2:5) so leaves form a tight vertical column near the digit.
-  return (
-    <svg
-      viewBox="0 0 40 100"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      className={className}
-      style={mirror ? { transform: 'scaleX(-1)' } : undefined}
-      aria-hidden
-    >
-      <g fill="currentColor">
-        {/* 5 teardrop leaves stacked in a gentle inward arc, all pointing to the upper-right */}
-        <path d="M34 90 C 18 88 8 94 6 100 C 20 96 30 94 34 90 Z" />
-        <path d="M30 70 C 12 66 2 70 4 78 C 18 76 26 74 30 70 Z" />
-        <path d="M28 50 C 10 46 2 48 4 56 C 16 54 24 54 28 50 Z" />
-        <path d="M30 30 C 14 24 6 26 8 34 C 20 32 28 32 30 30 Z" />
-        <path d="M34 12 C 22 6 14 6 16 14 C 26 14 32 14 34 12 Z" />
-      </g>
-    </svg>
-  );
-}
-
-function LaurelLeft({ className }: { className?: string }) {
-  return <LaurelBranch className={className} />;
-}
-
-function LaurelRight({ className }: { className?: string }) {
-  return <LaurelBranch className={className} mirror />;
-}
