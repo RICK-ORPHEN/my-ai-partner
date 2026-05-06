@@ -63,7 +63,7 @@ export default function HomePage() {
           <div className="mt-7 space-y-3">
             <Link
               href="/signup"
-              className="inline-flex items-center justify-center w-full bg-vermilion hover:bg-vermilion-700 text-cream-50 rounded-xl px-4 py-3.5 text-sm font-medium tracking-tight transition shadow-lg shadow-vermilion/25"
+              className="inline-flex items-center justify-center bg-vermilion hover:bg-vermilion-700 text-cream-50 rounded-xl px-5 py-3 text-sm font-medium tracking-tight transition shadow-lg shadow-vermilion/25 self-start"
             >
               無料で始める（クレカ不要）
             </Link>
