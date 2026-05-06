@@ -389,9 +389,9 @@ function Stat({ label, value, unit }: { label: string; value: string; unit: stri
   return (
     <div className="text-center">
       <div className="text-[11px] tracking-[0.22em] text-cream-50/85 mb-2">{label}</div>
-      <div className="relative inline-flex items-center justify-center px-5 md:px-7">
-        <LaurelLeft className="absolute left-0 top-1/2 -translate-y-1/2 w-6 md:w-8 h-auto text-vermilion/85" />
-        <LaurelRight className="absolute right-0 top-1/2 -translate-y-1/2 w-6 md:w-8 h-auto text-vermilion/85" />
+      <div className="relative inline-flex items-center justify-center px-10 md:px-14">
+        <LaurelLeft className="absolute left-0 top-1/2 -translate-y-1/2 w-8 md:w-10 h-auto text-vermilion/90" />
+        <LaurelRight className="absolute right-0 top-1/2 -translate-y-1/2 w-8 md:w-10 h-auto text-vermilion/90" />
         <div className="font-serif font-bold text-cream-50 leading-none" style={{ fontSize: 'clamp(2.4rem, 4.4vw, 3.6rem)' }}>
           {value}
           <span className="text-base md:text-xl text-cream-50/80 ml-0.5">{unit}</span>
