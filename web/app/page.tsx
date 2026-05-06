@@ -17,37 +17,42 @@ export default function HomePage() {
       <Nav />
 
       {/* HERO ---------------------------------------------------- */}
-      {/* MOBILE: stacked photo (top 56vh) + copy panel below on cream */}
-      <section className="md:hidden relative" style={{ background: 'var(--cream)' }}>
-        <div className="relative w-full overflow-hidden" style={{ height: '58vh', minHeight: 360 }}>
+      {/* MOBILE: photo + text integrated via vertical gradient — no disconnected stack */}
+      <section className="md:hidden relative overflow-hidden" style={{ background: 'var(--cream)' }}>
+        {/* Background photo bleeds full hero */}
+        <div className="absolute inset-0">
           <img
             src="/images/lp/kv_wide.png"
             alt=""
             aria-hidden
             className="w-full h-full object-cover"
-            style={{ objectPosition: '78% 18%' }}
+            style={{ objectPosition: '78% 22%' }}
           />
-          {/* Soft bottom fade so the title below sits cleanly on cream */}
+          {/* Vertical cream gradient — top transparent (man visible), middle 50% transparent, bottom solid for text */}
           <div
-            className="absolute inset-x-0 bottom-0 h-24 pointer-events-none"
-            style={{ background: 'linear-gradient(180deg, rgba(238,236,231,0) 0%, var(--cream) 95%)' }}
+            className="absolute inset-0"
+            style={{
+              background:
+                'linear-gradient(180deg, rgba(238,236,231,0) 0%, rgba(238,236,231,0) 35%, rgba(238,236,231,0.55) 50%, rgba(238,236,231,0.92) 62%, var(--cream) 70%)',
+            }}
           />
         </div>
-        <div className="relative z-10 px-6 pt-6 pb-14">
-          <h1 className="font-serif font-bold leading-[1.18] text-ink jp-balance" style={{ fontSize: 'clamp(2rem, 8vw, 2.6rem)' }}>
+        {/* Copy panel sits in the gradient-filled lower half */}
+        <div className="relative z-10 px-6 pt-[42vh] pb-12 min-h-[88vh]">
+          <h1 className="font-serif font-bold leading-[1.15] text-ink jp-balance" style={{ fontSize: 'clamp(2.1rem, 8.4vw, 2.8rem)' }}>
             AIと創る、
             <br />
             <span className="text-vermilion">理想の自分</span>へ。
           </h1>
-          <p className="mt-5 text-[15px] text-ink jp-text leading-[1.95]">
+          <p className="mt-4 text-[15px] text-ink jp-text leading-[1.9]">
             AIを活用して、アイデアを形にし、
             <br />
             人生を変えるプロダクトを生み出す。
           </p>
-          <div className="mt-7 flex flex-col gap-4">
+          <div className="mt-6 flex flex-col gap-3.5">
             <Link
               href="/signup"
-              className="inline-flex items-center justify-center bg-vermilion hover:bg-vermilion-700 text-cream-50 rounded-xl px-6 py-4 font-medium tracking-tight transition shadow-lg shadow-vermilion/20"
+              className="inline-flex items-center justify-center bg-vermilion hover:bg-vermilion-700 text-cream-50 rounded-xl px-6 py-4 font-medium tracking-tight transition shadow-lg shadow-vermilion/25"
             >
               無料で始める（クレカ不要）
             </Link>
@@ -409,39 +414,39 @@ function Stat({ label, value, unit }: { label: string; value: string; unit: stri
 }
 
 function LaurelBranch({ className, mirror }: { className?: string; mirror?: boolean }) {
-  // A clean classical laurel branch — curving stem with filled leaf ellipses on both sides
+  // Each leaf is a teardrop path attached to a central curving stem.
+  // viewBox is wider so leaves have room to curve naturally without spike-look.
   return (
     <svg
-      viewBox="0 0 64 140"
+      viewBox="0 0 80 160"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       className={className}
       style={mirror ? { transform: 'scaleX(-1)' } : undefined}
       aria-hidden
     >
-      {/* Curving stem — bottom-right tip up to top-left */}
-      <path
-        d="M58 132 C 36 116, 22 92, 18 64 C 16 42, 22 22, 36 6"
-        stroke="currentColor"
-        strokeWidth="1.6"
-        strokeLinecap="round"
-        fill="none"
-      />
       <g fill="currentColor">
-        {/* Outer leaves (on the left of the stem) */}
-        <ellipse cx="46" cy="120" rx="11" ry="3.2" transform="rotate(-50 46 120)" />
-        <ellipse cx="36" cy="104" rx="12" ry="3.4" transform="rotate(-55 36 104)" />
-        <ellipse cx="27" cy="86" rx="13" ry="3.6" transform="rotate(-60 27 86)" />
-        <ellipse cx="22" cy="66" rx="13" ry="3.6" transform="rotate(-66 22 66)" />
-        <ellipse cx="20" cy="46" rx="12" ry="3.4" transform="rotate(-72 20 46)" />
-        <ellipse cx="24" cy="26" rx="11" ry="3.2" transform="rotate(-80 24 26)" />
-        {/* Inner leaves (on the right of the stem) */}
-        <ellipse cx="52" cy="112" rx="9" ry="2.8" transform="rotate(38 52 112)" />
-        <ellipse cx="44" cy="94" rx="10" ry="3" transform="rotate(34 44 94)" />
-        <ellipse cx="38" cy="76" rx="11" ry="3.2" transform="rotate(28 38 76)" />
-        <ellipse cx="34" cy="56" rx="11" ry="3.2" transform="rotate(22 34 56)" />
-        <ellipse cx="34" cy="36" rx="10" ry="3" transform="rotate(14 34 36)" />
-        <ellipse cx="38" cy="18" rx="9" ry="2.6" transform="rotate(6 38 18)" />
+        {/* main curving stem */}
+        <path
+          d="M70 152 C 50 132, 36 100, 36 70 C 36 42, 46 22, 60 6"
+          stroke="currentColor"
+          strokeWidth="1.4"
+          strokeLinecap="round"
+          fill="none"
+        />
+        {/* outer leaves (left-of-stem) — tear drops pointing outward & upward */}
+        <path d="M58 138 C 38 138 24 146 22 156 C 36 152 50 148 58 138 Z" />
+        <path d="M48 116 C 26 116 12 122 8 134 C 24 130 40 126 48 116 Z" />
+        <path d="M40 90 C 18 88 6 92 4 104 C 20 100 34 98 40 90 Z" />
+        <path d="M36 64 C 16 60 6 60 6 72 C 22 70 32 70 36 64 Z" />
+        <path d="M40 38 C 22 32 12 30 14 42 C 28 42 36 42 40 38 Z" />
+        <path d="M50 18 C 36 10 28 8 28 18 C 38 20 46 20 50 18 Z" />
+        {/* inner leaves (right-of-stem) — tear drops pointing the other way, smaller */}
+        <path d="M64 130 C 76 130 78 138 74 146 C 68 138 62 134 64 130 Z" />
+        <path d="M52 104 C 66 102 70 110 66 120 C 58 112 50 110 52 104 Z" />
+        <path d="M44 76 C 58 74 64 80 60 90 C 52 84 42 82 44 76 Z" />
+        <path d="M42 50 C 56 48 62 52 58 62 C 50 56 40 56 42 50 Z" />
+        <path d="M48 26 C 62 22 68 26 64 36 C 56 32 46 32 48 26 Z" />
       </g>
     </svg>
   );
