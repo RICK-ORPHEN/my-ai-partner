@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { createClient } from '@/lib/supabase/server';
+import { NavMobile } from './NavMobile';
 
 export async function Nav() {
   const supabase = await createClient();
@@ -11,6 +12,8 @@ export async function Nav() {
           <span className="font-serif font-bold text-xl text-ink tracking-tight">My AI Partner</span>
           <span className="text-[10px] tracking-[0.18em] text-ink-mute mt-0.5 font-medium">AI PRODUCT SCHOOL</span>
         </Link>
+
+        {/* Desktop nav */}
         <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-ink">
           <Link href="#about" className="hover:text-vermilion transition-colors">About</Link>
           <Link href="#curriculum" className="hover:text-vermilion transition-colors">Curriculum</Link>
@@ -18,7 +21,9 @@ export async function Nav() {
           <Link href="#voice" className="hover:text-vermilion transition-colors">Voice</Link>
           <Link href="#faq" className="hover:text-vermilion transition-colors">FAQ</Link>
         </nav>
-        <div className="flex items-center gap-3">
+
+        {/* Desktop CTA */}
+        <div className="hidden md:flex items-center gap-3">
           {user ? (
             <Link href="/dashboard" className="inline-flex items-center bg-vermilion hover:bg-vermilion-700 text-cream-50 rounded-xl px-5 py-2.5 text-sm font-medium transition">
               ダッシュボード
@@ -32,6 +37,9 @@ export async function Nav() {
             </>
           )}
         </div>
+
+        {/* Mobile hamburger */}
+        <NavMobile loggedIn={!!user} />
       </div>
     </header>
   );
