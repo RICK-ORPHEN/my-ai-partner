@@ -103,3 +103,9 @@ body {
     background: linear-gradient(180deg, rgba(238,236,231,0) 30%, rgba(238,236,231,0.7) 70%, var(--cream) 100%);
   }
 }
+
+/* Hero KV background image: same photo PC/SP, only object-position differs */
+.kv-bg { object-position: 80% 50%; }
+@media (max-width: 768px) {
+  .kv-bg { object-position: 78% 22%; }
+}

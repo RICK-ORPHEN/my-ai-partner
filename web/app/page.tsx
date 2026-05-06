@@ -18,18 +18,14 @@ export default function HomePage() {
 
       {/* HERO ---------------------------------------------------- */}
       <section className="relative overflow-hidden" style={{ background: 'var(--cream)' }}>
-        {/* Full-bleed background photo (desktop wide / mobile vertical) */}
+        {/* Full-bleed background photo — same image PC/SP, object-position keeps man visible */}
         <div className="absolute inset-0 -z-0">
-          {/* Desktop wide image */}
-          <picture>
-            <source media="(max-width: 768px)" srcSet="/images/lp/kv_mobile_v3.png" />
-            <img
-              src="/images/lp/kv_wide.png"
-              alt=""
-              aria-hidden
-              className="w-full h-full object-cover object-right"
-            />
-          </picture>
+          <img
+            src="/images/lp/kv_wide.png"
+            alt=""
+            aria-hidden
+            className="w-full h-full object-cover kv-bg"
+          />
           {/* Cream gradient overlay — left fade-out for text readability */}
           <div
             className="absolute inset-0"
@@ -43,7 +39,7 @@ export default function HomePage() {
             className="absolute inset-0 md:hidden"
             style={{
               background:
-                'linear-gradient(180deg, rgba(238,236,231,0) 0%, rgba(238,236,231,0) 38%, rgba(238,236,231,0.55) 55%, rgba(238,236,231,0.92) 70%, var(--cream) 86%)',
+                'linear-gradient(180deg, rgba(238,236,231,0) 0%, rgba(238,236,231,0) 42%, rgba(238,236,231,0.6) 58%, rgba(238,236,231,0.94) 74%, var(--cream) 88%)',
             }}
           />
         </div>

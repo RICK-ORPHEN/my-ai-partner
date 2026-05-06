@@ -6,7 +6,7 @@ export function Footer() {
       <div className="container-editorial py-20 md:py-24">
         <div className="grid md:grid-cols-12 gap-12 md:gap-10">
           <div className="md:col-span-6">
-            <div className="h-display text-3xl md:text-4xl lg:text-5xl leading-[1.05] tracking-tightest jp-balance">
+            <div className="h-display text-3xl md:text-4xl lg:text-5xl leading-[1.45] tracking-normal jp-balance">
               業種×横断スキルで<br/>
               <span className="text-vermilion">作って公開できる、</span><br/>
               実行型のAIスクール。
