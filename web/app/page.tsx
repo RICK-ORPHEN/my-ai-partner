@@ -17,42 +17,34 @@ export default function HomePage() {
       <Nav />
 
       {/* HERO ---------------------------------------------------- */}
-      {/* MOBILE: photo + text integrated via vertical gradient — no disconnected stack */}
-      <section className="md:hidden relative overflow-hidden" style={{ background: 'var(--cream)' }}>
-        {/* Background photo bleeds full hero */}
-        <div className="absolute inset-0">
+      {/* MOBILE: photo block + text block, cleanly separated. No gradient bleed-through. */}
+      <section className="md:hidden" style={{ background: 'var(--cream)' }}>
+        {/* Photo block — fixed aspect, clear edges */}
+        <div className="relative w-full overflow-hidden" style={{ aspectRatio: '4/5' }}>
           <img
             src="/images/lp/kv_wide.png"
-            alt=""
-            aria-hidden
-            className="w-full h-full object-cover"
-            style={{ objectPosition: '78% 22%' }}
-          />
-          {/* Vertical cream gradient — top transparent (man visible), middle 50% transparent, bottom solid for text */}
-          <div
-            className="absolute inset-0"
-            style={{
-              background:
-                'linear-gradient(180deg, rgba(238,236,231,0) 0%, rgba(238,236,231,0) 35%, rgba(238,236,231,0.55) 50%, rgba(238,236,231,0.92) 62%, var(--cream) 70%)',
-            }}
+            alt="AIと共に理想の未来を見つめる若者"
+            className="absolute inset-0 w-full h-full object-cover"
+            style={{ objectPosition: '78% 32%' }}
           />
         </div>
-        {/* Copy panel sits in the gradient-filled lower half */}
-        <div className="relative z-10 px-6 pt-[42vh] pb-12 min-h-[88vh]">
-          <h1 className="font-serif font-bold leading-[1.15] text-ink jp-balance" style={{ fontSize: 'clamp(2.1rem, 8.4vw, 2.8rem)' }}>
+
+        {/* Text block — solid cream, generous padding */}
+        <div className="px-6 pt-10 pb-14">
+          <h1 className="font-serif font-bold leading-[1.18] text-ink jp-balance" style={{ fontSize: 'clamp(2rem, 8vw, 2.7rem)' }}>
             AIと創る、
             <br />
             <span className="text-vermilion">理想の自分</span>へ。
           </h1>
-          <p className="mt-4 text-[15px] text-ink jp-text leading-[1.9]">
+          <p className="mt-5 text-[15px] text-ink jp-text leading-[1.95]">
             AIを活用して、アイデアを形にし、
             <br />
             人生を変えるプロダクトを生み出す。
           </p>
-          <div className="mt-6 flex flex-col gap-3.5">
+          <div className="mt-7 flex flex-col gap-3.5">
             <Link
               href="/signup"
-              className="inline-flex items-center justify-center bg-vermilion hover:bg-vermilion-700 text-cream-50 rounded-xl px-6 py-4 font-medium tracking-tight transition shadow-lg shadow-vermilion/25"
+              className="inline-flex items-center justify-center bg-vermilion hover:bg-vermilion-700 text-cream-50 rounded-xl px-6 py-4 font-medium tracking-tight transition"
             >
               無料で始める（クレカ不要）
             </Link>
