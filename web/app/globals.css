@@ -104,8 +104,3 @@ body {
   }
 }
 
-/* Hero KV background image: same photo PC/SP, only object-position differs */
-.kv-bg { object-position: 80% 50%; }
-@media (max-width: 768px) {
-  .kv-bg { object-position: 78% 22%; }
-}

@@ -17,16 +17,61 @@ export default function HomePage() {
       <Nav />
 
       {/* HERO ---------------------------------------------------- */}
-      <section className="relative overflow-hidden" style={{ background: 'var(--cream)' }}>
-        {/* Full-bleed background photo — same image PC/SP, object-position keeps man visible */}
+      {/* MOBILE: stacked photo (top 56vh) + copy panel below on cream */}
+      <section className="md:hidden relative" style={{ background: 'var(--cream)' }}>
+        <div className="relative w-full overflow-hidden" style={{ height: '58vh', minHeight: 360 }}>
+          <img
+            src="/images/lp/kv_wide.png"
+            alt=""
+            aria-hidden
+            className="w-full h-full object-cover"
+            style={{ objectPosition: '78% 18%' }}
+          />
+          {/* Soft bottom fade so the title below sits cleanly on cream */}
+          <div
+            className="absolute inset-x-0 bottom-0 h-24 pointer-events-none"
+            style={{ background: 'linear-gradient(180deg, rgba(238,236,231,0) 0%, var(--cream) 95%)' }}
+          />
+        </div>
+        <div className="relative z-10 px-6 pt-6 pb-14">
+          <h1 className="font-serif font-bold leading-[1.18] text-ink jp-balance" style={{ fontSize: 'clamp(2rem, 8vw, 2.6rem)' }}>
+            AIと創る、
+            <br />
+            <span className="text-vermilion">理想の自分</span>へ。
+          </h1>
+          <p className="mt-5 text-[15px] text-ink jp-text leading-[1.95]">
+            AIを活用して、アイデアを形にし、
+            <br />
+            人生を変えるプロダクトを生み出す。
+          </p>
+          <div className="mt-7 flex flex-col gap-4">
+            <Link
+              href="/signup"
+              className="inline-flex items-center justify-center bg-vermilion hover:bg-vermilion-700 text-cream-50 rounded-xl px-6 py-4 font-medium tracking-tight transition shadow-lg shadow-vermilion/20"
+            >
+              無料で始める（クレカ不要）
+            </Link>
+            <Link
+              href="/lesson/restaurant_01"
+              className="inline-flex items-center gap-1.5 text-sm text-ink hover:text-vermilion transition self-start border-b border-ink/30 pb-1"
+            >
+              Lesson 1-2 完全無料体験
+              <IconArrowRight className="w-3.5 h-3.5" />
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* DESKTOP: full-bleed photo with cream left-gradient + text overlay on left */}
+      <section className="hidden md:block relative overflow-hidden" style={{ background: 'var(--cream)' }}>
         <div className="absolute inset-0 -z-0">
           <img
             src="/images/lp/kv_wide.png"
             alt=""
             aria-hidden
-            className="w-full h-full object-cover kv-bg"
+            className="w-full h-full object-cover"
+            style={{ objectPosition: '80% 50%' }}
           />
-          {/* Cream gradient overlay — left fade-out for text readability */}
           <div
             className="absolute inset-0"
             style={{
@@ -34,19 +79,11 @@ export default function HomePage() {
                 'linear-gradient(90deg, var(--cream) 0%, var(--cream) 30%, rgba(238,236,231,0.92) 45%, rgba(238,236,231,0.55) 60%, rgba(238,236,231,0) 78%)',
             }}
           />
-          {/* Mobile vertical fade — keeps man visible at top, text readable below */}
-          <div
-            className="absolute inset-0 md:hidden"
-            style={{
-              background:
-                'linear-gradient(180deg, rgba(238,236,231,0) 0%, rgba(238,236,231,0) 42%, rgba(238,236,231,0.6) 58%, rgba(238,236,231,0.94) 74%, var(--cream) 88%)',
-            }}
-          />
         </div>
 
         {/* Cursive overlay - bottom right of photo */}
         <div
-          className="absolute right-6 md:right-12 lg:right-20 bottom-12 md:bottom-16 z-10 text-cream-50/95 select-none pointer-events-none hidden sm:block"
+          className="absolute right-12 lg:right-20 bottom-16 z-10 text-cream-50/95 select-none pointer-events-none"
           style={{
             fontFamily: '"Snell Roundhand", "Brush Script MT", cursive',
             fontSize: 'clamp(1.5rem, 2.6vw, 2.4rem)',
@@ -60,23 +97,19 @@ export default function HomePage() {
           want to be.
         </div>
 
-        {/* Copy panel — left side */}
-        <div className="relative z-10 max-w-[1200px] mx-auto px-6 md:px-10 pt-28 md:pt-32 pb-20 md:pb-32 min-h-[88vh] md:min-h-[640px] flex items-center">
-          <div className="max-w-xl md:max-w-2xl">
-            <h1
-              className="font-serif font-bold leading-[1.1] text-ink jp-balance"
-              style={{ fontSize: 'clamp(2.4rem, 5.4vw, 4.4rem)' }}
-            >
+        <div className="relative z-10 max-w-[1200px] mx-auto px-10 pt-32 pb-32 min-h-[640px] flex items-center">
+          <div className="max-w-2xl">
+            <h1 className="font-serif font-bold leading-[1.1] text-ink jp-balance" style={{ fontSize: 'clamp(2.6rem, 5.4vw, 4.4rem)' }}>
               AIと創る、
               <br />
               <span className="text-vermilion">理想の自分</span>へ。
             </h1>
-            <p className="mt-7 md:mt-8 text-base md:text-lg text-ink jp-text leading-[1.95] max-w-xl">
+            <p className="mt-8 text-lg text-ink jp-text leading-[1.95] max-w-xl">
               AIを活用して、アイデアを形にし、人生を変えるプロダクトを生み出す。
               <br />
               ここは、あなたの可能性が加速する場所。
             </p>
-            <div className="mt-9 flex flex-col sm:flex-row sm:items-center gap-5">
+            <div className="mt-9 flex items-center gap-5 flex-wrap">
               <Link
                 href="/signup"
                 className="inline-flex items-center justify-center bg-vermilion hover:bg-vermilion-700 text-cream-50 rounded-xl px-7 py-4 font-medium tracking-tight transition shadow-lg shadow-vermilion/20"
@@ -85,7 +118,7 @@ export default function HomePage() {
               </Link>
               <Link
                 href="/lesson/restaurant_01"
-                className="inline-flex items-center gap-1.5 text-sm text-ink hover:text-vermilion transition border-b border-ink/30 hover:border-vermilion pb-1 self-start sm:self-auto"
+                className="inline-flex items-center gap-1.5 text-sm text-ink hover:text-vermilion transition border-b border-ink/30 hover:border-vermilion pb-1"
               >
                 Lesson 1-2 完全無料体験
                 <IconArrowRight className="w-3.5 h-3.5" />
@@ -375,49 +408,49 @@ function Stat({ label, value, unit }: { label: string; value: string; unit: stri
   );
 }
 
-function LaurelLeft({ className }: { className?: string }) {
+function LaurelBranch({ className, mirror }: { className?: string; mirror?: boolean }) {
+  // A clean classical laurel branch — curving stem with filled leaf ellipses on both sides
   return (
-    <svg viewBox="0 0 60 130" fill="none" xmlns="http://www.w3.org/2000/svg" className={className}>
-      <g stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" fill="none">
-        {/* central stem from bottom curving up to upper-right */}
-        <path d="M50 125 C 30 110, 18 90, 12 65 C 8 45, 14 25, 30 8" />
-        {/* leaves on the outside (left side of stem) */}
-        <path d="M44 118 q -10 -2 -16 4" />
-        <path d="M36 100 q -12 -1 -18 6" />
-        <path d="M28 80 q -14 0 -20 8" />
-        <path d="M22 60 q -14 2 -19 11" />
-        <path d="M20 40 q -12 4 -16 14" />
-        <path d="M24 22 q -8 6 -10 16" />
-        {/* leaves on the inside */}
-        <path d="M44 118 q 10 -2 14 -10" />
-        <path d="M36 100 q 12 -2 14 -12" />
-        <path d="M28 80 q 14 -2 16 -14" />
-        <path d="M22 60 q 14 -2 17 -14" />
-        <path d="M20 40 q 12 -2 14 -14" />
-        <path d="M24 22 q 8 -2 10 -12" />
+    <svg
+      viewBox="0 0 64 140"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className={className}
+      style={mirror ? { transform: 'scaleX(-1)' } : undefined}
+      aria-hidden
+    >
+      {/* Curving stem — bottom-right tip up to top-left */}
+      <path
+        d="M58 132 C 36 116, 22 92, 18 64 C 16 42, 22 22, 36 6"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinecap="round"
+        fill="none"
+      />
+      <g fill="currentColor">
+        {/* Outer leaves (on the left of the stem) */}
+        <ellipse cx="46" cy="120" rx="11" ry="3.2" transform="rotate(-50 46 120)" />
+        <ellipse cx="36" cy="104" rx="12" ry="3.4" transform="rotate(-55 36 104)" />
+        <ellipse cx="27" cy="86" rx="13" ry="3.6" transform="rotate(-60 27 86)" />
+        <ellipse cx="22" cy="66" rx="13" ry="3.6" transform="rotate(-66 22 66)" />
+        <ellipse cx="20" cy="46" rx="12" ry="3.4" transform="rotate(-72 20 46)" />
+        <ellipse cx="24" cy="26" rx="11" ry="3.2" transform="rotate(-80 24 26)" />
+        {/* Inner leaves (on the right of the stem) */}
+        <ellipse cx="52" cy="112" rx="9" ry="2.8" transform="rotate(38 52 112)" />
+        <ellipse cx="44" cy="94" rx="10" ry="3" transform="rotate(34 44 94)" />
+        <ellipse cx="38" cy="76" rx="11" ry="3.2" transform="rotate(28 38 76)" />
+        <ellipse cx="34" cy="56" rx="11" ry="3.2" transform="rotate(22 34 56)" />
+        <ellipse cx="34" cy="36" rx="10" ry="3" transform="rotate(14 34 36)" />
+        <ellipse cx="38" cy="18" rx="9" ry="2.6" transform="rotate(6 38 18)" />
       </g>
     </svg>
   );
 }
 
+function LaurelLeft({ className }: { className?: string }) {
+  return <LaurelBranch className={className} />;
+}
+
 function LaurelRight({ className }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 60 130" fill="none" xmlns="http://www.w3.org/2000/svg" className={className} style={{ transform: 'scaleX(-1)' }}>
-      <g stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" fill="none">
-        <path d="M50 125 C 30 110, 18 90, 12 65 C 8 45, 14 25, 30 8" />
-        <path d="M44 118 q -10 -2 -16 4" />
-        <path d="M36 100 q -12 -1 -18 6" />
-        <path d="M28 80 q -14 0 -20 8" />
-        <path d="M22 60 q -14 2 -19 11" />
-        <path d="M20 40 q -12 4 -16 14" />
-        <path d="M24 22 q -8 6 -10 16" />
-        <path d="M44 118 q 10 -2 14 -10" />
-        <path d="M36 100 q 12 -2 14 -12" />
-        <path d="M28 80 q 14 -2 16 -14" />
-        <path d="M22 60 q 14 -2 17 -14" />
-        <path d="M20 40 q 12 -2 14 -14" />
-        <path d="M24 22 q 8 -2 10 -12" />
-      </g>
-    </svg>
-  );
+  return <LaurelBranch className={className} mirror />;
 }
