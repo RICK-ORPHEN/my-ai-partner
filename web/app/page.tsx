@@ -12,31 +12,34 @@ export default function HomePage() {
       {/* HERO  —  magazine cover                                         */}
       {/* ============================================================== */}
 
-      {/* MOBILE — full-bleed photo + STRONG cream gradient on left covers framed art */}
-      <section className="md:hidden relative overflow-hidden" style={{ background: 'var(--cream)', minHeight: '780px' }}>
+      {/* MOBILE — full-bleed photo TIGHT crop on man + cream-side text overlay */}
+      <section className="md:hidden relative overflow-hidden" style={{ background: 'var(--cream)', minHeight: '760px' }}>
         <div className="absolute inset-0">
           <img
             src="/images/lp/kv_wide.png"
             alt=""
             aria-hidden
             className="w-full h-full object-cover"
-            style={{ objectPosition: '95% 28%' }}
+            style={{ objectPosition: '90% 35%', transform: 'scale(1.15)', transformOrigin: 'right center' }}
           />
           <div
             className="absolute inset-0"
             style={{
               background:
-                'linear-gradient(95deg, var(--cream) 0%, var(--cream) 38%, rgba(238,236,231,0.92) 52%, rgba(238,236,231,0.45) 68%, rgba(238,236,231,0) 88%)',
+                'linear-gradient(95deg, var(--cream) 0%, var(--cream) 35%, rgba(238,236,231,0.85) 48%, rgba(238,236,231,0.3) 62%, rgba(238,236,231,0) 78%)',
             }}
           />
         </div>
+        {/* Cursive overlay — large, on the man's chest area */}
         <div
-          className="absolute right-5 bottom-12 z-10 text-cream-50/95 select-none pointer-events-none"
+          className="absolute z-10 text-cream-50/95 select-none pointer-events-none"
           style={{
+            right: '6%',
+            top: '52%',
             fontFamily: '"Snell Roundhand", "Brush Script MT", cursive',
-            fontSize: '1.25rem',
+            fontSize: '1.85rem',
             fontStyle: 'italic',
-            lineHeight: 1.15,
+            lineHeight: 1.1,
             textAlign: 'right',
             textShadow: '0 2px 18px rgba(6,14,49,0.55)',
           }}
@@ -45,31 +48,28 @@ export default function HomePage() {
           <br />
           want to be.
         </div>
-        <div className="relative z-10 px-7 pt-28 pb-20 min-h-[780px] flex flex-col justify-center max-w-[80%]">
+        <div className="relative z-10 px-6 pt-28 pb-16 min-h-[760px] flex flex-col">
           <h1
             className="font-serif font-bold text-ink jp-balance"
-            style={{ fontSize: 'clamp(2.2rem, 9vw, 2.9rem)', lineHeight: 1.14, letterSpacing: '-0.015em' }}
+            style={{ fontSize: 'clamp(2.4rem, 10vw, 3.1rem)', lineHeight: 1.16, letterSpacing: '-0.018em' }}
           >
             AIと創る、
             <br />
             <span className="text-vermilion">理想の自分</span>へ。
           </h1>
-          <p className="mt-7 text-[13px] text-ink jp-text leading-[2.05] max-w-[26ch]">
-            AIを活用して、アイデアを形にし、
-            <br />
-            人生を変えるプロダクトを生み出す。
-            <br />
-            ここは、あなたの可能性が加速する場所。
+          <p className="mt-7 text-[13.5px] text-ink jp-text leading-[2] max-w-[20ch]">
+            AIを活用して、アイデアを形にし、人生を変えるプロダクトを生み出す。ここは、あなたの可能性が加速する場所。
           </p>
           <Link
             href="/signup"
-            className="mt-8 inline-flex items-center justify-center bg-vermilion hover:bg-vermilion-700 text-cream-50 rounded-xl px-7 py-4 text-sm font-medium tracking-tight transition self-start shadow-lg shadow-vermilion/20"
+            className="mt-9 inline-flex items-center justify-center bg-vermilion hover:bg-vermilion-700 text-cream-50 rounded-xl py-4 text-[15px] font-medium tracking-tight transition shadow-lg shadow-vermilion/25"
+            style={{ width: '78%' }}
           >
-            無料で始める
+            無料で始める（クレカ不要）
           </Link>
           <Link
             href="/lesson/restaurant_01"
-            className="mt-5 inline-flex items-center gap-1.5 text-xs text-ink hover:text-vermilion transition border-b border-ink/30 pb-1 self-start"
+            className="mt-5 inline-flex items-center gap-1.5 text-[13px] text-vermilion hover:text-ink transition border-b border-vermilion pb-1 self-start"
           >
             Lesson 1-2 完全無料体験 →
           </Link>
