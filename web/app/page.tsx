@@ -12,26 +12,25 @@ export default function HomePage() {
       {/* HERO  —  magazine cover                                         */}
       {/* ============================================================== */}
 
-      {/* MOBILE — full-bleed photo (built-in cream on left) + content-width CTA */}
-      <section className="md:hidden relative overflow-hidden" style={{ background: 'var(--cream)', minHeight: '720px' }}>
-        <div className="absolute inset-0">
-          <img
-            src="/images/lp/kv_mobile.png"
-            alt="AIと共に理想の未来を見つめる若者"
-            className="w-full h-full object-cover"
-            style={{ objectPosition: '50% 38%' }}
-          />
-        </div>
-        {/* Cursive overlay — placed on the man's chest/lower face area */}
+      {/* MOBILE — true 9:16 portrait photo, no scaling artifacts */}
+      <section
+        className="md:hidden relative overflow-hidden"
+        style={{ background: 'var(--cream)', aspectRatio: '9/16', maxHeight: '100vh' }}
+      >
+        <img
+          src="/images/lp/kv_mobile.png"
+          alt="AIと共に理想の未来を見つめる若者"
+          className="absolute inset-0 w-full h-full object-cover"
+        />
         <div
           className="absolute z-10 text-cream-50/95 select-none pointer-events-none"
           style={{
             right: '5%',
-            top: '46%',
+            top: '44%',
             fontFamily: '"Snell Roundhand", "Brush Script MT", cursive',
-            fontSize: '1.4rem',
+            fontSize: '1.45rem',
             fontStyle: 'italic',
-            lineHeight: 1.1,
+            lineHeight: 1.12,
             textAlign: 'right',
             textShadow: '0 2px 14px rgba(6,14,49,0.55)',
           }}
@@ -40,8 +39,7 @@ export default function HomePage() {
           <br />
           want to be.
         </div>
-        {/* Text overlay on the cream side (LEFT half of photo) */}
-        <div className="relative z-10 px-6 pt-24 pb-12 min-h-[720px] flex flex-col justify-end">
+        <div className="absolute inset-0 z-10 px-6 pt-24 pb-10 flex flex-col justify-between">
           <div className="max-w-[60%]">
             <h1
               className="font-serif font-bold text-ink jp-balance"
@@ -51,22 +49,26 @@ export default function HomePage() {
               <br />
               <span className="text-vermilion">理想の自分</span>へ。
             </h1>
-            <p className="mt-5 text-[12px] text-ink jp-text leading-[2]">
+            <p className="mt-4 text-[12px] text-ink jp-text leading-[2]">
               AIを活用して、アイデアを形にし、人生を変えるプロダクトを生み出す。
             </p>
           </div>
-          <Link
-            href="/signup"
-            className="mt-7 inline-flex items-center justify-center bg-vermilion hover:bg-vermilion-700 text-cream-50 rounded-xl px-6 py-3.5 text-[13px] font-medium tracking-tight transition shadow-lg shadow-vermilion/25 self-start"
-          >
-            無料で始める（クレカ不要）
-          </Link>
-          <Link
-            href="/lesson/restaurant_01"
-            className="mt-4 inline-flex items-center gap-1 text-[11.5px] text-vermilion hover:text-ink transition border-b border-vermilion pb-0.5 self-start"
-          >
-            Lesson 1-2 完全無料体験 →
-          </Link>
+          <div>
+            <Link
+              href="/signup"
+              className="inline-flex items-center justify-center bg-vermilion hover:bg-vermilion-700 text-cream-50 rounded-xl px-6 py-3.5 text-[13px] font-medium tracking-tight transition shadow-lg shadow-vermilion/25"
+            >
+              無料で始める（クレカ不要）
+            </Link>
+            <div className="mt-4">
+              <Link
+                href="/lesson/restaurant_01"
+                className="inline-flex items-center gap-1 text-[11.5px] text-vermilion hover:text-ink transition border-b border-vermilion pb-0.5"
+              >
+                Lesson 1-2 完全無料体験 →
+              </Link>
+            </div>
+          </div>
         </div>
       </section>
         </div>
