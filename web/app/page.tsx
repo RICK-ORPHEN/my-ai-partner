@@ -12,94 +12,61 @@ export default function HomePage() {
       {/* HERO  —  magazine cover                                         */}
       {/* ============================================================== */}
 
-      {/* MOBILE */}
-      <section className="md:hidden relative overflow-hidden" style={{ background: 'var(--cream)' }}>
-        <div className="absolute inset-0">
-          <img
-            src="/images/lp/kv_wide.png"
-            alt=""
-            aria-hidden
-            className="w-full h-full object-cover"
-            style={{ objectPosition: '62% 30%' }}
-          />
-        </div>
-        <div
-          className="absolute right-5 bottom-12 z-10 text-cream-50/95 select-none pointer-events-none"
-          style={{
-            fontFamily: '"Snell Roundhand", "Brush Script MT", cursive',
-            fontSize: '1.25rem',
-            fontStyle: 'italic',
-            lineHeight: 1.15,
-            textAlign: 'right',
-            textShadow: '0 2px 16px rgba(6,14,49,0.55)',
-          }}
-        >
-          Be who you
-          <br />
-          want to be.
-        </div>
-        <div className="relative z-10 px-7 pt-32 pb-24 min-h-[88vh] flex flex-col justify-center max-w-[78%]">
+      {/* MOBILE — clean stack: text block on cream + photo block clean below */}
+      <section className="md:hidden" style={{ background: 'var(--cream)' }}>
+        <div className="px-7 pt-28 pb-12">
           <h1
-            className="font-serif font-bold leading-[1.18] text-ink jp-balance"
-            style={{ fontSize: 'clamp(2.4rem, 9.5vw, 3rem)', letterSpacing: '-0.01em' }}
+            className="font-serif font-bold text-ink jp-balance"
+            style={{ fontSize: 'clamp(2.4rem, 9.6vw, 3.2rem)', lineHeight: 1.12, letterSpacing: '-0.015em' }}
           >
             AIと創る、
             <br />
             <span className="text-vermilion">理想の自分</span>へ。
           </h1>
-          <p className="mt-8 text-[14px] text-ink jp-text leading-[2.1]">
+          <p className="mt-8 text-[14px] text-ink jp-text leading-[2.05] max-w-[28ch]">
             AIを活用して、アイデアを形にし、
             <br />
             人生を変えるプロダクトを生み出す。
-            <br />
-            ここは、あなたの可能性が加速する場所。
           </p>
           <Link
             href="/signup"
-            className="mt-10 inline-flex items-center justify-center bg-vermilion hover:bg-vermilion-700 text-cream-50 rounded-xl px-7 py-4 text-sm font-medium tracking-tight transition self-start"
+            className="mt-9 inline-flex items-center justify-center bg-vermilion hover:bg-vermilion-700 text-cream-50 rounded-xl px-7 py-4 text-sm font-medium tracking-tight transition"
           >
             無料で始める
           </Link>
         </div>
-      </section>
-
-      {/* DESKTOP — magazine cover */}
-      <section className="hidden md:block relative overflow-hidden" style={{ background: 'var(--cream)' }}>
-        <div className="absolute inset-0 -z-0">
+        <div className="relative w-full overflow-hidden" style={{ aspectRatio: '4/5' }}>
           <img
             src="/images/lp/kv_wide.png"
-            alt=""
-            aria-hidden
-            className="w-full h-full object-cover"
-            style={{ objectPosition: '78% 50%' }}
+            alt="AIと共に理想の未来を見つめる若者"
+            className="absolute inset-0 w-full h-full object-cover"
+            style={{ objectPosition: '60% 25%' }}
           />
           <div
-            className="absolute inset-0"
+            className="absolute right-5 bottom-7 z-10 text-cream-50/95 select-none pointer-events-none"
             style={{
-              background:
-                'linear-gradient(90deg, var(--cream) 0%, var(--cream) 32%, rgba(238,236,231,0.94) 46%, rgba(238,236,231,0.55) 60%, rgba(238,236,231,0) 78%)',
+              fontFamily: '"Snell Roundhand", "Brush Script MT", cursive',
+              fontSize: '1.4rem',
+              fontStyle: 'italic',
+              lineHeight: 1.15,
+              textAlign: 'right',
+              textShadow: '0 2px 18px rgba(6,14,49,0.55)',
             }}
-          />
+          >
+            Be who you
+            <br />
+            want to be.
+          </div>
         </div>
-        <div
-          className="absolute right-16 lg:right-24 bottom-20 z-10 text-cream-50/95 select-none pointer-events-none"
-          style={{
-            fontFamily: '"Snell Roundhand", "Brush Script MT", cursive',
-            fontSize: 'clamp(1.6rem, 2.6vw, 2.6rem)',
-            fontStyle: 'italic',
-            lineHeight: 1.15,
-            textShadow: '0 2px 18px rgba(6,14,49,0.45)',
-          }}
-        >
-          Be who you
-          <br />
-          want to be.
-        </div>
-        <div className="relative z-10 max-w-[1280px] mx-auto px-12 pt-40 pb-44 min-h-[820px] flex items-center">
-          <div className="max-w-3xl">
+      </section>
+
+      {/* DESKTOP — split: solid cream left + clean photo right (no double-photo bleed) */}
+      <section className="hidden md:grid relative" style={{ background: 'var(--cream)', gridTemplateColumns: '52% 48%', minHeight: '820px' }}>
+        <div className="relative pl-12 lg:pl-20 xl:pl-32 pr-8 pt-44 pb-32 flex items-center">
+          <div className="max-w-[34rem]">
             <h1
               className="font-serif font-bold text-ink jp-balance"
-              style={{ fontSize: 'clamp(3.4rem, 6.4vw, 5.6rem)', letterSpacing: '-0.02em', lineHeight: 1.06 }}
+              style={{ fontSize: 'clamp(3.6rem, 6.4vw, 5.4rem)', letterSpacing: '-0.022em', lineHeight: 1.06 }}
             >
               AIと創る、
               <br />
@@ -107,7 +74,7 @@ export default function HomePage() {
             </h1>
             <p
               className="mt-12 text-ink jp-text"
-              style={{ fontSize: 'clamp(1rem, 1.2vw, 1.15rem)', lineHeight: 2.1, maxWidth: '36ch' }}
+              style={{ fontSize: 'clamp(1rem, 1.15vw, 1.12rem)', lineHeight: 2.15, maxWidth: '32ch' }}
             >
               AIを活用して、アイデアを形にし、
               <br />
@@ -115,7 +82,7 @@ export default function HomePage() {
               <br />
               ここは、あなたの可能性が加速する場所。
             </p>
-            <div className="mt-12 flex items-center gap-8 flex-wrap">
+            <div className="mt-14 flex items-center gap-8 flex-wrap">
               <Link
                 href="/signup"
                 className="inline-flex items-center justify-center bg-vermilion hover:bg-vermilion-700 text-cream-50 rounded-xl px-9 py-5 text-base font-medium tracking-tight transition"
@@ -130,6 +97,32 @@ export default function HomePage() {
                 <span aria-hidden>→</span>
               </Link>
             </div>
+          </div>
+        </div>
+        <div className="relative overflow-hidden">
+          <img
+            src="/images/lp/kv_wide.png"
+            alt="AIと共に理想の未来を見つめる若者"
+            className="absolute inset-0 w-full h-full object-cover"
+            style={{ objectPosition: '70% 50%' }}
+          />
+          <div
+            className="absolute inset-y-0 left-0 w-24 pointer-events-none"
+            style={{ background: 'linear-gradient(90deg, var(--cream) 0%, transparent 100%)' }}
+          />
+          <div
+            className="absolute right-10 bottom-16 text-cream-50/95 select-none pointer-events-none"
+            style={{
+              fontFamily: '"Snell Roundhand", "Brush Script MT", cursive',
+              fontSize: 'clamp(1.6rem, 2.4vw, 2.4rem)',
+              fontStyle: 'italic',
+              lineHeight: 1.15,
+              textShadow: '0 2px 18px rgba(6,14,49,0.45)',
+            }}
+          >
+            Be who you
+            <br />
+            want to be.
           </div>
         </div>
       </section>
