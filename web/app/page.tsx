@@ -12,64 +12,61 @@ export default function HomePage() {
       {/* HERO  —  magazine cover                                         */}
       {/* ============================================================== */}
 
-      {/* MOBILE — text left + tightly-cropped portrait photo right */}
-      <section className="md:hidden relative" style={{ background: 'var(--cream)' }}>
-        <div className="grid grid-cols-[55%,45%] min-h-[640px]">
-          {/* LEFT: text on solid cream */}
-          <div className="px-5 pt-24 pb-10 flex flex-col justify-center">
+      {/* MOBILE — full-bleed photo (built-in cream on left) + content-width CTA */}
+      <section className="md:hidden relative overflow-hidden" style={{ background: 'var(--cream)', minHeight: '720px' }}>
+        <div className="absolute inset-0">
+          <img
+            src="/images/lp/kv_mobile.png"
+            alt="AIと共に理想の未来を見つめる若者"
+            className="w-full h-full object-cover"
+            style={{ objectPosition: '50% 38%' }}
+          />
+        </div>
+        {/* Cursive overlay — placed on the man's chest/lower face area */}
+        <div
+          className="absolute z-10 text-cream-50/95 select-none pointer-events-none"
+          style={{
+            right: '5%',
+            top: '46%',
+            fontFamily: '"Snell Roundhand", "Brush Script MT", cursive',
+            fontSize: '1.4rem',
+            fontStyle: 'italic',
+            lineHeight: 1.1,
+            textAlign: 'right',
+            textShadow: '0 2px 14px rgba(6,14,49,0.55)',
+          }}
+        >
+          Be who you
+          <br />
+          want to be.
+        </div>
+        {/* Text overlay on the cream side (LEFT half of photo) */}
+        <div className="relative z-10 px-6 pt-24 pb-12 min-h-[720px] flex flex-col justify-end">
+          <div className="max-w-[60%]">
             <h1
               className="font-serif font-bold text-ink jp-balance"
-              style={{ fontSize: 'clamp(1.7rem, 8vw, 2.2rem)', lineHeight: 1.16, letterSpacing: '-0.018em' }}
+              style={{ fontSize: 'clamp(1.85rem, 8.5vw, 2.4rem)', lineHeight: 1.16, letterSpacing: '-0.018em' }}
             >
               AIと創る、
               <br />
               <span className="text-vermilion">理想の自分</span>へ。
             </h1>
-            <p className="mt-5 text-[12px] text-ink jp-text leading-[2.05]">
-              AIを活用して、アイデアを形にし、人生を変えるプロダクトを生み出す。ここは、あなたの可能性が加速する場所。
+            <p className="mt-5 text-[12px] text-ink jp-text leading-[2]">
+              AIを活用して、アイデアを形にし、人生を変えるプロダクトを生み出す。
             </p>
-            <Link
-              href="/signup"
-              className="mt-7 inline-flex items-center justify-center w-full bg-vermilion hover:bg-vermilion-700 text-cream-50 rounded-xl py-3.5 text-[13px] font-medium tracking-tight transition shadow-lg shadow-vermilion/25"
-            >
-              無料で始める（クレカ不要）
-            </Link>
-            <Link
-              href="/lesson/restaurant_01"
-              className="mt-4 inline-flex items-center gap-1 text-[11.5px] text-vermilion hover:text-ink transition border-b border-vermilion pb-0.5 self-start"
-            >
-              Lesson 1-2 完全無料体験 →
-            </Link>
           </div>
-
-          {/* RIGHT: portrait photo, tight crop on man */}
-          <div className="relative overflow-hidden">
-            <img
-              src="/images/lp/kv_mobile.png"
-              alt="AIと共に理想の未来を見つめる若者"
-              className="absolute inset-0 w-full h-full object-cover"
-              style={{ objectPosition: '50% 35%' }}
-            />
-            {/* Cursive on man's chest */}
-            <div
-              className="absolute z-10 text-cream-50/95 select-none pointer-events-none"
-              style={{
-                left: '8%',
-                right: '8%',
-                top: '58%',
-                fontFamily: '"Snell Roundhand", "Brush Script MT", cursive',
-                fontSize: '1.3rem',
-                fontStyle: 'italic',
-                lineHeight: 1.1,
-                textAlign: 'center',
-                textShadow: '0 2px 14px rgba(6,14,49,0.55)',
-              }}
-            >
-              Be who you
-              <br />
-              want to be.
-            </div>
-          </div>
+          <Link
+            href="/signup"
+            className="mt-7 inline-flex items-center justify-center bg-vermilion hover:bg-vermilion-700 text-cream-50 rounded-xl px-6 py-3.5 text-[13px] font-medium tracking-tight transition shadow-lg shadow-vermilion/25 self-start"
+          >
+            無料で始める（クレカ不要）
+          </Link>
+          <Link
+            href="/lesson/restaurant_01"
+            className="mt-4 inline-flex items-center gap-1 text-[11.5px] text-vermilion hover:text-ink transition border-b border-vermilion pb-0.5 self-start"
+          >
+            Lesson 1-2 完全無料体験 →
+          </Link>
         </div>
       </section>
         </div>
