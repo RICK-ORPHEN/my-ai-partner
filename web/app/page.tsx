@@ -188,34 +188,36 @@ export default function HomePage() {
       </section>
 
       {/* ============================================================== */}
-      {/* BEFORE / AFTER — cinematic                                       */}
+      {/* BEFORE / AFTER — warm dark + visible smiling man photo          */}
       {/* ============================================================== */}
-      <section className="relative" style={{ background: 'var(--ink)' }}>
+      <section className="relative" style={{ background: '#1E1814' }}>
         <div className="absolute inset-0">
           <img
             src="/images/lp/after_man.png"
             alt=""
             aria-hidden
-            className="w-full h-full object-cover opacity-70"
+            className="w-full h-full object-cover"
             style={{ objectPosition: 'right center' }}
           />
+          {/* Desktop: warm dark gradient on left, photo clearly visible on right */}
           <div
             className="absolute inset-0 hidden md:block"
             style={{
               background:
-                'linear-gradient(90deg, var(--ink) 0%, var(--ink) 30%, rgba(6,14,49,0.85) 55%, rgba(6,14,49,0.35) 80%, transparent 100%)',
+                'linear-gradient(90deg, rgba(30,24,20,0.96) 0%, rgba(30,24,20,0.85) 28%, rgba(30,24,20,0.55) 50%, rgba(30,24,20,0.2) 72%, transparent 95%)',
             }}
           />
+          {/* Mobile: photo dominates middle, warm dark fades top + bottom for text legibility */}
           <div
             className="absolute inset-0 md:hidden"
             style={{
               background:
-                'linear-gradient(180deg, var(--ink) 0%, rgba(6,14,49,0.94) 18%, rgba(6,14,49,0.4) 38%, rgba(6,14,49,0.4) 60%, rgba(6,14,49,0.94) 80%, var(--ink) 100%)',
+                'linear-gradient(180deg, rgba(30,24,20,0.92) 0%, rgba(30,24,20,0.55) 22%, rgba(30,24,20,0.15) 45%, rgba(30,24,20,0.15) 60%, rgba(30,24,20,0.85) 82%, rgba(30,24,20,0.96) 100%)',
             }}
           />
         </div>
-        <div className="hidden md:block relative max-w-[1280px] mx-auto px-12 py-36 text-cream-50">
-          <div className="grid grid-cols-[1fr,auto,1fr,1fr] gap-x-12 items-start">
+        <div className="hidden md:block relative max-w-[1280px] mx-auto px-12 py-40 text-cream-50">
+          <div className="grid grid-cols-[1fr,auto,1fr,0.5fr] gap-x-16 items-start">
             <BeforeBlock />
             <ArrowBlock />
             <AfterBlock />
@@ -225,7 +227,7 @@ export default function HomePage() {
         <div className="md:hidden relative px-7 py-24 text-cream-50">
           <BeforeBlock />
           <div className="my-14 flex justify-center">
-            <span className="w-14 h-14 grid place-items-center rounded-full border border-cream-50/25">
+            <span className="w-14 h-14 grid place-items-center rounded-full border border-cream-50/30">
               <span className="text-cream-50 text-xl" style={{ transform: 'rotate(90deg)', display: 'inline-block' }}>→</span>
             </span>
           </div>
