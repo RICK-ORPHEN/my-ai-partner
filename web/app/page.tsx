@@ -71,8 +71,6 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-        </div>
-      </section>
 
       {/* DESKTOP — full-bleed photo, object-position right (man only), STRONG cream gradient covers framed art */}
       <section className="hidden md:block relative overflow-hidden" style={{ background: 'var(--cream)' }}>
