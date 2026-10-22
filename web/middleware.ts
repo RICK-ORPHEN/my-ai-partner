@@ -1,3 +1,4 @@
+import './lib/security/bootstrap.mjs';
 import { NextResponse, type NextRequest } from 'next/server';
 import { createServerClient, type CookieOptions } from '@supabase/ssr';
 
@@ -29,5 +30,6 @@ export async function middleware(req: NextRequest) {
 }
 
 export const config = {
+  runtime: 'nodejs',
   matcher: ['/((?!_next/static|_next/image|favicon.ico|api/health|api/stripe/webhook).*)']
 };
